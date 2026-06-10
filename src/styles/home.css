@@ -1,0 +1,960 @@
+/* ─── Home Page ─── */
+/* 200vh = 100vh visible + 100vh d'espace de scroll */
+.home-page {
+  height: 200vh;
+  position: relative;
+}
+
+/* Colle à top:0 pendant tout le scroll de home-page */
+.home-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ─── Background ─── */
+.home-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+
+/* ─── Scène – remplit exactement le sticky ─── */
+.home-scene {
+  position: absolute;
+  inset: 0;           /* top:0 bottom:0 left:0 right:0 → 100vh exact */
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* ─── Wrappers positionnels ─── */
+.scene-pos {
+  position: absolute;
+  bottom: 0;          /* ancré en bas du 100vh sticky → visible dans le viewport */
+  will-change: transform;
+}
+
+.scene-pos--m1      { left: -2%;  z-index: 6; }
+.scene-pos--bottle  { left: 50%;  z-index: 10; }
+.scene-pos--ravinala { right: -1%; z-index: 7; }
+
+/* ─── Tailles & animations des images ─── */
+.scene-pos--m1 img {
+  height: clamp(160px, 100vh, 300px);
+  width: auto;
+  display: block;
+  animation: slideFromLeft 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+}
+
+.scene-pos--bottle img {
+  height: clamp(260px, 100vh, 480px);
+  width: auto;
+  display: block;
+  animation: bottleRise 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.7s both;
+}
+
+.scene-pos--ravinala img {
+  height: clamp(320px, 100vh, 600px);
+  width: auto;
+  display: block;
+  animation: slideFromRight 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
+}
+
+/* ─── Keyframes ─── */
+@keyframes slideFromLeft {
+  from { opacity: 0; transform: translateX(-120px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideFromRight {
+  from { opacity: 0; transform: translateX(120px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes bottleRise {
+  from { opacity: 0; transform: translateY(50px) scale(0.93); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ─── Grand écran (Bootstrap xxl) ─── */
+@media (min-width: 1400px) {
+  .scene-pos--m1 img      { height: clamp(300px, 34vh, 460px); }
+  .scene-pos--bottle img  { height: clamp(480px, 56vh, 680px); }
+  .scene-pos--ravinala img { height: clamp(600px, 68vh, 840px); }
+}
+
+/* ─── Responsive mobile (Bootstrap sm) ─── */
+@media (max-width: 575.98px) {
+  .scene-pos--m1       { left: -5%; }
+  .scene-pos--ravinala { right: -3%; }
+}
+
+/* ════════════════════════════════════════
+   Section 2 – Explore Our Rums
+   ════════════════════════════════════════ */
+.home-s2 {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.s2-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 5rem;
+}
+
+/* ─── Image plein écran ─── */
+/* Surdimensionné à 108% pour rester couvrant même à scale(0.93) */
+.s2-image {
+  position: absolute;
+  width: 108%;
+  height: 108%;
+  top: -4%;
+  left: -4%;
+  opacity: 0;
+  transition: opacity 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+  transform-origin: center center;
+  will-change: transform, opacity;
+}
+
+.s2-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.s2-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgb(28, 12, 1) 0%, rgba(0, 0, 0, 0) 40%, transparent 100%);
+}
+
+/* ─── Title ─── */
+.s2-title {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: 0.15s;
+
+  font-family: var(--font-cinzel);
+  font-weight: 700;
+  font-size: clamp(22px, 3.5vw, 44px);
+  color: #ECD8C4;
+  text-align: center;
+  line-height: 1.15;
+  word-wrap: break-word;
+}
+
+/* ─── CTA "view more" ─── */
+.s2-cta {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: 0.3s;
+
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+}
+
+.s2-cta__text {
+  font-family: var(--font-simonetta);
+  font-size: 16px;
+  color: #ECD8C4;
+  text-decoration: none; 
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: opacity var(--transition);
+}
+
+.s2-cta__line {
+  width: 1px;
+  height: 40px;
+  background: #ECD8C4;
+  transform: scaleY(0);
+  transform-origin: top center;
+}
+
+.home-s2--visible .s2-cta__line {
+  animation:
+    lineDraw    0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.65s forwards,
+    lineBreathe 2.4s  ease-in-out                    1.3s  infinite;
+}
+
+@keyframes lineDraw {
+  from { transform: scaleY(0); }
+  to   { transform: scaleY(1); }
+}
+
+@keyframes lineBreathe {
+  0%, 100% { transform: scaleY(1);    opacity: 1; }
+  50%      { transform: scaleY(0.55); opacity: 0.45; }
+}
+
+.s2-cta:hover .s2-cta__text {
+  opacity: 0.55;
+}
+
+.s2-cta:hover .s2-cta__line {
+  animation: none;
+  transform: scaleY(1);
+  height: 56px;
+  transition: height 0.25s ease;
+}
+
+/* ─── Scroll reveal ─── */
+.home-s2--visible .s2-image {
+  opacity: 1;
+  /* transform géré par JS (parallax dezoom) */
+}
+
+.home-s2--visible .s2-title,
+.home-s2--visible .s2-cta {
+  opacity: 1;
+  transform: none;
+}
+
+/* ════════════════════════════════════════
+   Section 3 – The spirit of Madagascar
+   ════════════════════════════════════════ */
+.home-s3 {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ─── Slider track ─── */
+.s3-track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.9s cubic-bezier(0.77, 0, 0.175, 1);
+  will-change: transform;
+}
+
+.s3-slide {
+  flex: 0 0 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.s3-slide__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ─── Sun filter overlay (slide 1) ─── */
+/* ─── Overlay parallax #EBC79599 ─── */
+.s3-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -35%;
+  bottom: -35%;
+  background: rgba(235, 199, 149, 0.6);
+  pointer-events: none;
+  z-index: 1;
+  will-change: transform;
+}
+
+/* ─── Slide content ─── */
+.s3-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  text-align: center;
+  max-width: 900px;
+}
+
+/* ─── Texte caché par défaut, animé quand slide actif ─── */
+.s3-title,
+.s3-subtitle {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity  0.75s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.s3-slide--active .s3-title    { opacity: 1; transform: none; transition-delay: 0.15s; }
+.s3-slide--active .s3-subtitle { opacity: 1; transform: none; transition-delay: 0.32s; }
+
+.s3-title {
+  font-family: var(--font-cinzel);
+  font-weight: 700;
+  font-size: clamp(28px, 5vw, 64px);
+  color: #1F0E06;
+  line-height: 1.1;
+  word-wrap: break-word;
+}
+
+.s3-title--lg {
+  font-size: clamp(28px, 5vw, 65px);
+}
+
+.s3-subtitle {
+  font-family: var(--font-simonetta);
+  font-weight: 400;
+  font-size: clamp(16px, 2.5vw, 40px);
+  color: #1F0E06;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+.s3-subtitle--lg {
+  font-size: clamp(16px, 2vw, 32px);
+}
+
+/* ─── Chevron navigation ─── */
+.s3-nav {
+  position: absolute;
+  right: 3rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.3s ease;
+}
+
+.s3-nav:hover {
+  transform: translateY(-50%) scale(1.08);
+}
+
+/* ─── Dot indicators ─── */
+.s3-dots {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  gap: 0.6rem;
+}
+
+.s3-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(31, 14, 6, 0.35);
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+  padding: 0;
+}
+
+.s3-dot--active {
+  background: #1F0E06;
+  transform: scale(1.3);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 767.98px) {
+  .s3-nav { right: 1rem; }
+  .s2-content { padding-bottom: 3.5rem; }
+}
+
+@media (max-width: 575.98px) {
+  .s3-nav { right: 0.75rem; }
+  .s2-content { padding-bottom: 2.5rem; }
+}
+
+/* ════════════════════════════════════════
+   Section 4 – Product slides
+   ════════════════════════════════════════ */
+.home-s4 {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--color-dark);
+}
+
+/* ─── Track ─── */
+.s4-track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.9s cubic-bezier(0.77, 0, 0.175, 1);
+  will-change: transform;
+}
+
+.s4-slide {
+  flex: 0 0 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.s4-slide__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.08);
+}
+
+/* ─── Contenu texte ─── */
+.s4-content {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  max-width: clamp(300px, 48vw, 600px);
+}
+
+.s4-content--left { left: clamp(5.5rem, 7vw, 7rem); }
+
+/* ─── Texte : caché, animé au slide actif ─── */
+.s4-name,
+.s4-tagline,
+.s4-desc,
+.s4-badge {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity  0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.s4-slide--active .s4-name    { opacity: 1; transform: none; transition-delay: 0.1s; }
+.s4-slide--active .s4-tagline { opacity: 1; transform: none; transition-delay: 0.22s; }
+.s4-slide--active .s4-desc    { opacity: 1; transform: none; transition-delay: 0.34s; }
+.s4-slide--active .s4-badge   { opacity: 1; transform: none; transition-delay: 0.48s; }
+
+.s4-name {
+  font-family: var(--font-cinzel);
+  font-weight: 700;
+  font-size: clamp(34px, 6vw, 80px);
+  color: #ECD8C4;
+  line-height: 1.05;
+}
+
+.s4-tagline {
+  font-family: var(--font-cinzel);
+  font-weight: 400;
+  font-size: clamp(20px, 2.6vw, 40px);
+  color: #ECD8C4;
+}
+
+.s4-desc {
+  font-family: var(--font-simonetta);
+  font-weight: 400;
+  font-size: clamp(15px, 1.5vw, 22px);
+  color: #ECD8C4;
+  line-height: 1.55;
+  max-width: 520px;
+}
+
+/* ─── Badge "sooner available" — double-border vintage ─── */
+.s4-badge {
+  display: block;
+  align-self: flex-start;
+  border: 1px solid #ECD8C4;
+  border-radius: 4px;
+  padding: 8px 14px;
+  margin-top: 0.75rem;
+}
+
+.s4-badge__frame {
+  border: 1px solid #ECD8C4;
+  border-radius: 2px;
+  padding: 9px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.s4-badge__text {
+  font-family: var(--font-cinzel);
+  font-weight: 700;
+  font-size: clamp(11px, 0.95vw, 15px);
+  color: #ECD8C4;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ─── Chevrons ─── */
+.s4-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.3s ease;
+}
+
+.s4-nav--right { right: 3rem; }
+.s4-nav--left  { left:  3rem; }
+
+.s4-nav:hover { transform: translateY(-50%) scale(1.08); }
+
+/* ─── Dots ─── */
+.s4-dots {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  gap: 0.6rem;
+}
+
+.s4-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(236, 216, 196, 0.35);
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+  padding: 0;
+}
+
+.s4-dot--active {
+  background: #ECD8C4;
+  transform: scale(1.3);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 767.98px) {
+  .s4-nav--right { right: 1rem; }
+  .s4-nav--left  { left:  1rem; }
+  .s4-content { max-width: 80vw; }
+  .s4-content--left { left: 4rem; }
+}
+
+@media (max-width: 575.98px) {
+  .s4-slide::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
+    z-index: 1;
+    pointer-events: none;
+  }
+  .s4-content {
+    top: auto;
+    bottom: 2.5rem;
+    transform: none;
+    left: 1.25rem !important;
+    right: 1.25rem !important;
+    text-align: left;
+    max-width: calc(100% - 2.5rem);
+    z-index: 2;
+  }
+}
+
+/* ════════════════════════════════════════
+   Section 5 – Women drink + vidéo
+   ════════════════════════════════════════ */
+
+.home-s5 {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.s5-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 1;
+}
+
+.s5-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.45;
+  z-index: 2;
+}
+
+/* ════════════════════════════════════════
+   Section 7 – Manifeste + 3 produits
+   ════════════════════════════════════════ */
+.home-s7 {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  background: #3A2E22;
+}
+
+/* ─── Fond montagne décalé vers le bas ─── */
+.s7-bg {
+  position: absolute;
+  top: clamp(4rem, 14vh, 10rem);
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Textes headline haut-gauche superposés ─── */
+.s7-headline {
+  position: absolute;
+  top: clamp(2.5rem, 6vh, 5rem);
+  left: clamp(2rem, 7.5vw, 8rem);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.s7-headline__line {
+  font-family: var(--font-holiday);
+  font-weight: 400;
+  font-size: clamp(22px, 2.8vw, 40px);
+  color: #C4B8AC;
+  display: block;
+}
+
+/* ─── Décorations dorées gauche / droite ─── */
+.s7-deco {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) rotate(-90deg);
+  width: 18px;
+  height: 32px;
+  background: #F2D58B;
+  z-index: 3;
+}
+.s7-deco--left  { left:  clamp(60px, 7.5vw, 143px); }
+.s7-deco--right { right: clamp(60px, 7.5vw, 143px); }
+
+/* ─── Bouteilles : positionnement absolu, animation transform ─── */
+.s7-bottles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.s7-bottle {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transition:
+    transform 0.72s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity   0.72s cubic-bezier(0.22, 1, 0.36, 1),
+    bottom    0.72s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, opacity;
+}
+
+.s7-bottle img {
+  height: clamp(380px, 62vh, 680px);
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 28px 52px rgba(0, 0, 0, 0.62));
+}
+
+/* ─── Positions des 3 états ─── */
+.s7-bottle--center {
+  transform: translateX(-50%);
+  bottom: 0;
+  z-index: 3;
+  opacity: 1;
+}
+
+.s7-bottle--left {
+  transform: translateX(calc(-50% - clamp(180px, 26vw, 420px))) scale(0.6);
+  bottom: 0;
+  z-index: 2;
+  opacity: 0.72;
+}
+
+.s7-bottle--right {
+  transform: translateX(calc(-50% + clamp(180px, 26vw, 420px))) scale(0.6);
+  bottom: 0;
+  z-index: 2;
+  opacity: 0.72;
+}
+
+/* ─── Chevrons section 7 ─── */
+.s7-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.3s ease;
+  pointer-events: all;
+}
+
+.s7-nav--left  { left:  3rem; }
+.s7-nav--right { right: 3rem; }
+
+.s7-nav:hover { transform: translateY(-50%) scale(1.1); }
+
+/* ─── Dots ─── */
+.s7-dots {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  gap: 0.6rem;
+}
+
+.s7-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(236, 216, 196, 0.35);
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+  padding: 0;
+}
+
+.s7-dot--active {
+  background: #ECD8C4;
+  transform: scale(1.3);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 767.98px) {
+  .s7-headline { top: 2rem; left: 1.5rem; }
+  .s7-deco--left  { left:  40px; }
+  .s7-deco--right { right: 40px; }
+  .s7-nav--left  { left:  1rem; }
+  .s7-nav--right { right: 1rem; }
+  .s7-bottle--left  { transform: translateX(calc(-50% - 40vw)) scale(0.58); }
+  .s7-bottle--right { transform: translateX(calc(-50% + 40vw)) scale(0.58); }
+}
+
+@media (max-width: 575.98px) {
+  .s7-headline__line { font-size: clamp(18px, 5vw, 24px); }
+  .s7-bottle img     { height: clamp(280px, 52vh, 500px); }
+  .s7-bottle--left  { transform: translateX(calc(-50% - 36vw)) scale(0.52); opacity: 0.6; }
+  .s7-bottle--right { transform: translateX(calc(-50% + 36vw)) scale(0.52); opacity: 0.6; }
+  .s7-deco { display: none; }
+}
+
+/* ════════════════════════════════════════
+   Back to top
+   ════════════════════════════════════════ */
+.back-to-top {
+  position: fixed;
+  bottom: 2.25rem;
+  right: 2.25rem;
+  z-index: 200;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(236, 216, 196, 0.45);
+  background: rgba(58, 46, 34, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #ECD8C4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.back-to-top:hover {
+  background: rgba(58, 46, 34, 0.95);
+  border-color: #ECD8C4;
+  transform: translateY(-3px);
+}
+
+.btt-enter-active,
+.btt-leave-active {
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.btt-enter-from,
+.btt-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+/* ════════════════════════════════════════
+   Section 6 – Cocktails slider
+   ════════════════════════════════════════ */
+.home-s6 {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  background: #1C0C01;
+}
+
+.s6-track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.9s cubic-bezier(0.77, 0, 0.175, 1);
+  will-change: transform;
+}
+
+.s6-slide {
+  flex: 0 0 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.s6-slide__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ─── Gradient bas → haut ─── */
+.s6-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, #452A15 0%, rgba(151, 124, 113, 0) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ─── Contenu texte centré en bas ─── */
+.s6-content {
+  position: absolute;
+  bottom: 5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+  width: 90%;
+  max-width: 800px;
+}
+
+/* ─── Animation reveal ─── */
+.s6-title,
+.s6-subtitle {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity  0.75s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.s6-slide--active .s6-title    { opacity: 1; transform: none; transition-delay: 0.15s; }
+.s6-slide--active .s6-subtitle { opacity: 1; transform: none; transition-delay: 0.3s; }
+
+.s6-title {
+  font-family: var(--font-cinzel);
+  font-weight: 700;
+  font-size: clamp(28px, 5vw, 50px);
+  color: #ECD8C4;
+  line-height: 1.1;
+}
+
+.s6-subtitle {
+  font-family: var(--font-simonetta);
+  font-weight: 400;
+  font-size: clamp(16px, 2vw, 32px);
+  color: #ECD8C4;
+  line-height: 1.4;
+}
+
+/* ─── Chevrons ─── */
+.s6-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.3s ease;
+}
+
+.s6-nav--right { right: 3rem; }
+.s6-nav--left  { left:  3rem; }
+
+.s6-nav:hover { transform: translateY(-50%) scale(1.08); }
+
+/* ─── Dots ─── */
+.s6-dots {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  gap: 0.6rem;
+}
+
+.s6-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(236, 216, 196, 0.35);
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+  padding: 0;
+}
+
+.s6-dot--active {
+  background: #ECD8C4;
+  transform: scale(1.3);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 767.98px) {
+  .s6-nav--right { right: 1rem; }
+  .s6-nav--left  { left:  1rem; }
+  .s6-content    { bottom: 4rem; }
+}
+
+@media (max-width: 575.98px) {
+  .s6-content { bottom: 3rem; width: 95%; }
+}
