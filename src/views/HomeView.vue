@@ -1,42 +1,27 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
-import Header from '@/layout/Header.vue'
 import '@/styles/home.css'
 
-const scrollY   = ref(0)
-const s2Visible = ref(false)
-const s3Visible = ref(false)
-const s3Index   = ref(0)
-const s4Index   = ref(0)
+const scrollY    = ref(0)
+const menuOpen   = ref(false)
+const s2Visible  = ref(false)
+const sRumVisible = ref(false)
+const s4Index    = ref(0)
 const s6Index   = ref(0)
 const s7Index   = ref(0)
-let observer   = null
-let s3Observer = null
-let s3Timer    = null
-let s4Observer = null
+let observer    = null
+let sRumObserver = null
+let s4Observer  = null
 let s4Timer    = null
 let s6Observer = null
 let s6Timer    = null
 
 const onScroll = () => { scrollY.value = window.scrollY }
 
+const isSticky = computed(() => scrollY.value > window.innerHeight * 0.8)
+
 const showTopBtn = computed(() => scrollY.value > window.innerHeight * 0.5)
 const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
-
-/* ─── Section 3 ─── */
-const s3StartTimer = () => {
-  if (!s3Timer) s3Timer = setInterval(() => {
-    s3Index.value = (s3Index.value + 1) % 2
-  }, 6000)
-}
-const s3StopTimer = () => {
-  if (s3Timer) { clearInterval(s3Timer); s3Timer = null }
-}
-const onChevronClick = () => {
-  s3Index.value = (s3Index.value + 1) % 2
-  s3StopTimer()
-  s3StartTimer()
-}
 
 /* ─── Section 4 ─── */
 const s4StartTimer = () => {
@@ -109,17 +94,13 @@ onMounted(() => {
     observer.observe(s2El)
   }
 
-  const s3El = document.querySelector('.home-s3')
-  if (s3El) {
-    s3Observer = new IntersectionObserver(
-      ([e]) => {
-        s3Visible.value = e.isIntersecting
-        if (e.isIntersecting) s3StartTimer()
-        else s3StopTimer()
-      },
-      { threshold: 0.4 }
+  const sRumEl = document.querySelector('.home-s-rum')
+  if (sRumEl) {
+    sRumObserver = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) sRumVisible.value = true },
+      { threshold: 0.15 }
     )
-    s3Observer.observe(s3El)
+    sRumObserver.observe(sRumEl)
   }
 
   const s4El = document.querySelector('.home-s4')
@@ -149,11 +130,10 @@ onMounted(() => {
 
 onUnmounted(() => {
   window.removeEventListener('scroll', onScroll)
-  if (observer)   observer.disconnect()
-  if (s3Observer) s3Observer.disconnect()
-  if (s4Observer) s4Observer.disconnect()
+  if (observer)      observer.disconnect()
+  if (sRumObserver)  sRumObserver.disconnect()
+  if (s4Observer)    s4Observer.disconnect()
   if (s6Observer) s6Observer.disconnect()
-  s3StopTimer()
   s4StopTimer()
   s6StopTimer()
 })
@@ -161,115 +141,111 @@ onUnmounted(() => {
 const parallax = computed(() => {
   const s = scrollY.value
   return {
-    m1:       `translateX(${s * 0.08}px)`,
-    bottle:   `translateX(-50%)`,
+    bottle:   `translateX(-50%) translateY(${-s * 0.04}px)`,
     ravinala: `translateX(${-s * 0.1}px)`,
   }
 })
 
-const s2Scale = computed(() => {
-  const vh = window.innerHeight
-  const t  = Math.max(0, Math.min(1, (scrollY.value - vh) / vh))
-  return 1.15 - 0.22 * t
-})
 
-/* ─── Parallax overlay section 3 ─── */
-const s3OverlayY = computed(() => {
-  scrollY.value // reactive dependency
-  const el = document.querySelector('.home-s3')
-  if (!el) return 0
-  return el.getBoundingClientRect().top * 0.32
-})
 </script>
 
 <template>
+
+  <!-- Hero Header : grand logo centré → sticky nav au scroll -->
+  <div class="hero-hd" :class="{ 'hero-hd--sticky': isSticky }">
+    <!-- Hamburger (mobile only) -->
+    <button class="hero-hd__toggler" @click="menuOpen = true" aria-label="Ouvrir le menu">
+      <span class="hero-hd__bar"></span>
+      <span class="hero-hd__bar"></span>
+      <span class="hero-hd__bar"></span>
+    </button>
+
+    <div class="hero-hd__inner">
+      <ul class="hero-hd__nav hero-hd__nav--left">
+        <li><RouterLink to="/" class="hero-hd__link" active-class="hero-hd__link--active">HOME</RouterLink></li>
+        <li><RouterLink to="/our-story" class="hero-hd__link" active-class="hero-hd__link--active">OUR STORY</RouterLink></li>
+      </ul>
+      <RouterLink to="/" class="hero-hd__logo-wrap">
+        <img src="/logo/logo-marron.png" class="hero-hd__logo" alt="Toaka Gasy" />
+      </RouterLink>
+      <ul class="hero-hd__nav hero-hd__nav--right">
+        <li><RouterLink to="/our-rums" class="hero-hd__link" active-class="hero-hd__link--active">OUR RUMS</RouterLink></li>
+        <li><RouterLink to="/contact" class="hero-hd__link" active-class="hero-hd__link--active">CONTACT US</RouterLink></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Mobile menu overlay -->
+  <Transition name="hmenu">
+    <div v-if="menuOpen" class="hero-mobile-menu">
+      <button class="hero-mobile-menu__close" @click="menuOpen = false" aria-label="Fermer">
+        <span></span><span></span>
+      </button>
+      <RouterLink to="/" class="hero-mobile-menu__logo" @click="menuOpen = false">
+        <img src="/logo/logo-marron.png" alt="Toaka Gasy" />
+      </RouterLink>
+      <nav class="hero-mobile-menu__nav">
+        <RouterLink to="/" class="hero-mobile-menu__link" @click="menuOpen = false">HOME</RouterLink>
+        <RouterLink to="/our-story" class="hero-mobile-menu__link" @click="menuOpen = false">OUR STORY</RouterLink>
+        <RouterLink to="/our-rums" class="hero-mobile-menu__link" @click="menuOpen = false">OUR RUMS</RouterLink>
+        <RouterLink to="/contact" class="hero-mobile-menu__link" @click="menuOpen = false">CONTACT US</RouterLink>
+      </nav>
+    </div>
+  </Transition>
+
   <!-- Section 1 : parallax sticky -->
   <div class="home-page">
     <div class="home-sticky">
       <img src="/img/fond-montagne.png" class="home-bg" alt="" aria-hidden="true" />
-      <Header />
       <section class="home-scene" aria-label="Scène Toaka Gasy">
-        <div class="scene-pos scene-pos--m1" :style="{ transform: parallax.m1 }">
-          <img src="/img/montagne.png" alt="" aria-hidden="true" />
+        <div class="scene-pos scene-pos--ravinala" :style="{ transform: parallax.ravinala }">
+          <img src="/img/ravinala.png" alt="" aria-hidden="true" />
         </div>
         <div class="scene-pos scene-pos--bottle" :style="{ transform: parallax.bottle }">
           <img src="/img/toaka-gasy-mainty.png" alt="Toaka Gasy" />
         </div>
-        <div class="scene-pos scene-pos--ravinala" :style="{ transform: parallax.ravinala }">
-          <img src="/img/ravinala.png" alt="" aria-hidden="true" />
-        </div>
+        <div class="bottle-shadow" aria-hidden="true"></div>
       </section>
     </div>
   </div>
 
-  <!-- Section 2 : Explore our rums -->
+  <!-- Section 2 : The Rum of Celebration -->
   <section class="home-s2" :class="{ 'home-s2--visible': s2Visible }">
-    <div class="s2-image" :style="{ transform: `scale(${s2Scale})` }">
-      <img src="/img/toaka-gasy.png" alt="Toaka Gasy" />
-    </div>
-    <div class="s2-content">
-      <h2 class="s2-title">explore our rums</h2>
+    <div class="s2-rect">
+      <img src="/img/rizière.png" class="s2-rect__bg" alt="" aria-hidden="true" />
+      <div class="s2-rect__overlay" aria-hidden="true"></div>
+      <h2 class="s2-title">THE RUM OF CELEBRATION</h2>
       <RouterLink to="/our-rums" class="s2-cta">
-        <span class="s2-cta__text">view more</span>
-        <span class="s2-cta__line" aria-hidden="true"></span>
+        <span>DISCOVER MORE</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
       </RouterLink>
     </div>
   </section>
 
-  <!-- Section 3 : The spirit of Madagascar -->
-  <section class="home-s3" :class="{ 'home-s3--visible': s3Visible }">
+  <!-- Section 3 : Lifestyle -->
+  <section class="home-s3">
+    <img src="/img/lifestyle1.jpg" class="s3-img" alt="Lifestyle 1" />
+    <img src="/img/lifestyle2.jpg" class="s3-img" alt="Lifestyle 2" />
+    <img src="/img/lifestyle3.jpg" class="s3-img" alt="Lifestyle 3" />
+  </section>
 
-    <div class="s3-track" :style="{ transform: `translateX(-${s3Index * 100}%)` }">
-
-      <!-- Slide 1 : rizière -->
-      <div class="s3-slide" :class="{ 's3-slide--active': s3Index === 0 }">
-        <img src="/img/rizière.png" class="s3-slide__bg" alt="" aria-hidden="true" />
-        <div
-          class="s3-overlay"
-          :style="{ transform: `translateY(${s3OverlayY}px)` }"
-          aria-hidden="true"
-        ></div>
-        <div class="s3-content">
-          <h2 class="s3-title">the spirit of madagascar</h2>
-          <p class="s3-subtitle">A refined expression of the rich betsileo rum heritage from southern island</p>
-        </div>
-      </div>
-
-      <!-- Slide 2 : cocotier -->
-      <div class="s3-slide" :class="{ 's3-slide--active': s3Index === 1 }">
-        <img src="/img/cocotier.png" class="s3-slide__bg" alt="" aria-hidden="true" />
-        <div
-          class="s3-overlay"
-          :style="{ transform: `translateY(${s3OverlayY}px)` }"
-          aria-hidden="true"
-        ></div>
-        <div class="s3-content">
-          <h2 class="s3-title s3-title--lg">BETSILEO TRADITIONAL RUM</h2>
-          <p class="s3-subtitle s3-subtitle--lg">Discover the origin and traditions of our Betsileo Rum, inspired by MADAGASCAR</p>
-        </div>
-      </div>
-
+  <!-- Section Explore Our Rum -->
+  <section class="home-s-rum" :class="{ 'home-s-rum--visible': sRumVisible }">
+    <div class="s2-rect">
+      <img src="/img/cocotier.png" class="s2-rect__bg" alt="" aria-hidden="true" />
+      <div class="s2-rect__overlay" aria-hidden="true"></div>
+      <h2 class="s2-title">EXPLORE OUR RUM</h2>
+      <RouterLink to="/our-rums" class="s2-cta">
+        <span>DISCOVER MORE</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </RouterLink>
     </div>
-
-    <!-- Chevron -->
-    <button class="s3-nav" @click="onChevronClick" aria-label="Slide suivant">
-      <svg width="32" height="32" viewBox="0 0 74 74" fill="none">
-        <polyline points="30,22 46,37 30,52" stroke="#3A2E22" stroke-width="4"
-          stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </button>
-
-    <!-- Dots -->
-    <div class="s3-dots">
-      <button
-        v-for="i in 2" :key="i"
-        class="s3-dot"
-        :class="{ 's3-dot--active': s3Index === i - 1 }"
-        @click="s3Index = i - 1"
-        :aria-label="`Slide ${i}`"
-      />
-    </div>
-
   </section>
 
   <!-- Section 4 : Our Rums product slides -->
@@ -427,15 +403,9 @@ const s3OverlayY = computed(() => {
 
   </section>
 
-  <!-- Section 7 : Manifeste + 3 produits -->
+  <!-- Section 7 : 3 produits -->
   <section class="home-s7">
-    <img src="/img/montagne-opacity.png" class="s7-bg" alt="" aria-hidden="true" />
-
-    <div class="s7-headline">
-      <span class="s7-headline__line">Pour out the first shot</span>
-      <span class="s7-headline__line">for what you believe in</span>
-    </div>
-
+    <img src="/img/foil-dore.png" class="s7-bg" alt="" aria-hidden="true" />
 
     <div class="s7-bottles">
       <div

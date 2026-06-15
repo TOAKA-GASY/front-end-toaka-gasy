@@ -80,7 +80,7 @@
 <style scoped>
 .site-footer {
   position: relative;
-  background: #3A2E22;
+  background: #6F380E;
   overflow: hidden;
   padding: 4rem 0 3rem;
 }
