@@ -1,5 +1,5 @@
 <template>
-  <nav class="header">
+  <nav class="header" :style="bgColor ? { backgroundColor: bgColor } : {}">
     <div class="header__container">
 
       <!-- Phone only: hamburger + logo centered -->
@@ -65,6 +65,11 @@
 
 <script setup>
 import { ref } from 'vue'
+
+defineProps({
+  bgColor: { type: String, default: '' },
+})
+
 const menuOpen = ref(false)
 </script>
 
@@ -75,6 +80,7 @@ const menuOpen = ref(false)
   position: relative;
   z-index: 50;
   padding: 2rem 0 0.75rem;
+  transition: background-color 0.4s ease;
 }
 
 .header__container {

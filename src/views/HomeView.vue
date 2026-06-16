@@ -1,18 +1,19 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { useRouter } from 'vue-router'
+import { products } from '@/data/products'
 import '@/styles/home.css'
+
+const router = useRouter()
 
 const scrollY    = ref(0)
 const menuOpen   = ref(false)
 const s2Visible  = ref(false)
 const sRumVisible = ref(false)
-const s4Index    = ref(0)
 const s6Index   = ref(0)
 const s7Index   = ref(0)
 let observer    = null
 let sRumObserver = null
-let s4Observer  = null
-let s4Timer    = null
 let s6Observer = null
 let s6Timer    = null
 
@@ -24,25 +25,7 @@ const showTopBtn = computed(() => scrollY.value > window.innerHeight * 0.5)
 const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
 
 /* ─── Section 4 ─── */
-const s4StartTimer = () => {
-  if (!s4Timer) s4Timer = setInterval(() => {
-    if (s4Index.value < 2) s4Index.value++
-    else s4StopTimer()
-  }, 5000)
-}
-const s4StopTimer = () => {
-  if (s4Timer) { clearInterval(s4Timer); s4Timer = null }
-}
-const onS4Chevron = () => {
-  if (s4Index.value < 2) s4Index.value++
-  s4StopTimer()
-  s4StartTimer()
-}
-const onS4Back = () => {
-  if (s4Index.value > 0) s4Index.value--
-  s4StopTimer()
-  s4StartTimer()
-}
+const goToProduct = (slug) => router.push(`/product/${slug}`)
 
 /* ─── Section 7 ─── */
 const s7Bottles = [
@@ -103,18 +86,6 @@ onMounted(() => {
     sRumObserver.observe(sRumEl)
   }
 
-  const s4El = document.querySelector('.home-s4')
-  if (s4El) {
-    s4Observer = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) s4StartTimer()
-        else s4StopTimer()
-      },
-      { threshold: 0.4 }
-    )
-    s4Observer.observe(s4El)
-  }
-
   const s6El = document.querySelector('.home-s6')
   if (s6El) {
     s6Observer = new IntersectionObserver(
@@ -132,9 +103,7 @@ onUnmounted(() => {
   window.removeEventListener('scroll', onScroll)
   if (observer)      observer.disconnect()
   if (sRumObserver)  sRumObserver.disconnect()
-  if (s4Observer)    s4Observer.disconnect()
   if (s6Observer) s6Observer.disconnect()
-  s4StopTimer()
   s6StopTimer()
 })
 
@@ -196,11 +165,12 @@ const parallax = computed(() => {
   <!-- Section 1 : parallax sticky -->
   <div class="home-page">
     <div class="home-sticky">
-      <img src="/img/fond-montagne.png" class="home-bg" alt="" aria-hidden="true" />
+      <img src="/img/fond.png" class="home-bg" alt="" aria-hidden="true" />
+      <div class="scene-pos scene-pos--ravinala" :style="{ transform: parallax.ravinala }">
+        <img src="/img/ravinala.png" alt="" aria-hidden="true" />
+      </div>
+      <img src="/img/montagne.png" class="home-mountain" alt="" aria-hidden="true" />
       <section class="home-scene" aria-label="Scène Toaka Gasy">
-        <div class="scene-pos scene-pos--ravinala" :style="{ transform: parallax.ravinala }">
-          <img src="/img/ravinala.png" alt="" aria-hidden="true" />
-        </div>
         <div class="scene-pos scene-pos--bottle" :style="{ transform: parallax.bottle }">
           <img src="/img/toaka-gasy-mainty.png" alt="Toaka Gasy" />
         </div>
@@ -248,85 +218,29 @@ const parallax = computed(() => {
     </div>
   </section>
 
-  <!-- Section 4 : Our Rums product slides -->
+  <!-- Section 4 : Our Rums – 3 colonnes alignées -->
   <section class="home-s4">
-
-    <div class="s4-track" :style="{ transform: `translateX(-${s4Index * 100}%)` }">
-
-      <!-- Slide 1 : Toaka-1 — texte GAUCHE -->
-      <div class="s4-slide" :class="{ 's4-slide--active': s4Index === 0 }">
-        <img src="/img/toaka-1.png" class="s4-slide__bg" alt="Toaka n°608" />
-        <div class="s4-content s4-content--left">
-          <h2 class="s4-name">TOAKA n° 608</h2>
-          <p class="s4-tagline">Best Sipped with Sun</p>
-          <p class="s4-desc">An iconic rum crafted from Caribbean sugar cane, Madagascar vanilla, and Canadian maple syrup.</p>
-          <div class="s4-badge">
-            <div class="s4-badge__frame">
-              <span class="s4-badge__text">sooner available</span>
-            </div>
-          </div>
-        </div>
+    <button
+      v-for="p in products"
+      :key="p.slug"
+      class="s4-panel"
+      @click="goToProduct(p.slug)"
+      :aria-label="`Découvrir ${p.name}`"
+    >
+      <img :src="p.image" class="s4-panel__img" :alt="p.name" />
+      <div class="s4-panel__overlay" aria-hidden="true"></div>
+      <div class="s4-panel__content">
+        <h2 class="s4-panel__title">{{ p.name }}</h2>
+        <p class="s4-panel__tagline">{{ p.tagline }}</p>
+        <span class="s4-panel__cta">
+          <span>DISCOVER MORE</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </span>
       </div>
-
-      <!-- Slide 2 : Toaka2 — texte GAUCHE -->
-      <div class="s4-slide" :class="{ 's4-slide--active': s4Index === 1 }">
-        <img src="/img/toaka-2.png" class="s4-slide__bg" alt="Toaka n°609" />
-        <div class="s4-content s4-content--left">
-          <h2 class="s4-name">TOAKA n° 609</h2>
-          <p class="s4-tagline">Born from the Island</p>
-          <p class="s4-desc">A smooth aged rum with tropical fruit notes and the warmth of authentic Malagasy spices.</p>
-          <div class="s4-badge">
-            <div class="s4-badge__frame">
-              <span class="s4-badge__text">sooner available</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 3 : Toaka3 — texte GAUCHE -->
-      <div class="s4-slide" :class="{ 's4-slide--active': s4Index === 2 }">
-        <img src="/img/toaka-3.png" class="s4-slide__bg" alt="Toaka n°610" />
-        <div class="s4-content s4-content--left">
-          <h2 class="s4-name">TOAKA n° 610</h2>
-          <p class="s4-tagline">Crafted for the Bold</p>
-          <p class="s4-desc">A rich full-bodied rum with deep caramel, aged oak, and pure Madagascar vanilla heritage.</p>
-          <div class="s4-badge">
-            <div class="s4-badge__frame">
-              <span class="s4-badge__text">sooner available</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Chevron gauche (slides 2 et 3) -->
-    <button v-if="s4Index > 0" class="s4-nav s4-nav--left" @click="onS4Back" aria-label="Slide précédent">
-      <svg width="32" height="32" viewBox="0 0 74 74" fill="none">
-        <polyline points="44,22 28,37 44,52" stroke="#ECD8C4" stroke-width="4"
-          stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
     </button>
-
-    <!-- Chevron droit (slides 1 et 2 seulement) -->
-    <button v-if="s4Index < 2" class="s4-nav s4-nav--right" @click="onS4Chevron" aria-label="Slide suivant">
-      <svg width="32" height="32" viewBox="0 0 74 74" fill="none">
-        <polyline points="30,22 46,37 30,52" stroke="#ECD8C4" stroke-width="4"
-          stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </button>
-
-    <!-- Dots -->
-    <div class="s4-dots">
-      <button
-        v-for="i in 3" :key="i"
-        class="s4-dot"
-        :class="{ 's4-dot--active': s4Index === i - 1 }"
-        @click="s4Index = i - 1"
-        :aria-label="`Slide ${i}`"
-      />
-    </div>
-
   </section>
 
   <!-- Section 5 : Women drink + vidéo superposée -->
@@ -385,7 +299,7 @@ const parallax = computed(() => {
     <!-- Chevron droit -->
     <button v-if="s6Index < 2" class="s6-nav s6-nav--right" @click="onS6Chevron" aria-label="Slide suivant">
       <svg width="32" height="32" viewBox="0 0 74 74" fill="none">
-        <polyline points="30,22 46,37 30,52" stroke="#ECD8C4" stroke-width="4"
+        <polyline points="30,22 46,37 30,52" stroke="currentColor" stroke-width="4"
           stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </button>
@@ -427,7 +341,7 @@ const parallax = computed(() => {
     </button>
     <button class="s7-nav s7-nav--right" @click="onS7Next" aria-label="Bouteille suivante">
       <svg width="32" height="32" viewBox="0 0 74 74" fill="none">
-        <polyline points="30,22 46,37 30,52" stroke="#ECD8C4" stroke-width="4"
+        <polyline points="30,22 46,37 30,52" stroke="currentColor" stroke-width="4"
           stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </button>
