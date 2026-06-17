@@ -12,7 +12,7 @@
 }
 
 .hero-hd--sticky {
-  background: #a6b3c4;
+  background: #e2cfb0;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
 }
 
@@ -37,7 +37,7 @@
 }
 
 .hero-hd__logo {
-  height: clamp(110px, 13vw, 170px);
+  height: clamp(80px, 8.5vw, 150px);
   width: auto;
   object-fit: contain;
   transition: height 0.45s cubic-bezier(0.22, 1, 0.36, 1),
@@ -46,7 +46,7 @@
 }
 
 .hero-hd--sticky .hero-hd__logo {
-  height: clamp(55px, 6vw, 78px);
+  height: clamp(48px, 5vw, 76px);
   filter: none;
 }
 
@@ -155,8 +155,8 @@
   bottom: -30px;
   left: 50%;
   transform: translateX(-50%);
-  width: 400px;
-  height: 60px;
+  width: clamp(200px, 22vmin, 480px);
+  height: clamp(40px, 4vmin, 80px);
   border-radius: 50%;
   background: rgba(20, 8, 1, 0.826);
   filter: blur(12px);
@@ -166,7 +166,7 @@
 
 /* ─── Tailles & animations des images ─── */
 .scene-pos--bottle img {
-  height: clamp(280px, 85vh, 520px);
+  height: clamp(260px, 68vmin, 800px);
   width: auto;
   display: block;
   filter: drop-shadow(0 28px 24px rgba(0, 0, 0, 0.45));
@@ -174,7 +174,7 @@
 }
 
 .scene-pos--ravinala img {
-  height: clamp(500px, 105vh, 880px);
+  height: clamp(380px, 82vmin, 950px);
   width: auto;
   display: block;
   animation: slideFromRight 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
@@ -194,12 +194,6 @@
 @keyframes bottleRise {
   from { opacity: 0; transform: translateY(50px) scale(0.93); }
   to   { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-/* ─── Grand écran (Bootstrap xxl) ─── */
-@media (min-width: 1400px) {
-  .scene-pos--bottle img  { height: clamp(460px, 65vh, 680px); }
-  .scene-pos--ravinala img { height: clamp(760px, 92vh, 1080px); }
 }
 
 /* ─── Responsive mobile (Bootstrap sm) ─── */
@@ -276,6 +270,10 @@
   letter-spacing: 0.22em;
   text-transform: uppercase;
   text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
   opacity: 0;
   transform: translateY(16px);
   transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
@@ -594,6 +592,126 @@
 }
 
 /* ════════════════════════════════════════
+   Section 5+7 – Women drink → Foil doré (seamless)
+   ════════════════════════════════════════ */
+.home-s57 {
+  overflow: hidden;
+  background: #190802;
+}
+
+/* ─── Zone haute : women-drink pleine hauteur naturelle ─── */
+.s57-zone-top {
+  position: relative;
+  width: 100%;
+  line-height: 0;
+  z-index: 1;
+}
+
+.s57-top {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.s57-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.35;
+  z-index: 2;
+}
+
+.s57-tagline {
+  position: absolute;
+  bottom: 18%;
+  right: -5%;
+  width: 50%;
+  z-index: 5;
+  font-family: var(--font-simonetta);
+  font-style: italic;
+  font-size: clamp(18px, 2.2vw, 36px);
+  line-height: 1.55;
+  color: #e0caad;
+  pointer-events: none;
+}
+
+/* ─── Zone basse : foil doré en premier plan ─── */
+.s57-zone-bottom {
+  position: relative;
+  width: 100%;
+  margin-top: -14%;
+  line-height: 0;
+  z-index: 10;
+}
+
+.s57-bottom {
+  display: block;
+  width: 100%;
+  max-height: 150vh;
+  object-fit: cover;
+  object-position: top center;
+}
+
+/* ─── Bouteilles sur le foil ─── */
+.s57-bottles {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* ─── Chevrons ─── */
+.s57-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  background: rgba(20, 8, 1, 0.45);
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: background 0.3s ease, transform 0.3s ease;
+  color: #fff;
+  pointer-events: all;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.s57-nav--left  { left:  2rem; }
+.s57-nav--right { right: 2rem; }
+
+.s57-nav:hover { background: rgba(20, 8, 1, 0.75); transform: translateY(-50%) scale(1.1); }
+
+/* ─── Dots ─── */
+.s57-dots {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  gap: 0.6rem;
+  pointer-events: all;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 767.98px) {
+  .s57-zone-bottom { margin-top: -10%; }
+  .s57-tagline  { bottom: 12%; right: 4%; width: 52%; font-size: clamp(14px, 3.5vw, 22px); }
+  .s57-nav--left  { left:  1rem; }
+  .s57-nav--right { right: 1rem; }
+}
+
+@media (max-width: 575.98px) {
+  .s57-zone-bottom { margin-top: -8%; }
+  .s57-tagline  { bottom: 8%; width: 60%; font-size: clamp(13px, 3.2vw, 18px); }
+}
+
+/* ════════════════════════════════════════
    Back to top
    ════════════════════════════════════════ */
 .back-to-top {
@@ -774,6 +892,112 @@
 }
 
 /* ════════════════════════════════════════
+   Section 4+6 – Rums & Cocktails combinés
+   ════════════════════════════════════════ */
+.home-s46 {
+  position: relative;
+  height: 400px;
+  overflow: hidden;
+  background: #fff;
+}
+
+/* ─── Polices harmonisées pour 400px de hauteur ─── */
+.home-s46 .s4-panel__content { bottom: 1.25rem }
+.home-s46 .s4-panel__title   { font-size: clamp(20px, 1.6vw, 23px); }
+.home-s46 .s4-panel__tagline { font-size: clamp(15px, 0.95vw, 14px); }
+.home-s46 .s4-panel__cta     { font-size: 12px; margin-top: 0.25rem; }
+
+.home-s46 .s6-content  { bottom: 1.5rem }
+.home-s46 .s6-title    { font-size: clamp(20px, 1.6vw, 23px); }
+.home-s46 .s6-subtitle { font-size: clamp(15px, 0.95vw, 14px); }
+
+.s46-track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.s46-slide {
+  flex: 0 0 33.333%;
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Séparateur léger entre slides */
+.s46-slide + .s46-slide {
+  border-left: 6px solid #fff;
+}
+
+/* ─── Rum slide ─── */
+.s46-slide--rum {
+  background: var(--color-dark);
+  border-top: none;
+  border-bottom: none;
+  border-right: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.s46-slide--rum:hover .s4-panel__img,
+.s46-slide--rum:focus-visible .s4-panel__img { transform: scale(1.1); }
+
+.s46-slide--rum:hover .s4-panel__cta,
+.s46-slide--rum:focus-visible .s4-panel__cta { opacity: 1; transform: translateY(0); }
+
+/* ─── Cocktail slide : texte reveal à l'activation ─── */
+.s46-slide--cocktail .s6-title,
+.s46-slide--cocktail .s6-subtitle {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity  0.75s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.s46-slide--cocktail.s46-active .s6-title    { opacity: 1; transform: none; transition-delay: 0.2s; }
+.s46-slide--cocktail.s46-active .s6-subtitle { opacity: 1; transform: none; transition-delay: 0.38s; }
+
+/* ─── Chevrons ─── */
+.s46-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.3s ease;
+  color: #ECD8C4;
+}
+
+.s46-nav--left  { left:  1.5rem; }
+.s46-nav--right { right: 1.5rem; }
+
+.s46-nav:hover { transform: translateY(-50%) scale(1.1); }
+
+/* ─── Responsive ─── */
+@media (max-width: 767.98px) {
+  .s46-slide               { flex: 0 0 100%; }
+  .s46-slide + .s46-slide  { border-left: none; }
+  .s46-nav--left           { left:  0.75rem; }
+  .s46-nav--right          { right: 0.75rem; color: #6F380E; }
+  .home-s46 .s6-content    { bottom: 2rem; }
+  .home-s46 .s4-panel__title  { font-size: clamp(17px, 4.5vw, 23px); }
+  .home-s46 .s6-title         { font-size: clamp(17px, 4.5vw, 23px); }
+  .home-s46 .s4-panel__tagline,
+  .home-s46 .s6-subtitle      { font-size: 13px; }
+}
+
+@media (max-width: 575.98px) {
+  .home-s46               { height: 320px; }
+  .home-s46 .s6-content   { bottom: 1.25rem; width: 95%; }
+  .home-s46 .s4-panel__cta { opacity: 1; transform: none; }
+}
+
+/* ════════════════════════════════════════
    RESPONSIVE GLOBAL – Bootstrap breakpoints
    ════════════════════════════════════════ */
 
@@ -782,7 +1006,7 @@
   position: fixed;
   inset: 0;
   z-index: 200;
-  background: #a6b3c4;
+  background: #ece0c1;
   display: flex;
   flex-direction: column;
   align-items: center;

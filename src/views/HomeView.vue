@@ -10,12 +10,13 @@ const scrollY    = ref(0)
 const menuOpen   = ref(false)
 const s2Visible  = ref(false)
 const sRumVisible = ref(false)
-const s6Index   = ref(0)
+const s46Index  = ref(0)
+const s46Max    = ref(3)
 const s7Index   = ref(0)
 let observer    = null
 let sRumObserver = null
-let s6Observer = null
-let s6Timer    = null
+let s46Observer = null
+let s46Timer    = null
 
 const onScroll = () => { scrollY.value = window.scrollY }
 
@@ -26,6 +27,42 @@ const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
 
 /* ─── Section 4 ─── */
 const goToProduct = (slug) => router.push(`/product/${slug}`)
+const scrollToRums = () => document.getElementById('section-rums')?.scrollIntoView({ behavior: 'smooth' })
+
+/* ─── Section 4+6 combinée ─── */
+const cocktails = [
+  { src: '/img/cocktail.png',  title: 'LOST ISLAND COCKTAIL',   subtitle: 'Go wild and get lost' },
+  { src: '/img/cocktail2.png', title: 'SUNKISSED AT MONTPASSO', subtitle: 'Smooth rum, bright citrus, perfect balance' },
+  { src: '/img/cocktail3.png', title: 'THE MACKAY COCKTAIL',    subtitle: 'One sip to be ready for another adventure' },
+]
+
+const isSlideActive = (pos) => {
+  const perPage = 6 - s46Max.value
+  return s46Index.value <= pos && pos < s46Index.value + perPage
+}
+
+const updateS46Max = () => {
+  const prev = s46Max.value
+  s46Max.value = window.innerWidth <= 767 ? 5 : 3
+  if (prev !== s46Max.value) s46Index.value = 0
+}
+
+const s46StartTimer = () => {
+  if (!s46Timer) s46Timer = setInterval(() => {
+    s46Index.value = s46Index.value < s46Max.value ? s46Index.value + 1 : 0
+  }, 5000)
+}
+const s46StopTimer = () => {
+  if (s46Timer) { clearInterval(s46Timer); s46Timer = null }
+}
+const onS46Next = () => {
+  if (s46Index.value < s46Max.value) s46Index.value++
+  s46StopTimer(); s46StartTimer()
+}
+const onS46Prev = () => {
+  if (s46Index.value > 0) s46Index.value--
+  s46StopTimer(); s46StartTimer()
+}
 
 /* ─── Section 7 ─── */
 const s7Bottles = [
@@ -44,26 +81,6 @@ const s7BottlePos = computed(() =>
 const onS7Next = () => { s7Index.value = (s7Index.value + 1) % 3 }
 const onS7Prev = () => { s7Index.value = (s7Index.value + 2) % 3 }
 
-/* ─── Section 6 ─── */
-const s6StartTimer = () => {
-  if (!s6Timer) s6Timer = setInterval(() => {
-    if (s6Index.value < 2) s6Index.value++
-    else s6StopTimer()
-  }, 5000)
-}
-const s6StopTimer = () => {
-  if (s6Timer) { clearInterval(s6Timer); s6Timer = null }
-}
-const onS6Chevron = () => {
-  if (s6Index.value < 2) s6Index.value++
-  s6StopTimer()
-  s6StartTimer()
-}
-const onS6Back = () => {
-  if (s6Index.value > 0) s6Index.value--
-  s6StopTimer()
-  s6StartTimer()
-}
 
 onMounted(() => {
   window.addEventListener('scroll', onScroll, { passive: true })
@@ -86,25 +103,29 @@ onMounted(() => {
     sRumObserver.observe(sRumEl)
   }
 
-  const s6El = document.querySelector('.home-s6')
-  if (s6El) {
-    s6Observer = new IntersectionObserver(
+  updateS46Max()
+  window.addEventListener('resize', updateS46Max, { passive: true })
+
+  const s46El = document.querySelector('.home-s46')
+  if (s46El) {
+    s46Observer = new IntersectionObserver(
       ([e]) => {
-        if (e.isIntersecting) s6StartTimer()
-        else s6StopTimer()
+        if (e.isIntersecting) s46StartTimer()
+        else s46StopTimer()
       },
-      { threshold: 0.4 }
+      { threshold: 0.3 }
     )
-    s6Observer.observe(s6El)
+    s46Observer.observe(s46El)
   }
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', onScroll)
-  if (observer)      observer.disconnect()
-  if (sRumObserver)  sRumObserver.disconnect()
-  if (s6Observer) s6Observer.disconnect()
-  s6StopTimer()
+  window.removeEventListener('resize', updateS46Max)
+  if (observer)     observer.disconnect()
+  if (sRumObserver) sRumObserver.disconnect()
+  if (s46Observer)  s46Observer.disconnect()
+  s46StopTimer()
 })
 
 const parallax = computed(() => {
@@ -185,13 +206,13 @@ const parallax = computed(() => {
       <img src="/img/rizière.png" class="s2-rect__bg" alt="" aria-hidden="true" />
       <div class="s2-rect__overlay" aria-hidden="true"></div>
       <h2 class="s2-title">THE RUM OF CELEBRATION</h2>
-      <RouterLink to="/our-rums" class="s2-cta">
+      <button class="s2-cta" @click="scrollToRums">
         <span>DISCOVER MORE</span>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="6 9 12 15 18 9"/>
         </svg>
-      </RouterLink>
+      </button>
     </div>
   </section>
 
@@ -208,88 +229,93 @@ const parallax = computed(() => {
       <img src="/img/cocotier.png" class="s2-rect__bg" alt="" aria-hidden="true" />
       <div class="s2-rect__overlay" aria-hidden="true"></div>
       <h2 class="s2-title">EXPLORE OUR RUM</h2>
-      <RouterLink to="/our-rums" class="s2-cta">
+      <button class="s2-cta" @click="scrollToRums">
         <span>DISCOVER MORE</span>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="6 9 12 15 18 9"/>
         </svg>
-      </RouterLink>
+      </button>
     </div>
   </section>
 
-  <!-- Section 4 : Our Rums – 3 colonnes alignées -->
-  <section class="home-s4">
-    <button
-      v-for="p in products"
-      :key="p.slug"
-      class="s4-panel"
-      @click="goToProduct(p.slug)"
-      :aria-label="`Découvrir ${p.name}`"
-    >
-      <img :src="p.image" class="s4-panel__img" :alt="p.name" />
-      <div class="s4-panel__overlay" aria-hidden="true"></div>
-      <div class="s4-panel__content">
-        <h2 class="s4-panel__title">{{ p.name }}</h2>
-        <p class="s4-panel__tagline">{{ p.tagline }}</p>
-        <span class="s4-panel__cta">
-          <span>DISCOVER MORE</span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="6 9 12 15 18 9"/>
-          </svg>
-        </span>
-      </div>
-    </button>
-  </section>
+  <!-- Section combinée : Rums + Cocktails alternés (slider 3 visible) -->
+  <section id="section-rums" class="home-s46">
+    <div class="s46-track" :style="{ transform: `translateX(-${s46Index * (100/6)}%)` }">
 
-  <!-- Section 5 : Women drink + vidéo superposée -->
-  <section class="home-s5">
-    <img src="/img/women-drink.png" class="s5-bg" alt="" aria-hidden="true" />
-    <video class="s5-video" autoplay muted loop playsinline>
-      <source src="/vd/rum-video.mp4" type="video/mp4" />
-    </video>
-  </section>
+      <!-- Rum 1 -->
+      <button class="s46-slide s46-slide--rum" @click="goToProduct(products[0].slug)" :aria-label="`Découvrir ${products[0].name}`">
+        <img :src="products[0].image" class="s4-panel__img" :alt="products[0].name" />
+        <div class="s4-panel__overlay" aria-hidden="true"></div>
+        <div class="s4-panel__content">
+          <h2 class="s4-panel__title">{{ products[0].name }}</h2>
+          <p class="s4-panel__tagline">{{ products[0].tagline }}</p>
+          <span class="s4-panel__cta"><span>DISCOVER MORE</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </span>
+        </div>
+      </button>
 
-   <!-- Section 6 : Cocktails slider -->
-  <section class="home-s6">
-
-    <div class="s6-track" :style="{ transform: `translateX(-${s6Index * 100}%)` }">
-
-      <!-- Slide 1 -->
-      <div class="s6-slide" :class="{ 's6-slide--active': s6Index === 0 }">
-        <img src="/img/cocktail.png" class="s6-slide__bg" alt="Cocktail Toaka" />
+      <!-- Cocktail 1 -->
+      <div class="s46-slide s46-slide--cocktail" :class="{ 's46-active': isSlideActive(1) }">
+        <img :src="cocktails[0].src" class="s6-slide__bg" alt="Cocktail" />
         <div class="s6-gradient" aria-hidden="true"></div>
         <div class="s6-content">
-          <h2 class="s6-title">LOST ISLAND COCKTAIL</h2>
-          <p class="s6-subtitle">Go wild and get lost</p>
+          <h2 class="s6-title">{{ cocktails[0].title }}</h2>
+          <p class="s6-subtitle">{{ cocktails[0].subtitle }}</p>
         </div>
       </div>
 
-      <!-- Slide 2 -->
-      <div class="s6-slide" :class="{ 's6-slide--active': s6Index === 1 }">
-        <img src="/img/cocktail2.png" class="s6-slide__bg" alt="Cocktail Tropical" />
+      <!-- Rum 2 -->
+      <button class="s46-slide s46-slide--rum" @click="goToProduct(products[1].slug)" :aria-label="`Découvrir ${products[1].name}`">
+        <img :src="products[1].image" class="s4-panel__img" :alt="products[1].name" />
+        <div class="s4-panel__overlay" aria-hidden="true"></div>
+        <div class="s4-panel__content">
+          <h2 class="s4-panel__title">{{ products[1].name }}</h2>
+          <p class="s4-panel__tagline">{{ products[1].tagline }}</p>
+          <span class="s4-panel__cta"><span>DISCOVER MORE</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </span>
+        </div>
+      </button>
+
+      <!-- Cocktail 2 -->
+      <div class="s46-slide s46-slide--cocktail" :class="{ 's46-active': isSlideActive(3) }">
+        <img :src="cocktails[1].src" class="s6-slide__bg" alt="Cocktail 2" />
         <div class="s6-gradient" aria-hidden="true"></div>
         <div class="s6-content">
-          <h2 class="s6-title">SUNKISSED AT MONTPASSO</h2>
-          <p class="s6-subtitle">Smooth rum, bright citrus, perfect balance</p>
+          <h2 class="s6-title">{{ cocktails[1].title }}</h2>
+          <p class="s6-subtitle">{{ cocktails[1].subtitle }}</p>
         </div>
       </div>
 
-      <!-- Slide 3 -->
-      <div class="s6-slide" :class="{ 's6-slide--active': s6Index === 2 }">
-        <img src="/img/cocktail3.png" class="s6-slide__bg" alt="Cocktail Signature" />
+      <!-- Rum 3 -->
+      <button class="s46-slide s46-slide--rum" @click="goToProduct(products[2].slug)" :aria-label="`Découvrir ${products[2].name}`">
+        <img :src="products[2].image" class="s4-panel__img" :alt="products[2].name" />
+        <div class="s4-panel__overlay" aria-hidden="true"></div>
+        <div class="s4-panel__content">
+          <h2 class="s4-panel__title">{{ products[2].name }}</h2>
+          <p class="s4-panel__tagline">{{ products[2].tagline }}</p>
+          <span class="s4-panel__cta"><span>DISCOVER MORE</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </span>
+        </div>
+      </button>
+
+      <!-- Cocktail 3 -->
+      <div class="s46-slide s46-slide--cocktail" :class="{ 's46-active': isSlideActive(5) }">
+        <img :src="cocktails[2].src" class="s6-slide__bg" alt="Cocktail 3" />
         <div class="s6-gradient" aria-hidden="true"></div>
         <div class="s6-content">
-          <h2 class="s6-title">THE MACKAY  COCKTAIL </h2>
-          <p class="s6-subtitle">One sip to be ready for an other adventure</p>
+          <h2 class="s6-title">{{ cocktails[2].title }}</h2>
+          <p class="s6-subtitle">{{ cocktails[2].subtitle }}</p>
         </div>
       </div>
 
     </div>
 
     <!-- Chevron gauche -->
-    <button v-if="s6Index > 0" class="s6-nav s6-nav--left" @click="onS6Back" aria-label="Slide précédent">
+    <button v-if="s46Index > 0" class="s46-nav s46-nav--left" @click="onS46Prev" aria-label="Précédent">
       <svg width="32" height="32" viewBox="0 0 74 74" fill="none">
         <polyline points="44,22 28,37 44,52" stroke="#ECD8C4" stroke-width="4"
           stroke-linecap="round" stroke-linejoin="round"/>
@@ -297,65 +323,68 @@ const parallax = computed(() => {
     </button>
 
     <!-- Chevron droit -->
-    <button v-if="s6Index < 2" class="s6-nav s6-nav--right" @click="onS6Chevron" aria-label="Slide suivant">
+    <button v-if="s46Index < s46Max" class="s46-nav s46-nav--right" @click="onS46Next" aria-label="Suivant">
       <svg width="32" height="32" viewBox="0 0 74 74" fill="none">
         <polyline points="30,22 46,37 30,52" stroke="currentColor" stroke-width="4"
           stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </button>
-
-    <!-- Dots -->
-    <div class="s6-dots">
-      <button
-        v-for="i in 3" :key="i"
-        class="s6-dot"
-        :class="{ 's6-dot--active': s6Index === i - 1 }"
-        @click="s6Index = i - 1"
-        :aria-label="`Slide ${i}`"
-      />
-    </div>
-
   </section>
 
-  <!-- Section 7 : 3 produits -->
-  <section class="home-s7">
-    <img src="/img/foil-dore.png" class="s7-bg" alt="" aria-hidden="true" />
+  <!-- Section 5+7 : Women drink → Foil doré + Bouteilles (seamless) -->
+  <section class="home-s57">
 
-    <div class="s7-bottles">
-      <div
-        v-for="(bottle, i) in s7Bottles"
-        :key="bottle.src"
-        class="s7-bottle"
-        :class="s7BottlePos[i]"
-      >
-        <img :src="bottle.src" :alt="bottle.alt" />
+    <!-- Zone haute : women-drink pleine hauteur -->
+    <div class="s57-zone-top">
+      <img src="/img/women-drink2.png" class="s57-top" alt="" aria-hidden="true" />
+      <video class="s57-video" autoplay muted loop playsinline>
+        <source src="/vd/rum-video.mp4" type="video/mp4" />
+      </video>
+      <p class="s57-tagline">
+        More than a rum it's a vibe, a celebration,<br>
+        a heritage and a tradition...
+      </p>
+    </div>
+
+    <!-- Zone basse : foil doré pleine hauteur + bouteilles -->
+    <div class="s57-zone-bottom">
+      <img src="/img/foil-dore2.png" class="s57-bottom" alt="" aria-hidden="true" />
+
+      <div class="s57-bottles">
+        <div
+          v-for="(bottle, i) in s7Bottles"
+          :key="bottle.src"
+          class="s7-bottle"
+          :class="s7BottlePos[i]"
+        >
+          <img :src="bottle.src" :alt="bottle.alt" />
+        </div>
+      </div>
+
+      <button class="s57-nav s57-nav--left" @click="onS7Prev" aria-label="Bouteille précédente">
+        <svg width="32" height="32" viewBox="0 0 74 74" fill="none">
+          <polyline points="44,22 28,37 44,52" stroke="currentColor" stroke-width="4"
+            stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button class="s57-nav s57-nav--right" @click="onS7Next" aria-label="Bouteille suivante">
+        <svg width="32" height="32" viewBox="0 0 74 74" fill="none">
+          <polyline points="30,22 46,37 30,52" stroke="currentColor" stroke-width="4"
+            stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <div class="s57-dots">
+        <button
+          v-for="i in 3" :key="i"
+          class="s7-dot"
+          :class="{ 's7-dot--active': s7Index === i - 1 }"
+          @click="s7Index = i - 1"
+          :aria-label="`Bouteille ${i}`"
+        />
       </div>
     </div>
 
-    <!-- Chevrons -->
-    <button class="s7-nav s7-nav--left" @click="onS7Prev" aria-label="Bouteille précédente">
-      <svg width="32" height="32" viewBox="0 0 74 74" fill="none">
-        <polyline points="44,22 28,37 44,52" stroke="#ECD8C4" stroke-width="4"
-          stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </button>
-    <button class="s7-nav s7-nav--right" @click="onS7Next" aria-label="Bouteille suivante">
-      <svg width="32" height="32" viewBox="0 0 74 74" fill="none">
-        <polyline points="30,22 46,37 30,52" stroke="currentColor" stroke-width="4"
-          stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </button>
-
-    <!-- Dots -->
-    <div class="s7-dots">
-      <button
-        v-for="i in 3" :key="i"
-        class="s7-dot"
-        :class="{ 's7-dot--active': s7Index === i - 1 }"
-        @click="s7Index = i - 1"
-        :aria-label="`Bouteille ${i}`"
-      />
-    </div>
   </section>
 
   <!-- Back to top -->

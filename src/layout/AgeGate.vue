@@ -4,7 +4,7 @@
       <div class="age-gate__card">
         <img src="/img/footer-pattern.png" class="age-gate__pattern" alt="" aria-hidden="true" />
 
-        <img src="/logo/logo-dore.png" class="age-gate__logo" alt="Toaka Gasy" />
+        <img src="/logo/logo-marron.png" class="age-gate__logo" alt="Toaka Gasy" />
 
         <h2 id="age-gate-title" class="age-gate__title">ARE YOU OF LEGAL DRINKING AGE&nbsp;?</h2>
         <p class="age-gate__text">
@@ -18,7 +18,7 @@
           <button class="age-gate__btn age-gate__btn--yes" @click="onYes">YES</button>
         </div>
 
-        <img src="/img/line-mdg.png" class="age-gate__line" alt="" aria-hidden="true" />
+        <img src="/img/line-mdg2.png" class="age-gate__line" alt="" aria-hidden="true" />
       </div>
     </div>
   </Transition>
@@ -67,8 +67,8 @@ const onNo = () => {
   height: 100%;
   padding: 1.5rem 2.5rem;
   text-align: center;
-  color: #e0caad;
-  background: #31271d;
+  color: #31271d;
+  background: #cfb68e;
   overflow: hidden;
 }
 
@@ -119,7 +119,7 @@ const onNo = () => {
   font-family: 'Simonetta', Georgia, serif;
   font-size: clamp(15px, 1.6vw, 20px);
   line-height: 1.6;
-  color: #d9c4ac;
+  color: #31271d;
   max-width: 540px;
   margin-bottom: 2.5rem;
 }
@@ -134,8 +134,8 @@ const onNo = () => {
 
 .age-gate__btn {
   background: transparent;
-  border: 1px solid #ecd8c4;
-  color: #ecd8c4;
+  border: 1px solid #31271d;
+  color: #31271d;
   font-family: 'Cinzel', 'Times New Roman', serif;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -147,9 +147,10 @@ const onNo = () => {
 }
 
 .age-gate__btn:hover {
-  background: #ecd8c4;
-  color: #31271d;
+  background: #8E602B;
+  color: #cfb68e;
   transform: translateY(-2px);
+  border-color: transparent;
 }
 
 /* ─── Transition fluide : slide depuis la gauche ─── */
