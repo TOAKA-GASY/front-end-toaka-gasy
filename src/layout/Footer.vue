@@ -1,5 +1,6 @@
 <template>
   <footer class="site-footer">
+    <img src="/img/foil-dore2.png" class="footer-foil" alt="" aria-hidden="true" />
     <img src="/img/footer-pattern.png" class="footer-pattern" alt="" aria-hidden="true" />
 
     <div class="footer-inner">
@@ -80,9 +81,23 @@
 <style scoped>
 .site-footer {
   position: relative;
-  background: #6F380E;
+  background: #5B3615;
   overflow: hidden;
   padding: 4rem 0 3rem;
+}
+
+/* ─── Foil doré : texture zoomée très basse opacité ─── */
+.footer-foil {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.8);
+  opacity: 0.07;
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* ─── Background pattern ─── */
