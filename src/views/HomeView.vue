@@ -241,7 +241,7 @@ const parallax = computed(() => {
 
   <!-- Section combinée : Rums + Cocktails alternés (slider 3 visible) -->
   <section id="section-rums" class="home-s46">
-    <div class="s46-track" :style="{ transform: `translateX(-${s46Index * (100/6)}%)` }">
+    <div class="s46-track" :style="{ transform: `translateX(-${s46Index * (100 / (6 - s46Max))}%)` }">
 
       <!-- Rum 1 -->
       <button class="s46-slide s46-slide--rum" @click="goToProduct(products[0].slug)" :aria-label="`Découvrir ${products[0].name}`">
@@ -342,7 +342,7 @@ const parallax = computed(() => {
       </video>
       <p class="s57-tagline">
         More than a rum it's a vibe, a celebration,<br>
-        a heritage and a tradition...
+        an heritage and a tradition...
       </p>
     </div>
 

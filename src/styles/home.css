@@ -12,7 +12,7 @@
 }
 
 .hero-hd--sticky {
-  background: #e2cfb0;
+  background: #F5E9DB;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
 }
 
@@ -902,12 +902,20 @@
 }
 
 /* ─── Polices harmonisées pour 400px de hauteur ─── */
-.home-s46 .s4-panel__content { bottom: 1.25rem }
+.home-s46 .s4-panel__content {
+  bottom: 1.5rem;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  width: 90%;
+  text-align: center;
+  align-items: center;
+}
 .home-s46 .s4-panel__title   { font-size: clamp(20px, 1.6vw, 23px); }
 .home-s46 .s4-panel__tagline { font-size: clamp(15px, 0.95vw, 14px); }
 .home-s46 .s4-panel__cta     { font-size: 12px; margin-top: 0.25rem; }
 
-.home-s46 .s6-content  { bottom: 1.5rem }
+.home-s46 .s6-content  { bottom: 1.5rem; }
 .home-s46 .s6-title    { font-size: clamp(20px, 1.6vw, 23px); }
 .home-s46 .s6-subtitle { font-size: clamp(15px, 0.95vw, 14px); }
 

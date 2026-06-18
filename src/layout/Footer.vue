@@ -13,16 +13,40 @@
       <!-- Newsletter -->
       <div class="footer-newsletter">
         <p class="footer-newsletter__heading">join our community</p>
-        <form class="footer-newsletter__form" @submit.prevent>
+        <form class="footer-newsletter__form" @submit.prevent="sendWelcome">
           <input
+            v-model="newsletterEmail"
             class="footer-newsletter__input"
             type="email"
             placeholder="enter your email"
             aria-label="Votre adresse email"
+            :disabled="newsletterSending || newsletterDone"
           />
-          <button class="footer-newsletter__btn" type="submit">continue</button>
+          <button class="footer-newsletter__btn" type="submit" :disabled="newsletterSending || newsletterDone">
+            {{ newsletterSending ? '...' : newsletterDone ? '✓' : 'continue' }}
+          </button>
         </form>
+        <p v-if="newsletterError" class="footer-newsletter__msg footer-newsletter__msg--error">{{ newsletterError }}</p>
       </div>
+
+      <!-- Popup de bienvenue -->
+      <Teleport to="body">
+        <Transition name="footer-popup">
+          <div v-if="newsletterDone" class="fn-popup-overlay" @click.self="newsletterDone = false">
+            <div class="fn-popup-card">
+              <img src="/logo/logo-icon.png" class="fn-popup__logo" alt="Toaka Gasy" />
+              <span class="fn-popup__ornament"></span>
+              <p class="fn-popup__title">Welcome to the Community</p>
+              <p class="fn-popup__message">
+                You're in.<br />
+                We have sent you a welcome email.<br />
+                <em>Born in the Hidden Valleys of Madagascar.</em>
+              </p>
+              <button class="fn-popup__close" @click="newsletterDone = false">CLOSE</button>
+            </div>
+          </div>
+        </Transition>
+      </Teleport>
 
       <!-- Social -->
       <div class="footer-social">
@@ -76,6 +100,51 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
+import emailjs from '@emailjs/browser'
+
+const newsletterEmail = ref('')
+const newsletterSending = ref(false)
+const newsletterDone = ref(false)
+const newsletterError = ref('')
+
+async function saveToSheetsCommunity(email) {
+  const url = import.meta.env.VITE_GOOGLE_SHEET_URL_COMMUNITY
+  if (!url) return
+  await fetch(url, {
+    method: 'POST',
+    mode: 'no-cors',
+    body: JSON.stringify({ email, date: new Date().toISOString() }),
+  })
+}
+
+async function sendWelcome() {
+  newsletterError.value = ''
+  const email = newsletterEmail.value.trim()
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    newsletterError.value = 'Please enter a valid email address.'
+    return
+  }
+
+  newsletterSending.value = true
+  try {
+    await Promise.all([
+      emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID_COMMUNITY,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID_COMMUNITY,
+        { to_email: email, to_name: email },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+      ),
+      saveToSheetsCommunity(email),
+    ])
+    newsletterDone.value = true
+    newsletterEmail.value = ''
+  } catch {
+    newsletterError.value = 'Something went wrong. Please try again.'
+  } finally {
+    newsletterSending.value = false
+  }
+}
 </script>
 
 <style scoped>
@@ -193,6 +262,104 @@
 .footer-newsletter__btn:hover {
   background: rgba(236, 216, 196, 0.1);
 }
+
+.footer-newsletter__btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.footer-newsletter__msg {
+  font-family: var(--font-simonetta);
+  font-size: clamp(12px, 1.1vw, 14px);
+  font-style: italic;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.footer-newsletter__msg--error { color: #ffb3ba; }
+
+/* ─── Popup bienvenue ─── */
+.fn-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 10, 2, 0.6);
+  z-index: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  backdrop-filter: blur(4px);
+}
+
+.fn-popup-card {
+  background: #f3e6d8;
+  border: 1px solid #a86b33;
+  outline: 3px solid #f3e6d8;
+  outline-offset: -8px;
+  border-radius: 4px;
+  padding: 2.5rem 2rem 2rem;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 12px 48px rgba(30, 10, 2, 0.4);
+}
+
+.fn-popup__logo {
+  width: 64px;
+  height: auto;
+  margin-bottom: 1.25rem;
+}
+
+.fn-popup__ornament {
+  display: block;
+  width: 50px;
+  height: 1px;
+  background: #a86b33;
+  margin: 0 auto 1.25rem;
+}
+
+.fn-popup__title {
+  font-family: var(--font-cinzel);
+  font-weight: 700;
+  font-size: 1rem;
+  color: #3a2e22;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.fn-popup__message {
+  font-family: var(--font-simonetta);
+  font-size: 1rem;
+  color: #69431D;
+  line-height: 1.75;
+  margin-bottom: 1.75rem;
+}
+
+.fn-popup__close {
+  font-family: var(--font-cinzel);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  color: #f3e6d8;
+  background: #3a2e22;
+  border: none;
+  border-radius: 50px;
+  padding: 0.55rem 2.25rem;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.fn-popup__close:hover {
+  background: #574232;
+  transform: translateY(-1px);
+}
+
+/* ─── Transition popup ─── */
+.footer-popup-enter-active,
+.footer-popup-leave-active { transition: opacity 0.3s ease, transform 0.3s ease; }
+.footer-popup-enter-from,
+.footer-popup-leave-to     { opacity: 0; transform: scale(0.92) translateY(10px); }
 
 /* ─── Social ─── */
 .footer-social {
