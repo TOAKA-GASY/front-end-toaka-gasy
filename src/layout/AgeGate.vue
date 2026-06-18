@@ -68,7 +68,7 @@ const onNo = () => {
   padding: 1.5rem 2.5rem;
   text-align: center;
   color: #31271d;
-  background: #cfb68e;
+  background: #F5E9DB;
   overflow: hidden;
 }
 
