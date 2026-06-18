@@ -1,0 +1,46 @@
+/* ─── Reset & Base ─── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+@font-face {
+  font-family: 'HolidayFree';
+  src: url('/fonts/HolidayFree.woff2') format('woff2'),
+       url('/fonts/HolidayFree.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-cinzel: 'Cinzel', 'Times New Roman', serif;
+  --font-cinzel2: 'Cinzel', 'regular', 'Times New Roman', serif;
+  --font-simonetta: 'Simonetta', 'Georgia', serif;
+  --font-holiday: 'HolidayFree', Georgia, serif;
+  --color-dark: #1F0E06;
+  --color-gold: #a86b33;
+  --color-beige: #f5e6c8;
+  --color-brown: #4a2e1a;
+  --color-brown-light: #7a4e2d;
+  --color-white: #ffffff;
+  --color-white-60: rgba(255, 255, 255, 0.6);
+  --transition: 0.3s ease;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+}
