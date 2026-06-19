@@ -249,11 +249,11 @@ const parallaxRed   = computed(() => ({ transform: `translateY(${-p.value * 38}p
       <div class="row align-items-start justify-content-end gx-5 gy-0">
         <div class="col-12 col-md-6 text-md-end os-animate" data-delay="0">
           <p class="os-s6__bio ms-md-auto">
-            Born and raised in Loosdrecht, the Netherlands, I grew up surrounded by the energy of festivals — music, movement, and people coming together. That world shaped me deeply.
-            For 15 years, I travelled the globe working festivals. Not on stage, but behind the scenes — deep in the technical side of beverages: the setups, the systems, the craft behind every pour. I witnessed firsthand what people reach for when they celebrate, when they connect, when they truly let go.
+            Born and raised in Loosdrecht, the Netherlands, I grew up surrounded by the energy of festivals music, movement, and people coming together. That world shaped me deeply.
+            For 15 years, I travelled the globe working festivals. Not on stage, but behind the scenes deep in the technical side of beverages: the setups, the systems, the craft behind every pour. I witnessed firsthand what people reach for when they celebrate, when they connect, when they truly let go.
             That's where Toaka Gasy found me.
-            Together with Narindra a true Malagasy woman, the living connection to the roots of this brand — I co-founded Toaka Gasy. Not just to create a drink, but to carry a story. A feeling. Where my world of festivals and global stages meets her culture, her heritage, and her identity.
-            Toaka Gasy is that bridge. Between two worlds, two stories, one shared vision — that the best moments in life are the ones we share.
+            Together with Narindra a true Malagasy woman, the living connection to the roots of this brand I co-founded Toaka Gasy. Not just to create a drink, but to carry a story. A feeling. Where my world of festivals and global stages meets her culture, her heritage, and her identity.
+            Toaka Gasy is that bridge. Between two worlds, two stories, one shared vision  that the best moments in life are the ones we share.
           </p>
         </div>
         <div class="col-12 col-md-4 os-animate" data-delay="200">

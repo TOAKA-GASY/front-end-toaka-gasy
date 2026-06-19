@@ -27,7 +27,7 @@ const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
 
 /* ─── Section 4 ─── */
 const goToProduct = (slug) => router.push(`/product/${slug}`)
-const scrollToRums = () => document.getElementById('section-rums')?.scrollIntoView({ behavior: 'smooth' })
+const scrollToRums = () => router.push('/our-rums')
 
 /* ─── Section 4+6 combinée ─── */
 const cocktails = [
