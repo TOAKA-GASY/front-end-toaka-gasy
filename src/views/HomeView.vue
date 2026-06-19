@@ -32,7 +32,7 @@ const scrollToRums = () => document.getElementById('section-rums')?.scrollIntoVi
 /* ─── Section 4+6 combinée ─── */
 const cocktails = [
   { src: '/img/cocktail.png',  title: 'LOST ISLAND COCKTAIL',   subtitle: 'Go wild and get lost' },
-  { src: '/img/cocktail2.png', title: 'SUNKISSED AT MONTPASSO', subtitle: 'Smooth rum, bright citrus, perfect balance' },
+  { src: '/img/cocktail2.png', title: 'SUNKISSED IN MONT PASSO', subtitle: 'Smooth rum, bright citrus, perfect balance' },
   { src: '/img/cocktail3.png', title: 'THE MACKAY COCKTAIL',    subtitle: 'One sip to be ready for another adventure' },
 ]
 
