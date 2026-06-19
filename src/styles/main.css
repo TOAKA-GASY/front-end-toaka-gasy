@@ -10,8 +10,7 @@
 
 @font-face {
   font-family: 'HolidayFree';
-  src: url('/fonts/HolidayFree.woff2') format('woff2'),
-       url('/fonts/HolidayFree.woff') format('woff');
+  src: url('/fonts/HolidayFree.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;

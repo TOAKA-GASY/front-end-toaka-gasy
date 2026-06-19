@@ -159,7 +159,7 @@ const parallaxRed   = computed(() => ({ transform: `translateY(${-p.value * 38}p
       <h2 class="os-s3__title">AN HERITAGE OF<br>BETSILEO RUM</h2>
       <div class="os-s3__line"></div>
       <p class="os-s3__body">
-        Born in the Betsileo mountains, Toaka Gasy carries the spirit of the Tsaranoro Valley
+        Born in the Betsileo mountains, Toaka Gasy carries the spirit of the Tsaranoro Valley,
         wild, iconic, and deeply rooted in southern Madagascar. Shared in everyday life,
         from celebrations to late evenings with friends.
       </p>

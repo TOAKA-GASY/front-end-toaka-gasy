@@ -27,7 +27,7 @@ const sideBottles = [
 /* Cocktails */
 const cocktails = [
   { src: '/img/cocktail.png',  title: 'LOST ISLAND COCKTAIL',    subtitle: 'Go wild and get lost'                       },
-  { src: '/img/cocktail2.png', title: 'SUNKISSED IN MONT PASSO', subtitle: 'Smooth rum, bright citrus, perfect balance' },
+  { src: '/img/cocktail2.png', title: 'SUNKISSED IN MONT PASSOT', subtitle: 'Smooth rum, bright citrus, perfect balance' },
   { src: '/img/cocktail3.png', title: 'THE MACKAY COCKTAIL',     subtitle: 'One sip to be ready for another adventure'  },
 ]
 
@@ -158,9 +158,9 @@ onUnmounted(() => {
     <div class="or-hero__overlay" aria-hidden="true"></div>
 
     <!-- Logo doré centré en haut -->
-    <div class="or-hero__logo-wrap" :class="{ 'or-hero__logo-wrap--in': animated }">
+    <RouterLink to="/" class="or-hero__logo-wrap" :class="{ 'or-hero__logo-wrap--in': animated }">
       <img src="/logo/logo-dore.png" class="or-hero__logo" alt="Toaka Gasy" />
-    </div>
+    </RouterLink>
 
     <!-- Titre + texte centrés -->
     <div class="or-hero__center" :class="{ 'or-hero__center--in': animated }">
