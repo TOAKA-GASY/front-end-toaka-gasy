@@ -139,7 +139,7 @@ const parallaxRed   = computed(() => ({ transform: `translateY(${-p.value * 38}p
     </div>
 
     <div class="os-s2__video-wrap os-animate" data-delay="150">
-      <video class="os-s2__video" autoplay muted loop playsinline>
+      <video class="os-s2__video" autoplay muted loop playsinline preload="none">
         <source src="/vd/mdg-video.mp4" type="video/mp4" />
       </video>
     </div>
@@ -192,7 +192,7 @@ const parallaxRed   = computed(() => ({ transform: `translateY(${-p.value * 38}p
        Section 5 – Vidéo centrée
        ══════════════════════════════════════ -->
   <section class="os-s5">
-    <video class="os-s5__video os-animate" data-delay="0" autoplay muted loop playsinline>
+    <video class="os-s5__video os-animate" data-delay="0" autoplay muted loop playsinline preload="none">
       <source src="/vd/mdg-toaka.mp4" type="video/mp4" />
     </video>
   </section>

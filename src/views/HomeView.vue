@@ -218,9 +218,9 @@ const parallax = computed(() => {
 
   <!-- Section 3 : Lifestyle -->
   <section class="home-s3">
-    <img src="/img/lifestyle1.jpg" class="s3-img" alt="Lifestyle 1" />
-    <img src="/img/lifestyle2.jpg" class="s3-img" alt="Lifestyle 2" />
-    <img src="/img/lifestyle3.jpg" class="s3-img" alt="Lifestyle 3" />
+    <img src="/img/lifestyle1.jpg" class="s3-img" alt="Lifestyle 1" loading="lazy" />
+    <img src="/img/lifestyle2.jpg" class="s3-img" alt="Lifestyle 2" loading="lazy" />
+    <img src="/img/lifestyle3.jpg" class="s3-img" alt="Lifestyle 3" loading="lazy" />
   </section>
 
   <!-- Section Explore Our Rum -->
@@ -336,8 +336,8 @@ const parallax = computed(() => {
 
     <!-- Zone haute : women-drink pleine hauteur -->
     <div class="s57-zone-top">
-      <img src="/img/women-drink2.png" class="s57-top" alt="" aria-hidden="true" />
-      <video class="s57-video" autoplay muted loop playsinline>
+      <img src="/img/women-drink2.png" class="s57-top" alt="" aria-hidden="true" loading="lazy" />
+      <video class="s57-video" autoplay muted loop playsinline preload="none">
         <source src="/vd/rum-video.mp4" type="video/mp4" />
       </video>
       <p class="s57-tagline">
@@ -348,7 +348,7 @@ const parallax = computed(() => {
 
     <!-- Zone basse : foil doré pleine hauteur + bouteilles -->
     <div class="s57-zone-bottom">
-      <img src="/img/foil-dore2.png" class="s57-bottom" alt="" aria-hidden="true" />
+      <img src="/img/foil-dore2.png" class="s57-bottom" alt="" aria-hidden="true" loading="lazy" />
 
       <div class="s57-bottles">
         <div
