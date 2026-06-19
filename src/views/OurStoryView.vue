@@ -86,7 +86,7 @@ const parallaxRed   = computed(() => ({ transform: `translateY(${-p.value * 38}p
        Section 1 – Rizière + 3 bouteilles
        ══════════════════════════════════════ -->
   <section class="os-hero">
-    <img src="/img/rizière.png" class="os-hero__bg" alt="" />
+    <img src="/img/rizière.webp" class="os-hero__bg" alt="" />
 
     <div class="os-hero__bottles">
 
@@ -94,7 +94,7 @@ const parallaxRed   = computed(() => ({ transform: `translateY(${-p.value * 38}p
       <div class="os-hero__pos os-hero__pos--left">
         <div :style="parallaxBlack">
           <img
-            src="/img/toaka-gasy-mainty.png"
+            src="/img/toaka-gasy-mainty.webp"
             class="os-hero__bottle os-hero__bottle--black"
             :class="{ 'os-hero__bottle--in': animated }"
             alt="Toaka Gasy Black"
@@ -106,7 +106,7 @@ const parallaxRed   = computed(() => ({ transform: `translateY(${-p.value * 38}p
       <div class="os-hero__pos os-hero__pos--center">
         <div :style="parallaxWhite">
           <img
-            src="/img/toaka-gasy-white.png"
+            src="/img/toaka-gasy-white.webp"
             class="os-hero__bottle os-hero__bottle--white"
             :class="{ 'os-hero__bottle--in': animated }"
             alt="Toaka Gasy White"
@@ -118,7 +118,7 @@ const parallaxRed   = computed(() => ({ transform: `translateY(${-p.value * 38}p
       <div class="os-hero__pos os-hero__pos--right">
         <div :style="parallaxRed">
           <img
-            src="/img/toaka-gasy-red.png"
+            src="/img/toaka-gasy-red.webp"
             class="os-hero__bottle os-hero__bottle--red"
             :class="{ 'os-hero__bottle--in': animated }"
             alt="Toaka Gasy Red"
@@ -152,7 +152,7 @@ const parallaxRed   = computed(() => ({ transform: `translateY(${-p.value * 38}p
   <section class="os-s3">
 
     <div class="os-s3__img-wrap os-animate" data-delay="0">
-      <img src="/img/citizen.png" class="os-s3__img" alt="Citizen" />
+      <img src="/img/citizen.webp" class="os-s3__img" alt="Citizen" />
     </div>
 
     <div class="os-s3__content os-animate" data-delay="180">
@@ -183,7 +183,7 @@ const parallaxRed   = computed(() => ({ transform: `translateY(${-p.value * 38}p
     </div>
 
     <div class="os-s4__img-wrap os-animate" data-delay="180">
-      <img src="/img/cajot.jpeg" class="os-s4__img" alt="Cajot" />
+      <img src="/img/cajot.webp" class="os-s4__img" alt="Cajot" />
     </div>
 
   </section>
@@ -216,7 +216,7 @@ const parallaxRed   = computed(() => ({ transform: `translateY(${-p.value * 38}p
       </div>
       <div class="row align-items-start gx-3 gy-0">
         <div class="col-12 col-md-4 offset-md-2 os-animate" data-delay="0">
-          <img src="/img/Story 1.png" class="os-s6__photo" alt="Narindra Rajosvah" />
+          <img src="/img/narindra.jpg" class="os-s6__photo" alt="Narindra Rajosvah" />
         </div>
         <div class="col-12 col-md-5 os-animate" data-delay="200">
           <p class="os-s6__bio">
@@ -257,7 +257,7 @@ const parallaxRed   = computed(() => ({ transform: `translateY(${-p.value * 38}p
           </p>
         </div>
         <div class="col-12 col-md-4 os-animate" data-delay="200">
-          <img src="/img/Story 2.png" class="os-s6__photo os-s6__photo--gerben" alt="Gerben Krijnen" />
+          <img src="/img/gerben.jpg" class="os-s6__photo os-s6__photo--gerben" alt="Narindra Rajosvah" />
         </div>
       </div>
     </div>

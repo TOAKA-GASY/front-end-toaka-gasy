@@ -1,7 +1,7 @@
 <template>
   <footer class="site-footer">
-    <img src="/img/foil-dore2.png" class="footer-foil" alt="" aria-hidden="true" />
-    <img src="/img/footer-pattern.png" class="footer-pattern" alt="" aria-hidden="true" />
+    <img src="/img/foil-dore2.webp" class="footer-foil" alt="" aria-hidden="true" />
+    <img src="/img/footer-pattern.webp" class="footer-pattern" alt="" aria-hidden="true" />
 
     <div class="footer-inner">
 

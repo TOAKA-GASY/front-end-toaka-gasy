@@ -19,16 +19,16 @@ const activeRum   = computed(() => {
 
 /* Side nav : 3 bouteilles Toaka */
 const sideBottles = [
-  { src: '/img/toaka-gasy-black.png', alt: 'Toaka Gasy Black', label: 'N° 608' },
-  { src: '/img/toaka-gasy-white.png', alt: 'Toaka Gasy White', label: 'N° 609' },
-  { src: '/img/toaka-gasy-red.png',   alt: 'Toaka Gasy Red',   label: 'N° 610' },
+  { src: '/img/toaka-gasy-black.webp', alt: 'Toaka Gasy Black', label: 'TOAKA NOVA' },
+  { src: '/img/toaka-gasy-white.webp', alt: 'Toaka Gasy White', label: 'TOAKA VAZA' },
+  { src: '/img/toaka-gasy-red.webp',   alt: 'Toaka Gasy Red',   label: 'TOAKA 610' },
 ]
 
 /* Cocktails */
 const cocktails = [
-  { src: '/img/cocktail.png',  title: 'LOST ISLAND COCKTAIL',    subtitle: 'Go wild and get lost'                       },
-  { src: '/img/cocktail2.png', title: 'SUNKISSED IN MONT PASSOT', subtitle: 'Smooth rum, bright citrus, perfect balance' },
-  { src: '/img/cocktail3.png', title: 'THE MACKAY COCKTAIL',     subtitle: 'One sip to be ready for another adventure'  },
+  { src: '/img/cocktail.webp',  title: 'LOST ISLAND COCKTAIL',    subtitle: 'Go wild and get lost'                       },
+  { src: '/img/cocktail2.webp', title: 'SUNKISSED IN MONT PASSOT', subtitle: 'Smooth rum, bright citrus, perfect balance' },
+  { src: '/img/cocktail3.webp', title: 'THE MACKAY COCKTAIL',     subtitle: 'One sip to be ready for another adventure'  },
 ]
 
 const onScroll = () => { scrollY.value = window.scrollY }
@@ -154,7 +154,7 @@ onUnmounted(() => {
        Section 1 – Hero : logo-dore + bouteilles gauche + texte droite
        ══════════════════════════════════════ -->
   <section class="or-hero">
-    <img src="/img/foil-dore2.png" class="or-hero__bg" alt="" aria-hidden="true" />
+    <img src="/img/foil-dore2.webp" class="or-hero__bg" alt="" aria-hidden="true" />
     <div class="or-hero__overlay" aria-hidden="true"></div>
 
     <!-- Logo doré centré en haut -->

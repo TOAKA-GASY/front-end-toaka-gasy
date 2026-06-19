@@ -2,7 +2,7 @@
   <Transition name="age-gate">
     <div v-if="visible" class="age-gate" role="dialog" aria-modal="true" aria-labelledby="age-gate-title">
       <div class="age-gate__card">
-        <img src="/img/footer-pattern.png" class="age-gate__pattern" alt="" aria-hidden="true" />
+        <img src="/img/footer-pattern.webp" class="age-gate__pattern" alt="" aria-hidden="true" />
 
         <img src="/logo/logo-marron.png" class="age-gate__logo" alt="Toaka Gasy" />
 
@@ -18,7 +18,7 @@
           <button class="age-gate__btn age-gate__btn--yes" @click="onYes">YES</button>
         </div>
 
-        <img src="/img/line-mdg2.png" class="age-gate__line" alt="" aria-hidden="true" />
+        <img src="/img/line-mdg2.webp" class="age-gate__line" alt="" aria-hidden="true" />
       </div>
     </div>
   </Transition>

@@ -31,9 +31,9 @@ const scrollToRums = () => router.push('/our-rums')
 
 /* ─── Section 4+6 combinée ─── */
 const cocktails = [
-  { src: '/img/cocktail.png',  title: 'LOST ISLAND COCKTAIL',   subtitle: 'Go wild and get lost' },
-  { src: '/img/cocktail2.png', title: 'SUNKISSED IN MONT PASSOT', subtitle: 'Smooth rum, bright citrus, perfect balance' },
-  { src: '/img/cocktail3.png', title: 'THE MACKAY COCKTAIL',    subtitle: 'One sip to be ready for another adventure' },
+  { src: '/img/cocktail.webp',  title: 'LOST ISLAND COCKTAIL',   subtitle: 'Go wild and get lost' },
+  { src: '/img/cocktail2.webp', title: 'SUNKISSED IN MONT PASSOT', subtitle: 'Smooth rum, bright citrus, perfect balance' },
+  { src: '/img/cocktail3.webp', title: 'THE MACKAY COCKTAIL',    subtitle: 'One sip to be ready for another adventure' },
 ]
 
 const isSlideActive = (pos) => {
@@ -66,9 +66,9 @@ const onS46Prev = () => {
 
 /* ─── Section 7 ─── */
 const s7Bottles = [
-  { src: '/img/toaka-gasy-black.png', alt: 'Toaka Gasy Black' },
-  { src: '/img/toaka-gasy-white.png', alt: 'Toaka Gasy White' },
-  { src: '/img/toaka-gasy-red.png',   alt: 'Toaka Gasy Red'   },
+  { src: '/img/toaka-gasy-black.webp', alt: 'Toaka Gasy Black' },
+  { src: '/img/toaka-gasy-white.webp', alt: 'Toaka Gasy White' },
+  { src: '/img/toaka-gasy-red.webp',   alt: 'Toaka Gasy Red'   },
 ]
 const s7BottlePos = computed(() =>
   s7Bottles.map((_, i) => {
@@ -186,14 +186,14 @@ const parallax = computed(() => {
   <!-- Section 1 : parallax sticky -->
   <div class="home-page">
     <div class="home-sticky">
-      <img src="/img/fond.png" class="home-bg" alt="" aria-hidden="true" />
+      <img src="/img/fond.webp" class="home-bg" alt="" aria-hidden="true" />
       <div class="scene-pos scene-pos--ravinala" :style="{ transform: parallax.ravinala }">
-        <img src="/img/ravinala.png" alt="" aria-hidden="true" />
+        <img src="/img/ravinala.webp" alt="" aria-hidden="true" />
       </div>
-      <img src="/img/montagne.png" class="home-mountain" alt="" aria-hidden="true" />
+      <img src="/img/montagne.webp" class="home-mountain" alt="" aria-hidden="true" />
       <section class="home-scene" aria-label="Scène Toaka Gasy">
         <div class="scene-pos scene-pos--bottle" :style="{ transform: parallax.bottle }">
-          <img src="/img/toaka-gasy-mainty.png" alt="Toaka Gasy" />
+          <img src="/img/toaka-gasy-mainty.webp" alt="Toaka Gasy" />
         </div>
         <div class="bottle-shadow" aria-hidden="true"></div>
       </section>
@@ -203,7 +203,7 @@ const parallax = computed(() => {
   <!-- Section 2 : The Rum of Celebration -->
   <section class="home-s2" :class="{ 'home-s2--visible': s2Visible }">
     <div class="s2-rect">
-      <img src="/img/rizière.png" class="s2-rect__bg" alt="" aria-hidden="true" />
+      <img src="/img/rizière.webp" class="s2-rect__bg" alt="" aria-hidden="true" />
       <div class="s2-rect__overlay" aria-hidden="true"></div>
       <h2 class="s2-title">THE RUM OF CELEBRATION</h2>
       <button class="s2-cta" @click="scrollToRums">
@@ -218,15 +218,15 @@ const parallax = computed(() => {
 
   <!-- Section 3 : Lifestyle -->
   <section class="home-s3">
-    <img src="/img/lifestyle1.jpg" class="s3-img" alt="Lifestyle 1" loading="lazy" />
-    <img src="/img/lifestyle2.jpg" class="s3-img" alt="Lifestyle 2" loading="lazy" />
-    <img src="/img/lifestyle3.jpg" class="s3-img" alt="Lifestyle 3" loading="lazy" />
+    <img src="/img/lifestyle1.webp" class="s3-img" alt="Lifestyle 1" loading="lazy" />
+    <img src="/img/lifestyle2.webp" class="s3-img" alt="Lifestyle 2" loading="lazy" />
+    <img src="/img/lifestyle3.webp" class="s3-img" alt="Lifestyle 3" loading="lazy" />
   </section>
 
   <!-- Section Explore Our Rum -->
   <section class="home-s-rum" :class="{ 'home-s-rum--visible': sRumVisible }">
     <div class="s2-rect">
-      <img src="/img/cocotier.png" class="s2-rect__bg" alt="" aria-hidden="true" />
+      <img src="/img/cocotier.webp" class="s2-rect__bg" alt="" aria-hidden="true" />
       <div class="s2-rect__overlay" aria-hidden="true"></div>
       <h2 class="s2-title">EXPLORE OUR RUMS</h2>
       <button class="s2-cta" @click="scrollToRums">
@@ -336,7 +336,7 @@ const parallax = computed(() => {
 
     <!-- Zone haute : women-drink pleine hauteur -->
     <div class="s57-zone-top">
-      <img src="/img/women-drink2.png" class="s57-top" alt="" aria-hidden="true" loading="lazy" />
+      <img src="/img/women-drink2.webp" class="s57-top" alt="" aria-hidden="true" loading="lazy" />
       <video class="s57-video" autoplay muted loop playsinline preload="none">
         <source src="/vd/rum-video.mp4" type="video/mp4" />
       </video>
@@ -348,7 +348,7 @@ const parallax = computed(() => {
 
     <!-- Zone basse : foil doré pleine hauteur + bouteilles -->
     <div class="s57-zone-bottom">
-      <img src="/img/foil-dore2.png" class="s57-bottom" alt="" aria-hidden="true" loading="lazy" />
+      <img src="/img/foil-dore2.webp" class="s57-bottom" alt="" aria-hidden="true" loading="lazy" />
 
       <div class="s57-bottles">
         <div

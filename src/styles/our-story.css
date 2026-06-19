@@ -471,7 +471,7 @@
 .os-s6__quote-line {
   font-family: 'HolidayFree', var(--font-cinzel), serif;
   font-size: clamp(18px, 3.6vw, 58px);
-  color: #c4b8ac;
+  color: #f5e9dbea;
   line-height: 1.35;
   margin: 0;
   font-weight: 400;
