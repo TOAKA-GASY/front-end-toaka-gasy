@@ -441,7 +441,7 @@
   color: #3a2e22;
   line-height: 1.75;
   margin: 0;
-  max-width: clamp(400px, 52vw, 740px);
+  max-width: clamp(560px, 78vw, 1100px);
 }
 
 .os-s6__quote {

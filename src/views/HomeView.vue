@@ -228,7 +228,7 @@ const parallax = computed(() => {
     <div class="s2-rect">
       <img src="/img/cocotier.png" class="s2-rect__bg" alt="" aria-hidden="true" />
       <div class="s2-rect__overlay" aria-hidden="true"></div>
-      <h2 class="s2-title">EXPLORE OUR RUM</h2>
+      <h2 class="s2-title">EXPLORE OUR RUMS</h2>
       <button class="s2-cta" @click="scrollToRums">
         <span>DISCOVER MORE</span>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
