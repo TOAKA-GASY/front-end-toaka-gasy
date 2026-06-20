@@ -210,15 +210,15 @@ const parallaxRed   = computed(() => ({ transform: `translateY(${-p.value * 38}p
     <!-- ── Narindra : nom en haut, photo gauche / bio droite alignés ── -->
     <div class="os-s6__person">
       <div class="row mb-2">
-        <div class="col-12 col-md-4 offset-md-2 os-animate" data-delay="0">
+        <div class="col-12 col-md-5 offset-md-1 os-animate" data-delay="0">
           <h3 class="os-s6__name">NARINDRA RAJOSVAH</h3>
         </div>
       </div>
-      <div class="row align-items-start gx-3 gy-0">
-        <div class="col-12 col-md-4 offset-md-2 os-animate" data-delay="0">
+      <div class="row align-items-start gx-3 gy-3 gy-md-0">
+        <div class="col-12 col-md-4 offset-md-1 os-animate" data-delay="0">
           <img src="/img/narindra.jpg" class="os-s6__photo" alt="Narindra Rajosvah" />
         </div>
-        <div class="col-12 col-md-5 os-animate" data-delay="200">
+        <div class="col-12 col-md-7 os-animate" data-delay="200">
           <p class="os-s6__bio">
             Born and raised in Madagascar, I've been surrounded by this world from a very young age.
             Coming from a family involved in alcohol distribution in Madagascar, that environment naturally became part of my story and my inspiration.
@@ -231,24 +231,24 @@ const parallaxRed   = computed(() => ({ transform: `translateY(${-p.value * 38}p
     </div>
 
     <!-- ── Citation centrale avec image de fond ── -->
-    <div class="os-s6__quote">
+    <!-- <div class="os-s6__quote">
       <img src="/img/Rectangle.png" class="os-s6__quote-bg" alt="" />
       <div class="os-s6__quote-inner os-animate" data-delay="0">
         <p class="os-s6__quote-line">Pour out the first shot</p>
         <p class="os-s6__quote-line">for what you believe in</p>
       </div>
-    </div>
+    </div> -->
 
     <!-- ── Gerben : nom en haut, bio gauche / photo droite alignés ── -->
     <div class="os-s6__person os-s6__person--gerben">
-      <div class="row mb-2 justify-content-end gx-5 gy-0">
+      <div class="row mb-2 justify-content-end gx-3 gx-md-5 gy-0">
         <div class="col-12 col-md-4 os-animate" data-delay="200">
           <h3 class="os-s6__name os-s6__name--sm">GERBEN KRIJNEN</h3>
         </div>
       </div>
-      <div class="row align-items-start justify-content-end gx-5 gy-0">
-        <div class="col-12 col-md-6 text-md-end os-animate" data-delay="0">
-          <p class="os-s6__bio ms-md-auto">
+      <div class="row align-items-start justify-content-end gx-3 gx-md-5 gy-3 gy-md-0">
+        <div class="col-12 col-md-8 order-2 order-md-1 text-md-end os-animate" data-delay="0">
+          <p class="os-s6__bio os-s6__bio--gerben ms-md-auto">
             Born and raised in Loosdrecht, the Netherlands, I grew up surrounded by the energy of festivals music, movement, and people coming together. That world shaped me deeply.
             For 15 years, I travelled the globe working festivals. Not on stage, but behind the scenes deep in the technical side of beverages: the setups, the systems, the craft behind every pour. I witnessed firsthand what people reach for when they celebrate, when they connect, when they truly let go.
             That's where Toaka Gasy found me.
@@ -256,8 +256,8 @@ const parallaxRed   = computed(() => ({ transform: `translateY(${-p.value * 38}p
             Toaka Gasy is that bridge. Between two worlds, two stories, one shared vision  that the best moments in life are the ones we share.
           </p>
         </div>
-        <div class="col-12 col-md-4 os-animate" data-delay="200">
-          <img src="/img/gerben.jpg" class="os-s6__photo os-s6__photo--gerben" alt="Narindra Rajosvah" />
+        <div class="col-12 col-md-4 order-1 order-md-2 os-animate" data-delay="200">
+          <img src="/img/gerben.jpg" class="os-s6__photo os-s6__photo--gerben" alt="Gerben Krijnen" />
         </div>
       </div>
     </div>

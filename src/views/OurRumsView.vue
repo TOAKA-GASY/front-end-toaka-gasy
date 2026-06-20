@@ -211,7 +211,6 @@ onUnmounted(() => {
     />
     <div class="or-rum__gradient" aria-hidden="true"></div>
     <div class="or-rum__content">
-      <span class="or-rum__num">N° 608</span>
       <h2 class="or-rum__name">{{ products[0].name }}</h2>
       <div class="or-rum__line"></div>
       <p class="or-rum__tagline">{{ products[0].tagline }}</p>
@@ -245,7 +244,6 @@ onUnmounted(() => {
     />
     <div class="or-rum__gradient" aria-hidden="true"></div>
     <div class="or-rum__content">
-      <span class="or-rum__num">N° 609</span>
       <h2 class="or-rum__name">{{ products[1].name }}</h2>
       <div class="or-rum__line"></div>
       <p class="or-rum__tagline">{{ products[1].tagline }}</p>
@@ -279,7 +277,6 @@ onUnmounted(() => {
     />
     <div class="or-rum__gradient" aria-hidden="true"></div>
     <div class="or-rum__content">
-      <span class="or-rum__num">N° 610</span>
       <h2 class="or-rum__name">{{ products[2].name }}</h2>
       <div class="or-rum__line"></div>
       <p class="or-rum__tagline">{{ products[2].tagline }}</p>

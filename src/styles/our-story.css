@@ -406,6 +406,7 @@
 }
 
 .os-s6__person--gerben {
+  padding-top: 5rem;
   padding-bottom: 2rem;
 }
 
@@ -441,7 +442,11 @@
   color: #3a2e22;
   line-height: 1.75;
   margin: 0;
-  max-width: clamp(560px, 78vw, 1100px);
+  max-width: clamp(1000px, 95vw, 2000px);
+}
+
+.os-s6__bio--gerben {
+  max-width: clamp(900px, 98vw, 2000px);
 }
 
 .os-s6__quote {
@@ -600,12 +605,13 @@
   .os-nav__links, .os-nav__links--left, .os-nav__links--right { display: none; }
   .os-nav__toggler { display: flex; }
 
-  .os-hero__pos        { top: 80px; }
-  .os-hero__pos--left  { transform: translateX(calc(-50% - clamp(70px, 13vw, 160px))); }
-  .os-hero__pos--right { transform: translateX(calc(-50% + clamp(70px, 13vw, 160px))); }
-  .os-hero__bottle--white { height: clamp(180px, 44vh, 340px); }
-  .os-hero__bottle--black { height: clamp(138px, 34vh, 260px); }
-  .os-hero__bottle--red   { height: clamp(126px, 30vh, 235px); }
+  .os-hero__pos         { top: 50%; }
+  .os-hero__pos--center { transform: translate(-50%, -50%); }
+  .os-hero__pos--left   { transform: translate(calc(-50% - clamp(80px, 16vw, 170px)), -50%); }
+  .os-hero__pos--right  { transform: translate(calc(-50% + clamp(80px, 16vw, 170px)), -50%); }
+  .os-hero__bottle--white { height: clamp(240px, 56vh, 400px); }
+  .os-hero__bottle--black { height: clamp(184px, 43vh, 305px); }
+  .os-hero__bottle--red   { height: clamp(168px, 39vh, 278px); }
 
   .os-s2__text-wrap { padding: 2.5rem 1.5rem 2rem; }
   .os-s2__title { font-size: clamp(16px, 5vw, 28px); }
@@ -630,12 +636,12 @@
   .os-s6 { padding: 2rem 0 0.5rem; }
   .os-s6__header { padding: 0 1.25rem 1.5rem; }
   .os-s6__about-title { font-size: clamp(36px, 11vw, 60px); }
-  .os-s6__person { padding: 0 1.25rem 1rem; }
-  .os-s6__person--gerben { padding-bottom: 1rem; }
-  .os-s6__name    { font-size: clamp(14px, 4.5vw, 24px); }
-  .os-s6__name--sm { font-size: clamp(12px, 3.5vw, 18px); }
-  .os-s6__bio { font-size: clamp(12px, 3.5vw, 16px); max-width: 100%; }
-  .os-s6__photo { max-width: clamp(120px, 45vw, 240px); }
-  .os-s6__photo--gerben { max-width: clamp(110px, 40vw, 210px); }
+  .os-s6__person { padding: 0 1.25rem 1.5rem; }
+  .os-s6__person--gerben { padding-top: 2.5rem; padding-bottom: 1.5rem; }
+  .os-s6__name    { font-size: clamp(14px, 4.5vw, 24px); text-align: center; }
+  .os-s6__name--sm { font-size: clamp(12px, 3.5vw, 18px); text-align: center; }
+  .os-s6__bio { font-size: clamp(13px, 3.8vw, 17px); max-width: 100%; text-align: left; margin-top: 1.25rem; }
+  .os-s6__photo { max-width: 72vw; margin: 0 auto 0; display: block; }
+  .os-s6__photo--gerben { max-width: 68vw; margin: 0 auto 0; }
   .os-s6__quote-line { font-size: clamp(14px, 4vw, 24px); }
 }
