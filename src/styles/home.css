@@ -901,23 +901,48 @@
   background: #fff;
 }
 
-/* ─── Polices harmonisées pour 400px de hauteur ─── */
-.home-s46 .s4-panel__content {
-  bottom: 1.5rem;
+/* ─── Alignement uniforme titre/description rum & cocktail ─── */
+.home-s46 .s4-panel__content,
+.home-s46 .s6-content {
+  bottom: 1.75rem;
   left: 50%;
   right: auto;
-  transform: translateX(-50%);
   width: 90%;
-  text-align: center;
+  max-width: 90%;
+  height: auto;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  text-align: center;
+  padding: 0;
+  gap: 0.4rem;
 }
-.home-s46 .s4-panel__title   { font-size: clamp(20px, 1.6vw, 23px); }
-.home-s46 .s4-panel__tagline { font-size: clamp(15px, 0.95vw, 14px); }
-.home-s46 .s4-panel__cta     { font-size: 12px; margin-top: 0.25rem; }
-
-.home-s46 .s6-content  { bottom: 1.5rem; }
+.home-s46 .s4-panel__title,
 .home-s46 .s6-title    { font-size: clamp(20px, 1.6vw, 23px); }
-.home-s46 .s6-subtitle { font-size: clamp(15px, 0.95vw, 14px); }
+.home-s46 .s4-panel__tagline,
+.home-s46 .s6-subtitle { font-size: clamp(13px, 0.95vw, 14px); }
+
+/* ─── Flèche droite sur hover (hors flux) ─── */
+.s46-rum-arrow {
+  position: absolute;
+  right: 1.25rem;
+  bottom: 1.75rem;
+  z-index: 3;
+  color: #ECD8C4;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.s46-slide--rum:hover .s46-rum-arrow,
+.s46-slide--rum:focus-visible .s46-rum-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
 
 .s46-track {
   display: flex;
@@ -952,8 +977,6 @@
 .s46-slide--rum:hover .s4-panel__img,
 .s46-slide--rum:focus-visible .s4-panel__img { transform: scale(1.1); }
 
-.s46-slide--rum:hover .s4-panel__cta,
-.s46-slide--rum:focus-visible .s4-panel__cta { opacity: 1; transform: translateY(0); }
 
 /* ─── Cocktail slide : texte reveal à l'activation ─── */
 .s46-slide--cocktail .s6-title,
@@ -992,17 +1015,14 @@
   .s46-slide + .s46-slide  { border-left: none; }
   .s46-nav--left           { left:  0.75rem; }
   .s46-nav--right          { right: 0.75rem; color: #6F380E; }
-  .home-s46 .s6-content    { bottom: 2rem; }
-  .home-s46 .s4-panel__title  { font-size: clamp(17px, 4.5vw, 23px); }
+  .home-s46 .s4-panel__title,
   .home-s46 .s6-title         { font-size: clamp(17px, 4.5vw, 23px); }
   .home-s46 .s4-panel__tagline,
   .home-s46 .s6-subtitle      { font-size: 13px; }
 }
 
 @media (max-width: 575.98px) {
-  .home-s46               { height: 320px; }
-  .home-s46 .s6-content   { bottom: 1.25rem; width: 95%; }
-  .home-s46 .s4-panel__cta { opacity: 1; transform: none; }
+  .home-s46 { height: 320px; }
 }
 
 /* ════════════════════════════════════════

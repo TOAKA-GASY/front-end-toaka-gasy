@@ -186,7 +186,7 @@
   font-family: var(--font-cinzel);
   font-weight: 700;
   font-size: clamp(1.3rem, 2.8vw, 2rem);
-  color: #3a2e22;
+  color: #69431D;
   text-align: center;
   letter-spacing: 0.18em;
 }
@@ -221,7 +221,7 @@
   background: transparent;
   border: none;
   border-bottom: 1.5px solid rgba(58, 46, 34, 0.35);
-  color: #3a2e22;
+  color: #69431D;
   font-family: var(--font-simonetta);
   font-weight: 400;
   font-size: clamp(0.9rem, 1.3vw, 1.05rem);
@@ -245,7 +245,7 @@
 
 .contact-form__input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 1000px #f3e6d8 inset;
-  -webkit-text-fill-color: #3a2e22;
+  -webkit-text-fill-color: #69431D;
   transition: background-color 5000s ease-in-out 0s;
 }
 
@@ -271,7 +271,7 @@
 
 /* ─── Submit Button ─── */
 .contact-form__submit {
-  background-color: #3a2e22;
+  background-color: #69431D;
   color: #ffffff;
   font-family: var(--font-cinzel);
   font-weight: 700;
@@ -364,7 +364,7 @@
   font-family: var(--font-cinzel);
   font-weight: 700;
   font-size: 1rem;
-  color: #3a2e22;
+  color: #69431D;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   margin-bottom: 0.6rem;
@@ -385,7 +385,7 @@
   font-size: 0.8rem;
   letter-spacing: 0.1em;
   color: #ffffff;
-  background: #3a2e22;
+  background: #69431D;
   border: none;
   border-radius: 50px;
   padding: 0.5rem 2rem;

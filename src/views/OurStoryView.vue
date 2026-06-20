@@ -94,7 +94,7 @@ const parallaxRed   = computed(() => ({ transform: `translateY(${-p.value * 38}p
       <div class="os-hero__pos os-hero__pos--left">
         <div :style="parallaxBlack">
           <img
-            src="/img/toaka-gasy-mainty.webp"
+            src="/img/toaka-gasy-black.webp"
             class="os-hero__bottle os-hero__bottle--black"
             :class="{ 'os-hero__bottle--in': animated }"
             alt="Toaka Gasy Black"
@@ -176,7 +176,7 @@ const parallaxRed   = computed(() => ({ transform: `translateY(${-p.value * 38}p
       <h2 class="os-s4__title">THE BEGINNING</h2>
       <div class="os-s4__line"></div>
       <p class="os-s4__body">
-        Our vision is to redefine the alcohol lifestyle by creating products that evoke emotion
+        Our vision is to redefine the alcohol lifestyle <br /> by creating products that evoke emotion
         and bring people together. Inspired by the energy of rhythm, culture, and festivity,
         we see every bottle as a symbol of celebration.
       </p>
