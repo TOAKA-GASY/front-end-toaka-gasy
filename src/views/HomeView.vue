@@ -8,130 +8,96 @@ const router = useRouter()
 
 const scrollY    = ref(0)
 const menuOpen   = ref(false)
-const s2Visible  = ref(false)
-const sRumVisible = ref(false)
-const s46Index  = ref(0)
-const s46Max    = ref(3)
-const s7Index   = ref(0)
-let observer    = null
-let sRumObserver = null
-let s46Observer = null
-let s46Timer    = null
+const hnS2TopVisible    = ref(false)
+const hnS2BottomVisible = ref(false)
+const hnS4Visible = ref(false)
+let hnS2TopObserver = null
+let hnS2BottomObserver = null
+let hnS4Observer = null
 
-const onScroll = () => { scrollY.value = window.scrollY }
+/* ─── Scroll fluide : lecture throttlée via requestAnimationFrame ─── */
+let scrollTicking = false
+const onScroll = () => {
+  if (scrollTicking) return
+  scrollTicking = true
+  requestAnimationFrame(() => {
+    scrollY.value = window.scrollY
+    scrollTicking = false
+  })
+}
 
-const isSticky = computed(() => scrollY.value > window.innerHeight * 0.8)
+const isSticky = computed(() => scrollY.value > window.innerHeight * 0.15)
 
 const showTopBtn = computed(() => scrollY.value > window.innerHeight * 0.5)
 const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
 
-/* ─── Section 4 ─── */
+/* ─── Section 2B ─── */
 const goToProduct = (slug) => router.push(`/product/${slug}`)
-const scrollToRums = () => router.push('/our-rums')
+const goToStory = () => router.push('/our-story')
 
-/* ─── Section 4+6 combinée ─── */
-const cocktails = [
-  { src: '/img/cocktail.webp',  title: 'LOST ISLAND COCKTAIL',   subtitle: 'Go wild and get lost' },
-  { src: '/img/cocktail2.webp', title: 'SUNKISSED IN MONT PASSOT', subtitle: 'Smooth rum, bright citrus, perfect balance' },
-  { src: '/img/cocktail3.webp', title: 'THE MACKAY COCKTAIL',    subtitle: 'One sip to be ready for another adventure' },
-]
-
-const isSlideActive = (pos) => {
-  const perPage = 6 - s46Max.value
-  return s46Index.value <= pos && pos < s46Index.value + perPage
-}
-
-const updateS46Max = () => {
-  const prev = s46Max.value
-  s46Max.value = window.innerWidth <= 767 ? 5 : 3
-  if (prev !== s46Max.value) s46Index.value = 0
-}
-
-const s46StartTimer = () => {
-  if (!s46Timer) s46Timer = setInterval(() => {
-    s46Index.value = s46Index.value < s46Max.value ? s46Index.value + 1 : 0
-  }, 5000)
-}
-const s46StopTimer = () => {
-  if (s46Timer) { clearInterval(s46Timer); s46Timer = null }
-}
-const onS46Next = () => {
-  if (s46Index.value < s46Max.value) s46Index.value++
-  s46StopTimer(); s46StartTimer()
-}
-const onS46Prev = () => {
-  if (s46Index.value > 0) s46Index.value--
-  s46StopTimer(); s46StartTimer()
-}
-
-/* ─── Section 7 ─── */
+/* ─── Bouteilles (Section 5) ─── */
 const s7Bottles = [
   { src: '/img/toaka-gasy-black.webp', alt: 'Toaka Gasy Black' },
   { src: '/img/toaka-gasy-white.webp', alt: 'Toaka Gasy White' },
   { src: '/img/toaka-gasy-red.webp',   alt: 'Toaka Gasy Red'   },
 ]
-const s7BottlePos = computed(() =>
+
+/* ─── Section 5 : Rizière (carousel indépendant, mêmes bouteilles) ─── */
+const s5Index = ref(0)
+const s5BottlePos = computed(() =>
   s7Bottles.map((_, i) => {
-    const pos = (i - s7Index.value + 3) % 3
+    const pos = (i - s5Index.value + 3) % 3
     if (pos === 0) return 's7-bottle--center'
     if (pos === 1) return 's7-bottle--right'
     return 's7-bottle--left'
   })
 )
-const onS7Next = () => { s7Index.value = (s7Index.value + 1) % 3 }
-const onS7Prev = () => { s7Index.value = (s7Index.value + 2) % 3 }
+const onS5Next = () => { s5Index.value = (s5Index.value + 1) % 3 }
+const onS5Prev = () => { s5Index.value = (s5Index.value + 2) % 3 }
 
 
 onMounted(() => {
   window.addEventListener('scroll', onScroll, { passive: true })
 
-  const s2El = document.querySelector('.home-s2')
-  if (s2El) {
-    observer = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) s2Visible.value = true },
+  const hnS2TopEl = document.querySelector('.hn-s2-top')
+  if (hnS2TopEl) {
+    hnS2TopObserver = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) hnS2TopVisible.value = true },
       { threshold: 0.15 }
     )
-    observer.observe(s2El)
+    hnS2TopObserver.observe(hnS2TopEl)
   }
 
-  const sRumEl = document.querySelector('.home-s-rum')
-  if (sRumEl) {
-    sRumObserver = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) sRumVisible.value = true },
+  const hnS2BottomEl = document.querySelector('.hn-s2-bottom')
+  if (hnS2BottomEl) {
+    hnS2BottomObserver = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) hnS2BottomVisible.value = true },
       { threshold: 0.15 }
     )
-    sRumObserver.observe(sRumEl)
+    hnS2BottomObserver.observe(hnS2BottomEl)
   }
 
-  updateS46Max()
-  window.addEventListener('resize', updateS46Max, { passive: true })
-
-  const s46El = document.querySelector('.home-s46')
-  if (s46El) {
-    s46Observer = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) s46StartTimer()
-        else s46StopTimer()
-      },
-      { threshold: 0.3 }
+  const hnS4El = document.querySelector('.home-new-s4')
+  if (hnS4El) {
+    hnS4Observer = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) hnS4Visible.value = true },
+      { threshold: 0.15 }
     )
-    s46Observer.observe(s46El)
+    hnS4Observer.observe(hnS4El)
   }
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', onScroll)
-  window.removeEventListener('resize', updateS46Max)
-  if (observer)     observer.disconnect()
-  if (sRumObserver) sRumObserver.disconnect()
-  if (s46Observer)  s46Observer.disconnect()
-  s46StopTimer()
+  if (hnS2TopObserver)    hnS2TopObserver.disconnect()
+  if (hnS2BottomObserver) hnS2BottomObserver.disconnect()
+  if (hnS4Observer)       hnS4Observer.disconnect()
 })
 
 const parallax = computed(() => {
   const s = scrollY.value
   return {
-    bottle:   `translateX(-50%) translateY(${-s * 0.04}px)`,
+    bottle:   `translateX(-50%) translateY(${Math.min(s * 0.12, 60)}px)`,
     ravinala: `translateX(${-s * 0.1}px)`,
   }
 })
@@ -186,205 +152,144 @@ const parallax = computed(() => {
   <!-- Section 1 : parallax sticky -->
   <div class="home-page">
     <div class="home-sticky">
-      <img src="/img/fond.webp" class="home-bg" alt="" aria-hidden="true" />
-      <div class="scene-pos scene-pos--ravinala" :style="{ transform: parallax.ravinala }">
-        <img src="/img/ravinala.webp" alt="" aria-hidden="true" />
+      <div class="home-sticky__bg-clip">
+        <img src="/img/fond.png" class="home-bg" alt="" aria-hidden="true" />
+        <div class="scene-pos scene-pos--ravinala" :style="{ transform: parallax.ravinala }">
+          <img src="/img/ravinala.png" alt="" aria-hidden="true" />
+        </div>
+        <img src="/img/montagne.png" class="home-mountain" alt="" aria-hidden="true" />
       </div>
-      <img src="/img/montagne.webp" class="home-mountain" alt="" aria-hidden="true" />
       <section class="home-scene" aria-label="Scène Toaka Gasy">
         <div class="scene-pos scene-pos--bottle" :style="{ transform: parallax.bottle }">
-          <img src="/img/toaka-gasy-black.webp" alt="Toaka Gasy" />
+          <img src="/img/toaka-gasy-black.png" alt="Toaka Gasy" />
         </div>
         <div class="bottle-shadow" aria-hidden="true"></div>
       </section>
     </div>
   </div>
 
-  <!-- Section 2 : The Rum of Celebration -->
-  <section class="home-s2" :class="{ 'home-s2--visible': s2Visible }">
-    <div class="s2-rect">
-      <img src="/img/rizière.webp" class="s2-rect__bg" alt="" aria-hidden="true" />
-      <div class="s2-rect__overlay" aria-hidden="true"></div>
-      <h2 class="s2-title">THE RUM OF CELEBRATION</h2>
-      <button class="s2-cta" @click="scrollToRums">
-        <span>DISCOVER MORE</span>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="6 9 12 15 18 9"/>
-        </svg>
-      </button>
-    </div>
-  </section>
+  <!-- Sections 2 + 4 combinées : fond unique fond-sec2-3.png + grain + dégradé, 300vh -->
+  <div class="home-new-wrap">
 
-  <!-- Section 3 : Lifestyle -->
-  <section class="home-s3">
-    <img src="/img/lifestyle1.webp" class="s3-img" alt="Lifestyle 1" loading="lazy" />
-    <img src="/img/lifestyle2.webp" class="s3-img" alt="Lifestyle 2" loading="lazy" />
-    <img src="/img/lifestyle3.webp" class="s3-img" alt="Lifestyle 3" loading="lazy" />
-  </section>
+    <!-- Section 2 : Inspiration + Nova (200vh) -->
+    <section class="home-new-s2">
 
-  <!-- Section Explore Our Rum -->
-  <section class="home-s-rum" :class="{ 'home-s-rum--visible': sRumVisible }">
-    <div class="s2-rect">
-      <img src="/img/cocotier.webp" class="s2-rect__bg" alt="" aria-hidden="true" />
-      <div class="s2-rect__overlay" aria-hidden="true"></div>
-      <h2 class="s2-title">EXPLORE OUR RUMS</h2>
-      <button class="s2-cta" @click="scrollToRums">
-        <span>DISCOVER MORE</span>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="6 9 12 15 18 9"/>
-        </svg>
-      </button>
-    </div>
-  </section>
-
-  <!-- Section combinée : Rums + Cocktails alternés (slider 3 visible) -->
-  <section id="section-rums" class="home-s46">
-    <div class="s46-track" :style="{ transform: `translateX(-${s46Index * (100 / (6 - s46Max))}%)` }">
-
-      <!-- Rum 1 -->
-      <button class="s46-slide s46-slide--rum" @click="goToProduct(products[0].slug)" :aria-label="`Découvrir ${products[0].name}`">
-        <img :src="products[0].image" class="s4-panel__img" :alt="products[0].name" />
-        <div class="s4-panel__overlay" aria-hidden="true"></div>
-        <div class="s4-panel__content">
-          <h2 class="s4-panel__title">{{ products[0].name }}</h2>
-          <p class="s4-panel__tagline">{{ products[0].tagline }}</p>
-        </div>
-        <span class="s46-rum-arrow" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-        </span>
-      </button>
-
-      <!-- Cocktail 1 -->
-      <div class="s46-slide s46-slide--cocktail" :class="{ 's46-active': isSlideActive(1) }">
-        <img :src="cocktails[0].src" class="s6-slide__bg" alt="Cocktail" />
-        <div class="s6-gradient" aria-hidden="true"></div>
-        <div class="s6-content">
-          <h2 class="s6-title">{{ cocktails[0].title }}</h2>
-          <p class="s6-subtitle">{{ cocktails[0].subtitle }}</p>
+      <!-- 2A : The Rum of Celebration -->
+      <div class="hn-s2-top" :class="{ 'hn-s2-top--visible': hnS2TopVisible }">
+        <div class="hn-s2-content">
+          <span class="hn-s2-eyebrow">THE INSPIRATION</span>
+          <h2 class="hn-s2-title">The Rum of Celebration</h2>
+          <p class="hn-s2-text">
+            In Betsileo Ethnies, in the South of Madagascar, rum is more than a drink.<br>
+            It's a symbol of togetherness, a pleasure of celebration, a joy of hospitality.<br>
+            Our rum is inspired by this culture and shaped by our journey, made to be shared with the world.
+          </p>
+          <button class="hn-s2-cta" @click="goToStory">
+            <span>DISCOVER OUR STORY</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </button>
         </div>
       </div>
 
-      <!-- Rum 2 -->
-      <button class="s46-slide s46-slide--rum" @click="goToProduct(products[1].slug)" :aria-label="`Découvrir ${products[1].name}`">
-        <img :src="products[1].image" class="s4-panel__img" :alt="products[1].name" />
-        <div class="s4-panel__overlay" aria-hidden="true"></div>
-        <div class="s4-panel__content">
-          <h2 class="s4-panel__title">{{ products[1].name }}</h2>
-          <p class="s4-panel__tagline">{{ products[1].tagline }}</p>
+      <!-- 2B : Introducing Nova -->
+      <div class="hn-s2-bottom" :class="{ 'hn-s2-bottom--visible': hnS2BottomVisible }">
+        <div class="hn-s2b-bottle">
+          <img src="/img/toaka-gasy-verre.png" alt="Toaka Gasy" />
+          <div class="hn-s2b-bottle__shadow" aria-hidden="true"></div>
         </div>
-        <span class="s46-rum-arrow" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-        </span>
-      </button>
-
-      <!-- Cocktail 2 -->
-      <div class="s46-slide s46-slide--cocktail" :class="{ 's46-active': isSlideActive(3) }">
-        <img :src="cocktails[1].src" class="s6-slide__bg" alt="Cocktail 2" />
-        <div class="s6-gradient" aria-hidden="true"></div>
-        <div class="s6-content">
-          <h2 class="s6-title">{{ cocktails[1].title }}</h2>
-          <p class="s6-subtitle">{{ cocktails[1].subtitle }}</p>
+        <div class="hn-s2b-content">
+          <span class="hn-s2-eyebrow">INTRODUCING</span>
+          <h2 class="hn-s2b-title">NOVA</h2>
+          <p class="hn-s2-text">{{ products[0].desc }}</p>
+          <button class="hn-s2-cta" @click="goToProduct(products[0].slug)">
+            <span>DISCOVER MORE</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </button>
         </div>
       </div>
 
-      <!-- Rum 3 -->
-      <button class="s46-slide s46-slide--rum" @click="goToProduct(products[2].slug)" :aria-label="`Découvrir ${products[2].name}`">
-        <img :src="products[2].image" class="s4-panel__img" :alt="products[2].name" />
-        <div class="s4-panel__overlay" aria-hidden="true"></div>
-        <div class="s4-panel__content">
-          <h2 class="s4-panel__title">{{ products[2].name }}</h2>
-          <p class="s4-panel__tagline">{{ products[2].tagline }}</p>
-        </div>
-        <span class="s46-rum-arrow" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-        </span>
-      </button>
+    </section>
 
-      <!-- Cocktail 3 -->
-      <div class="s46-slide s46-slide--cocktail" :class="{ 's46-active': isSlideActive(5) }">
-        <img :src="cocktails[2].src" class="s6-slide__bg" alt="Cocktail 3" />
-        <div class="s6-gradient" aria-hidden="true"></div>
-        <div class="s6-content">
-          <h2 class="s6-title">{{ cocktails[2].title }}</h2>
-          <p class="s6-subtitle">{{ cocktails[2].subtitle }}</p>
-        </div>
+    <!-- Section 4 : Why We Exist -->
+    <section class="home-new-s4" :class="{ 'home-new-s4--visible': hnS4Visible }">
+      <div class="hn-s4-content">
+        <span class="hn-s2-eyebrow">WHY WE EXIST</span>
+        <h2 class="hn-s4-title">Rum Crafted With Purpose</h2>
+        <p class="hn-s4-text">From Madagascar to the world, rum has always brought us together!</p>
       </div>
+      <div class="hn-s4-images">
+        <img src="/img/cajot1.JPG" class="hn-s4-img" alt="Rum aging in oak barrels" loading="lazy" />
+        <img src="/img/cajot2.png" class="hn-s4-img" alt="Tasting the rum" loading="lazy" />
+        <img src="/img/cajot3.jpg" class="hn-s4-img" alt="Rum tasting experience" loading="lazy" />
+      </div>
+    </section>
 
+  </div>
+
+  <!-- Section 5 : Rizière + bouteilles animées -->
+  <section class="home-riz">
+    <img src="/img/rizière.webp" class="home-riz__bg" alt="" aria-hidden="true" />
+
+    <div class="home-riz__bottles">
+      <div
+        v-for="(bottle, i) in s7Bottles"
+        :key="`riz-${bottle.src}`"
+        class="s7-bottle"
+        :class="s5BottlePos[i]"
+      >
+        <img :src="bottle.src" :alt="bottle.alt" />
+      </div>
     </div>
 
-    <!-- Chevron gauche -->
-    <button v-if="s46Index > 0" class="s46-nav s46-nav--left" @click="onS46Prev" aria-label="Précédent">
+    <button class="s57-nav s57-nav--left" @click="onS5Prev" aria-label="Bouteille précédente">
       <svg width="32" height="32" viewBox="0 0 74 74" fill="none">
-        <polyline points="44,22 28,37 44,52" stroke="#ECD8C4" stroke-width="4"
+        <polyline points="44,22 28,37 44,52" stroke="currentColor" stroke-width="4"
           stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </button>
-
-    <!-- Chevron droit -->
-    <button v-if="s46Index < s46Max" class="s46-nav s46-nav--right" @click="onS46Next" aria-label="Suivant">
+    <button class="s57-nav s57-nav--right" @click="onS5Next" aria-label="Bouteille suivante">
       <svg width="32" height="32" viewBox="0 0 74 74" fill="none">
         <polyline points="30,22 46,37 30,52" stroke="currentColor" stroke-width="4"
           stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </button>
+
+    <div class="s57-dots">
+      <button
+        v-for="i in 3" :key="i"
+        class="s7-dot"
+        :class="{ 's7-dot--active': s5Index === i - 1 }"
+        @click="s5Index = i - 1"
+        :aria-label="`Bouteille ${i}`"
+      />
+    </div>
   </section>
 
-  <!-- Section 5+7 : Women drink → Foil doré + Bouteilles (seamless) -->
-  <section class="home-s57">
+  <!-- Section 3 : Lifestyle -->
+  <section class="home-new-s3">
+    <img src="/img/lifestyle1.webp" class="s3-img" alt="Lifestyle 1" loading="lazy" />
+    <img src="/img/lifestyle2.webp" class="s3-img" alt="Lifestyle 2" loading="lazy" />
+    <img src="/img/lifestyle3.webp" class="s3-img" alt="Lifestyle 3" loading="lazy" />
+  </section>
 
-    <!-- Zone haute : women-drink pleine hauteur -->
+  <!-- Section : Women drink + vidéo -->
+  <section class="home-s57">
     <div class="s57-zone-top">
       <img src="/img/women-drink2.webp" class="s57-top" alt="" aria-hidden="true" loading="lazy" />
       <video class="s57-video" autoplay muted loop playsinline preload="none">
         <source src="/vd/rum-video.mp4" type="video/mp4" />
       </video>
-      <p class="s57-tagline">
+      <!-- <p class="s57-tagline">
         More than a rum it's a vibe, a celebration,<br>
         an heritage and a tradition...
-      </p>
+      </p> -->
     </div>
-
-    <!-- Zone basse : foil doré pleine hauteur + bouteilles -->
-    <div class="s57-zone-bottom">
-      <img src="/img/foil-dore2.webp" class="s57-bottom" alt="" aria-hidden="true" loading="lazy" />
-
-      <div class="s57-bottles">
-        <div
-          v-for="(bottle, i) in s7Bottles"
-          :key="bottle.src"
-          class="s7-bottle"
-          :class="s7BottlePos[i]"
-        >
-          <img :src="bottle.src" :alt="bottle.alt" />
-        </div>
-      </div>
-
-      <button class="s57-nav s57-nav--left" @click="onS7Prev" aria-label="Bouteille précédente">
-        <svg width="32" height="32" viewBox="0 0 74 74" fill="none">
-          <polyline points="44,22 28,37 44,52" stroke="currentColor" stroke-width="4"
-            stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-      <button class="s57-nav s57-nav--right" @click="onS7Next" aria-label="Bouteille suivante">
-        <svg width="32" height="32" viewBox="0 0 74 74" fill="none">
-          <polyline points="30,22 46,37 30,52" stroke="currentColor" stroke-width="4"
-            stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-
-      <div class="s57-dots">
-        <button
-          v-for="i in 3" :key="i"
-          class="s7-dot"
-          :class="{ 's7-dot--active': s7Index === i - 1 }"
-          @click="s7Index = i - 1"
-          :aria-label="`Bouteille ${i}`"
-        />
-      </div>
-    </div>
-
   </section>
 
   <!-- Back to top -->
