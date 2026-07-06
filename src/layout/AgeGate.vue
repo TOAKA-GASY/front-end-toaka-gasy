@@ -13,9 +13,35 @@
           to stop underage drinking and encourage responsible enjoyment of our products.
         </p>
 
+        <p class="age-gate__dob-label">ENTER YOUR DATE OF BIRTH</p>
+        <div class="age-gate__dob">
+          <div class="age-gate__field">
+            <label class="age-gate__label" for="ag-year">Year</label>
+            <input
+              id="ag-year" v-model="year" type="number" inputmode="numeric"
+              class="age-gate__input" placeholder="YYYY" min="1900" :max="currentYear"
+            />
+          </div>
+          <div class="age-gate__field">
+            <label class="age-gate__label" for="ag-month">Month</label>
+            <input
+              id="ag-month" v-model="month" type="number" inputmode="numeric"
+              class="age-gate__input" placeholder="MM" min="1" max="12"
+            />
+          </div>
+          <div class="age-gate__field">
+            <label class="age-gate__label" for="ag-day">Day</label>
+            <input
+              id="ag-day" v-model="day" type="number" inputmode="numeric"
+              class="age-gate__input" placeholder="DD" min="1" max="31"
+            />
+          </div>
+        </div>
+
+        <p v-if="error" class="age-gate__error">{{ error }}</p>
+
         <div class="age-gate__actions">
-          <button class="age-gate__btn age-gate__btn--no" @click="onNo">NO</button>
-          <button class="age-gate__btn age-gate__btn--yes" @click="onYes">YES</button>
+          <button class="age-gate__btn age-gate__btn--yes" @click="onSubmit">ENTER</button>
         </div>
 
         <img src="/img/line-mdg2.webp" class="age-gate__line" alt="" aria-hidden="true" />
@@ -30,18 +56,47 @@ import { ref, onMounted } from 'vue'
 const visible = ref(false)
 let timer = null
 
+const day   = ref('')
+const month = ref('')
+const year  = ref('')
+const error = ref('')
+
+const currentYear = new Date().getFullYear()
+
 onMounted(() => {
   if (sessionStorage.getItem('age-verified') === 'true') return
   timer = setTimeout(() => { visible.value = true }, 3000)
 })
 
-const onYes = () => {
-  sessionStorage.setItem('age-verified', 'true')
-  visible.value = false
-}
+const onSubmit = () => {
+  if (!day.value || !month.value || !year.value) {
+    error.value = 'Please enter your full date of birth.'
+    return
+  }
 
-const onNo = () => {
-  window.location.href = 'https://www.who.int/'
+  const d = Number(day.value)
+  const m = Number(month.value)
+  const y = Number(year.value)
+  const dob = new Date(y, m - 1, d)
+
+  if (dob.getFullYear() !== y || dob.getMonth() !== m - 1 || dob.getDate() !== d) {
+    error.value = 'Please enter a valid date.'
+    return
+  }
+
+  const today = new Date()
+  let age = today.getFullYear() - dob.getFullYear()
+  const beforeBirthday =
+    today.getMonth() < dob.getMonth() ||
+    (today.getMonth() === dob.getMonth() && today.getDate() < dob.getDate())
+  if (beforeBirthday) age--
+
+  if (age >= 18) {
+    sessionStorage.setItem('age-verified', 'true')
+    visible.value = false
+  } else {
+    window.location.href = 'https://www.google.com'
+  }
 }
 </script>
 
@@ -117,11 +172,90 @@ const onNo = () => {
   position: relative;
   z-index: 1;
   font-family: 'Simonetta', Georgia, serif;
-  font-size: clamp(15px, 1.6vw, 20px);
-  line-height: 1.6;
+  font-size: clamp(12px, 1.05vw, 14px);
+  line-height: 1.55;
   color: #31271d;
   max-width: 540px;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.age-gate__dob-label {
+  position: relative;
+  z-index: 1;
+  font-family: 'Cinzel', 'Times New Roman', serif;
+  font-weight: 700;
+  font-size: clamp(11px, 1vw, 13px);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #8E602B;
+  margin-bottom: 1.1rem;
+}
+
+.age-gate__dob {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.age-gate__field {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+}
+
+.age-gate__label {
+  font-family: 'Cinzel', 'Times New Roman', serif;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6e5a42;
+}
+
+.age-gate__input {
+  font-family: 'Cinzel', 'Times New Roman', serif;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 0.03em;
+  text-align: center;
+  color: #31271d;
+  background: transparent;
+  border: 1px solid #31271d;
+  padding: 0.85rem 0.5rem;
+  width: 130px;
+  border-radius: 3px;
+  transition: border-color 0.3s ease;
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.age-gate__input::-webkit-outer-spin-button,
+.age-gate__input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.age-gate__input::placeholder {
+  color: rgba(49, 39, 29, 0.4);
+}
+
+.age-gate__input:focus {
+  outline: none;
+  border-color: #8E602B;
+}
+
+.age-gate__error {
+  position: relative;
+  z-index: 1;
+  font-family: 'Simonetta', Georgia, serif;
+  font-style: italic;
+  font-size: 14px;
+  color: #a13a2b;
+  margin: 0 0 1.5rem;
 }
 
 .age-gate__actions {
@@ -173,5 +307,9 @@ const onNo = () => {
   .age-gate__logo { width: 84px; }
   .age-gate__actions { gap: 1.5rem; }
   .age-gate__btn { padding: 0.6rem 1.8rem; font-size: 14px; }
+
+  .age-gate__dob { gap: 0.6rem; }
+  .age-gate__input { width: auto; flex: 1; font-size: 13px; padding: 0.45rem 0.2rem; }
+  .age-gate__field { flex: 1; align-items: center; }
 }
 </style>
