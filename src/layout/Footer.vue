@@ -156,9 +156,21 @@ async function sendWelcome() {
 <style scoped>
 .site-footer {
   position: relative;
+  z-index: 10;
+  width: 100%;
   background: #5B3615;
   overflow: hidden;
   padding: 4rem 0 3rem;
+  margin-top: clamp(-140px, -8vw, -60px);
+  transform: translateZ(0);
+  -webkit-mask-image: url('/img/montagne-vector.svg');
+          mask-image: url('/img/montagne-vector.svg');
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  -webkit-mask-size: cover;
+          mask-size: cover;
+  -webkit-mask-position: top;
+          mask-position: top;
 }
 
 /* ─── Foil doré : texture zoomée très basse opacité ─── */
@@ -464,6 +476,14 @@ async function sendWelcome() {
     flex-direction: column;
     gap: 1rem;
     align-items: center;
+  }
+}
+
+/* ─── Desktop : davantage de recouvrement avec la vidéo, contenu redescendu ─── */
+@media (min-width: 768px) {
+  .site-footer {
+    margin-top: clamp(-220px, -14vw, -140px);
+    padding-top: 7rem;
   }
 }
 </style>
