@@ -37,9 +37,9 @@ const goToStory = () => router.push('/our-story')
 
 /* ─── Bouteilles (Section 5) ─── */
 const s7Bottles = [
-  { src: '/img/toaka-gasy-black.webp', alt: 'Toaka Gasy Black' },
-  { src: '/img/toaka-gasy-white.webp', alt: 'Toaka Gasy White' },
-  { src: '/img/toaka-gasy-red.webp',   alt: 'Toaka Gasy Red'   },
+  { src: '/img/toaka-gasy-black.png', alt: 'Toaka Gasy Black' },
+  { src: '/img/toaka-gasy-white.png', alt: 'Toaka Gasy White' },
+  { src: '/img/toaka-gasy-red.png',   alt: 'Toaka Gasy Red'   },
 ]
 
 /* ─── Section 5 : Rizière (carousel indépendant, mêmes bouteilles) ─── */
@@ -162,8 +162,8 @@ const parallax = computed(() => {
       <section class="home-scene" aria-label="Scène Toaka Gasy">
         <div class="scene-pos scene-pos--bottle" :style="{ transform: parallax.bottle }">
           <img src="/img/toaka-gasy-black.png" alt="Toaka Gasy" />
+          <div class="bottle-shadow" aria-hidden="true"></div>
         </div>
-        <div class="bottle-shadow" aria-hidden="true"></div>
       </section>
     </div>
   </div>
@@ -197,7 +197,7 @@ const parallax = computed(() => {
       <!-- 2B : Introducing Nova -->
       <div class="hn-s2-bottom" :class="{ 'hn-s2-bottom--visible': hnS2BottomVisible }">
         <div class="hn-s2b-bottle">
-          <img src="/img/toaka-gasy-verre.png" alt="Toaka Gasy" />
+          <img src="/img/toaka-gasy-black.png" alt="Toaka Gasy" />
           <div class="hn-s2b-bottle__shadow" aria-hidden="true"></div>
         </div>
         <div class="hn-s2b-content">
@@ -205,7 +205,7 @@ const parallax = computed(() => {
           <h2 class="hn-s2b-title">NOVA</h2>
           <p class="hn-s2-text">{{ products[0].desc }}</p>
           <button class="hn-s2-cta" @click="goToProduct(products[0].slug)">
-            <span>DISCOVER MORE</span>
+            <span>DISCOVER NOVA</span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="6 9 12 15 18 9"/>
@@ -244,6 +244,7 @@ const parallax = computed(() => {
         :class="s5BottlePos[i]"
       >
         <img :src="bottle.src" :alt="bottle.alt" />
+        <div class="s7-bottle__shadow" aria-hidden="true"></div>
       </div>
     </div>
 

@@ -20,25 +20,24 @@
             <input
               id="ag-year" v-model="year" type="number" inputmode="numeric"
               class="age-gate__input" placeholder="YYYY" min="1900" :max="currentYear"
+              @input="onYearInput"
             />
           </div>
           <div class="age-gate__field">
             <label class="age-gate__label" for="ag-month">Month</label>
             <input
-              id="ag-month" v-model="month" type="number" inputmode="numeric"
+              id="ag-month" ref="monthInput" v-model="month" type="number" inputmode="numeric"
               class="age-gate__input" placeholder="MM" min="1" max="12"
-            />
-          </div>
-          <div class="age-gate__field">
-            <label class="age-gate__label" for="ag-day">Day</label>
-            <input
-              id="ag-day" v-model="day" type="number" inputmode="numeric"
-              class="age-gate__input" placeholder="DD" min="1" max="31"
             />
           </div>
         </div>
 
         <p v-if="error" class="age-gate__error">{{ error }}</p>
+
+        <label class="age-gate__remember">
+          <input type="checkbox" v-model="rememberMe" />
+          Remember me
+        </label>
 
         <div class="age-gate__actions">
           <button class="age-gate__btn age-gate__btn--yes" @click="onSubmit">ENTER</button>
@@ -56,30 +55,41 @@ import { ref, onMounted } from 'vue'
 const visible = ref(false)
 let timer = null
 
-const day   = ref('')
 const month = ref('')
 const year  = ref('')
 const error = ref('')
+const rememberMe = ref(false)
+
+const monthInput = ref(null)
 
 const currentYear = new Date().getFullYear()
 
+const onYearInput = () => {
+  if (String(year.value).length >= 4) monthInput.value?.focus()
+}
+
 onMounted(() => {
-  if (sessionStorage.getItem('age-verified') === 'true') return
+  if (localStorage.getItem('age-verified') === 'true' || sessionStorage.getItem('age-verified') === 'true') return
   timer = setTimeout(() => { visible.value = true }, 3000)
 })
 
 const onSubmit = () => {
-  if (!day.value || !month.value || !year.value) {
+  if (!month.value || !year.value) {
     error.value = 'Please enter your full date of birth.'
     return
   }
 
-  const d = Number(day.value)
   const m = Number(month.value)
   const y = Number(year.value)
-  const dob = new Date(y, m - 1, d)
 
-  if (dob.getFullYear() !== y || dob.getMonth() !== m - 1 || dob.getDate() !== d) {
+  if (m < 1 || m > 12) {
+    error.value = 'Please enter a valid date.'
+    return
+  }
+
+  const dob = new Date(y, m - 1, 1)
+
+  if (dob.getFullYear() !== y || dob.getMonth() !== m - 1) {
     error.value = 'Please enter a valid date.'
     return
   }
@@ -92,7 +102,11 @@ const onSubmit = () => {
   if (beforeBirthday) age--
 
   if (age >= 18) {
-    sessionStorage.setItem('age-verified', 'true')
+    if (rememberMe.value) {
+      localStorage.setItem('age-verified', 'true')
+    } else {
+      sessionStorage.setItem('age-verified', 'true')
+    }
     visible.value = false
   } else {
     window.location.href = 'https://www.google.com'
@@ -256,6 +270,26 @@ const onSubmit = () => {
   font-size: 14px;
   color: #a13a2b;
   margin: 0 0 1.5rem;
+}
+
+.age-gate__remember {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: 'Simonetta', Georgia, serif;
+  font-size: 13px;
+  color: #6e5a42;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+}
+
+.age-gate__remember input {
+  accent-color: #8E602B;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
 }
 
 .age-gate__actions {
