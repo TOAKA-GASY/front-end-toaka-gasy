@@ -161,7 +161,6 @@ async function sendWelcome() {
   background: #5B3615;
   overflow: hidden;
   padding: 4rem 0 3rem;
-  margin-top: clamp(-140px, -8vw, -60px);
   transform: translateZ(0);
 }
 
@@ -474,7 +473,6 @@ async function sendWelcome() {
 /* ─── Desktop : davantage de recouvrement avec la vidéo, contenu redescendu ─── */
 @media (min-width: 768px) {
   .site-footer {
-    margin-top: clamp(-220px, -14vw, -140px);
     padding-top: 7rem;
   }
 }
