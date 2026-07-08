@@ -7,7 +7,7 @@
 
       <!-- Logo -->
       <div class="footer-logo">
-        <img src="/logo/logo-icon.png" alt="Toaka Gasy" />
+        <img src="/logo/logo-icon.webp" alt="Toaka Gasy" />
       </div>
 
       <!-- Newsletter -->
@@ -34,7 +34,7 @@
         <Transition name="footer-popup">
           <div v-if="newsletterDone" class="fn-popup-overlay" @click.self="newsletterDone = false">
             <div class="fn-popup-card">
-              <img src="/logo/logo-icon.png" class="fn-popup__logo" alt="Toaka Gasy" />
+              <img src="/logo/logo-icon.webp" class="fn-popup__logo" alt="Toaka Gasy" />
               <span class="fn-popup__ornament"></span>
               <p class="fn-popup__title">Welcome to the Community</p>
               <p class="fn-popup__message">

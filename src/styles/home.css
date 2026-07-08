@@ -176,8 +176,8 @@
   bottom: 2%;
   left: 50%;
   transform: translateX(-50%);
-  width: clamp(320px, 42vmin, 720px);
-  height: clamp(64px, 8.5vmin, 130px);
+  width: clamp(240px, 30vmin, 520px);
+  height: clamp(72px, 10vmin, 160px);
   border-radius: 50%;
   background: rgba(4, 1, 0, 0.5);
   filter: blur(18px);
@@ -241,7 +241,16 @@
   object-fit: cover;
   object-position: center;
   display: block;
+  opacity: 0;
+  transform: translateY(48px);
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
 }
+
+.home-new-s3--visible .s3-img { opacity: 1; transform: none; }
+.home-new-s3--visible .s3-img:nth-child(1) { transition-delay: 0.05s; }
+.home-new-s3--visible .s3-img:nth-child(2) { transition-delay: 0.18s; }
+.home-new-s3--visible .s3-img:nth-child(3) { transition-delay: 0.31s; }
 
 /* ════════════════════════════════════════
    Nouvelles Sections 2 & 3 – Gradient continu
@@ -259,7 +268,7 @@
   position: absolute;
   inset: 0;
   background:
-    url('/img/fond-sec2-3.png') center / cover no-repeat,
+    url('/img/fond-sec2-3.webp') center / cover no-repeat,
     linear-gradient(to bottom, #6E7E99, #F5EADB);
   z-index: 0;
 }
@@ -393,8 +402,8 @@
   bottom: 2%;
   left: 50%;
   transform: translateX(-50%);
-  width: clamp(280px, 38vmin, 560px);
-  height: clamp(56px, 7.6vmin, 112px);
+  width: clamp(200px, 27vmin, 400px);
+  height: clamp(64px, 8.6vmin, 128px);
   border-radius: 50%;
   background: rgba(4, 1, 0, 0.5);
   filter: blur(18px);
@@ -420,7 +429,12 @@
   line-height: 1;
 }
 
-.hn-s2b-content .hn-s2-text { max-width: 480px; }
+.hn-s2b-content .hn-s2-text {
+  max-width: 480px;
+  font-family: var(--font-simonetta);
+  font-size: clamp(16px, 1.3vw, 21px);
+  color: #F4EADB;
+}
 
 /* ─── Reveal au scroll (IntersectionObserver) ─── */
 .hn-s2-top .hn-s2-eyebrow,
@@ -457,6 +471,7 @@
   z-index: 2;
   display: flex;
   overflow: hidden;
+  margin-top: -3vh;
 }
 
 .home-new-s3::before {
@@ -464,7 +479,7 @@
   position: absolute;
   inset: 0;
   background:
-    url('/img/fond-sec2-3.png') center / cover no-repeat,
+    url('/img/fond-sec2-3.webp') center / cover no-repeat,
     linear-gradient(to bottom, #6E7E99, #F5EADB);
   z-index: -2;
 }
@@ -550,7 +565,6 @@
   gap: 0.75rem;
   width: 100%;
   height: 70vh;
-  padding: 0 0 clamp(1.5rem, 4vw, 3rem);
 }
 
 .hn-s4-img {
@@ -596,7 +610,7 @@
   /* Section 4 : hauteur fixe pour bien voir les images (pas 100vh) */
   .home-new-s4   { height: 500px; }
   .hn-s4-content { padding: 1rem 1.25rem; }
-  .hn-s4-images  { flex: 0 0 300px; height: 300px; gap: 0.4rem; padding: 0 0 1.25rem; }
+  .hn-s4-images  { flex: 0 0 300px; height: 300px; gap: 0.4rem; }
 }
 
 /* ════════════════════════════════════════
@@ -626,8 +640,8 @@
   bottom: 2%;
   left: 50%;
   transform: translateX(-50%);
-  width: clamp(190px, 28vmin, 400px);
-  height: clamp(38px, 5.2vmin, 72px);
+  width: clamp(140px, 20vmin, 290px);
+  height: clamp(44px, 6.2vmin, 92px);
   border-radius: 50%;
   background: rgba(4, 1, 0, 0.5);
   filter: blur(18px);
@@ -971,20 +985,23 @@
   .scene-pos--bottle img   { height: clamp(300px, 78vh, 520px); }
   .bottle-shadow { width: 320px; height: 80px; }
 
-  /* Section 5 – Rizière : hauteur fixe (pas 100vh), bouteilles remontées, flèches centrées */
-  .home-riz { height: 500px; }
-  .s7-bottle img { height: clamp(170px, 40vh, 320px); }
-  .s7-bottle--center { bottom: 60px; }
+  /* Section 5 – Rizière : hauteur fixe pour bien voir les bouteilles */
+  .home-riz { height: 400px; }
+  .s7-bottle img { height: 210px; }
+  .s7-bottle--center { bottom: 24px; }
   .s7-bottle--left  {
     transform: translateX(calc(-50% - 36vw)) scale(0.55);
-    bottom: 60px;
+    bottom: 24px;
     opacity: 1;
   }
   .s7-bottle--right {
     transform: translateX(calc(-50% + 36vw)) scale(0.55);
-    bottom: 60px;
+    bottom: 24px;
     opacity: 1;
   }
+
+  /* Section 3 – Lifestyle : hauteur fixe pour bien voir les images */
+  .home-new-s3 { height: 400px; }
 
   /* Section vidéo/femme : remontée pour ne pas laisser de vide après la lifestyle */
   .home-s57 { margin-top: -8px; }
@@ -999,11 +1016,7 @@
   .scene-pos--ravinala { left: -50%; bottom: 18vh; }
   .scene-pos--ravinala img { height: clamp(320px, 76vh, 560px); }
   .scene-pos--bottle img   { height: clamp(260px, 70vh, 440px); }
-  .bottle-shadow { width: 250px; height: 62px; }
-
-  /* Section 3 : hauteur au contenu (pas 100vh) pour ne pas laisser de vide avant la vidéo */
-  .home-new-s3 { height: auto; }
-  .s3-img { height: 64vw; }
+  .bottle-shadow { width: 180px; height: 58px; }
 
   /* Section 5 – Rizière */
   .s7-bottle img { height: clamp(140px, 34vh, 230px); }
@@ -1026,4 +1039,11 @@
   .scene-pos--bottle img   { height: clamp(240px, 68vh, 460px); }
 
   .s7-bottle img { height: clamp(340px, 54vh, 560px); }
+}
+
+/* ════════════════════════════════════════
+   Desktop (≥ 992px) – Section 3 Lifestyle réduite
+   ════════════════════════════════════════ */
+@media (min-width: 992px) {
+  .home-new-s3 { height: 70vh; }
 }

@@ -16,11 +16,20 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Moontime';
+  src: url('/fonts/MoonTime-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --font-cinzel: 'Cinzel', 'Times New Roman', serif;
   --font-cinzel2: 'Cinzel', 'regular', 'Times New Roman', serif;
   --font-simonetta: 'Simonetta', 'Georgia', serif;
   --font-holiday: 'HolidayFree', Georgia, serif;
+  --font-moontime: 'Moontime', cursive;
   --color-dark: #1F0E06;
   --color-gold: #a86b33;
   --color-beige: #f5e6c8;

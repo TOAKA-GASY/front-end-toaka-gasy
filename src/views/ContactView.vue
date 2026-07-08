@@ -32,7 +32,7 @@ onUnmounted(() => {
         <li><RouterLink to="/our-story" class="ct-nav__link" active-class="ct-nav__link--active">OUR STORY</RouterLink></li>
       </ul>
       <RouterLink to="/" class="ct-nav__logo-wrap">
-        <img src="/logo/logo-marron.png" class="ct-nav__logo" alt="Toaka Gasy" />
+        <img src="/logo/logo-marron.webp" class="ct-nav__logo" alt="Toaka Gasy" />
       </RouterLink>
       <ul class="ct-nav__links ct-nav__links--right">
         <li><RouterLink to="/our-rums" class="ct-nav__link" active-class="ct-nav__link--active">OUR RUMS</RouterLink></li>
@@ -48,7 +48,7 @@ onUnmounted(() => {
         <span></span><span></span>
       </button>
       <RouterLink to="/" class="ct-mobile-menu__logo" @click="menuOpen = false">
-        <img src="/logo/logo-marron.png" alt="Toaka Gasy" />
+        <img src="/logo/logo-marron.webp" alt="Toaka Gasy" />
       </RouterLink>
       <nav class="ct-mobile-menu__nav">
         <RouterLink to="/" class="ct-mobile-menu__link" @click="menuOpen = false">HOME</RouterLink>
@@ -69,7 +69,7 @@ onUnmounted(() => {
   <!-- Section 2 : Fond f3e6d8 + formulaire -->
   <section class="ct-form-section">
     <div class="ct-form-section__inner">
-      <img src="/logo/logo-marron.png" class="ct-form-section__logo" alt="Toaka Gasy" />
+      <img src="/logo/logo-marron.webp" class="ct-form-section__logo" alt="Toaka Gasy" />
       <h1 class="ct-form-section__title">CONTACT US</h1>
       <p class="ct-form-section__subtitle">For partnerships, distribution, press, or select inquiries,<br>please contact us. Product details and pricing are shared upon request.</p>
       <ContactForm />

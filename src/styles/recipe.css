@@ -1,0 +1,205 @@
+/* ════════════════════════════════════════
+   Recipe detail page – 100vh : image+titre en haut, ingrédients en bas
+   ════════════════════════════════════════ */
+.recipe-page {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Haut : photo du cocktail + titre (100vh) ─── */
+.recipe-hero {
+  position: relative;
+  flex: 0 0 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+.recipe-hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+
+.recipe-hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+/* Recette 1 : gradient beige (foncé) */
+.recipe-page--0 .recipe-hero__overlay {
+  background: linear-gradient(to top,
+    rgba(140, 108, 58, 0.95) 0%,
+    rgba(96, 74, 40, 0.45) 55%,
+    rgba(31, 14, 6, 0.35) 100%);
+}
+/* Recette 2 : gradient terracotta/rouge (foncé) */
+.recipe-page--1 .recipe-hero__overlay {
+  background: linear-gradient(to top,
+    rgba(112, 40, 22, 0.95) 0%,
+    rgba(84, 30, 17, 0.45) 55%,
+    rgba(31, 14, 6, 0.35) 100%);
+}
+/* Recette 3 : gradient marron */
+.recipe-page--2 .recipe-hero__overlay {
+  background: linear-gradient(to top,
+    rgba(46, 22, 8, 0.95) 0%,
+    rgba(35, 17, 6, 0.5) 55%,
+    rgba(20, 9, 4, 0.4) 100%);
+}
+
+.recipe-back {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: clamp(1.5rem, 4vw, 3rem);
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(245, 233, 219, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(245, 234, 219, 0.5);
+  color: #F5EADB;
+  font-size: 1rem;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+.recipe-back:hover {
+  background: rgba(245, 233, 219, 0.4);
+  transform: translateY(-50%) translateY(-2px);
+}
+
+.recipe-hero__title {
+  position: relative;
+  z-index: 2;
+  padding: 0 clamp(1.5rem, 5vw, 4rem) 2.5rem;
+  max-width: 900px;
+}
+
+.recipe-title {
+  font-family: var(--font-cinzel);
+  font-weight: 700;
+  font-size: clamp(30px, 4.6vw, 56px);
+  color: #ECD8C4;
+  letter-spacing: 0.03em;
+  line-height: 1.1;
+}
+
+.recipe-subtitle {
+  font-family: var(--font-simonetta);
+  font-style: italic;
+  font-size: clamp(15px, 1.5vw, 20px);
+  color: #ECD8C4;
+  margin-top: 0.35rem;
+}
+
+/* ─── Bas : ingrédients + méthode, fond beige (100vh) ─── */
+.recipe-lower {
+  position: relative;
+  flex: 0 0 100vh;
+  min-height: 100vh;
+  background: #F5EADB;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(2.5rem, 6vh, 4.5rem);
+  padding: clamp(2rem, 4vh, 3rem) clamp(1.5rem, 5vw, 4rem);
+}
+
+.recipe-lower__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.recipe-block__heading {
+  font-family: var(--font-cinzel);
+  font-weight: 700;
+  font-size: clamp(16px, 1.6vw, 22px);
+  color: #522A0C;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0 0 1.1rem;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid rgba(82, 42, 12, 0.25);
+}
+
+.recipe-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.recipe-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-simonetta);
+  font-size: clamp(14px, 1.1vw, 17px);
+  color: #522A0C;
+  line-height: 1.5;
+}
+
+.recipe-list__icon {
+  flex-shrink: 0;
+  color: #B5533C;
+  font-size: 1rem;
+  width: 1.25rem;
+  text-align: center;
+}
+
+.recipe-steps {
+  font-family: var(--font-simonetta);
+  font-size: clamp(14px, 1.1vw, 17px);
+  color: #522A0C;
+  line-height: 1.8;
+  padding-left: 1.25rem;
+  margin: 0;
+}
+
+.recipe-enjoy {
+  flex: 0 0 auto;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  padding: 0.3em 1.5rem;
+  font-family: var(--font-holiday);
+  font-weight: 400;
+  font-size: clamp(40px, 5.5vw, 68px);
+  line-height: 1.4;
+  color: #522A0C;
+}
+
+.recipe-page--empty {
+  align-items: center;
+  justify-content: center;
+  background: var(--color-dark);
+  color: #ECD8C4;
+  font-family: var(--font-simonetta);
+  gap: 1rem;
+}
+.recipe-back-link { color: #ECD8C4; font-family: var(--font-cinzel); letter-spacing: 0.08em; }
+
+@media (max-width: 767.98px) {
+  .recipe-hero  { flex-basis: 100vh; }
+  .recipe-lower { flex-basis: auto; min-height: auto; padding-top: 3rem; padding-bottom: 3rem; }
+  .recipe-lower__inner { grid-template-columns: 1fr; gap: 2rem; }
+}

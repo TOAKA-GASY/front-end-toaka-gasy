@@ -4,7 +4,7 @@
       <div class="age-gate__card">
         <img src="/img/footer-pattern.webp" class="age-gate__pattern" alt="" aria-hidden="true" />
 
-        <img src="/logo/logo-marron.png" class="age-gate__logo" alt="Toaka Gasy" />
+        <img src="/logo/logo-marron.webp" class="age-gate__logo" alt="Toaka Gasy" />
 
         <h2 id="age-gate-title" class="age-gate__title">ARE YOU OF LEGAL DRINKING AGE&nbsp;?</h2>
         <p class="age-gate__text">

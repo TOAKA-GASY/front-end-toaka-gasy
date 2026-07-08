@@ -1,0 +1,11 @@
+Home : 
+bug shaddow
+blanc entre section
+section lifestyle 70%
+
+
+Maintenant je finalise le tout , pour un meilleur experience utilisateur 
+je voudrais que tu supprime les images non utilsé dans public-img 
+et converti les fichiers png non converti en webp toutes les images dans public en webp 
+Pour les textes fais en sorte d'avoir un bon texte referencement SEO et que le texte soit bien structuré pour le SEO
+
