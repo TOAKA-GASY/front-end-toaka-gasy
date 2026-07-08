@@ -1,0 +1,18 @@
+
+
+
+Dans our story mettre le masque en premier section 100vh remplis l'ecran 
+Pui mettre la bouteille diminuer la taille et le mettre en bas a gauche au dessus de la video et moitié fond blanc et animer la bouteille au scroll
+Beginning le texte est trop long augmente le widht et augmente l'image aussi 
+Pour le events c'est les images qui sont à corriger animation slide zoom auto de chaque image
+
+
+Dans our story Behind the legend en grand et from the founders petit pas d'image mettre le texte au milieu stp 
+l'animation des images en events je veux defiler les 5 images en automatique 
+Dans our rums ajoute le responsive de tous ecrans stp sur les textes ils sont trop petits quand je dezoom garde la meme taille
+Dans Recipe mettre mont passot ensemble et non coupé 
+
+
+Dans our story le masque ne rempli pas encore le width de l'ecran 
+la bouteille en plus grande et en bas a droite 
+Ensuite the beignning le texte est trop long augmente le widht et augmente l'image aussi, enleve l'espace entre le texte 

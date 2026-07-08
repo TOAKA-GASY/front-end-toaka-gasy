@@ -1,126 +1,261 @@
 /* ════════════════════════════════════════
    Product detail page
    ════════════════════════════════════════ */
-.product-page {
+.pp {
   position: relative;
-  min-height: 90vh;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  padding: 1.5rem 4rem 5rem;
-}
-
-.product-page__bg {
-  position: absolute;
-  inset: 0;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  z-index: 0;
 }
 
-.product-page__overlay {
+/* ── Hero : gradient bleu/beige + image de fond + bouteille + texte ── */
+.pp-hero {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(to bottom, #6E7E99, #F5EADB);
+  display: flex;
+  align-items: center;
+  padding: clamp(7rem, 12vh, 9rem) clamp(1.5rem, 5vw, 4rem) 4rem;
+}
+
+.pp-hero__bgimg {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(31, 14, 6, 0.85) 0%, rgba(31, 14, 6, 0.35) 55%, rgba(31, 14, 6, 0.15) 100%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 90%;
+  max-height: 92%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  opacity: 0.14;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Vaza & Soma : image de fond pleine largeur (contrairement à Nova, contenue) */
+.pp-hero__bgimg--full {
+  width: 100vw;
+  height: auto;
+  max-width: none;
+  max-height: none;
+  object-fit: cover;
+}
+
+.pp-hero__inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(2rem, 6vw, 6rem);
+}
+
+.pp-hero__bottle {
+  position: relative;
+  flex: 0 1 40%;
+  display: flex;
+  justify-content: center;
+}
+
+.pp-hero__bottle img {
+  position: relative;
+  z-index: 2;
+  height: clamp(360px, 66vmin, 680px);
+  width: auto;
+  display: block;
+}
+
+.pp-hero__shadow {
+  position: absolute;
+  bottom: 4%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(180px, 26vmin, 380px);
+  height: clamp(36px, 5vmin, 76px);
+  border-radius: 50%;
+  background: rgba(4, 1, 0, 0.5);
+  filter: blur(18px);
   z-index: 1;
 }
 
-.product-back {
-  position: relative;
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  color: #ECD8C4;
-  font-family: var(--font-cinzel);
-  font-size: 0.85rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  width: fit-content;
-  opacity: 0.8;
-  transition: opacity var(--transition);
-}
-
-.product-back:hover { opacity: 1; }
-
-.product-hero {
-  position: relative;
-  z-index: 2;
-  flex: 1;
+.pp-hero__content {
+  flex: 0 1 45%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  gap: 0.5rem;
-  max-width: 600px;
-  margin-top: 2rem;
+  align-items: flex-start;
+  gap: 0.9rem;
+  text-align: left;
 }
 
-.product-name {
-  font-family: var(--font-cinzel);
-  font-weight: 700;
-  font-size: clamp(36px, 5vw, 64px);
-  color: #ECD8C4;
-  line-height: 1.05;
-}
-
-.product-tagline {
+.pp-hero__kicker {
   font-family: var(--font-cinzel);
   font-weight: 400;
-  font-size: clamp(18px, 2vw, 28px);
-  color: #ECD8C4;
-}
-
-.product-desc {
-  font-family: var(--font-simonetta);
-  font-weight: 400;
-  font-size: clamp(15px, 1.3vw, 19px);
-  color: #ECD8C4;
-  line-height: 1.6;
-  max-width: 480px;
-  margin-top: 0.5rem;
-}
-
-.product-badge {
-  display: block;
-  align-self: flex-start;
-  border: 1px solid #ECD8C4;
-  border-radius: 4px;
-  padding: 8px 14px;
-  margin-top: 1.25rem;
-}
-
-.product-badge__frame {
-  border: 1px solid #ECD8C4;
-  border-radius: 2px;
-  padding: 9px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.product-badge__text {
-  font-family: var(--font-cinzel);
-  font-weight: 700;
-  font-size: clamp(11px, 0.95vw, 15px);
-  color: #ECD8C4;
-  letter-spacing: 0.1em;
+  font-size: clamp(11px, 1vw, 14px);
+  color: #F4EADB;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
-  white-space: nowrap;
 }
 
-.product-page--empty {
+.pp-hero__name {
+  font-family: var(--font-cinzel);
+  font-weight: 700;
+  font-size: clamp(48px, 7vw, 100px);
+  color: #522A0C;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  margin: 0.2rem 0 0.3rem;
+}
+
+.pp-hero__spec {
+  font-family: var(--font-cinzel);
+  font-weight: 700;
+  font-size: clamp(12px, 1vw, 15px);
+  color: #522A0C;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.pp-hero__tags {
+  font-family: var(--font-simonetta);
+  font-style: italic;
+  font-size: clamp(14px, 1.2vw, 18px);
+  color: #6e4008;
+  margin: 0 0 0.5rem;
+}
+
+.pp-hero__desc {
+  font-family: var(--font-simonetta);
+  font-size: clamp(15px, 1.15vw, 19px);
+  color: #F4EADB;
+  line-height: 1.75;
+  max-width: 480px;
+  margin: 0;
+}
+
+.pp-hero__closing {
+  font-family: var(--font-cinzel);
+  font-weight: 700;
+  font-size: clamp(13px, 1.05vw, 16px);
+  color: #522A0C;
+  letter-spacing: 0.06em;
+  margin: 0.5rem 0 0;
+}
+
+/* ── Tagline collection ── */
+.pp-tagline {
+  background: #F5EADB;
+  text-align: center;
+  padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4rem);
+}
+
+.pp-tagline__title {
+  font-family: 'HolidayFree', var(--font-cinzel), serif;
+  font-weight: 400;
+  font-size: clamp(24px, 3vw, 40px);
+  color: #522A0C;
+  line-height: 1.2;
+  margin: 0 0 1.25rem;
+}
+
+.pp-tagline__text {
+  font-family: var(--font-simonetta);
+  font-size: clamp(14px, 1.1vw, 18px);
+  color: #3a2e22;
+  line-height: 1.75;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* ── Détails : the moment / how to enjoy / notes ── */
+.pp-details {
+  background: #F5EADB;
+  border-top: 1px solid rgba(82, 42, 12, 0.25);
+  padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 5vw, 4rem) clamp(4rem, 7vw, 6rem);
+}
+
+.pp-details__inner {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.pp-detail {
+  text-align: center;
+}
+
+.pp-detail__title {
+  font-family: var(--font-cinzel);
+  font-weight: 700;
+  font-size: clamp(13px, 1.1vw, 16px);
+  color: #69431D;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin: 0 0 0.85rem;
+}
+
+.pp-detail__text {
+  font-family: var(--font-simonetta);
+  font-size: clamp(14px, 1.05vw, 17px);
+  color: #3a2e22;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ── Lien réutilisé par l'état vide ── */
+.pp-cta__link {
+  font-family: var(--font-cinzel);
+  font-weight: 700;
+  font-size: clamp(12px, 1vw, 14px);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #ECD8C4;
+  text-decoration: none;
+  border: 1px solid rgba(236, 216, 196, 0.5);
+  padding: 0.85rem 2rem;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.pp-cta__link:hover {
+  background: #ECD8C4;
+  color: #5B3615;
+  border-color: #ECD8C4;
+}
+
+/* ── État vide ── */
+.pp--empty {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 1.5rem;
   background: var(--color-dark);
   color: #ECD8C4;
   font-family: var(--font-simonetta);
-  gap: 1rem;
 }
 
+/* ── Responsive ── */
 @media (max-width: 767.98px) {
-  .product-page { padding: 1.5rem 1.5rem 4rem; }
-  .product-hero { text-align: center; align-items: center; max-width: 100%; }
-  .product-badge { align-self: center; }
+  .pp-hero {
+    padding: 6rem 1.5rem 3rem;
+    min-height: auto;
+  }
+  .pp-hero__inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+  .pp-hero__bottle img { height: clamp(260px, 50vh, 440px); }
+  .pp-hero__content { align-items: center; text-align: center; }
+  .pp-hero__desc { max-width: 90%; }
+  .pp-hero__name { font-size: clamp(40px, 12vw, 60px); }
+
+  .pp-details__inner { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
 }

@@ -1,0 +1,60 @@
+export const cocktails = [
+  {
+    slug: 'lost-island',
+    src: '/img/cocktail.webp',
+    title: 'LOST ISLAND COCKTAIL',
+    subtitle: 'Go wild and get lost',
+    ingredients: [
+      '50ml Toaka Gasy Nova',
+      '20ml fresh lime juice',
+      '15ml passion fruit syrup',
+      '3 mint leaves',
+      'Crushed ice',
+      'Slice of lime, to garnish',
+    ],
+    steps: [
+      'Muddle the mint leaves gently at the bottom of a shaker.',
+      'Add the rum, lime juice and passion fruit syrup with ice, then shake hard for 10 seconds.',
+      'Strain into a glass filled with crushed ice.',
+      'Garnish with a lime slice and a sprig of mint.',
+    ],
+  },
+  {
+    slug: 'sunkissed-mont-passot',
+    src: '/img/cocktail2.webp',
+    title: 'SUNKISSED IN MONT PASSOT',
+    subtitle: 'Smooth rum, bright citrus, perfect balance',
+    ingredients: [
+      '45ml Toaka Gasy Vaza',
+      '25ml fresh orange juice',
+      '10ml honey syrup',
+      '2 dashes of bitters',
+      'Orange twist, to garnish',
+    ],
+    steps: [
+      'Fill a mixing glass with ice and add the rum, orange juice, honey syrup and bitters.',
+      'Stir until well chilled, about 15 seconds.',
+      'Strain into a rocks glass over a large ice cube.',
+      'Express the orange twist over the drink and drop it in.',
+    ],
+  },
+  {
+    slug: 'the-mackay',
+    src: '/img/cocktail3.webp',
+    title: 'THE MACKAY COCKTAIL',
+    subtitle: 'One sip to be ready for another adventure',
+    ingredients: [
+      '50ml Toaka Gasy Sôma',
+      '20ml spiced ginger syrup',
+      '15ml lemon juice',
+      'Top with soda water',
+      'Candied ginger, to garnish',
+    ],
+    steps: [
+      'Shake the rum, ginger syrup and lemon juice with ice.',
+      'Strain into a tall glass filled with fresh ice.',
+      'Top with soda water and stir gently.',
+      'Garnish with a piece of candied ginger.',
+    ],
+  },
+]

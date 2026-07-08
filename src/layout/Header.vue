@@ -10,7 +10,7 @@
       </button>
 
       <RouterLink to="/" class="header__brand-mobile">
-        <img src="/logo/logo-marron.png" class="header__logo-mobile" alt="Toaka Gasy" />
+        <img src="/logo/logo-marron.webp" class="header__logo-mobile" alt="Toaka Gasy" />
       </RouterLink>
 
       <!-- Desktop: 3-column grid -->
@@ -25,7 +25,7 @@
         </ul>
 
         <RouterLink to="/" class="header__logo-center">
-          <img src="/logo/logo-marron.png" class="header__logo" alt="Toaka Gasy" />
+          <img src="/logo/logo-marron.webp" class="header__logo" alt="Toaka Gasy" />
         </RouterLink>
 
         <ul class="header__nav header__nav--right">
@@ -50,7 +50,7 @@
       </button>
 
       <RouterLink to="/" class="mobile-menu__logo" @click="menuOpen = false">
-        <img src="/logo/logo-marron.png" alt="Toaka Gasy" />
+        <img src="/logo/logo-marron.webp" alt="Toaka Gasy" />
       </RouterLink>
 
       <nav class="mobile-menu__nav">
@@ -76,10 +76,14 @@ const menuOpen = ref(false)
 <style scoped>
 /* ─── Header ─── */
 .header {
-  background: transparent;
-  position: relative;
-  z-index: 50;
-  padding: 2rem 0 0.75rem;
+  background: rgba(245, 233, 219, 0.55);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 1.1rem 0;
   transition: background-color 0.4s ease;
 }
 
@@ -137,7 +141,7 @@ const menuOpen = ref(false)
   font-family: var(--font-cinzel);
   font-weight: 700;
   font-size: clamp(0.75rem, 1vw, 1rem);
-  color: var(--color-dark);
+  color: #69431D;
   letter-spacing: 0.1em;
   padding: 0.4rem 0.6rem;
   display: block;
@@ -166,7 +170,7 @@ const menuOpen = ref(false)
   display: block;
   width: 32px;
   height: 2px;
-  background: var(--color-dark);
+  background: #69431D;
   border-radius: 2px;
 }
 

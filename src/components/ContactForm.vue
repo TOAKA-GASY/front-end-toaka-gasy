@@ -138,7 +138,7 @@ async function sendEmail() {
   <Teleport to="body">
     <div v-if="showSuccess" class="popup-overlay" @click.self="showSuccess = false">
       <div class="popup-card">
-        <img src="/logo/logo-beige.png" class="popup-card__logo" alt="Toaka Gasy" />
+        <img src="/logo/logo-beige.webp" class="popup-card__logo" alt="Toaka Gasy" />
         <span class="popup-card__ornament"></span>
         <p class="popup-card__title">Message Received</p>
         <p class="popup-card__message">

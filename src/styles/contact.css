@@ -412,7 +412,7 @@
 @media (max-width: 767.98px) {
   .ct-nav__links   { display: none; }
   .ct-nav__toggler { display: flex; }
-  .ct-nav__inner   { padding: 1rem 1.25rem; }
+  .ct-nav__inner   { grid-template-columns: 1fr; justify-items: center; padding: 1rem 1.25rem; }
 
   .ct-form-section { padding: 4rem 1.25rem 5rem; }
 

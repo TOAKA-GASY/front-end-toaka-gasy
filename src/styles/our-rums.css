@@ -5,8 +5,10 @@
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
-  background: #F5E9DB;
-  box-shadow: 0 2px 20px rgba(0,0,0,0.12);
+  background: rgba(245, 233, 219, 0.55);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.15);
   transform: translateY(-110%);
   transition: transform 0.52s cubic-bezier(0.22,1,0.36,1);
   pointer-events: none;
@@ -100,82 +102,342 @@
 .ormenu-enter-from,  .ormenu-leave-to      { opacity: 0; transform: translateY(-10px); }
 
 /* ════════════════════════════════════════
-   Section 1 – Hero (logo + titre, sans nav)
+   Section 1 – Hero : nosy.webp (filtre beige) + 3 bouteilles flottantes
    ════════════════════════════════════════ */
 .or-hero {
   position: relative;
   height: 100vh;
   overflow: hidden;
-  background: #5B3615;
 }
 .or-hero__bg {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
-  object-fit: cover; object-position: top center;
+  object-fit: cover; object-position: center;
   z-index: 0;
-  opacity: 0.55;
+  filter: sepia(0.3) saturate(1.15) brightness(1.05);
 }
-.or-hero__overlay {
+/* Filtre beige : rectangle plein posé au-dessus de l'image */
+.or-hero__beige {
   position: absolute; inset: 0;
-  background: linear-gradient(to bottom, rgba(36,16,4,0.45) 0%, rgba(36,16,4,0.05) 45%, rgba(36,16,4,0.55) 100%);
+  background: #F5E9DB;
+  opacity: 0.65;
   z-index: 1;
-}
-/* Bloc centré hero */
-.or-hero__center {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -42%);
-  z-index: 10;
-  display: flex; flex-direction: column;
-  align-items: center; gap: 1.25rem;
-  text-align: center;
-  width: min(680px, 88vw);
-  opacity: 0;
-  transition: opacity 1s ease 0.5s,
-              transform 1s cubic-bezier(0.22,1,0.36,1) 0.5s;
   pointer-events: none;
 }
-.or-hero__center--in {
-  opacity: 1;
-  transform: translate(-50%, -50%);
+.or-hero__bottles {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
 }
-.or-hero__title {
+
+/* ─── Wrappers de positionnement ─── */
+.or-hero__pos {
+  position: absolute;
+  top: 170px;
+  left: 50%;
+}
+.or-hero__pos--center {
+  transform: translateX(-50%);
+  z-index: 3;
+}
+.or-hero__pos--left {
+  transform: translateX(calc(-50% - clamp(110px, 15vw, 280px)));
+  z-index: 2;
+}
+.or-hero__pos--right {
+  transform: translateX(calc(-50% + clamp(110px, 15vw, 280px)));
+  z-index: 2;
+}
+
+/* ─── Float animation subtile ─── */
+@keyframes or-hero-float {
+  0%, 100% { transform: translateY(0);     }
+  50%       { transform: translateY(-14px); }
+}
+
+/* ─── Bouteilles : entrée + float après entrée ─── */
+.or-hero__bottle {
+  display: block;
+  width: auto;
+  filter: drop-shadow(0 20px 42px rgba(0, 0, 0, 0.55));
+  opacity: 0;
+  transform: translateY(60px) scale(0.9);
+  transition:
+    opacity  1.1s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.or-hero__bottle--white {
+  height: clamp(340px, 68vh, 660px);
+  transition-delay: 0.15s;
+}
+.or-hero__bottle--black {
+  height: clamp(262px, 52vh, 510px);
+  transition-delay: 0.4s;
+}
+.or-hero__bottle--red {
+  height: clamp(238px, 47vh, 458px);
+  transition-delay: 0.6s;
+}
+.or-hero__bottle--in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Float déclenché après la fin de l'entrée */
+.or-hero__bottle--white.or-hero__bottle--in {
+  animation: or-hero-float 4s   ease-in-out 1.35s infinite;
+}
+.or-hero__bottle--black.or-hero__bottle--in {
+  animation: or-hero-float 4.4s ease-in-out 1.6s  infinite;
+}
+.or-hero__bottle--red.or-hero__bottle--in {
+  animation: or-hero-float 4.2s ease-in-out 1.8s  infinite;
+}
+
+/* ════════════════════════════════════════
+   Section 2 – Our Collection : gradient bleu/beige
+   Intro + présentation séquentielle des 3 rums (Nova → Vaza → 610)
+   ════════════════════════════════════════ */
+.or-collection {
+  position: relative;
+  width: 100%;
+  height: 335vh;
+}
+.or-collection::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, #6E7E99, #F5EADB);
+  z-index: 0;
+}
+
+.or-col-top,
+.or-col-intro {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 2;
+}
+
+/* ─── 2A : Many ways to celebrate + bateau ─── */
+.or-col-top {
+  height: 35vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.or-col-top__boat {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(1050px, 105vw, 1850px);
+  height: auto;
+  opacity: 0.15;
+  z-index: 0;
+  pointer-events: none;
+}
+.or-col-top__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+  padding: 0 1.5rem;
+}
+.or-col-eyebrow {
+  font-family: var(--font-cinzel);
+  font-weight: 400;
+  font-size: clamp(12px, 1.1vw, 15px);
+  color: #F4EADB;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+}
+.or-col-top__title {
   font-family: var(--font-cinzel);
   font-weight: 700;
-  font-size: clamp(38px,6vw,88px);
-  color: #C9A050;
-  letter-spacing: 0.14em;
-  line-height: 1; margin: 0;
-  text-shadow: 0 2px 20px rgba(201,160,80,0.3);
-}
-
-/* Logo centré en haut */
-.or-hero__logo-wrap {
-  position: absolute;
-  top: clamp(2rem,4vh,4rem);
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-  opacity: 0;
-  transition: opacity 0.9s ease 0.2s;
-}
-.or-hero__logo-wrap--in { opacity: 1; }
-.or-hero__logo {
-  height: clamp(100px,14vh,180px);
-  width: auto;
-  filter: drop-shadow(0 2px 12px rgba(255,220,150,0.35)) drop-shadow(0 4px 24px rgba(0,0,0,0.5));
-}
-
-
-.or-hero__gold-line { width: 55px; height: 1px; background: #C9A050; }
-.or-hero__subtitle {
-  font-family: var(--font-simonetta);
-  font-style: italic;
-  font-size: clamp(15px,1.6vw,22px);
-  color: rgba(236,216,196,0.8);
-  line-height: 1.9;
+  font-size: clamp(34px, 5.6vw, 78px);
+  color: #F4EADB;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.1;
   margin: 0;
 }
+
+/* ─── 2B-D : chaque rum – description / bouteille, côtés alternés ─── */
+.or-col-intro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(2rem, 6vw, 6rem);
+  padding: 0 clamp(1.5rem, 6vw, 6rem);
+}
+.or-col-intro--reverse { flex-direction: row-reverse; }
+
+/* ─── Image de fond centrée par rum (Nova en couleur, Vaza/Soma en N&B) ─── */
+.or-col-intro__bgimg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 130%;
+  max-height: 130%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  opacity: 0.16;
+  z-index: 0;
+  pointer-events: none;
+}
+.or-col-intro__bgimg--bw {
+  filter: grayscale(1);
+  width: 100vw;
+  height: auto;
+  max-width: none;
+  max-height: none;
+}
+
+.or-col-intro__content {
+  position: relative;
+  z-index: 1;
+  flex: 0 1 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.1rem;
+  text-align: left;
+}
+.or-col-intro--reverse .or-col-intro__content { align-items: flex-end; text-align: right; }
+
+.or-col-intro__title {
+  font-family: var(--font-cinzel);
+  font-weight: 700;
+  font-size: clamp(30px, 4vw, 56px);
+  color: #F4EADB;
+  letter-spacing: 0.05em;
+  line-height: 1.1;
+  margin: 0;
+}
+.or-col-intro__tagline {
+  font-family: var(--font-simonetta);
+  font-style: italic;
+  font-size: clamp(15px, 1.5vw, 22px);
+  color: #F4EADB;
+  margin: 0;
+}
+.or-col-intro__desc {
+  font-family: var(--font-simonetta);
+  font-size: clamp(14px, 1.05vw, 18px);
+  color: #F4EADB;
+  line-height: 1.7;
+  max-width: 480px;
+  margin: 0;
+}
+.or-col-intro__badge {
+  display: inline-block;
+  font-family: var(--font-cinzel);
+  font-size: clamp(9px, 0.75vw, 11px);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #F4EADB;
+  border: 1px solid rgba(244, 234, 219, 0.45);
+  padding: 0.32rem 0.85rem;
+}
+.or-col-intro__cta {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-family: var(--font-cinzel); font-weight: 700;
+  font-size: clamp(11px, 0.95vw, 14px); letter-spacing: 0.18em;
+  color: #F4EADB; text-decoration: none;
+  border-bottom: 1px solid rgba(244, 234, 219, 0.6);
+  padding-bottom: 0.25rem;
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+.or-col-intro__cta:hover { color: #C9A050; border-color: #C9A050; }
+
+/* ─── Couleurs de texte par rum : marron foncé (Sôma) unifié sur les 3 bouteilles ─── */
+.or-col-intro--0 .or-col-intro__title,
+.or-col-intro--0 .or-col-intro__tagline,
+.or-col-intro--0 .or-col-intro__desc,
+.or-col-intro--0 .or-col-intro__badge,
+.or-col-intro--0 .or-col-intro__cta,
+.or-col-intro--1 .or-col-intro__title,
+.or-col-intro--1 .or-col-intro__tagline,
+.or-col-intro--1 .or-col-intro__desc,
+.or-col-intro--1 .or-col-intro__badge,
+.or-col-intro--1 .or-col-intro__cta,
+.or-col-intro--2 .or-col-intro__title,
+.or-col-intro--2 .or-col-intro__tagline,
+.or-col-intro--2 .or-col-intro__desc,
+.or-col-intro--2 .or-col-intro__badge,
+.or-col-intro--2 .or-col-intro__cta {
+  color: #2E1608;
+}
+.or-col-intro--0 .or-col-intro__badge,
+.or-col-intro--1 .or-col-intro__badge,
+.or-col-intro--2 .or-col-intro__badge {
+  border-color: rgba(46, 22, 8, 0.5);
+}
+.or-col-intro--0 .or-col-intro__cta,
+.or-col-intro--1 .or-col-intro__cta,
+.or-col-intro--2 .or-col-intro__cta {
+  border-color: rgba(46, 22, 8, 0.6);
+}
+
+.or-col-intro__bottle {
+  position: relative;
+  z-index: 1;
+  flex: 0 1 40%;
+  display: flex;
+  justify-content: center;
+}
+.or-col-intro__bottle img {
+  position: relative;
+  z-index: 2;
+  height: clamp(380px, 70vmin, 720px);
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 28px 24px rgba(0, 0, 0, 0.5));
+}
+.or-col-intro__shadow {
+  position: absolute;
+  bottom: 6%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(120px, 18vmin, 260px);
+  height: clamp(18px, 2.6vmin, 36px);
+  border-radius: 50%;
+  background: rgba(4, 1, 0, 0.85);
+  filter: blur(24px);
+  z-index: 1;
+}
+
+/* ─── Reveal au scroll (IntersectionObserver) ─── */
+.or-col-top .or-col-eyebrow,
+.or-col-top .or-col-top__title,
+.or-col-intro .or-col-intro__title,
+.or-col-intro .or-col-intro__tagline,
+.or-col-intro .or-col-intro__desc,
+.or-col-intro .or-col-intro__badge,
+.or-col-intro .or-col-intro__cta,
+.or-col-intro__bottle {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.or-col-top--visible .or-col-eyebrow   { opacity: 1; transform: none; transition-delay: 0.05s; }
+.or-col-top--visible .or-col-top__title { opacity: 1; transform: none; transition-delay: 0.18s; }
+
+.or-col-intro--visible .or-col-intro__bottle  { opacity: 1; transform: none; transition-delay: 0.05s; }
+.or-col-intro--visible .or-col-intro__title   { opacity: 1; transform: none; transition-delay: 0.2s;  }
+.or-col-intro--visible .or-col-intro__tagline { opacity: 1; transform: none; transition-delay: 0.32s; }
+.or-col-intro--visible .or-col-intro__desc    { opacity: 1; transform: none; transition-delay: 0.44s; }
+.or-col-intro--visible .or-col-intro__badge   { opacity: 1; transform: none; transition-delay: 0.54s; }
+.or-col-intro--visible .or-col-intro__cta     { opacity: 1; transform: none; transition-delay: 0.64s; }
 
 /* ════════════════════════════════════════
    Section 2 – Intro
@@ -207,103 +469,12 @@
 }
 
 /* ════════════════════════════════════════
-   Sections 3-5 – Rum (plein écran, texte sur image gauche)
-   ════════════════════════════════════════ */
-.or-rum {
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
-}
-/* Image de fond avec marge pour le parallax */
-.or-rum__bg {
-  position: absolute;
-  inset: -12% 0;
-  width: 100%; height: 124%;
-  object-fit: cover; object-position: center;
-  z-index: 0;
-  will-change: transform;
-}
-/* Gradient sombre sur la gauche pour lisibilité */
-.or-rum__gradient {
-  position: absolute; inset: 0;
-  background: linear-gradient(
-    to right,
-    rgba(8,3,1,0.92) 0%,
-    rgba(8,3,1,0.72) 35%,
-    rgba(8,3,1,0.30) 60%,
-    transparent      85%
-  );
-  z-index: 1;
-}
-/* Contenu texte superposé à gauche */
-.or-rum__content {
-  position: absolute;
-  left: clamp(2.5rem,9vw,11rem);
-  top: 50%;
-  transform: translateY(-50%) translateX(-36px);
-  z-index: 5;
-  display: flex; flex-direction: column;
-  max-width: clamp(300px,38vw,520px);
-  opacity: 0;
-  transition:
-    opacity  0.95s cubic-bezier(0.22,1,0.36,1) 0.15s,
-    transform 0.95s cubic-bezier(0.22,1,0.36,1) 0.15s;
-}
-.or-rum--visible .or-rum__content {
-  opacity: 1;
-  transform: translateY(-50%) translateX(0);
-}
-.or-rum__num {
-  font-family: var(--font-cinzel); font-weight: 700;
-  font-size: clamp(10px,0.85vw,12px);
-  color: #C9A050; letter-spacing: 0.35em; text-transform: uppercase;
-  margin-bottom: 0.85rem; display: block;
-}
-.or-rum__name {
-  font-family: var(--font-cinzel); font-weight: 700;
-  font-size: clamp(26px,3.2vw,48px);
-  color: #ECD8C4; line-height: 1.05; margin: 0 0 1.5rem;
-}
-.or-rum__line { width: 55px; height: 1px; background: #C9A050; margin-bottom: 1.4rem; }
-.or-rum__tagline {
-  font-family: var(--font-simonetta); font-style: italic;
-  font-size: clamp(15px,1.5vw,22px);
-  color: rgba(236,216,196,0.85); margin: 0 0 1.1rem;
-}
-.or-rum__desc {
-  font-family: var(--font-simonetta);
-  font-size: clamp(13px,1.2vw,17px);
-  color: rgba(236,216,196,0.65); line-height: 1.75;
-  margin: 0 0 2rem;
-}
-.or-rum__badge {
-  display: inline-block; align-self: flex-start;
-  font-family: var(--font-cinzel);
-  font-size: clamp(9px,0.72vw,11px);
-  letter-spacing: 0.2em; text-transform: uppercase;
-  color: #C9A050; border: 1px solid rgba(201,160,80,0.45);
-  padding: 0.32rem 0.85rem; margin-bottom: 1.75rem;
-}
-.or-rum__cta {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  align-self: flex-start;
-  font-family: var(--font-cinzel); font-weight: 700;
-  font-size: clamp(10px,0.9vw,13px); letter-spacing: 0.18em;
-  color: #ECD8C4; text-decoration: none;
-  border-bottom: 1px solid rgba(201,160,80,0.6);
-  padding-bottom: 0.25rem;
-  transition: color 0.25s ease, border-color 0.25s ease;
-}
-.or-rum__cta:hover { color: #C9A050; border-color: #C9A050; }
-
-/* ════════════════════════════════════════
-   Side nav – 3 bouteilles Toaka (fixe, droite)
+   Side nav – 3 bouteilles Toaka (fixe, en haut à droite)
    ════════════════════════════════════════ */
 .or-side-nav {
   position: fixed;
   right: clamp(1.25rem,2.5vw,2.75rem);
-  top: 50%;
-  transform: translateY(-50%);
+  top: 140px;
   z-index: 80;
   display: flex; flex-direction: column;
   align-items: center; gap: 1.5rem;
@@ -344,11 +515,11 @@
   font-family: var(--font-cinzel);
   font-size: clamp(7px,0.65vw,9px);
   letter-spacing: 0.18em;
-  color: rgba(236,216,196,0.6);
+  color: rgba(105,67,29,0.65);
   white-space: nowrap;
   transition: color 0.35s ease;
 }
-.or-side-nav__item--active .or-side-nav__label { color: #C9A050; }
+.or-side-nav__item--active .or-side-nav__label { color: #69431D; }
 
 /* Separator line between items */
 .or-side-nav__sep {
@@ -360,13 +531,14 @@
 .or-sidenav-enter-active { transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.22,1,0.36,1); }
 .or-sidenav-leave-active { transition: opacity 0.4s ease, transform 0.4s ease; }
 .or-sidenav-enter-from,
-.or-sidenav-leave-to     { opacity: 0; transform: translateY(-50%) translateX(20px); }
+.or-sidenav-leave-to     { opacity: 0; transform: translateX(20px); }
 
 /* ════════════════════════════════════════
    Section 6 – Cocktails
    ════════════════════════════════════════ */
 .or-cocktails {
-  background: #1C0C01;
+  position: relative;
+  background: url('/img/fond-sec2-3.webp') center / cover no-repeat, #F5EADB;
   padding: 6rem clamp(1.5rem,5vw,7rem);
   display: flex; flex-direction: column;
   align-items: center; gap: 4rem;
@@ -382,16 +554,25 @@
 .or-cocktails__title {
   font-family: var(--font-cinzel); font-weight: 700;
   font-size: clamp(22px,3.2vw,50px);
-  color: #ECD8C4; letter-spacing: 0.12em; margin: 0;
+  color: #522A0C; letter-spacing: 0.12em; margin: 0;
 }
 .or-cocktails__line { width: 60px; height: 1px; background: #C9A050; }
+.or-cocktails__desc {
+  font-family: var(--font-simonetta);
+  font-style: italic;
+  font-size: clamp(14px, 1.1vw, 18px);
+  color: #522A0C;
+  max-width: 480px;
+  margin: 0;
+}
 .or-cocktails__grid {
   display: grid;
   grid-template-columns: repeat(3,1fr);
   gap: 1.5rem; width: 100%; max-width: 1200px;
 }
 .or-cocktail-card {
-  position: relative; aspect-ratio: 3/4; overflow: hidden;
+  position: relative; display: block; aspect-ratio: 3/4; overflow: hidden;
+  text-decoration: none; color: inherit;
   opacity: 0; transform: translateY(36px);
   transition: opacity 0.85s cubic-bezier(0.22,1,0.36,1),
               transform 0.85s cubic-bezier(0.22,1,0.36,1);
@@ -406,9 +587,41 @@
 .or-cocktail-card:hover .or-cocktail-card__img { transform: scale(1.11); }
 .or-cocktail-card__overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(20,8,1,0.92) 0%, rgba(20,8,1,0.12) 55%, transparent 80%);
   z-index: 1;
 }
+/* Carte 1 : gradient beige */
+.or-cocktail-card:nth-child(1) .or-cocktail-card__overlay {
+  background: linear-gradient(to top,
+    rgba(201, 160, 80, 0.92) 0%,
+    rgba(245, 234, 219, 0.4) 55%,
+    transparent 85%);
+}
+/* Carte 2 : gradient terracotta */
+.or-cocktail-card:nth-child(2) .or-cocktail-card__overlay {
+  background: linear-gradient(to top,
+    rgba(165, 66, 38, 0.92) 0%,
+    rgba(181, 83, 60, 0.4) 55%,
+    transparent 85%);
+}
+/* Carte 3 : gradient marron */
+.or-cocktail-card:nth-child(3) .or-cocktail-card__overlay {
+  background: linear-gradient(to top,
+    rgba(46, 22, 8, 0.92) 0%,
+    rgba(91, 54, 21, 0.4) 55%,
+    transparent 85%);
+}
+.or-cocktail-card__hover {
+  position: absolute; inset: 0; z-index: 3;
+  display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  background: rgba(59, 31, 15, 0.55);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  font-family: var(--font-cinzel); font-weight: 700;
+  font-size: clamp(12px, 1.1vw, 15px);
+  letter-spacing: 0.2em;
+  color: #F5EADB;
+}
+.or-cocktail-card:hover .or-cocktail-card__hover { opacity: 1; }
 .or-cocktail-card__content {
   position: absolute; bottom: 2rem; left: 1.75rem; right: 1.75rem;
   z-index: 2; display: flex; flex-direction: column; gap: 0.4rem;
@@ -422,6 +635,13 @@
   font-family: var(--font-simonetta);
   font-size: clamp(11px,0.9vw,14px);
   color: rgba(236,216,196,0.7); margin: 0; line-height: 1.4;
+}
+
+/* Le footer chevauche normalement la section précédente (margin-top négatif),
+   ce qui rogne la grille de cocktails ici : on neutralise ce chevauchement
+   uniquement quand le footer suit la page Our Rums. */
+.or-cocktails ~ .site-footer {
+  margin-top: 0 !important;
 }
 
 /* Back to top */
@@ -443,6 +663,35 @@
 /* ════════════════════════════════════════
    Responsive
    ════════════════════════════════════════ */
+
+/* ─── Très grands écrans / zoom arrière (≥ 1600px) ───
+   Les tailles en clamp() plafonnent vers 1300-1500px : au-delà (grand moniteur
+   ou navigateur dézoomé, qui élargit le viewport CSS), le texte restait figé au
+   plafond et paraissait minuscule. On relance la progression ici. */
+@media (min-width: 1600px) {
+  .or-nav__link { font-size: clamp(0.75rem, 0.9vw, 1.05rem); }
+
+  .or-col-eyebrow  { font-size: clamp(15px, 1vw, 19px); }
+  .or-col-top__title { font-size: clamp(78px, 4.6vw, 108px); }
+
+  .or-col-intro__title   { font-size: clamp(56px, 3.2vw, 76px); }
+  .or-col-intro__tagline { font-size: clamp(22px, 1.2vw, 28px); }
+  .or-col-intro__desc    { font-size: clamp(18px, 1vw, 23px); }
+  .or-col-intro__badge   { font-size: clamp(11px, 0.65vw, 14px); }
+  .or-col-intro__cta     { font-size: clamp(14px, 0.8vw, 17px); }
+
+  .or-intro__title { font-size: clamp(54px, 2.8vw, 68px); }
+  .or-intro__text  { font-size: clamp(24px, 1.3vw, 29px); }
+
+  .or-side-nav__label { font-size: clamp(9px, 0.55vw, 11px); }
+
+  .or-cocktails__title    { font-size: clamp(50px, 2.6vw, 64px); }
+  .or-cocktails__desc     { font-size: clamp(18px, 0.9vw, 22px); }
+  .or-cocktail-card__title { font-size: clamp(18px, 1vw, 22px); }
+  .or-cocktail-card__sub   { font-size: clamp(14px, 0.75vw, 17px); }
+  .or-cocktail-card__hover { font-size: clamp(15px, 0.9vw, 18px); }
+}
+
 @media (min-width: 768px) and (max-width: 991.98px) {
   .or-nav__inner { padding: 0.9rem 2rem; }
   .or-nav__links { gap: 2rem; }
@@ -454,8 +703,9 @@
   .or-hero__bottle--black { height: clamp(185px,38vh,355px); }
   .or-hero__bottle--red   { height: clamp(168px,34vh,325px); }
 
-  .or-rum__content { left: clamp(2rem,6vw,7rem); max-width: 380px; }
-  .or-side-nav { right: 1rem; }
+  .or-col-top__boat { width: clamp(700px, 100vw, 1200px); }
+
+  .or-side-nav { right: 1rem; top: 110px; }
 
   .or-cocktails__grid { grid-template-columns: 1fr; max-width: 460px; }
   .or-cocktail-card   { aspect-ratio: 4/3; }
@@ -465,16 +715,34 @@
   .or-nav__inner  { grid-template-columns: 1fr; justify-items: center; padding: 0.75rem 1.5rem; }
   .or-nav__links, .or-nav__links--left, .or-nav__links--right { display: none; }
   .or-nav__toggler { display: flex; }
+  .or-nav__bar { background: #F4EADB; }
 
-  .or-hero__title { font-size: clamp(28px,7vw,48px); }
+  .or-hero__pos           { top: 50%; }
+  .or-hero__pos--center   { transform: translate(-50%, -50%); }
+  .or-hero__pos--left     { transform: translate(calc(-50% - clamp(80px, 16vw, 170px)), -50%); }
+  .or-hero__pos--right    { transform: translate(calc(-50% + clamp(80px, 16vw, 170px)), -50%); }
+  .or-hero__bottle--white { height: clamp(240px, 56vh, 400px); }
+  .or-hero__bottle--black { height: clamp(184px, 43vh, 305px); }
+  .or-hero__bottle--red   { height: clamp(168px, 39vh, 278px); }
+
+  .or-col-top__boat { width: clamp(560px, 130vw, 900px); opacity: 0.12; }
+  .or-col-intro {
+    flex-direction: column-reverse;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2rem 1.5rem;
+    text-align: center;
+  }
+  .or-col-intro__content,
+  .or-col-intro--reverse .or-col-intro__content { flex: none; align-items: center; text-align: center; }
+  .or-col-intro__desc    { max-width: 90%; }
+  .or-col-intro__bottle  { flex: none; }
+  .or-col-intro__bottle img { height: clamp(260px, 50vh, 440px); }
+  .or-col-intro__title   { font-size: clamp(30px, 10vw, 48px); }
 
   .or-intro { padding: 4rem 1.5rem 3.5rem; }
 
-  .or-rum__content { left: 1.5rem; max-width: calc(100vw - 5rem); }
-  .or-rum__name    { font-size: clamp(20px,5.5vw,30px); }
-  .or-rum__desc    { display: none; }
-
-  .or-side-nav { right: 0.6rem; gap: 0.85rem; }
+  .or-side-nav { right: 0.6rem; top: 88px; gap: 0.85rem; }
   .or-side-nav__bottle { height: clamp(38px,4.5vh,55px); }
   .or-side-nav__label  { display: none; }
   .or-side-nav__sep    { height: 12px; }
@@ -486,8 +754,8 @@
 }
 
 @media (max-width: 575.98px) {
-  .or-hero__title { font-size: clamp(26px,7vw,38px); }
-  .or-rum__content { left: 1.25rem; }
-  .or-rum__tagline { font-size: clamp(13px,3.5vw,18px); }
+  .or-hero__pos--left  { transform: translate(calc(-50% - clamp(60px, 15vw, 130px)), -50%); }
+  .or-hero__pos--right { transform: translate(calc(-50% + clamp(60px, 15vw, 130px)), -50%); }
+  .or-col-top__title { font-size: clamp(28px, 8vw, 40px); }
   .or-cocktail-card { aspect-ratio: 3/2; }
 }

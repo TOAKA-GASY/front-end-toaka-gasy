@@ -11,9 +11,11 @@ const menuOpen   = ref(false)
 const hnS2TopVisible    = ref(false)
 const hnS2BottomVisible = ref(false)
 const hnS4Visible = ref(false)
+const s3Visible = ref(false)
 let hnS2TopObserver = null
 let hnS2BottomObserver = null
 let hnS4Observer = null
+let s3Observer = null
 
 /* ─── Scroll fluide : lecture throttlée via requestAnimationFrame ─── */
 let scrollTicking = false
@@ -37,9 +39,9 @@ const goToStory = () => router.push('/our-story')
 
 /* ─── Bouteilles (Section 5) ─── */
 const s7Bottles = [
-  { src: '/img/toaka-gasy-black.png', alt: 'Toaka Gasy Black' },
-  { src: '/img/toaka-gasy-white.png', alt: 'Toaka Gasy White' },
-  { src: '/img/toaka-gasy-red.png',   alt: 'Toaka Gasy Red'   },
+  { src: '/img/toaka-gasy-black.webp', alt: 'Toaka Gasy Black' },
+  { src: '/img/toaka-gasy-white.webp', alt: 'Toaka Gasy White' },
+  { src: '/img/toaka-gasy-red.webp',   alt: 'Toaka Gasy Red'   },
 ]
 
 /* ─── Section 5 : Rizière (carousel indépendant, mêmes bouteilles) ─── */
@@ -85,6 +87,15 @@ onMounted(() => {
     )
     hnS4Observer.observe(hnS4El)
   }
+
+  const s3El = document.querySelector('.home-new-s3')
+  if (s3El) {
+    s3Observer = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) s3Visible.value = true },
+      { threshold: 0.15 }
+    )
+    s3Observer.observe(s3El)
+  }
 })
 
 onUnmounted(() => {
@@ -92,6 +103,7 @@ onUnmounted(() => {
   if (hnS2TopObserver)    hnS2TopObserver.disconnect()
   if (hnS2BottomObserver) hnS2BottomObserver.disconnect()
   if (hnS4Observer)       hnS4Observer.disconnect()
+  if (s3Observer)         s3Observer.disconnect()
 })
 
 const parallax = computed(() => {
@@ -122,7 +134,7 @@ const parallax = computed(() => {
         <li><RouterLink to="/our-story" class="hero-hd__link" active-class="hero-hd__link--active">OUR STORY</RouterLink></li>
       </ul>
       <RouterLink to="/" class="hero-hd__logo-wrap">
-        <img src="/logo/logo-marron.png" class="hero-hd__logo" alt="Toaka Gasy" />
+        <img src="/logo/logo-marron.webp" class="hero-hd__logo" alt="Toaka Gasy" />
       </RouterLink>
       <ul class="hero-hd__nav hero-hd__nav--right">
         <li><RouterLink to="/our-rums" class="hero-hd__link" active-class="hero-hd__link--active">OUR RUMS</RouterLink></li>
@@ -138,7 +150,7 @@ const parallax = computed(() => {
         <span></span><span></span>
       </button>
       <RouterLink to="/" class="hero-mobile-menu__logo" @click="menuOpen = false">
-        <img src="/logo/logo-marron.png" alt="Toaka Gasy" />
+        <img src="/logo/logo-marron.webp" alt="Toaka Gasy" />
       </RouterLink>
       <nav class="hero-mobile-menu__nav">
         <RouterLink to="/" class="hero-mobile-menu__link" @click="menuOpen = false">HOME</RouterLink>
@@ -151,24 +163,25 @@ const parallax = computed(() => {
 
   <!-- Section 1 : parallax sticky -->
   <div class="home-page">
+    <h1 class="visually-hidden">Toaka Gasy — Authentic Malagasy Rum Crafted in the Betsileo Tradition</h1>
     <div class="home-sticky">
       <div class="home-sticky__bg-clip">
-        <img src="/img/fond.png" class="home-bg" alt="" aria-hidden="true" />
+        <img src="/img/fond.webp" class="home-bg" alt="" aria-hidden="true" />
         <div class="scene-pos scene-pos--ravinala" :style="{ transform: parallax.ravinala }">
-          <img src="/img/ravinala.png" alt="" aria-hidden="true" />
+          <img src="/img/ravinala.webp" alt="" aria-hidden="true" />
         </div>
-        <img src="/img/montagne.png" class="home-mountain" alt="" aria-hidden="true" />
+        <img src="/img/montagne.webp" class="home-mountain" alt="" aria-hidden="true" />
       </div>
       <section class="home-scene" aria-label="Scène Toaka Gasy">
         <div class="scene-pos scene-pos--bottle" :style="{ transform: parallax.bottle }">
-          <img src="/img/toaka-gasy-black.png" alt="Toaka Gasy" />
+          <img src="/img/toaka-gasy-black.webp" alt="Toaka Gasy" />
           <div class="bottle-shadow" aria-hidden="true"></div>
         </div>
       </section>
     </div>
   </div>
 
-  <!-- Sections 2 + 4 combinées : fond unique fond-sec2-3.png + grain + dégradé, 300vh -->
+  <!-- Sections 2 + 4 combinées : fond unique fond-sec2-3.webp + grain + dégradé, 300vh -->
   <div class="home-new-wrap">
 
     <!-- Section 2 : Inspiration + Nova (200vh) -->
@@ -197,13 +210,15 @@ const parallax = computed(() => {
       <!-- 2B : Introducing Nova -->
       <div class="hn-s2-bottom" :class="{ 'hn-s2-bottom--visible': hnS2BottomVisible }">
         <div class="hn-s2b-bottle">
-          <img src="/img/toaka-gasy-black.png" alt="Toaka Gasy" />
+          <img src="/img/toaka-gasy-black.webp" alt="Toaka Gasy" />
           <div class="hn-s2b-bottle__shadow" aria-hidden="true"></div>
         </div>
         <div class="hn-s2b-content">
           <span class="hn-s2-eyebrow">INTRODUCING</span>
           <h2 class="hn-s2b-title">NOVA</h2>
-          <p class="hn-s2-text">{{ products[0].desc }}</p>
+          <p class="hn-s2-text">
+            Our first Rum: Madagascar-inspired, with a Nova Scotian touch and a Canadian soul. An amber rum that celebrates all sweet beginnings!
+          </p>
           <button class="hn-s2-cta" @click="goToProduct(products[0].slug)">
             <span>DISCOVER NOVA</span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -224,9 +239,9 @@ const parallax = computed(() => {
         <p class="hn-s4-text">From Madagascar to the world, rum has always brought us together!</p>
       </div>
       <div class="hn-s4-images">
-        <img src="/img/cajot1.JPG" class="hn-s4-img" alt="Rum aging in oak barrels" loading="lazy" />
-        <img src="/img/cajot2.png" class="hn-s4-img" alt="Tasting the rum" loading="lazy" />
-        <img src="/img/cajot3.jpg" class="hn-s4-img" alt="Rum tasting experience" loading="lazy" />
+        <img src="/img/cajot1.webp" class="hn-s4-img" alt="Rum aging in oak barrels" loading="lazy" />
+        <img src="/img/cajot2.webp" class="hn-s4-img" alt="Tasting the rum" loading="lazy" />
+        <img src="/img/cajot3.webp" class="hn-s4-img" alt="Rum tasting experience" loading="lazy" />
       </div>
     </section>
 
@@ -273,7 +288,7 @@ const parallax = computed(() => {
   </section>
 
   <!-- Section 3 : Lifestyle -->
-  <section class="home-new-s3">
+  <section class="home-new-s3" :class="{ 'home-new-s3--visible': s3Visible }">
     <img src="/img/lifestyle1.webp" class="s3-img" alt="Lifestyle 1" loading="lazy" />
     <img src="/img/lifestyle2.webp" class="s3-img" alt="Lifestyle 2" loading="lazy" />
     <img src="/img/lifestyle3.webp" class="s3-img" alt="Lifestyle 3" loading="lazy" />
