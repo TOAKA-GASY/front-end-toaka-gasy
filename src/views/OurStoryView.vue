@@ -159,7 +159,7 @@ const goToEvent = (i) => { eventIndex.value = i; restartAutoplay() }
       <h2 class="os-s4__title">THE BEGINNING</h2>
       <div class="os-s4__line"></div>
       <p class="os-s4__body">
-        We are Toaka Gasy Company, a rum house founded by Malagasy and Dutch partners/associates.<br /><br />
+        We are Toaka Gasy Company, a rum house founded by Malagasy and Dutch associates<br /><br />
         Crafted in the Netherlands, our rum carries Madagascar's spirit of celebration made to bring people together.
       </p>
       <p class="os-s4__body">
