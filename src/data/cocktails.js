@@ -22,7 +22,7 @@ export const cocktails = [
   {
     slug: 'sunkissed-mont-passot',
     src: '/img/cocktail2.webp',
-    title: 'SUNKISSED IN MONT PASSOT',
+    title: 'SUNKISSED IN MONT PASSOT',
     subtitle: 'Smooth rum, bright citrus, perfect balance',
     ingredients: [
       '45ml Toaka Gasy Vaza',
@@ -44,7 +44,7 @@ export const cocktails = [
     title: 'THE MACKAY COCKTAIL',
     subtitle: 'One sip to be ready for another adventure',
     ingredients: [
-      '50ml Toaka Gasy Soma',
+      '50ml Toaka Gasy Sôma',
       '20ml spiced ginger syrup',
       '15ml lemon juice',
       'Top with soda water',

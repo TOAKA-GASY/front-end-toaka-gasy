@@ -75,7 +75,7 @@
 }
 
 /* ════════════════════════════════════════
-   Section 1 – Hero : fond + bouteille Mena
+   Section 1 – Hero : fond + vidéo masquée + bouteille Mena
    ════════════════════════════════════════ */
 .os-hero {
   position: relative;
@@ -92,6 +92,40 @@
   z-index: 0;
 }
 
+/* ─── Vidéo "papier déchiré", pleine largeur ───
+   Mesure géométrique du tracé SVG : les bords gauche/droit du masque ne
+   collent à 0%/100% que sur la bande verticale ~14%-95% de sa hauteur ; les
+   fines bandes tout en haut et tout en bas rentrent fortement vers l'intérieur
+   (jusqu'à 20-57% de la largeur), ce qui laissait apparaître le fond sur les
+   côtés. On recadre donc verticalement dans cette bande centrale (mask-size
+   en hauteur > 100%, repositionné) plutôt que d'écraser horizontalement :
+   les côtés restent pleins sur toute la hauteur, sans perdre le détail du
+   motif en largeur. */
+.os-hero__mask-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  -webkit-mask-image: url('/img/paper-mask.svg');
+          mask-image: url('/img/paper-mask.svg');
+  -webkit-mask-size: cover;
+          mask-size: cover;
+  -webkit-mask-position: center center;
+          mask-position: center center;
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+}
+
+.os-hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 .os-hero__bottles {
   position: absolute;
   inset: 0;
@@ -99,39 +133,16 @@
   pointer-events: none;
 }
 
-/* ─── "Our" / "Story" de part et d'autre de la bouteille centrale ─── */
-.os-hero__title {
-  position: absolute;
-  inset: 0;
-  z-index: 4;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  pointer-events: none;
-  padding: 0 clamp(1.5rem, 5vw, 6rem);
-}
-
-.os-hero__title-word {
-  font-family: 'HolidayFree', var(--font-cinzel), serif;
-  font-weight: 400;
-  font-size: clamp(50px, 8vw, 130px);
-  color: #FBF7EF;
-  line-height: 1;
-  text-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
-}
-
-.os-hero__title-word--left  { margin-left: clamp(2rem, 10vw, 9rem); }
-.os-hero__title-word--right { text-align: right; }
-
-/* ─── Wrapper de positionnement : bouteille ancrée en bas, déborde sur le masque ─── */
+/* ─── Wrapper de positionnement : bouteille ancrée en bas à droite de la vidéo, au-dessus d'elle ─── */
 .os-hero__pos {
   position: absolute;
-  bottom: -70px;
-  left: 50%;
 }
 
+/* Centrée horizontalement, bien descendue pour ne pas cacher la vidéo. */
 .os-hero__pos--center {
+  left: 50%;
   transform: translateX(-50%);
+  bottom: -160px;
   z-index: 3;
 }
 
@@ -141,8 +152,9 @@
   50%       { transform: translateY(-14px); }
 }
 
-/* ─── Bouteilles : entrée + float après entrée ─── */
-.os-hero__bottle {
+/* ─── Bouteilles : entrée (déclenchée au scroll via .os-animate) + float après entrée ───
+   Spécificité renforcée (2 classes) pour prendre le pas sur les règles génériques .os-animate. */
+.os-hero__bottle.os-animate {
   display: block;
   width: auto;
   filter: drop-shadow(0 20px 42px rgba(0, 0, 0, 0.55));
@@ -154,80 +166,17 @@
 }
 
 .os-hero__bottle--mena {
-  height: clamp(440px, 86vh, 860px);
-  transition-delay: 0.2s;
+  height: clamp(400px, 72vh, 760px);
 }
 
-.os-hero__bottle--in {
+.os-hero__bottle.os-animate--in {
   opacity: 1;
   transform: none;
 }
 
 /* Float déclenché après la fin de l'entrée */
-.os-hero__bottle--mena.os-hero__bottle--in {
+.os-hero__bottle--mena.os-animate--in {
   animation: os-float 4.2s ease-in-out 1.5s infinite;
-}
-
-/* ════════════════════════════════════════
-   Section 2 – Masque paper-mask.svg (pleine section) + récit familial
-   ════════════════════════════════════════ */
-.os-s2 {
-  background: #F5E9DB;
-  padding: 0;
-}
-
-/* Le masque "papier déchiré" ne touche le bord gauche/droit que sur sa bande centrale
-   (le haut et le bas de la forme sont volontairement irréguliers). En forçant une hauteur
-   100vh on étirait ces bandes déchirées et ça créait du vide visible sur les côtés.
-   On garde donc le ratio natif du SVG pour que la partie pleine largeur reste dominante. */
-.os-s2__mask-wrap {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1790.22 / 1081.43;
-  -webkit-mask-image: url('/img/paper-mask.svg');
-          mask-image: url('/img/paper-mask.svg');
-  -webkit-mask-size: 100% 100%;
-          mask-size: 100% 100%;
-  -webkit-mask-repeat: no-repeat;
-          mask-repeat: no-repeat;
-}
-
-.os-s2__video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.os-s2__title {
-  font-family: var(--font-cinzel);
-  font-weight: 700;
-  font-size: clamp(26px, 3.4vw, 46px);
-  color: #69431D;
-  text-align: center;
-  line-height: 1.2;
-  margin: 0;
-  padding: clamp(1.75rem, 4vw, 2.5rem) 1.5rem 0;
-}
-
-.os-s2__story {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: clamp(1.25rem, 3vw, 2rem) clamp(1.5rem, 5vw, 2rem) clamp(3rem, 6vw, 5rem);
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-}
-
-.os-s2__story p {
-  font-family: var(--font-simonetta);
-  font-size: clamp(15px, 1.3vw, 19px);
-  color: #1f0e06;
-  line-height: 1.75;
-  text-align: center;
-  margin: 0;
 }
 
 /* ════════════════════════════════════════
@@ -235,19 +184,35 @@
    ════════════════════════════════════════ */
 .os-s4 {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.3fr 0.7fr;
   background: #F5E9DB;
   padding: 6rem 0;
   align-items: center;
 }
 
+/* "The Beginning" : marge haute supplémentaire pour laisser respirer la
+   bouteille du hero, désormais centrée et bien descendue en bas de la vidéo. */
+.os-s4:not(.os-s4--legend) {
+  padding-top: 16rem;
+}
+
 .os-s4__content {
-  padding: 0 2rem 0 5rem;
+  padding: 0 2rem 0 4rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+
+.os-s4__eyebrow {
+  font-family: var(--font-cinzel);
+  font-weight: 400;
+  font-size: clamp(12px, 1.1vw, 15px);
+  color: #C9A050;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
 }
 
 .os-s4__title {
@@ -257,6 +222,10 @@
   color: #69431D;
   line-height: 1.1;
   margin: 0 0 2rem;
+}
+
+.os-s4__title--big {
+  font-size: clamp(38px, 5.6vw, 72px);
 }
 
 .os-s4__line {
@@ -272,7 +241,7 @@
   color: #1f0e06;
   line-height: 1.75;
   margin: 0;
-  max-width: 520px;
+  max-width: 780px;
 }
 
 .os-s4__img-wrap {
@@ -282,12 +251,27 @@
 }
 
 .os-s4__img {
-  width: clamp(220px, 28vw, 400px);
+  width: clamp(300px, 40vw, 540px);
   aspect-ratio: 529 / 423;
   object-fit: cover;
   object-position: center;
   display: block;
   flex-shrink: 0;
+}
+
+/* ─── "Behind the Legend" : pas d'image, texte seul centré sur toute la largeur ─── */
+.os-s4--legend {
+  grid-template-columns: 1fr;
+  justify-items: center;
+}
+
+.os-s4--legend .os-s4__content {
+  max-width: 980px;
+  padding: 0 2rem;
+}
+
+.os-s4--legend .os-s4__body {
+  max-width: 900px;
 }
 
 /* ════════════════════════════════════════
@@ -330,21 +314,6 @@
 .os-s6__wm--top { top: -5%;  left: -40%; }
 .os-s6__wm--bot { bottom: -5%; left: -25%; transform: scaleX(-1); }
 
-.os-s6__header {
-  position: relative;
-  z-index: 1;
-  padding: 0 clamp(1.5rem, 6vw, 8rem) 3.5rem;
-}
-
-.os-s6__about-title {
-  font-family: 'HolidayFree', var(--font-cinzel), serif;
-  font-size: clamp(52px, 7vw, 90px);
-  color: #3a2e22;
-  text-align: left;
-  margin: 0;
-  font-weight: 400;
-}
-
 .os-s6__person {
   position: relative;
   z-index: 1;
@@ -368,18 +337,6 @@
 .os-s6__photo--gerben {
   aspect-ratio: 419 / 443;
   max-width: clamp(190px, 24vw, 360px);
-}
-
-.os-s6__name--sm {
-  font-size: clamp(15px, 1.6vw, 24px);
-}
-
-.os-s6__name {
-  font-family: var(--font-cinzel);
-  font-weight: 700;
-  font-size: clamp(20px, 2.4vw, 36px);
-  color: #3a2e22;
-  margin-bottom: 1.25rem;
 }
 
 .os-s6__bio {
@@ -557,19 +514,47 @@
   margin: 0 auto;
 }
 
-.os-events__img {
+/* ─── Cadre : porte le flex/la taille et masque le débordement du zoom ─── */
+.os-events__frame {
+  position: relative;
   flex: 1 1 0;
   min-width: 0;
+  overflow: hidden;
+  display: block;
+}
+
+.os-events__frame--l1     { height: 68%; }
+.os-events__frame--l2     { height: 86%; }
+.os-events__frame--center { height: 100%; flex: 1.3 1 0; }
+.os-events__frame--r1     { height: 86%; }
+.os-events__frame--r2     { height: 68%; }
+
+/* ─── Image : défilement automatique en boucle (zoom + léger panoramique), par cadre ─── */
+.os-events__img {
   width: 100%;
+  height: 100%;
   object-fit: cover;
   display: block;
 }
 
-.os-events__img--l1    { height: 68%; }
-.os-events__img--l2    { height: 86%; }
-.os-events__img--center { height: 100%; flex: 1.3 1 0; }
-.os-events__img--r1    { height: 86%; }
-.os-events__img--r2    { height: 68%; }
+@keyframes os-events-pan-a {
+  0%   { transform: scale(1.06) translate(0, 0); }
+  100% { transform: scale(1.2) translate(-4%, -2%); }
+}
+@keyframes os-events-pan-b {
+  0%   { transform: scale(1.06) translate(0, 0); }
+  100% { transform: scale(1.2) translate(4%, 2%); }
+}
+@keyframes os-events-pan-c {
+  0%   { transform: scale(1.04) translate(0, 0); }
+  100% { transform: scale(1.16) translate(0, -3%); }
+}
+
+.os-events__frame--l1     .os-events__img { animation: os-events-pan-a 13s ease-in-out infinite alternate; animation-delay: 0s;    }
+.os-events__frame--l2     .os-events__img { animation: os-events-pan-b 13s ease-in-out infinite alternate; animation-delay: 0.9s;  }
+.os-events__frame--center .os-events__img { animation: os-events-pan-c 13s ease-in-out infinite alternate; animation-delay: 1.8s;  }
+.os-events__frame--r1     .os-events__img { animation: os-events-pan-b 13s ease-in-out infinite alternate; animation-delay: 2.7s;  }
+.os-events__frame--r2     .os-events__img { animation: os-events-pan-a 13s ease-in-out infinite alternate; animation-delay: 3.6s;  }
 
 /* ════════════════════════════════════════
    Scroll animations
@@ -650,14 +635,11 @@
 
 /* ─── Grand écran (≥ 1440px) : contrainte max-width ─── */
 @media (min-width: 1440px) {
-  .os-s2__story { max-width: 900px; }
-
-  .os-s4 {
-    grid-template-columns: minmax(0, 680px) minmax(0, 680px);
+  .os-s4:not(.os-s4--legend) {
+    grid-template-columns: minmax(0, 820px) minmax(0, 540px);
     justify-content: center;
   }
 
-  .os-s6__header,
   .os-s6__person { max-width: 1400px; margin-left: auto; margin-right: auto; }
 }
 
@@ -668,17 +650,14 @@
   .os-nav__links--left  { padding-right: 1.25rem; }
   .os-nav__links--right { padding-left:  1.25rem; }
 
-  .os-hero__bottle--mena { height: clamp(280px, 56vh, 520px); }
+  .os-hero__bottle--mena { height: clamp(320px, 58vh, 540px); }
 
   .os-s4 { grid-template-columns: 1fr; padding: 4rem 0; }
+  .os-s4:not(.os-s4--legend) { padding-top: 10.5rem; }
   .os-s4__img-wrap { padding: 0 3rem; order: -1; }
   .os-s4__content  { padding: 3rem 3rem; }
 
   .os-s5__video { height: clamp(260px, 32vh, 400px); }
-
-  .os-s6__about-title { font-size: clamp(40px, 6vw, 70px); }
-  .os-s6__name    { font-size: clamp(16px, 2vw, 28px); }
-  .os-s6__name--sm { font-size: clamp(13px, 1.6vw, 22px); }
 }
 
 /* ─── Mobile (< 768px) ─── */
@@ -687,18 +666,10 @@
   .os-nav__links, .os-nav__links--left, .os-nav__links--right { display: none; }
   .os-nav__toggler { display: flex; }
 
-  .os-hero { height: 60vh; }
-  .os-hero__pos { bottom: auto; top: clamp(8rem, 24vh, 11rem); left: 50%; }
-  .os-hero__bottle--mena { height: clamp(190px, 34vh, 280px); }
-
-  .os-hero__title { align-items: flex-start; padding-top: clamp(5rem, 14vh, 7rem); }
-  .os-hero__title-word { font-size: clamp(36px, 12vw, 64px); }
-  .os-hero__title-word--left { margin-left: clamp(1rem, 6vw, 3rem); }
-
-  .os-s2__title { font-size: clamp(26px, 8vw, 38px); }
-  .os-s2__story { padding: 2.5rem 1.5rem; gap: 1rem; }
+  .os-hero__bottle--mena { height: clamp(250px, 46vh, 400px); }
 
   .os-s4 { grid-template-columns: 1fr; padding: 3rem 0; }
+  .os-s4:not(.os-s4--legend) { padding-top: 8.5rem; }
   .os-s4__img-wrap { padding: 0 1.5rem; order: -1; }
   .os-s4__img { width: clamp(160px, 55vw, 300px); }
   .os-s4__content { padding: 2rem 1.5rem; }
@@ -709,12 +680,8 @@
   .os-s5__video { height: clamp(180px, 38vh, 300px); max-width: 96%; }
 
   .os-s6 { padding: 2rem 0 0.5rem; }
-  .os-s6__header { padding: 0 1.25rem 1.5rem; }
-  .os-s6__about-title { font-size: clamp(36px, 11vw, 60px); }
   .os-s6__person { padding: 0 1.25rem 1.5rem; }
   .os-s6__person--gerben { padding-top: 2.5rem; padding-bottom: 1.5rem; }
-  .os-s6__name    { font-size: clamp(14px, 4.5vw, 24px); text-align: center; }
-  .os-s6__name--sm { font-size: clamp(12px, 3.5vw, 18px); text-align: center; }
   .os-s6__bio { font-size: clamp(13px, 3.8vw, 17px); max-width: 100%; text-align: left; margin-top: 1.25rem; }
   .os-s6__signature { text-align: right; font-size: clamp(24px, 8vw, 34px); }
   .os-s6__photo { max-width: 72vw; margin: 0 auto 0; display: block; }
@@ -731,10 +698,27 @@
     height: auto;
     gap: 0.5rem;
   }
-  .os-events__img { flex: none; width: 100%; height: 100%; }
-  .os-events__img--l1     { grid-column: 1; grid-row: 1; }
-  .os-events__img--l2     { grid-column: 2; grid-row: 1; }
-  .os-events__img--center { grid-column: 1 / 3; grid-row: 2; height: 170px; }
-  .os-events__img--r1     { grid-column: 1; grid-row: 3; }
-  .os-events__img--r2     { grid-column: 2; grid-row: 3; }
+  .os-events__frame        { flex: none; width: 100%; height: 100%; }
+  .os-events__frame--l1     { grid-column: 1; grid-row: 1; }
+  .os-events__frame--l2     { grid-column: 2; grid-row: 1; }
+  .os-events__frame--center { grid-column: 1 / 3; grid-row: 2; height: 170px; }
+  .os-events__frame--r1     { grid-column: 1; grid-row: 3; }
+  .os-events__frame--r2     { grid-column: 2; grid-row: 3; }
+}
+
+/* ─── Mobile / tablette en paysage : la grille empilée est trop petite et rogne les photos.
+   On repasse en rangée unique (comme le desktop), avec une hauteur basée sur le vh disponible. ─── */
+@media (max-width: 1300px) and (orientation: landscape) {
+  .os-events__gallery {
+    display: flex;
+    align-items: flex-end;
+    height: clamp(200px, 65vh, 380px);
+    gap: 0.6rem;
+  }
+  .os-events__frame        { flex: 1 1 0; width: 100%; height: auto; }
+  .os-events__frame--l1     { height: 68%; }
+  .os-events__frame--l2     { height: 86%; }
+  .os-events__frame--center { height: 100%; flex: 1.3 1 0; }
+  .os-events__frame--r1     { height: 86%; }
+  .os-events__frame--r2     { height: 68%; }
 }

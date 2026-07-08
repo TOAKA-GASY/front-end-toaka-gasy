@@ -243,14 +243,14 @@
   display: block;
   opacity: 0;
   transform: translateY(48px);
-  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 1.3s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 1.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .home-new-s3--visible .s3-img { opacity: 1; transform: none; }
-.home-new-s3--visible .s3-img:nth-child(1) { transition-delay: 0.05s; }
-.home-new-s3--visible .s3-img:nth-child(2) { transition-delay: 0.18s; }
-.home-new-s3--visible .s3-img:nth-child(3) { transition-delay: 0.31s; }
+.home-new-s3--visible .s3-img:nth-child(1) { transition-delay: 0.15s; }
+.home-new-s3--visible .s3-img:nth-child(2) { transition-delay: 0.4s; }
+.home-new-s3--visible .s3-img:nth-child(3) { transition-delay: 0.65s; }
 
 /* ════════════════════════════════════════
    Nouvelles Sections 2 & 3 – Gradient continu
@@ -424,7 +424,7 @@
   font-family: var(--font-cinzel);
   font-weight: 600;
   font-size: clamp(44px, 7vw, 100px);
-  color: #522A0C;
+  color: #3A1D08;
   letter-spacing: 0.05em;
   line-height: 1;
 }
@@ -444,12 +444,19 @@
 .hn-s2-bottom .hn-s2-eyebrow,
 .hn-s2-bottom .hn-s2b-title,
 .hn-s2-bottom .hn-s2-text,
-.hn-s2-bottom .hn-s2-cta,
-.hn-s2b-bottle {
+.hn-s2-bottom .hn-s2-cta {
   opacity: 0;
   transform: translateY(28px);
   transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
               transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Arrivée de la bouteille Nova : entrée plus marquée, avec léger rebond */
+.hn-s2b-bottle {
+  opacity: 0;
+  transform: translateY(90px) scale(0.82);
+  transition: opacity 1s cubic-bezier(0.34, 1.56, 0.64, 1),
+              transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .hn-s2-top--visible .hn-s2-eyebrow { opacity: 1; transform: none; transition-delay: 0.05s; }
@@ -574,9 +581,13 @@
   object-fit: cover;
   object-position: center;
   display: block;
+  opacity: 0;
+  transform: translateY(48px);
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* ─── Reveal au scroll : texte uniquement (images visibles directement) ─── */
+/* ─── Reveal au scroll : texte + images en cascade ─── */
 .home-new-s4 .hn-s2-eyebrow,
 .hn-s4-title,
 .hn-s4-text {
@@ -589,6 +600,11 @@
 .home-new-s4--visible .hn-s2-eyebrow { opacity: 1; transform: none; transition-delay: 0.05s; }
 .home-new-s4--visible .hn-s4-title   { opacity: 1; transform: none; transition-delay: 0.18s; }
 .home-new-s4--visible .hn-s4-text    { opacity: 1; transform: none; transition-delay: 0.32s; }
+
+.home-new-s4--visible .hn-s4-img { opacity: 1; transform: none; }
+.home-new-s4--visible .hn-s4-img:nth-child(1) { transition-delay: 0.42s; }
+.home-new-s4--visible .hn-s4-img:nth-child(2) { transition-delay: 0.55s; }
+.home-new-s4--visible .hn-s4-img:nth-child(3) { transition-delay: 0.68s; }
 
 /* ─── Responsive : 2B en colonne sur mobile ─── */
 @media (max-width: 767.98px) {
@@ -1046,4 +1062,22 @@
    ════════════════════════════════════════ */
 @media (min-width: 992px) {
   .home-new-s3 { height: 70vh; }
+}
+
+/* ════════════════════════════════════════
+   xl/xxl – Très grands écrans (≥ 1600px)
+   Les tailles en clamp() plafonnent vers 1400px : on relance
+   la progression pour que le texte reste lisible sur les grands moniteurs.
+   ════════════════════════════════════════ */
+@media (min-width: 1600px) {
+  .hn-s2-eyebrow { font-size: clamp(15px, 1vw, 20px); }
+  .hn-s2-title   { font-size: clamp(72px, 4.6vw, 108px); }
+  .hn-s2-text    { font-size: clamp(18px, 1.05vw, 24px); }
+  .hn-s2-cta     { font-size: clamp(18px, 1.2vw, 22px); }
+
+  .hn-s2b-title  { font-size: clamp(100px, 6vw, 140px); }
+  .hn-s2b-content .hn-s2-text { font-size: clamp(21px, 1.3vw, 26px); }
+
+  .hn-s4-title { font-size: clamp(60px, 3.6vw, 84px); }
+  .hn-s4-text  { font-size: clamp(20px, 1.1vw, 26px); }
 }

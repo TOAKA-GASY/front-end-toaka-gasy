@@ -22,7 +22,7 @@ const activeRum   = computed(() => {
 const sideBottles = [
   { src: '/img/toaka-gasy-black.webp', alt: 'Toaka Gasy Black', label: 'TOAKA NOVA' },
   { src: '/img/toaka-gasy-white.webp', alt: 'Toaka Gasy White', label: 'TOAKA VAZA' },
-  { src: '/img/toaka-gasy-red.webp',   alt: 'Toaka Gasy Red',   label: 'TOAKA SOMA' },
+  { src: '/img/toaka-gasy-red.webp',   alt: 'Toaka Gasy Red',   label: 'TOAKA SÔMA' },
 ]
 
 const onScroll = () => { scrollY.value = window.scrollY }

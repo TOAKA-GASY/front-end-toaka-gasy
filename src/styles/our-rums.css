@@ -120,7 +120,7 @@
 .or-hero__beige {
   position: absolute; inset: 0;
   background: #F5E9DB;
-  opacity: 0.45;
+  opacity: 0.65;
   z-index: 1;
   pointer-events: none;
 }
@@ -358,27 +358,17 @@
 }
 .or-col-intro__cta:hover { color: #C9A050; border-color: #C9A050; }
 
-/* ─── Couleurs de texte par rum : Nova (terracotta), Vaza (marron), Soma (marron foncé) ─── */
+/* ─── Couleurs de texte par rum : marron foncé (Sôma) unifié sur les 3 bouteilles ─── */
 .or-col-intro--0 .or-col-intro__title,
 .or-col-intro--0 .or-col-intro__tagline,
 .or-col-intro--0 .or-col-intro__desc,
 .or-col-intro--0 .or-col-intro__badge,
-.or-col-intro--0 .or-col-intro__cta {
-  color: #521608;
-}
-.or-col-intro--0 .or-col-intro__badge { border-color: rgba(80, 27, 9, 0.5); }
-.or-col-intro--0 .or-col-intro__cta   { border-color: rgba(80, 27, 9, 0.5); }
-
+.or-col-intro--0 .or-col-intro__cta,
 .or-col-intro--1 .or-col-intro__title,
 .or-col-intro--1 .or-col-intro__tagline,
 .or-col-intro--1 .or-col-intro__desc,
 .or-col-intro--1 .or-col-intro__badge,
-.or-col-intro--1 .or-col-intro__cta {
-  color: #6E4008;
-}
-.or-col-intro--1 .or-col-intro__badge { border-color: rgba(110, 64, 8, 0.5); }
-.or-col-intro--1 .or-col-intro__cta   { border-color: rgba(110, 64, 8, 0.6); }
-
+.or-col-intro--1 .or-col-intro__cta,
 .or-col-intro--2 .or-col-intro__title,
 .or-col-intro--2 .or-col-intro__tagline,
 .or-col-intro--2 .or-col-intro__desc,
@@ -386,8 +376,16 @@
 .or-col-intro--2 .or-col-intro__cta {
   color: #2E1608;
 }
-.or-col-intro--2 .or-col-intro__badge { border-color: rgba(46, 22, 8, 0.5); }
-.or-col-intro--2 .or-col-intro__cta   { border-color: rgba(46, 22, 8, 0.6); }
+.or-col-intro--0 .or-col-intro__badge,
+.or-col-intro--1 .or-col-intro__badge,
+.or-col-intro--2 .or-col-intro__badge {
+  border-color: rgba(46, 22, 8, 0.5);
+}
+.or-col-intro--0 .or-col-intro__cta,
+.or-col-intro--1 .or-col-intro__cta,
+.or-col-intro--2 .or-col-intro__cta {
+  border-color: rgba(46, 22, 8, 0.6);
+}
 
 .or-col-intro__bottle {
   position: relative;
@@ -665,6 +663,35 @@
 /* ════════════════════════════════════════
    Responsive
    ════════════════════════════════════════ */
+
+/* ─── Très grands écrans / zoom arrière (≥ 1600px) ───
+   Les tailles en clamp() plafonnent vers 1300-1500px : au-delà (grand moniteur
+   ou navigateur dézoomé, qui élargit le viewport CSS), le texte restait figé au
+   plafond et paraissait minuscule. On relance la progression ici. */
+@media (min-width: 1600px) {
+  .or-nav__link { font-size: clamp(0.75rem, 0.9vw, 1.05rem); }
+
+  .or-col-eyebrow  { font-size: clamp(15px, 1vw, 19px); }
+  .or-col-top__title { font-size: clamp(78px, 4.6vw, 108px); }
+
+  .or-col-intro__title   { font-size: clamp(56px, 3.2vw, 76px); }
+  .or-col-intro__tagline { font-size: clamp(22px, 1.2vw, 28px); }
+  .or-col-intro__desc    { font-size: clamp(18px, 1vw, 23px); }
+  .or-col-intro__badge   { font-size: clamp(11px, 0.65vw, 14px); }
+  .or-col-intro__cta     { font-size: clamp(14px, 0.8vw, 17px); }
+
+  .or-intro__title { font-size: clamp(54px, 2.8vw, 68px); }
+  .or-intro__text  { font-size: clamp(24px, 1.3vw, 29px); }
+
+  .or-side-nav__label { font-size: clamp(9px, 0.55vw, 11px); }
+
+  .or-cocktails__title    { font-size: clamp(50px, 2.6vw, 64px); }
+  .or-cocktails__desc     { font-size: clamp(18px, 0.9vw, 22px); }
+  .or-cocktail-card__title { font-size: clamp(18px, 1vw, 22px); }
+  .or-cocktail-card__sub   { font-size: clamp(14px, 0.75vw, 17px); }
+  .or-cocktail-card__hover { font-size: clamp(15px, 0.9vw, 18px); }
+}
+
 @media (min-width: 768px) and (max-width: 991.98px) {
   .or-nav__inner { padding: 0.9rem 2rem; }
   .or-nav__links { gap: 2rem; }
@@ -688,6 +715,7 @@
   .or-nav__inner  { grid-template-columns: 1fr; justify-items: center; padding: 0.75rem 1.5rem; }
   .or-nav__links, .or-nav__links--left, .or-nav__links--right { display: none; }
   .or-nav__toggler { display: flex; }
+  .or-nav__bar { background: #F4EADB; }
 
   .or-hero__pos           { top: 50%; }
   .or-hero__pos--center   { transform: translate(-50%, -50%); }

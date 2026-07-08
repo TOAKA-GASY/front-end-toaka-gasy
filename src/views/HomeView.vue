@@ -216,7 +216,9 @@ const parallax = computed(() => {
         <div class="hn-s2b-content">
           <span class="hn-s2-eyebrow">INTRODUCING</span>
           <h2 class="hn-s2b-title">NOVA</h2>
-          <p class="hn-s2-text">{{ products[0].desc }}</p>
+          <p class="hn-s2-text">
+            Our first Rum: Madagascar-inspired, with a Nova Scotian touch and a Canadian soul. An amber rum that celebrates all sweet beginnings!
+          </p>
           <button class="hn-s2-cta" @click="goToProduct(products[0].slug)">
             <span>DISCOVER NOVA</span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"

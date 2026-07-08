@@ -63,7 +63,7 @@ export const products = [
     image: '/img/toaka-3.webp',
     bottle: '/img/toaka-gasy-red.webp',
     bgImage: '/img/soma-image.webp',
-    name: 'TOAKA SOMA',
+    name: 'TOAKA SÔMA',
     tagline: 'Crafted for the Bold',
     desc: 'A rich full-bodied rum with deep caramel, aged oak, and pure Madagascar vanilla heritage.',
     badge: 'On aging',
