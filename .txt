@@ -1,18 +1,28 @@
+Dans page home voici les modifications : 
+-mettre en un seul mouvement l'animation du ravinala et bouteille , 
+en meme temps , ravinala bouge, et bouteille descent,en un seul scroll
+-augmenter un peu le height de la section pour mettre le texte EACH BOTTLE TELLS A STORY sur l'entete de la bouteille en animation avec fond rizière
+-Sur la section wome avec la vidéo au seddus rajouter en bas a droite ce texte "Amber Rum Born in Nova Scotia, 
+shaped by the spirit of the Maritimes. An amber rum that celebrates all sweet beginning" beige , font simonetta
+-Sur le introducing Nova , rajouter une animation bien visible stp , qui dure plus longtemps qui s'affichent à chaque passage sur la section apres Rum Crafted With Purpose, et reduire un peu la section de 100px stp , changer le texte Our first rum en Amber Rum Born in Nova Scotia, shaped by the spirit of the Maritimes. An amber rum that celebrates all sweet beginning
+et reduire un peu la section de 100px stp , changer le texte Our first rum en Amber Rum Born in Nova Scotia, shaped by the spirit of the Maritimes. An amber rum that celebrates all sweet beginning
+-Mettre la description From Madagascar en beige 
+-Rajouter une belle animation des 3 images qui s'affichent à chaque passage sur la section  apres Rum Crafted With Purpose
 
 
 
-Dans our story mettre le masque en premier section 100vh remplis l'ecran 
-Pui mettre la bouteille diminuer la taille et le mettre en bas a gauche au dessus de la video et moitié fond blanc et animer la bouteille au scroll
-Beginning le texte est trop long augmente le widht et augmente l'image aussi 
-Pour le events c'est les images qui sont à corriger animation slide zoom auto de chaque image
 
+Dans la page fiche produit nova : 
+changer nova is the spriit en "Nova represents the beginning of our story, the perfect home for our vision where our creativity takes shape. NOVA is the toast, a celebration of new starts, bold dreams, and the people who bring them to life.
+An iconic rum made of Caribbean sugar cane and Canadian maple syrup"
+et ajouter ses descriptions NOVA
+The First Rum
+TYPE: Amber Rum
+VOLUME: 75cl
+ABV: 40%
+CHARACTER: Bright · Vibrant · Sweet, Young
+INGREDIENTS:
+Caribbean Sugar Cane · Canadian Maple Syrup
+TASTE PROFILE:
+Smooth, approachable, and infinitely mixable. NOVA shines in cocktails but stands boldly on its own
 
-Dans our story Behind the legend en grand et from the founders petit pas d'image mettre le texte au milieu stp 
-l'animation des images en events je veux defiler les 5 images en automatique 
-Dans our rums ajoute le responsive de tous ecrans stp sur les textes ils sont trop petits quand je dezoom garde la meme taille
-Dans Recipe mettre mont passot ensemble et non coupé 
-
-
-Dans our story le masque ne rempli pas encore le width de l'ecran 
-la bouteille en plus grande et en bas a droite 
-Ensuite the beignning le texte est trop long augmente le widht et augmente l'image aussi, enleve l'espace entre le texte 

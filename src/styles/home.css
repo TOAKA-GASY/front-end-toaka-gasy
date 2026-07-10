@@ -192,14 +192,14 @@
   height: clamp(300px, 82vmin, 920px);
   width: auto;
   display: block;
-  animation: bottleRise 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.7s both;
+  animation: bottleRise 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
 }
 
 .scene-pos--ravinala img {
   height: clamp(380px, 82vmin, 950px);
   width: auto;
   display: block;
-  animation: slideFromRight 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
+  animation: slideFromRight 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
 }
 
 /* ─── Keyframes ─── */
@@ -242,15 +242,18 @@
   object-position: center;
   display: block;
   opacity: 0;
-  transform: translateY(48px);
-  transition: opacity 1.3s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 1.3s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(64px) scale(0.9);
+  transition: opacity 1.1s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
 }
+
+.s3-img:nth-child(1) { transform: translateY(64px) translateX(-30px) scale(0.9); }
+.s3-img:nth-child(3) { transform: translateY(64px) translateX(30px) scale(0.9); }
 
 .home-new-s3--visible .s3-img { opacity: 1; transform: none; }
 .home-new-s3--visible .s3-img:nth-child(1) { transition-delay: 0.15s; }
-.home-new-s3--visible .s3-img:nth-child(2) { transition-delay: 0.4s; }
-.home-new-s3--visible .s3-img:nth-child(3) { transition-delay: 0.65s; }
+.home-new-s3--visible .s3-img:nth-child(2) { transition-delay: 0.32s; }
+.home-new-s3--visible .s3-img:nth-child(3) { transition-delay: 0.49s; }
 
 /* ════════════════════════════════════════
    Nouvelles Sections 2 & 3 – Gradient continu
@@ -260,7 +263,7 @@
 .home-new-wrap {
   position: relative;
   width: 100%;
-  height: 300vh;
+  height: calc(300vh - 100px);
 }
 
 .home-new-wrap::before {
@@ -291,21 +294,26 @@
   z-index: 2;
 }
 
-/* ─── Nouvelle Section 2 – Inspiration + Nova (200vh = 2 x 100vh) ─── */
+/* ─── Nouvelle Section 2 – Inspiration + Nova (200vh - 100px : Nova réduite de 100px) ─── */
 .home-new-s2 {
   position: relative;
   width: 100%;
-  height: 200vh;
+  height: calc(200vh - 100px);
   z-index: 2;
   display: flex;
   flex-direction: column;
 }
 
-.hn-s2-top,
-.hn-s2-bottom {
+.hn-s2-top {
   position: relative;
   width: 100%;
   height: 100vh;
+}
+
+.hn-s2-bottom {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 100px);
 }
 
 /* ─── 2A : The Rum of Celebration ─── */
@@ -440,23 +448,11 @@
 .hn-s2-top .hn-s2-eyebrow,
 .hn-s2-top .hn-s2-title,
 .hn-s2-top .hn-s2-text,
-.hn-s2-top .hn-s2-cta,
-.hn-s2-bottom .hn-s2-eyebrow,
-.hn-s2-bottom .hn-s2b-title,
-.hn-s2-bottom .hn-s2-text,
-.hn-s2-bottom .hn-s2-cta {
+.hn-s2-top .hn-s2-cta {
   opacity: 0;
   transform: translateY(28px);
   transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
               transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* Arrivée de la bouteille Nova : entrée plus marquée, avec léger rebond */
-.hn-s2b-bottle {
-  opacity: 0;
-  transform: translateY(90px) scale(0.82);
-  transition: opacity 1s cubic-bezier(0.34, 1.56, 0.64, 1),
-              transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .hn-s2-top--visible .hn-s2-eyebrow { opacity: 1; transform: none; transition-delay: 0.05s; }
@@ -464,11 +460,41 @@
 .hn-s2-top--visible .hn-s2-text    { opacity: 1; transform: none; transition-delay: 0.32s; }
 .hn-s2-top--visible .hn-s2-cta     { opacity: 1; transform: none; transition-delay: 0.46s; }
 
+/* ─── Introducing Nova : animation plus ample et plus longue, bien visible ─── */
+.hn-s2-bottom .hn-s2-eyebrow,
+.hn-s2-bottom .hn-s2b-title,
+.hn-s2-bottom .hn-s2-text,
+.hn-s2-bottom .hn-s2-cta {
+  opacity: 0;
+  transform: translateY(52px);
+  transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Arrivée de la bouteille Nova : entrée plus marquée, plus longue, avec léger rebond */
+.hn-s2b-bottle {
+  opacity: 0;
+  transform: translateY(120px) scale(0.72) rotate(-3deg);
+  transition: opacity 1.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+              transform 1.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
 .hn-s2-bottom--visible .hn-s2b-bottle { opacity: 1; transform: none; transition-delay: 0.05s; }
-.hn-s2-bottom--visible .hn-s2-eyebrow { opacity: 1; transform: none; transition-delay: 0.2s;  }
-.hn-s2-bottom--visible .hn-s2b-title  { opacity: 1; transform: none; transition-delay: 0.32s; }
-.hn-s2-bottom--visible .hn-s2-text    { opacity: 1; transform: none; transition-delay: 0.46s; }
-.hn-s2-bottom--visible .hn-s2-cta     { opacity: 1; transform: none; transition-delay: 0.58s; }
+
+/* Flottement permanent de la bouteille Nova, une fois l'entrée terminée */
+@keyframes bottleFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-16px); }
+}
+
+.hn-s2-bottom--visible .hn-s2b-bottle img {
+  animation: bottleFloat 4.2s ease-in-out 1.7s infinite;
+}
+
+.hn-s2-bottom--visible .hn-s2-eyebrow { opacity: 1; transform: none; transition-delay: 0.3s;  }
+.hn-s2-bottom--visible .hn-s2b-title  { opacity: 1; transform: none; transition-delay: 0.48s; }
+.hn-s2-bottom--visible .hn-s2-text    { opacity: 1; transform: none; transition-delay: 0.66s; }
+.hn-s2-bottom--visible .hn-s2-cta     { opacity: 1; transform: none; transition-delay: 0.84s; }
 
 /* ─── Nouvelle Section 3 – Lifestyle images (fond autonome, même style que le wrap) ─── */
 .home-new-s3 {
@@ -505,8 +531,43 @@
 .home-riz {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 115vh;
   overflow: hidden;
+}
+
+.riz-heading {
+  position: relative;
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  padding-top: clamp(110px, 18vh, 200px);
+  text-align: center;
+  opacity: 0;
+  transform: translateY(-24px);
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.riz-heading--visible {
+  opacity: 1;
+  transform: none;
+}
+
+.riz-title {
+  font-family: var(--font-cinzel);
+  font-weight: 600;
+  font-size: clamp(22px, 3.4vw, 44px);
+  color: #3A1D08;
+  letter-spacing: 0.06em;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+
+.riz-heading .hn-s2-eyebrow {
+  color: #3A1D08;
+  font-size: clamp(10px, 0.9vw, 13px);
 }
 
 .home-riz__bg {
@@ -561,7 +622,7 @@
 .hn-s4-text {
   font-family: var(--font-simonetta);
   font-size: clamp(15px, 1.2vw, 20px);
-  color: #ffffff;
+  color: #F4EADB;
   line-height: 1.6;
 }
 
@@ -582,10 +643,13 @@
   object-position: center;
   display: block;
   opacity: 0;
-  transform: translateY(48px);
-  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(64px) scale(0.9);
+  transition: opacity 1.1s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
 }
+
+.hn-s4-img:nth-child(1) { transform: translateY(64px) translateX(-30px) scale(0.9); }
+.hn-s4-img:nth-child(3) { transform: translateY(64px) translateX(30px) scale(0.9); }
 
 /* ─── Reveal au scroll : texte + images en cascade ─── */
 .home-new-s4 .hn-s2-eyebrow,
@@ -602,9 +666,9 @@
 .home-new-s4--visible .hn-s4-text    { opacity: 1; transform: none; transition-delay: 0.32s; }
 
 .home-new-s4--visible .hn-s4-img { opacity: 1; transform: none; }
-.home-new-s4--visible .hn-s4-img:nth-child(1) { transition-delay: 0.42s; }
-.home-new-s4--visible .hn-s4-img:nth-child(2) { transition-delay: 0.55s; }
-.home-new-s4--visible .hn-s4-img:nth-child(3) { transition-delay: 0.68s; }
+.home-new-s4--visible .hn-s4-img:nth-child(1) { transition-delay: 0.15s; }
+.home-new-s4--visible .hn-s4-img:nth-child(2) { transition-delay: 0.32s; }
+.home-new-s4--visible .hn-s4-img:nth-child(3) { transition-delay: 0.49s; }
 
 /* ─── Responsive : 2B en colonne sur mobile ─── */
 @media (max-width: 767.98px) {
@@ -749,13 +813,14 @@
 
 .s57-tagline {
   position: absolute;
-  bottom: 18%;
-  right: -5%;
-  width: 50%;
+  bottom: 8%;
+  right: 4%;
+  width: 42%;
   z-index: 5;
+  text-align: right;
   font-family: var(--font-simonetta);
   font-style: italic;
-  font-size: clamp(18px, 2.2vw, 36px);
+  font-size: clamp(16px, 1.6vw, 26px);
   line-height: 1.55;
   color: #e0caad;
   pointer-events: none;
@@ -1002,7 +1067,9 @@
   .bottle-shadow { width: 320px; height: 80px; }
 
   /* Section 5 – Rizière : hauteur fixe pour bien voir les bouteilles */
-  .home-riz { height: 400px; }
+  .home-riz { height: 480px; }
+  .riz-heading { padding-top: 2.5rem; gap: 0.4rem; }
+  .riz-title { font-size: clamp(18px, 5.5vw, 26px); }
   .s7-bottle img { height: 210px; }
   .s7-bottle--center { bottom: 24px; }
   .s7-bottle--left  {

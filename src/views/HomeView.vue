@@ -12,10 +12,12 @@ const hnS2TopVisible    = ref(false)
 const hnS2BottomVisible = ref(false)
 const hnS4Visible = ref(false)
 const s3Visible = ref(false)
+const rizVisible = ref(false)
 let hnS2TopObserver = null
 let hnS2BottomObserver = null
 let hnS4Observer = null
 let s3Observer = null
+let rizObserver = null
 
 /* ─── Scroll fluide : lecture throttlée via requestAnimationFrame ─── */
 let scrollTicking = false
@@ -82,7 +84,7 @@ onMounted(() => {
   const hnS4El = document.querySelector('.home-new-s4')
   if (hnS4El) {
     hnS4Observer = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) hnS4Visible.value = true },
+      ([e]) => { hnS4Visible.value = e.isIntersecting },
       { threshold: 0.15 }
     )
     hnS4Observer.observe(hnS4El)
@@ -91,10 +93,19 @@ onMounted(() => {
   const s3El = document.querySelector('.home-new-s3')
   if (s3El) {
     s3Observer = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) s3Visible.value = true },
+      ([e]) => { s3Visible.value = e.isIntersecting },
       { threshold: 0.15 }
     )
     s3Observer.observe(s3El)
+  }
+
+  const rizEl = document.querySelector('.home-riz')
+  if (rizEl) {
+    rizObserver = new IntersectionObserver(
+      ([e]) => { rizVisible.value = e.isIntersecting },
+      { threshold: 0.15 }
+    )
+    rizObserver.observe(rizEl)
   }
 })
 
@@ -104,13 +115,16 @@ onUnmounted(() => {
   if (hnS2BottomObserver) hnS2BottomObserver.disconnect()
   if (hnS4Observer)       hnS4Observer.disconnect()
   if (s3Observer)         s3Observer.disconnect()
+  if (rizObserver)        rizObserver.disconnect()
 })
 
+/* Un seul mouvement, sur un seul scroll : ravinala et bouteille suivent la même progression */
 const parallax = computed(() => {
-  const s = scrollY.value
+  const vh = typeof window !== 'undefined' ? window.innerHeight : 800
+  const progress = Math.min(scrollY.value / vh, 1)
   return {
-    bottle:   `translateX(-50%) translateY(${Math.min(s * 0.12, 60)}px)`,
-    ravinala: `translateX(${-s * 0.1}px)`,
+    bottle:   `translateX(-50%) translateY(${progress * 90}px)`,
+    ravinala: `translateX(${-progress * 110}px)`,
   }
 })
 
@@ -217,7 +231,7 @@ const parallax = computed(() => {
           <span class="hn-s2-eyebrow">INTRODUCING</span>
           <h2 class="hn-s2b-title">NOVA</h2>
           <p class="hn-s2-text">
-            Our first Rum: Madagascar-inspired, with a Nova Scotian touch and a Canadian soul. An amber rum that celebrates all sweet beginnings!
+            Amber Rum Born in Nova Scotia, shaped by the spirit of the Maritimes. An amber rum that celebrates all sweet beginning
           </p>
           <button class="hn-s2-cta" @click="goToProduct(products[0].slug)">
             <span>DISCOVER NOVA</span>
@@ -250,6 +264,11 @@ const parallax = computed(() => {
   <!-- Section 5 : Rizière + bouteilles animées -->
   <section class="home-riz">
     <img src="/img/rizière.webp" class="home-riz__bg" alt="" aria-hidden="true" />
+
+    <div class="riz-heading" :class="{ 'riz-heading--visible': rizVisible }">
+      <span class="hn-s2-eyebrow">OUR COLLECTION</span>
+      <h2 class="riz-title">EACH BOTTLE TELLS A STORY</h2>
+    </div>
 
     <div class="home-riz__bottles">
       <div
@@ -301,10 +320,10 @@ const parallax = computed(() => {
       <video class="s57-video" autoplay muted loop playsinline preload="none">
         <source src="/vd/rum-video.mp4" type="video/mp4" />
       </video>
-      <!-- <p class="s57-tagline">
-        More than a rum it's a vibe, a celebration,<br>
-        an heritage and a tradition...
-      </p> -->
+      <p class="s57-tagline">
+        Amber Rum Born in Nova Scotia,<br>
+        shaped by the spirit of the Maritimes. An amber rum that celebrates all sweet beginning
+      </p>
     </div>
   </section>
 
