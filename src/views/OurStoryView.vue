@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue'
+import EventsSection from '@/components/EventsSection.vue'
 import '@/styles/our-story.css'
 
 const menuOpen = ref(false)
@@ -25,60 +26,16 @@ onMounted(() => {
   window.scrollTo(0, 0)
   window.addEventListener('scroll', onScroll, { passive: true })
   document.querySelectorAll('.os-animate').forEach(el => observer.observe(el))
-  restartAutoplay()
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', onScroll)
   observer.disconnect()
-  if (eventAutoplay) clearInterval(eventAutoplay)
 })
 
 // Parallax scroll sur la bouteille : descend légèrement vers le masque au scroll
 const p = computed(() => Math.min(1, scrollY.value / (window.innerHeight || 1)))
 const parallaxRed = computed(() => ({ transform: `translateY(${p.value * 70}px)` }))
-
-/* ─── Events ─── */
-const events = [
-  {
-    title: 'SAIL GP',
-    location: 'Halifax — Nova Scotia',
-    desc: "Toaka Gasy joined the world's fastest sailing circuit for a weekend of speed, spray and celebration on the Halifax waterfront, sharing Malagasy rum with sailing fans from around the globe.",
-    images: [
-      '/img/gp1.webp',
-      '/img/gp2.webp',
-      '/img/gp3.webp',
-      '/img/gp4.webp',
-      '/img/gp5.webp',
-    ],
-  },
-  {
-    title: 'SOOKANY TROPHY',
-    location: 'Diego Suarez — Madagascar',
-    desc: 'Back home in the north of Madagascar, we poured Toaka Gasy at the Sookany Trophy, honouring local sailors and the coastal traditions that first inspired our rum.',
-    images: [
-      '/img/s1.webp',
-      '/img/s2.webp',
-      '/img/s3.webp',
-      '/img/s4.webp',
-      '/img/s5.webp',
-    ],
-  },
-]
-const eventIndex = ref(0)
-let eventAutoplay = null
-const AUTOPLAY_DELAY = 6000
-
-const restartAutoplay = () => {
-  if (eventAutoplay) clearInterval(eventAutoplay)
-  eventAutoplay = setInterval(() => {
-    eventIndex.value = (eventIndex.value + 1) % events.length
-  }, AUTOPLAY_DELAY)
-}
-
-const nextEvent = () => { eventIndex.value = (eventIndex.value + 1) % events.length; restartAutoplay() }
-const prevEvent = () => { eventIndex.value = (eventIndex.value - 1 + events.length) % events.length; restartAutoplay() }
-const goToEvent = (i) => { eventIndex.value = i; restartAutoplay() }
 </script>
 
 <template>
@@ -127,7 +84,6 @@ const goToEvent = (i) => { eventIndex.value = i; restartAutoplay() }
        ══════════════════════════════════════ -->
   <section class="os-hero">
     <h1 class="visually-hidden">Our Story — The Heritage Behind Toaka Gasy Rum</h1>
-    <img src="/img/fond-sec2-3.webp" class="os-hero__bg" alt="" />
 
     <div class="os-hero__mask-wrap os-animate" data-delay="0">
       <video class="os-hero__video" autoplay muted loop playsinline preload="none">
@@ -282,62 +238,6 @@ const goToEvent = (i) => { eventIndex.value = i; restartAutoplay() }
   <!-- ══════════════════════════════════════
        Section 7 – Events
        ══════════════════════════════════════ -->
-  <section class="os-events">
-
-    <div class="os-events__header os-animate" data-delay="0">
-      <h2 class="os-events__title">EVENTS</h2>
-    </div>
-
-    <div class="os-events__slider os-animate" data-delay="120">
-      <div class="os-events__slide">
-        <span class="os-events__index">0{{ eventIndex + 1 }} / 0{{ events.length }}</span>
-        <div class="os-events__title-row">
-          <button class="os-events__nav os-events__nav--prev" @click="prevEvent" aria-label="Previous event">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="15 18 9 12 15 6"/>
-            </svg>
-          </button>
-          <h3 class="os-events__name">{{ events[eventIndex].title }}</h3>
-          <button class="os-events__nav os-events__nav--next" @click="nextEvent" aria-label="Next event">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="9 18 15 12 9 6"/>
-            </svg>
-          </button>
-        </div>
-        <p class="os-events__location">{{ events[eventIndex].location }}</p>
-        <p class="os-events__desc">{{ events[eventIndex].desc }}</p>
-      </div>
-    </div>
-
-    <div class="os-events__dots">
-      <button
-        v-for="(e, i) in events" :key="i"
-        class="os-events__dot"
-        :class="{ 'os-events__dot--active': eventIndex === i }"
-        @click="goToEvent(i)"
-        :aria-label="`Go to ${e.title}`"
-      />
-    </div>
-
-    <!-- Galerie photo de l'événement actif : 1 grande au centre, 2 de chaque côté, zoom auto (Ken Burns) sur chaque image -->
-    <div class="os-events__gallery os-animate" data-delay="0">
-      <div class="os-events__frame os-events__frame--l1">
-        <img :src="events[eventIndex].images[0]" class="os-events__img" :alt="events[eventIndex].title" />
-      </div>
-      <div class="os-events__frame os-events__frame--l2">
-        <img :src="events[eventIndex].images[1]" class="os-events__img" :alt="events[eventIndex].title" />
-      </div>
-      <div class="os-events__frame os-events__frame--center">
-        <img :src="events[eventIndex].images[2]" class="os-events__img" :alt="events[eventIndex].title" />
-      </div>
-      <div class="os-events__frame os-events__frame--r1">
-        <img :src="events[eventIndex].images[3]" class="os-events__img" :alt="events[eventIndex].title" />
-      </div>
-      <div class="os-events__frame os-events__frame--r2">
-        <img :src="events[eventIndex].images[4]" class="os-events__img" :alt="events[eventIndex].title" />
-      </div>
-    </div>
-
-  </section>
+  <EventsSection />
 
 </template>

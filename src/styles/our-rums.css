@@ -70,7 +70,7 @@
    ════════════════════════════════════════ */
 .or-mobile-menu {
   position: fixed; inset: 0; z-index: 200;
-  background: #F5E9DB;
+  background: var(--color-beige);
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
   gap: 2.5rem;
@@ -559,7 +559,6 @@
 .or-cocktails__line { width: 60px; height: 1px; background: #C9A050; }
 .or-cocktails__desc {
   font-family: var(--font-simonetta);
-  font-style: italic;
   font-size: clamp(14px, 1.1vw, 18px);
   color: #522A0C;
   max-width: 480px;

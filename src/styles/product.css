@@ -135,6 +135,7 @@
   line-height: 1.75;
   max-width: 480px;
   margin: 0;
+  white-space: pre-line;
 }
 
 .pp-hero__closing {
@@ -144,6 +145,118 @@
   color: #522A0C;
   letter-spacing: 0.06em;
   margin: 0.5rem 0 0;
+}
+
+/* ── Fiche produit : rectangle beige récapitulatif ── */
+.pp-fiche {
+  background: #F5EADB;
+  display: flex;
+  justify-content: center;
+  padding: clamp(2.5rem, 5vw, 4.5rem) clamp(1.5rem, 5vw, 4rem);
+}
+
+.pp-fiche__card {
+  width: 100%;
+  max-width: 760px;
+  background: #ECD8C4;
+  border: 1px solid rgba(82, 42, 12, 0.18);
+  border-radius: 4px;
+  box-shadow: 0 12px 40px rgba(82, 42, 12, 0.1);
+  padding: clamp(2rem, 4.5vw, 3.25rem);
+  text-align: center;
+}
+
+.pp-fiche__eyebrow {
+  display: block;
+  font-family: var(--font-cinzel);
+  font-weight: 400;
+  font-size: clamp(11px, 1vw, 14px);
+  color: #8a5a24;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.pp-fiche__name {
+  font-family: var(--font-cinzel);
+  font-weight: 700;
+  font-size: clamp(30px, 4.4vw, 48px);
+  color: #522A0C;
+  letter-spacing: 0.06em;
+  line-height: 1.1;
+  margin: 0 0 0.35rem;
+}
+
+.pp-fiche__subtitle {
+  font-family: var(--font-simonetta);
+  font-style: italic;
+  font-size: clamp(14px, 1.15vw, 18px);
+  color: #6e4008;
+  margin: 0;
+}
+
+.pp-fiche__line {
+  width: 60px;
+  height: 1px;
+  background: rgba(82, 42, 12, 0.4);
+  margin: 1.5rem auto;
+}
+
+.pp-fiche__specs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem 2rem;
+  margin: 0 0 1.75rem;
+  text-align: left;
+}
+
+.pp-fiche__spec--full { grid-column: 1 / -1; }
+
+.pp-fiche__spec dt {
+  font-family: var(--font-cinzel);
+  font-weight: 700;
+  font-size: clamp(11px, 0.95vw, 13px);
+  color: #8a5a24;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin: 0 0 0.3rem;
+}
+
+.pp-fiche__spec dd {
+  font-family: var(--font-simonetta);
+  font-size: clamp(14px, 1.05vw, 17px);
+  color: #3a2e22;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.pp-fiche__taste {
+  border-top: 1px solid rgba(82, 42, 12, 0.25);
+  padding-top: 1.5rem;
+  text-align: left;
+}
+
+.pp-fiche__taste-label {
+  display: block;
+  font-family: var(--font-cinzel);
+  font-weight: 700;
+  font-size: clamp(11px, 0.95vw, 13px);
+  color: #8a5a24;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.pp-fiche__taste-text {
+  font-family: var(--font-simonetta);
+  font-size: clamp(14px, 1.05vw, 17px);
+  color: #3a2e22;
+  line-height: 1.7;
+  margin: 0;
+}
+
+@media (max-width: 575.98px) {
+  .pp-fiche__specs { grid-template-columns: 1fr; }
 }
 
 /* ── Tagline collection ── */

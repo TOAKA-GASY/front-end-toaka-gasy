@@ -15,7 +15,7 @@ export const products = [
     shortName: 'NOVA',
     spec: 'Amber Rum · 40% · 75cl',
     tags: 'Bright · Bold · Born for the Party',
-    pageDesc: "Nova is the spark. The first pour, the toast, the moment the music gets louder and the night takes off. A vibrant amber rum made to mix, to share, to celebrate.",
+    pageDesc: "Nova represents the beginning of our story, the perfect home for our vision where our creativity takes shape. NOVA is the toast, a celebration of new starts, bold dreams, and the people who bring them to life.\n\nAn iconic rum made of Caribbean sugar cane and Canadian maple syrup.",
     closing: 'Pour it. Share it. Let the night begin.',
     moment: {
       title: 'The Moment',
@@ -29,6 +29,15 @@ export const products = [
       title: 'Tasting Notes',
       text: 'Coming soon.',
     },
+    fiche: {
+      subtitle: 'The First Rum',
+      type: 'Amber Rum',
+      volume: '75cl',
+      abv: '40%',
+      character: 'Bright · Vibrant · Sweet, Young',
+      ingredients: 'Caribbean Sugar Cane · Canadian Maple Syrup',
+      taste: 'Smooth, approachable, and infinitely mixable. NOVA shines in cocktails but stands boldly on its own.',
+    },
   },
   {
     slug: 'toaka-609',
@@ -37,7 +46,7 @@ export const products = [
     bgImage: '/img/vaza-image.webp',
     name: 'TOAKA VAZA',
     tagline: 'Born from the Island',
-    desc: 'A smooth aged rum with tropical fruit notes and the warmth of authentic Malagasy spices.',
+    desc: "Born from a shared vision, shaped by the spirit of the Netherlands. A grassy rum that celebrates fresh herbal character and the bonds that unite cultures",
     badge: 'On aging',
     color: '#f5e6c8',
 
@@ -46,7 +55,7 @@ export const products = [
     shortName: 'VAZA',
     spec: 'Aged Rum · Working Name',
     tags: 'Round · Mellow · Made to Savour',
-    pageDesc: 'Where Nova lights up the night, this one slows it down. Aged for depth and warmth — poured neat, when there is time to taste every note.',
+    pageDesc: 'In Madagascar, "Vaza" means foreigner, often referring to someone from another culture. To honour one of the founders, we created Vaza — a rum that celebrates the beauty of two worlds coming together.\n\nPowerful, grassy, and alive — with a raw edge that breathes authenticity. Crafted from Caribbean sugarcane, it reveals vibrant herbal notes, ripe wet-grade banana richness, and a subtle earthy warmth that creates unforgettable character.',
     closing: '',
     moment: null,
     enjoy: {
@@ -56,6 +65,15 @@ export const products = [
     notes: {
       title: 'Name & Profile',
       text: 'To be confirmed.',
+    },
+    fiche: {
+      subtitle: 'The Cultural Fusion Rum',
+      type: 'Grassy Rum',
+      volume: '75cl',
+      abv: '40%',
+      character: 'Powerful · Grassy · Authentic · Alive',
+      ingredients: 'Caribbean Sugar Cane · Ripe Banana · Natural Botanical Notes',
+      taste: 'VAZA reveals vibrant herbal notes, ripe banana richness, and a subtle earthy warmth. With a raw edge that breathes authenticity, crafted to celebrate diversity and the stories that connect us.',
     },
   },
   {
@@ -74,7 +92,7 @@ export const products = [
     shortName: 'SÔMA',
     spec: 'Long-Aged Rum · Working Name',
     tags: 'Deep · Complex · Unforgettable',
-    pageDesc: 'The ceremony. Our most considered expression — long-aged, layered, and meant for the moments worth marking. A rum to pour slowly, and remember.',
+    pageDesc: 'SOMA represents the joy of gathering, the magic of shared moments, and the warmth of celebrations that bring people together.\n\nA bold and warm rum made from Caribbean sugar cane, the iconic Madagascar vanilla, and rich sweet caramel notes. Carrying the essence of Madagascar, SOMA is our signature creation.',
     closing: '',
     moment: null,
     enjoy: {
@@ -84,6 +102,15 @@ export const products = [
     notes: {
       title: 'Name & Profile',
       text: 'To be confirmed.',
+    },
+    fiche: {
+      subtitle: 'The Signature Rum',
+      type: 'Amber Rum',
+      volume: '75cl',
+      abv: '40%',
+      character: 'Bold · Warm · Rich · Authentic',
+      ingredients: 'Caribbean Sugar Cane · Madagascar Vanilla · Sweet Caramel Notes',
+      taste: 'A bold and warm expression of Madagascar, SOMA reveals rich vanilla aromas, sweet caramel notes, and a smooth depth that invites connection. Crafted as our signature rum, it celebrates heritage, craftsmanship, and unforgettable moments shared together.',
     },
   },
 ]

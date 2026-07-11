@@ -207,6 +207,12 @@ const menuOpen = ref(false)
 @media (max-width: 767.98px) {
   .header {
     padding: 1.5rem 0 0.75rem;
+    /* Sur mobile, le header est fixe au-dessus d'images de fond sombres
+       (hero produit/recette) ; si backdrop-filter n'est pas supporté (WebView
+       Android ancien, etc.), le fond translucide à 55% laisse transparaître
+       le sombre et vire au marron sale. Fond quasi opaque pour rester
+       lisible dans tous les cas. */
+    background: rgba(245, 233, 219, 0.92);
   }
 
   .header__toggler {
@@ -227,7 +233,7 @@ const menuOpen = ref(false)
   position: fixed;
   inset: 0;
   z-index: 100;
-  background: var(--color-dark);
+  background: var(--color-beige);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -252,7 +258,7 @@ const menuOpen = ref(false)
   position: absolute;
   width: 28px;
   height: 2px;
-  background: var(--color-beige);
+  background: #69431D;
   border-radius: 2px;
   top: 50%;
   left: 50%;
@@ -270,7 +276,6 @@ const menuOpen = ref(false)
   height: 72px;
   width: auto;
   object-fit: contain;
-  filter: brightness(0) invert(1);
 }
 
 .mobile-menu__nav {
@@ -283,9 +288,9 @@ const menuOpen = ref(false)
 .mobile-menu__link {
   font-family: var(--font-cinzel);
   font-weight: 700;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   letter-spacing: 0.12em;
-  color: var(--color-beige);
+  color: #69431D;
   transition: opacity var(--transition);
 }
 

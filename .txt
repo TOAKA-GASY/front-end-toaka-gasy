@@ -26,3 +26,77 @@ Caribbean Sugar Cane · Canadian Maple Syrup
 TASTE PROFILE:
 Smooth, approachable, and infinitely mixable. NOVA shines in cocktails but stands boldly on its own
 
+
+voici les modifications
+Pour la page fiche produits 
+Changer la descriptions texte Nova is the spark en 
+"Nova represents the beginning of our story, the perfect home for our vision where our creativity takes shape. NOVA is the toast, a celebration of new starts, bold dreams, and the people who bring them to life.
+An iconic rum made of Caribbean sugar cane and Canadian maple syrup."
+et ajouter un design rectangle beige avec 
+
+FICHE PRODUIT
+NOVA
+The First Rum
+TYPE: Amber Rum
+VOLUME: 75cl
+ABV: 40%
+CHARACTER: Bright · Vibrant · Sweet, Young
+INGREDIENTS:
+Caribbean Sugar Cane · Canadian Maple Syrup
+TASTE PROFILE:
+Smooth, approachable, and infinitely mixable. NOVA shines in cocktails but stands boldly on its own.
+
+VAZA "In Madagascar, “Vaza” means foreigner, often referring to someone from another culture. To honour one of the founders, we created Vaza — a rum that celebrates the beauty of two worlds coming together.
+Powerful, grassy, and alive — with a raw edge that breathes authenticity. Crafted from Caribbean sugarcane, it reveals vibrant herbal notes, ripe wet-grade banana richness, and a subtle earthy warmth that creates unforgettable character."
+FICHE PRODUIT
+VAZA
+The Cultural Fusion Rum
+TYPE: Grassy Rum
+VOLUME: 75cl
+ABV: 40%
+CHARACTER: Powerful · Grassy · Authentic · Alive
+INGREDIENTS:
+Caribbean Sugar Cane · Ripe Banana · Natural Botanical Notes
+ VAZA reveals vibrant herbal notes, ripe banana richness, and a subtle earthy warmth. With a raw edge that breathes authenticity, 
+Crafted to celebrate diversity and the stories that connect us.
+
+Sôma "SOMA represents the joy of gathering, the magic of shared moments, and the warmth of celebrations that bring people together.
+A bold and warm rum made from Caribbean sugar cane, the iconic Madagascar vanilla, and rich sweet caramel notes. Carrying the essence of Madagascar, SOMA is our signature creation "
+FICHE PRODUIT
+SOMA
+The Signature Rum
+TYPE: Amber Rum
+VOLUME: 75cl
+ABV: 40%
+CHARACTER: Bold · Warm · Rich · Authentic
+INGREDIENTS:
+Caribbean Sugar Cane · Madagascar Vanilla · Sweet Caramel Notes
+TASTE PROFILE:
+A bold and warm expression of Madagascar, SOMA reveals rich vanilla aromas, sweet caramel notes, and a smooth depth that invites connection. Crafted as our signature rum, it celebrates heritage, craftsmanship, and unforgettable moments shared together.
+
+Dans la page OUR RUMS 
+Changer la description en "Born from a shared vision, shaped by the spirit of the Netherlands. A grassy rum that celebrates fresh herbal character and the bonds that unite cultures"
+
+Dans la page our STORY 
+Mettre le masq-paper svg et remplir elargir a remplir l'ecran et ne pas toucher au height le masque est coupé en hauteur 
+Fond premiere section beige en continu avec la deuxieme section 
+Bouteille a descendre un peu plus et descendre le contenu suivant 
+Dans la section events remplacer le texte description piur le GP avec "First stop, first connections. In Halifax,Nova Scotia, Toaka Gasy Company team made meaningful connections and join the active community during SailGP , one of the city's most iconic and anticipated sailing events.
+
+A first step in the city where it all began ! 
+
+20 Juin 2026"
+ et pour soakany "Very honored to be part of the Sookany Trophy! 
+
+We're excited to support an event that celebrates sailing, the spirit of Diego Suarez, and hashtag#Madagascar's rich maritime heritage.
+
+The culture of hashtag#sailing has also been one of the hashtag#inspirations behind our rum. This time, we'll meet on the water for the race... and hopefully next time, we'll meet again to share a glass of our Toaka Gasy Rum 🥃
+See you on the water! 
+
+date 17 Juillet 2026"
+
+Dans la page Contact 
+Premiere section ajouter une carte du monde en 
+
+
+

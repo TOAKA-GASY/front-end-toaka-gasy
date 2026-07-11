@@ -51,6 +51,44 @@ watchEffect(() => {
       </div>
     </div>
 
+    <!-- ── Fiche produit : rectangle beige récapitulatif ── -->
+    <div v-if="product.fiche" class="pp-fiche">
+      <div class="pp-fiche__card">
+        <h2 class="pp-fiche__name">{{ product.shortName }}</h2>
+        <p class="pp-fiche__subtitle">{{ product.fiche.subtitle }}</p>
+
+        <div class="pp-fiche__line"></div>
+
+        <dl class="pp-fiche__specs">
+          <div class="pp-fiche__spec">
+            <dt>Type</dt>
+            <dd>{{ product.fiche.type }}</dd>
+          </div>
+          <div class="pp-fiche__spec">
+            <dt>Volume</dt>
+            <dd>{{ product.fiche.volume }}</dd>
+          </div>
+          <div class="pp-fiche__spec">
+            <dt>ABV</dt>
+            <dd>{{ product.fiche.abv }}</dd>
+          </div>
+          <div class="pp-fiche__spec">
+            <dt>Character</dt>
+            <dd>{{ product.fiche.character }}</dd>
+          </div>
+          <div class="pp-fiche__spec pp-fiche__spec--full">
+            <dt>Ingredients</dt>
+            <dd>{{ product.fiche.ingredients }}</dd>
+          </div>
+        </dl>
+
+        <div class="pp-fiche__taste">
+          <span class="pp-fiche__taste-label">Taste Profile</span>
+          <p class="pp-fiche__taste-text">{{ product.fiche.taste }}</p>
+        </div>
+      </div>
+    </div>
+
     <!-- ── Tagline collection ── -->
     <div class="pp-tagline">
       <h2 class="pp-tagline__title">One spirit,<br>many ways to celebrate.</h2>
