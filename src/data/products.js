@@ -6,7 +6,7 @@ export const products = [
     bgImage: '/img/nova-image.webp',
     name: 'TOAKA NOVA',
     tagline: 'Best Sipped with Sun',
-    desc: 'An iconic rum made of Caribbean sugar cane, Madagascar vanilla, and Canadian maple syrup.',
+    desc: 'Born in Nova Scotia, shaped by the spirit of the Maritimes. An amber rum that celebrates all sweet beginning',
     badge: 'On aging',
     color: '#4a2e1a',
 
@@ -45,7 +45,7 @@ export const products = [
     bottle: '/img/toaka-gasy-white.webp',
     bgImage: '/img/vaza-image.webp',
     name: 'TOAKA VAZA',
-    tagline: 'Born from the Island',
+    tagline: 'Where Cultures Meet',
     desc: "Born from a shared vision, shaped by the spirit of the Netherlands. A grassy rum that celebrates fresh herbal character and the bonds that unite cultures",
     badge: 'On aging',
     color: '#f5e6c8',
@@ -92,7 +92,7 @@ export const products = [
     shortName: 'SÔMA',
     spec: 'Long-Aged Rum · Working Name',
     tags: 'Deep · Complex · Unforgettable',
-    pageDesc: 'SOMA represents the joy of gathering, the magic of shared moments, and the warmth of celebrations that bring people together.\n\nA bold and warm rum made from Caribbean sugar cane, the iconic Madagascar vanilla, and rich sweet caramel notes. Carrying the essence of Madagascar, SOMA is our signature creation.',
+    pageDesc: 'SÔMA represents the joy of gathering, the magic of shared moments, and the warmth of celebrations that bring people together.\n\nA bold and warm rum made from Caribbean sugar cane, the iconic Madagascar vanilla, and rich sweet caramel notes. Carrying the essence of Madagascar, SÔMA is our signature creation.',
     closing: '',
     moment: null,
     enjoy: {
@@ -110,7 +110,7 @@ export const products = [
       abv: '40%',
       character: 'Bold · Warm · Rich · Authentic',
       ingredients: 'Caribbean Sugar Cane · Madagascar Vanilla · Sweet Caramel Notes',
-      taste: 'A bold and warm expression of Madagascar, SOMA reveals rich vanilla aromas, sweet caramel notes, and a smooth depth that invites connection. Crafted as our signature rum, it celebrates heritage, craftsmanship, and unforgettable moments shared together.',
+      taste: 'A bold and warm expression of Madagascar, SÔMA reveals rich vanilla aromas, sweet caramel notes, and a smooth depth that invites connection. Crafted as our signature rum, it celebrates heritage, craftsmanship, and unforgettable moments shared together.',
     },
   },
 ]

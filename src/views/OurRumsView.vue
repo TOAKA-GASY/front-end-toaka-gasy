@@ -248,7 +248,7 @@ onUnmounted(() => {
     <div class="or-col-top" :class="{ 'or-col-top--visible': orColTopVisible }">
       <div class="or-col-top__content">
         <span class="or-col-eyebrow">OUR COLLECTION</span>
-        <h2 class="or-col-top__title">MANY WAYS TO CELEBRATE</h2>
+        <h2 class="or-col-top__title">MANY WAYS<br>TO CELEBRATE</h2>
       </div>
     </div>
 

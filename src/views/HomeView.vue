@@ -31,7 +31,14 @@ const onScroll = () => {
   })
 }
 
-const isSticky = computed(() => scrollY.value > window.innerHeight * 0.15)
+/* Le header (avec le menu) ne doit apparaître qu'à l'arrivée de la section 2,
+   pas dès le premier scroll : on compare au scroll dépassant la hauteur réelle
+   de la section 1 (200vh desktop / 100vh mobile, gérée en CSS). */
+const isSticky = computed(() => {
+  const homePageEl = document.querySelector('.home-page')
+  const threshold = homePageEl ? homePageEl.offsetHeight : window.innerHeight * 2
+  return scrollY.value > threshold - 80
+})
 
 const showTopBtn = computed(() => scrollY.value > window.innerHeight * 0.5)
 const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -232,7 +239,7 @@ const parallax = computed(() => {
           <span class="hn-s2-eyebrow">INTRODUCING</span>
           <h2 class="hn-s2b-title">NOVA</h2>
           <p class="hn-s2-text">
-            Amber Rum Born in Nova Scotia, shaped by the spirit of the Maritimes. An amber rum that celebrates all sweet beginning
+            Born in Nova Scotia, shaped by the spirit of the Maritimes. An amber rum that celebrates all sweet beginning
           </p>
           <button class="hn-s2-cta" @click="goToProduct(products[0].slug)">
             <span>DISCOVER NOVA</span>
@@ -250,7 +257,7 @@ const parallax = computed(() => {
     <section class="home-new-s4" :class="{ 'home-new-s4--visible': hnS4Visible }">
       <div class="hn-s4-content">
         <span class="hn-s2-eyebrow">WHY WE EXIST</span>
-        <h2 class="hn-s4-title">Rum Crafted With Purpose</h2>
+        <h2 class="hn-s4-title">Rum Crafted With<br />Purpose</h2>
         <p class="hn-s4-text">From Madagascar to the world, rum has always brought us together!</p>
       </div>
       <div class="hn-s4-images">
@@ -277,6 +284,7 @@ const parallax = computed(() => {
         :key="`riz-${bottle.src}`"
         class="s7-bottle"
         :class="s5BottlePos[i]"
+        @click="goToProduct(products[i].slug)"
       >
         <img :src="bottle.src" :alt="bottle.alt" />
         <div class="s7-bottle__shadow" aria-hidden="true"></div>
@@ -313,22 +321,6 @@ const parallax = computed(() => {
     <img src="/img/lifestyle2.webp" class="s3-img" alt="Lifestyle 2" loading="lazy" />
     <img src="/img/lifestyle3.webp" class="s3-img" alt="Lifestyle 3" loading="lazy" />
   </section>
-
-  <!-- Section : Women drink + vidéo (remplacée par la section Events) -->
-  <!--
-  <section class="home-s57">
-    <div class="s57-zone-top">
-      <img src="/img/women-drink2.webp" class="s57-top" alt="" aria-hidden="true" loading="lazy" />
-      <video class="s57-video" autoplay muted loop playsinline preload="none">
-        <source src="/vd/rum-video.mp4" type="video/mp4" />
-      </video>
-      <p class="s57-tagline">
-        Amber Rum Born in Nova Scotia,<br>
-        shaped by the spirit of the Maritimes. An amber rum that celebrates all sweet beginning
-      </p>
-    </div>
-  </section>
-  -->
 
   <!-- Section : Events -->
   <EventsSection />

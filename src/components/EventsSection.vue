@@ -251,7 +251,7 @@ onUnmounted(() => {
   display: flex;
   justify-content: center;
   gap: 0.6rem;
-  margin: 2rem 0 clamp(3rem, 6vw, 5rem);
+  margin: 2rem 0 clamp(4.5rem, 9vw, 7rem);
 }
 
 .os-events__dot {
@@ -264,58 +264,51 @@ onUnmounted(() => {
 }
 .os-events__dot--active { background: #69431D; transform: scale(1.3); }
 
-/* ─── Galerie photo : 1 grande au centre, 2 de chaque côté, silhouette en arc (sans coins arrondis) ───
-   Hauteur réduite : cadres plus larges que hauts (rectangle "paysage") pour mieux voir les photos. */
+/* ─── Galerie photo : colonne gauche (cadre en haut / cadre en bas),
+   grand cadre au centre, colonne droite (cadre en haut / cadre en bas).
+   Les cadres latéraux débordent volontairement au-dessus et en dessous du
+   cadre central (plus grands que sa hauteur), pour un effet collage.
+   Au survol, le cadre s'agrandit légèrement en overlay au-dessus de ses voisins. ─── */
 .os-events__gallery {
-  display: flex;
-  align-items: flex-end;
-  gap: clamp(0.6rem, 1.5vw, 1.25rem);
-  height: clamp(220px, 32vh, 360px);
-  max-width: 1680px;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+  height: clamp(360px, 48vh, 540px);
+  max-width: 1400px;
   margin: 0 auto;
 }
 
-/* ─── Cadre : porte le flex/la taille et masque le débordement du zoom ─── */
+/* ─── Cadre : porte la taille et masque le débordement du zoom ─── */
 .os-events__frame {
   position: relative;
-  flex: 1 1 0;
-  min-width: 0;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
-  display: block;
+  cursor: pointer;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.os-events__frame--l1     { height: 68%; }
-.os-events__frame--l2     { height: 86%; }
-.os-events__frame--center { height: 100%; flex: 1.3 1 0; }
-.os-events__frame--r1     { height: 86%; }
-.os-events__frame--r2     { height: 68%; }
+.os-events__frame:hover {
+  transform: scale(1.1);
+  z-index: 5;
+  box-shadow: 0 20px 42px rgba(0, 0, 0, 0.38);
+}
 
-/* ─── Image : défilement automatique en boucle (zoom + léger panoramique), par cadre ─── */
+.os-events__frame--l1     { grid-column: 1; grid-row: 1; align-self: end;   height: 132%; }
+.os-events__frame--l2     { grid-column: 1; grid-row: 2; align-self: start; height: 132%; }
+.os-events__frame--center { grid-column: 2; grid-row: 1 / span 2; }
+.os-events__frame--r1     { grid-column: 3; grid-row: 1; align-self: end;   height: 132%; }
+.os-events__frame--r2     { grid-column: 3; grid-row: 2; align-self: start; height: 132%; }
+
+/* ─── Image : recouvre le cadre ─── */
 .os-events__img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
-
-@keyframes os-events-pan-a {
-  0%   { transform: scale(1.06) translate(0, 0); }
-  100% { transform: scale(1.2) translate(-4%, -2%); }
-}
-@keyframes os-events-pan-b {
-  0%   { transform: scale(1.06) translate(0, 0); }
-  100% { transform: scale(1.2) translate(4%, 2%); }
-}
-@keyframes os-events-pan-c {
-  0%   { transform: scale(1.04) translate(0, 0); }
-  100% { transform: scale(1.16) translate(0, -3%); }
-}
-
-.os-events__frame--l1     .os-events__img { animation: os-events-pan-a 13s ease-in-out infinite alternate; animation-delay: 0s;    }
-.os-events__frame--l2     .os-events__img { animation: os-events-pan-b 13s ease-in-out infinite alternate; animation-delay: 0.9s;  }
-.os-events__frame--center .os-events__img { animation: os-events-pan-c 13s ease-in-out infinite alternate; animation-delay: 1.8s;  }
-.os-events__frame--r1     .os-events__img { animation: os-events-pan-b 13s ease-in-out infinite alternate; animation-delay: 2.7s;  }
-.os-events__frame--r2     .os-events__img { animation: os-events-pan-a 13s ease-in-out infinite alternate; animation-delay: 3.6s;  }
 
 /* ─── Responsive ─── */
 @media (max-width: 767.98px) {
@@ -325,14 +318,17 @@ onUnmounted(() => {
   .os-events__gallery {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-auto-rows: 130px;
+    /* Rangée 2 (cadre central) sizée pile à sa propre hauteur (170px) plutôt
+       qu'un grid-auto-rows uniforme : sinon le cadre central déborde de sa
+       rangée (130px) et chevauche les cadres du dessous. */
+    grid-template-rows: 130px 170px 130px;
     height: auto;
     gap: 0.5rem;
   }
-  .os-events__frame        { flex: none; width: 100%; height: 100%; }
+  .os-events__frame        { width: 100%; height: 100%; align-self: stretch; }
   .os-events__frame--l1     { grid-column: 1; grid-row: 1; }
   .os-events__frame--l2     { grid-column: 2; grid-row: 1; }
-  .os-events__frame--center { grid-column: 1 / 3; grid-row: 2; height: 170px; }
+  .os-events__frame--center { grid-column: 1 / 3; grid-row: 2; }
   .os-events__frame--r1     { grid-column: 1; grid-row: 3; }
   .os-events__frame--r2     { grid-column: 2; grid-row: 3; }
 }
@@ -342,15 +338,11 @@ onUnmounted(() => {
 @media (max-width: 1300px) and (orientation: landscape) {
   .os-events__gallery {
     display: flex;
-    align-items: flex-end;
-    height: clamp(160px, 40vh, 260px);
+    align-items: stretch;
+    height: clamp(150px, 34vh, 240px);
     gap: 0.6rem;
   }
-  .os-events__frame        { flex: 1 1 0; width: 100%; height: auto; }
-  .os-events__frame--l1     { height: 68%; }
-  .os-events__frame--l2     { height: 86%; }
-  .os-events__frame--center { height: 100%; flex: 1.3 1 0; }
-  .os-events__frame--r1     { height: 86%; }
-  .os-events__frame--r2     { height: 68%; }
+  .os-events__frame        { flex: 1 1 0; width: 100%; height: 100%; align-self: auto; }
+  .os-events__frame--center { flex: 1.6 1 0; }
 }
 </style>

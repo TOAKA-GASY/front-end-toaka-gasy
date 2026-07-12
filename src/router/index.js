@@ -6,7 +6,7 @@ const DEFAULT_DESCRIPTION =
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  scrollBehavior: () => ({ top: 0 }),
+  scrollBehavior: (to, from, savedPosition) => savedPosition || { top: 0 },
   routes: [
     {
       path: '/',

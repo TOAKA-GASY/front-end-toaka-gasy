@@ -1,6 +1,5 @@
 <script setup>
-import { ref, onMounted, onUnmounted, computed } from 'vue'
-import EventsSection from '@/components/EventsSection.vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import '@/styles/our-story.css'
 
 const menuOpen = ref(false)
@@ -32,10 +31,6 @@ onUnmounted(() => {
   window.removeEventListener('scroll', onScroll)
   observer.disconnect()
 })
-
-// Parallax scroll sur la bouteille : descend légèrement vers le masque au scroll
-const p = computed(() => Math.min(1, scrollY.value / (window.innerHeight || 1)))
-const parallaxRed = computed(() => ({ transform: `translateY(${p.value * 70}px)` }))
 </script>
 
 <template>
@@ -80,7 +75,7 @@ const parallaxRed = computed(() => ({ transform: `translateY(${p.value * 70}px)`
   </Transition>
 
   <!-- ══════════════════════════════════════
-       Section 1 – Fond + vidéo masquée + bouteille Toaka Mena
+       Section 1 – Fond + vidéo masquée (paper-mask.svg)
        ══════════════════════════════════════ -->
   <section class="os-hero">
     <h1 class="visually-hidden">Our Story — The Heritage Behind Toaka Gasy Rum</h1>
@@ -90,38 +85,47 @@ const parallaxRed = computed(() => ({ transform: `translateY(${p.value * 70}px)`
         <source src="/vd/mdg-video.mp4" type="video/mp4" />
       </video>
     </div>
-
-    <div class="os-hero__bottles">
-      <!-- Mena (rouge) – centrée, en bas du hero -->
-      <div class="os-hero__pos os-hero__pos--center">
-        <div :style="parallaxRed">
-          <img
-            src="/img/toaka-gasy-red.webp"
-            class="os-hero__bottle os-hero__bottle--mena os-animate"
-            data-delay="100"
-            alt="Toaka Gasy Mena"
-          />
-        </div>
-      </div>
-    </div>
   </section>
 
   <!-- ══════════════════════════════════════
-       Section 4 – The Beginning
+       Section 2 – Behind the Legend
+       ══════════════════════════════════════ -->
+  <section class="os-legend">
+
+    <div class="os-legend__inner">
+      <div class="os-legend__visual">
+        <div class="os-legend__bottle-pos os-animate" data-delay="0">
+          <img src="/img/toaka-gasy-red.webp" class="os-legend__bottle" alt="Toaka Gasy Mena" />
+          <div class="os-legend__bottle-shadow" aria-hidden="true"></div>
+        </div>
+      </div>
+
+      <div class="os-legend__content os-animate" data-delay="150">
+        <h2 class="os-s4__title">BEHIND THE LEGEND</h2>
+        <div class="os-s4__line"></div>
+        <p class="os-legend__body">
+          Across Madagascar, rum has always been part of every tradition. It's called toaka gasy, often made in far places where wild nature gives it its finest taste. The one that inspired us most comes from the south, in the hidden valleys of Betsileo's ethnie, a special rum that has carried Betsileo celebration for generations. A symbol of unity and hospitality, it's poured to welcome a guest, to bless a marriage, to bring people together at the moments that matter most.
+        </p>
+        <p class="os-legend__body">
+          So we crafted a bottle to honor it, to show the world how rum can be enjoyed: as a spirit of togetherness and a drink of celebration. Because for us, the best moments in life are the ones we celebrate together.
+        </p>
+      </div>
+    </div>
+
+    <p class="os-legend__proverb os-animate" data-delay="280">Ny betsileo tsa mora mamo fa ny toaka ro mahery</p>
+
+  </section>
+
+  <!-- ══════════════════════════════════════
+       Section 3 – About Us
        ══════════════════════════════════════ -->
   <section class="os-s4">
 
     <div class="os-s4__content os-animate" data-delay="0">
-      <h2 class="os-s4__title">THE BEGINNING</h2>
+      <h2 class="os-s4__title">ABOUT US</h2>
       <div class="os-s4__line"></div>
-      <p class="os-s4__body">
-        We are Toaka Gasy Company, a rum house founded by Malagasy and Dutch associates<br /><br />
-        Crafted in the Netherlands, our rum carries Madagascar's spirit of celebration made to bring people together.
-      </p>
-      <p class="os-s4__body">
-        Our vision is to redefine the alcohol lifestyle <br /> by creating products that evoke emotion
-        and bring people together. Inspired by the energy of rhythm, culture, and festivity,
-        we see every bottle as a symbol of celebration.
+      <p class="os-s4__body os-s4__body--compact">
+        We are Toaka Gasy Company, a rum house founded by Malagasy and Dutch associates. Our vision is to redefine the alcohol lifestyle by creating products that evoke emotion and bring people together. Inspired by the energy of rhythm, culture, and festivity, we see every bottle as a symbol of celebration.
       </p>
     </div>
 
@@ -131,36 +135,9 @@ const parallaxRed = computed(() => ({ transform: `translateY(${p.value * 70}px)`
 
   </section>
 
-  <!-- ══════════════════════════════════════
-       Section 4b – Behind the Legend
-       ══════════════════════════════════════ -->
-  <section class="os-s4 os-s4--legend">
-
-    <div class="os-s4__content os-animate" data-delay="0">
-      <span class="os-s4__eyebrow">FROM THE FOUNDERS</span>
-      <h2 class="os-s4__title os-s4__title--big">BEHIND THE LEGEND</h2>
-      <div class="os-s4__line"></div>
-      <p class="os-s4__body">
-        Across Madagascar, rum has always been part of every tradition. It's called toaka gasy, often made in far places where wild nature gives it its finest taste. The one that inspired us most comes from the south, in the hidden valleys of Betsileo's ethnie, a special rum that has carried Betsileo celebration for generations. A symbol of unity and hospitality, it's poured to welcome a guest, to bless a marriage, to bring people together at the moments that matter most.
-      </p>
-      <p class="os-s4__body">
-        So we crafted a bottle to honor it, to show the world how rum can be enjoyed: as a spirit of togetherness and a drink of celebration. Because for us, the best moments in life are the ones we celebrate together.
-      </p>
-    </div>
-
-  </section>
 
   <!-- ══════════════════════════════════════
-       Section 5 – Vidéo centrée
-       ══════════════════════════════════════ -->
-  <section class="os-s5">
-    <video class="os-s5__video os-animate" data-delay="0" autoplay muted loop playsinline preload="none">
-      <source src="/vd/mdg-toaka.mp4" type="video/mp4" />
-    </video>
-  </section>
-
-  <!-- ══════════════════════════════════════
-       Section 6 – About Us
+       Section 6 – Founders
        ══════════════════════════════════════ -->
   <section class="os-s6">
 
@@ -234,10 +211,5 @@ const parallaxRed = computed(() => ({ transform: `translateY(${p.value * 70}px)`
     </div>
 
   </section>
-
-  <!-- ══════════════════════════════════════
-       Section 7 – Events
-       ══════════════════════════════════════ -->
-  <EventsSection />
 
 </template>

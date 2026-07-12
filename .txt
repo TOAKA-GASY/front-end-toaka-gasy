@@ -1,102 +1,55 @@
-Dans page home voici les modifications : 
--mettre en un seul mouvement l'animation du ravinala et bouteille , 
-en meme temps , ravinala bouge, et bouteille descent,en un seul scroll
--augmenter un peu le height de la section pour mettre le texte EACH BOTTLE TELLS A STORY sur l'entete de la bouteille en animation avec fond rizière
--Sur la section wome avec la vidéo au seddus rajouter en bas a droite ce texte "Amber Rum Born in Nova Scotia, 
-shaped by the spirit of the Maritimes. An amber rum that celebrates all sweet beginning" beige , font simonetta
--Sur le introducing Nova , rajouter une animation bien visible stp , qui dure plus longtemps qui s'affichent à chaque passage sur la section apres Rum Crafted With Purpose, et reduire un peu la section de 100px stp , changer le texte Our first rum en Amber Rum Born in Nova Scotia, shaped by the spirit of the Maritimes. An amber rum that celebrates all sweet beginning
-et reduire un peu la section de 100px stp , changer le texte Our first rum en Amber Rum Born in Nova Scotia, shaped by the spirit of the Maritimes. An amber rum that celebrates all sweet beginning
--Mettre la description From Madagascar en beige 
--Rajouter une belle animation des 3 images qui s'affichent à chaque passage sur la section  apres Rum Crafted With Purpose
+Dans la page home voici les modifications :
+-Afficher le header avec le menu uniquement a l'arivée de la deuxieme section 
+et non apres le premier scrolL, pareil pour la version mobile 
+-Mettre the rum of celebration en beige 
+-Pour la section events j'aime pas la disposition des cartes images , je voudrais 
+organiser comme petit rectangle grand au milieu et 2 petits rectangles de chaque coté, et la hauteur des cadres plus larges que hauts (rectangle "paysage") pour mieux voir les photos comme les grilles de carde photos 
+enlever la disposition aligné cadre photo et lorsqu'on hover une image elle affiche l'image un peu grande en overlayractangle 
+-J'ai un beug lorsque je vais sur la section events arrange stp 
+-sur la section bouteille 3 en animation ajouter un hover sur les bouteille et lorsqu'on clique elle redirige vers la fiche details du produit 
+-ici Rum Crafted With Purpose , pour tous les ecrans rum crafted with et purpose a la ligne 
 
 
+Dans la page our story voici les modifications : 
+-Dans la première section descendre la masque stp mettre un fond beige ensuite apres 150px mettre 
+le paper mask. svg avec la video stp ne rien modifier avec le masque
+-Deuxième section fond beige avec image story.png sur la gauche mettre la bouteille avec un eclipse ombre en bas 
+sur la droite mettre le titre BEHIND THE LEGEND puis description "Across Madagascar, rum has always been part of every tradition. It's called toaka gasy, often made in far places where wild nature gives it its finest taste. 
+The one that inspired us most comes from the south, 
+in the hidden valleys of Betsileo's ethnie, a special rum that has carried Betsileo celebration for generations.
+ A symbol of unity and hospitality, it's poured to welcome 
+a guest, to bless a marriage, to bring people together at the moments that matter most. 
+So we crafted a bottle to honor it, to show the world how rum can be enjoyed: as a spirit of togetherness and a drink 
+of celebration. Because for us, the best moments in life are 
+the ones we celebrate together. "
+ en marron titre cinzel et description simonetta et en bas mettre au milieu le texte "N y betsileo tsa mora mamo fa ny toaka  ro mahery" en moontime 
+ Ensuite section 3 texte sur la gauche ABOUT US au lieu de the beiginning et description "We are Toaka Gasy Company, a rum house founded by Malagasy and Dutch associates. Our vision is to redefine the alcohol lifestyle by creating products that evoke emotion and bring people together. Inspired by the energy of rhythm, culture, and festivity, we see every bottle as a symbol of celebration."
+ et image sur la droite , police mettre comme la taille des textes founder 
+ -enlever la section events 
 
+    Dans la page our rums 
+    -Many ways puis a la ligne to celebrate
+    -changer "An iconic rum made of Caribbean sugar cane, Madagascar vanilla, and Canadian maple syrup." en 
+    Born in Nova Scotia, shaped by the spirit of the Maritimes. An amber rum that celebrates all sweet beginning
+    
+    Dans la page description de produit 
+    -Ajouter un bouton retour sur la droite au milieu de section qui revient vers rum pas on top mais a la position precednete
+    -Pour tous les textes marron utilise ce marron stp 3A1D08
+    Pour les 3 fiches enlever la ligne "spec"
+    Ensuite changer le texte "One spirit," Pour it. Share it. Let the night begin.
+    enlever ceci "One rum to start the night. Two aged expressions to savour. All amber, all made to be shared."
+    Et enlver la section en bas "The Moment
+    The spark — the cocktail, the toast, the start of the night.
+    How to Enjoy
+    In a cocktail, or as a festive shot among friends.
+    Tasting Notes
+    Coming soon" et les mettre en haut dans le div fiche produit 
+    Pour tous les marrons foncé utilise ceci #3A1D08 et marron clair ceci #5b3507
+    -Vérifie le sôma stp avec accent le ô
 
-Dans la page fiche produit nova : 
-changer nova is the spriit en "Nova represents the beginning of our story, the perfect home for our vision where our creativity takes shape. NOVA is the toast, a celebration of new starts, bold dreams, and the people who bring them to life.
-An iconic rum made of Caribbean sugar cane and Canadian maple syrup"
-et ajouter ses descriptions NOVA
-The First Rum
-TYPE: Amber Rum
-VOLUME: 75cl
-ABV: 40%
-CHARACTER: Bright · Vibrant · Sweet, Young
-INGREDIENTS:
-Caribbean Sugar Cane · Canadian Maple Syrup
-TASTE PROFILE:
-Smooth, approachable, and infinitely mixable. NOVA shines in cocktails but stands boldly on its own
+    Dans la page contact Us : 
+    enlever la video premiere section directement mettre le contact us , enlever la map et mettre le contact us au milieu stp 
 
-
-voici les modifications
-Pour la page fiche produits 
-Changer la descriptions texte Nova is the spark en 
-"Nova represents the beginning of our story, the perfect home for our vision where our creativity takes shape. NOVA is the toast, a celebration of new starts, bold dreams, and the people who bring them to life.
-An iconic rum made of Caribbean sugar cane and Canadian maple syrup."
-et ajouter un design rectangle beige avec 
-
-FICHE PRODUIT
-NOVA
-The First Rum
-TYPE: Amber Rum
-VOLUME: 75cl
-ABV: 40%
-CHARACTER: Bright · Vibrant · Sweet, Young
-INGREDIENTS:
-Caribbean Sugar Cane · Canadian Maple Syrup
-TASTE PROFILE:
-Smooth, approachable, and infinitely mixable. NOVA shines in cocktails but stands boldly on its own.
-
-VAZA "In Madagascar, “Vaza” means foreigner, often referring to someone from another culture. To honour one of the founders, we created Vaza — a rum that celebrates the beauty of two worlds coming together.
-Powerful, grassy, and alive — with a raw edge that breathes authenticity. Crafted from Caribbean sugarcane, it reveals vibrant herbal notes, ripe wet-grade banana richness, and a subtle earthy warmth that creates unforgettable character."
-FICHE PRODUIT
-VAZA
-The Cultural Fusion Rum
-TYPE: Grassy Rum
-VOLUME: 75cl
-ABV: 40%
-CHARACTER: Powerful · Grassy · Authentic · Alive
-INGREDIENTS:
-Caribbean Sugar Cane · Ripe Banana · Natural Botanical Notes
- VAZA reveals vibrant herbal notes, ripe banana richness, and a subtle earthy warmth. With a raw edge that breathes authenticity, 
-Crafted to celebrate diversity and the stories that connect us.
-
-Sôma "SOMA represents the joy of gathering, the magic of shared moments, and the warmth of celebrations that bring people together.
-A bold and warm rum made from Caribbean sugar cane, the iconic Madagascar vanilla, and rich sweet caramel notes. Carrying the essence of Madagascar, SOMA is our signature creation "
-FICHE PRODUIT
-SOMA
-The Signature Rum
-TYPE: Amber Rum
-VOLUME: 75cl
-ABV: 40%
-CHARACTER: Bold · Warm · Rich · Authentic
-INGREDIENTS:
-Caribbean Sugar Cane · Madagascar Vanilla · Sweet Caramel Notes
-TASTE PROFILE:
-A bold and warm expression of Madagascar, SOMA reveals rich vanilla aromas, sweet caramel notes, and a smooth depth that invites connection. Crafted as our signature rum, it celebrates heritage, craftsmanship, and unforgettable moments shared together.
-
-Dans la page OUR RUMS 
-Changer la description en "Born from a shared vision, shaped by the spirit of the Netherlands. A grassy rum that celebrates fresh herbal character and the bonds that unite cultures"
-
-Dans la page our STORY 
-Mettre le masq-paper svg et remplir elargir a remplir l'ecran et ne pas toucher au height le masque est coupé en hauteur 
-Fond premiere section beige en continu avec la deuxieme section 
-Bouteille a descendre un peu plus et descendre le contenu suivant 
-Dans la section events remplacer le texte description piur le GP avec "First stop, first connections. In Halifax,Nova Scotia, Toaka Gasy Company team made meaningful connections and join the active community during SailGP , one of the city's most iconic and anticipated sailing events.
-
-A first step in the city where it all began ! 
-
-20 Juin 2026"
- et pour soakany "Very honored to be part of the Sookany Trophy! 
-
-We're excited to support an event that celebrates sailing, the spirit of Diego Suarez, and hashtag#Madagascar's rich maritime heritage.
-
-The culture of hashtag#sailing has also been one of the hashtag#inspirations behind our rum. This time, we'll meet on the water for the race... and hopefully next time, we'll meet again to share a glass of our Toaka Gasy Rum 🥃
-See you on the water! 
-
-date 17 Juillet 2026"
-
-Dans la page Contact 
-Premiere section ajouter une carte du monde en 
 
 
 

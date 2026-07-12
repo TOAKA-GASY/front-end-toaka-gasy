@@ -347,7 +347,7 @@
   font-family: var(--font-cinzel);
   font-weight: 600;
   font-size: clamp(32px, 5.2vw, 72px);
-  color: #261305;
+  color: #F4EADB;
   letter-spacing: 0.05em;
   line-height: 1.1;
   text-transform: uppercase;
@@ -700,6 +700,8 @@
   position: absolute;
   bottom: 0;
   left: 50%;
+  cursor: pointer;
+  pointer-events: auto;
   transition:
     transform 0.72s cubic-bezier(0.22, 1, 0.36, 1),
     opacity   0.72s cubic-bezier(0.22, 1, 0.36, 1),
@@ -713,6 +715,13 @@
   height: clamp(400px, 66vh, 680px);
   width: auto;
   display: block;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              filter 0.35s ease;
+}
+
+.s7-bottle:hover img {
+  transform: scale(1.05) translateY(-8px);
+  filter: drop-shadow(0 22px 34px rgba(0, 0, 0, 0.4));
 }
 
 .s7-bottle__shadow {
@@ -1008,6 +1017,16 @@
   padding: 0.35rem;
   cursor: pointer;
   z-index: 101;
+  /* Le menu (hamburger) ne doit apparaître qu'à l'arrivée de la section 2,
+     comme la nav desktop : caché tant que le header n'est pas sticky. */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease 0.08s;
+}
+
+.hero-hd--sticky .hero-hd__toggler {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .hero-hd__bar {
