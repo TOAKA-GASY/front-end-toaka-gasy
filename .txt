@@ -1,55 +1,19 @@
-Dans la page home voici les modifications :
--Afficher le header avec le menu uniquement a l'arivée de la deuxieme section 
-et non apres le premier scrolL, pareil pour la version mobile 
--Mettre the rum of celebration en beige 
--Pour la section events j'aime pas la disposition des cartes images , je voudrais 
-organiser comme petit rectangle grand au milieu et 2 petits rectangles de chaque coté, et la hauteur des cadres plus larges que hauts (rectangle "paysage") pour mieux voir les photos comme les grilles de carde photos 
-enlever la disposition aligné cadre photo et lorsqu'on hover une image elle affiche l'image un peu grande en overlayractangle 
--J'ai un beug lorsque je vais sur la section events arrange stp 
--sur la section bouteille 3 en animation ajouter un hover sur les bouteille et lorsqu'on clique elle redirige vers la fiche details du produit 
--ici Rum Crafted With Purpose , pour tous les ecrans rum crafted with et purpose a la ligne 
+Dans our story section 2 descendre un peu l'image story.png stp 
+Rajouter animation sur l'arrivée de la section 2 texte et une animation stp comme une ecriture lettre par lettre sur le ny bestileo qui arrivent par lettre lorsque que le curseur descends sur la section 2 
+Augmente la taille de la bouteille stp 
+Les animations doivent toujours etre presentes lorsqu'on passe le curseur stp 
 
 
-Dans la page our story voici les modifications : 
--Dans la première section descendre la masque stp mettre un fond beige ensuite apres 150px mettre 
-le paper mask. svg avec la video stp ne rien modifier avec le masque
--Deuxième section fond beige avec image story.png sur la gauche mettre la bouteille avec un eclipse ombre en bas 
-sur la droite mettre le titre BEHIND THE LEGEND puis description "Across Madagascar, rum has always been part of every tradition. It's called toaka gasy, often made in far places where wild nature gives it its finest taste. 
-The one that inspired us most comes from the south, 
-in the hidden valleys of Betsileo's ethnie, a special rum that has carried Betsileo celebration for generations.
- A symbol of unity and hospitality, it's poured to welcome 
-a guest, to bless a marriage, to bring people together at the moments that matter most. 
-So we crafted a bottle to honor it, to show the world how rum can be enjoyed: as a spirit of togetherness and a drink 
-of celebration. Because for us, the best moments in life are 
-the ones we celebrate together. "
- en marron titre cinzel et description simonetta et en bas mettre au milieu le texte "N y betsileo tsa mora mamo fa ny toaka  ro mahery" en moontime 
- Ensuite section 3 texte sur la gauche ABOUT US au lieu de the beiginning et description "We are Toaka Gasy Company, a rum house founded by Malagasy and Dutch associates. Our vision is to redefine the alcohol lifestyle by creating products that evoke emotion and bring people together. Inspired by the energy of rhythm, culture, and festivity, we see every bottle as a symbol of celebration."
- et image sur la droite , police mettre comme la taille des textes founder 
- -enlever la section events 
+Dans la page Home , premiere section je veux faire un scroll et elle descends direct sur la deuxieme section en animation scroll down 
+le logo marron doré ne doit pas descendre en meme temps que le scroll elle reste la ou elle est
+Pour la description Born in Nova Scotia, shaped by the spirit of the Maritimes. An amber rum that celebrates all sweet beginning
+mettre la taille pareil que pour In Bestileo Ethnies
 
-    Dans la page our rums 
-    -Many ways puis a la ligne to celebrate
-    -changer "An iconic rum made of Caribbean sugar cane, Madagascar vanilla, and Canadian maple syrup." en 
-    Born in Nova Scotia, shaped by the spirit of the Maritimes. An amber rum that celebrates all sweet beginning
-    
-    Dans la page description de produit 
-    -Ajouter un bouton retour sur la droite au milieu de section qui revient vers rum pas on top mais a la position precednete
-    -Pour tous les textes marron utilise ce marron stp 3A1D08
-    Pour les 3 fiches enlever la ligne "spec"
-    Ensuite changer le texte "One spirit," Pour it. Share it. Let the night begin.
-    enlever ceci "One rum to start the night. Two aged expressions to savour. All amber, all made to be shared."
-    Et enlver la section en bas "The Moment
-    The spark — the cocktail, the toast, the start of the night.
-    How to Enjoy
-    In a cocktail, or as a festive shot among friends.
-    Tasting Notes
-    Coming soon" et les mettre en haut dans le div fiche produit 
-    Pour tous les marrons foncé utilise ceci #3A1D08 et marron clair ceci #5b3507
-    -Vérifie le sôma stp avec accent le ô
+Sur la page product view , la fiche produit mettre le titre en marron clair 
+La barre de header devient trop grand dans la page product view 
+Dans product view VAZA With a (mettre  la ligne) , ajouter “It’s “ crafted to celebrate….
+Et pour chaque product view Pour out the first shot for what you believe in au lieu de One spirit 
 
-    Dans la page contact Us : 
-    enlever la video premiere section directement mettre le contact us , enlever la map et mettre le contact us au milieu stp 
+Dans contact us NS,CA changer par Nova Scotia , Canada
 
-
-
-
+Dans la page our rums rajoute plus d'animation sur l'arrivée des elements stp comme les images animé dans home 

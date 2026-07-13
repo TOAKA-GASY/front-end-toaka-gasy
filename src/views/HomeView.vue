@@ -27,8 +27,31 @@ const onScroll = () => {
   scrollTicking = true
   requestAnimationFrame(() => {
     scrollY.value = window.scrollY
+    if (scrollY.value < 40) heroSnapDone = false
     scrollTicking = false
   })
+}
+
+/* ─── Section 1 : un seul geste de scroll anime directement jusqu'à la
+   section 2 (au lieu d'obliger l'utilisateur à parcourir manuellement les
+   200vh de la scène parallax) ─── */
+let heroSnapDone = false
+let heroSnapping = false
+
+const onHeroWheel = (e) => {
+  if (heroSnapDone) return
+  if (heroSnapping) { e.preventDefault(); return }
+  if (e.deltaY <= 0) return
+
+  const homePageEl = document.querySelector('.home-page')
+  if (!homePageEl) return
+  const heroHeight = homePageEl.offsetHeight
+  if (window.scrollY >= heroHeight - 4) { heroSnapDone = true; return }
+
+  e.preventDefault()
+  heroSnapping = true
+  window.scrollTo({ top: heroHeight, behavior: 'smooth' })
+  window.setTimeout(() => { heroSnapping = false; heroSnapDone = true }, 1000)
 }
 
 /* Le header (avec le menu) ne doit apparaître qu'à l'arrivée de la section 2,
@@ -70,6 +93,7 @@ const onS5Prev = () => { s5Index.value = (s5Index.value + 2) % 3 }
 
 onMounted(() => {
   window.addEventListener('scroll', onScroll, { passive: true })
+  window.addEventListener('wheel', onHeroWheel, { passive: false })
 
   const hnS2TopEl = document.querySelector('.hn-s2-top')
   if (hnS2TopEl) {
@@ -119,6 +143,7 @@ onMounted(() => {
 
 onUnmounted(() => {
   window.removeEventListener('scroll', onScroll)
+  window.removeEventListener('wheel', onHeroWheel)
   if (hnS2TopObserver)    hnS2TopObserver.disconnect()
   if (hnS2BottomObserver) hnS2BottomObserver.disconnect()
   if (hnS4Observer)       hnS4Observer.disconnect()
@@ -157,7 +182,7 @@ const parallax = computed(() => {
       </ul>
       <RouterLink to="/" class="hero-hd__logo-wrap">
         <img src="/logo/logo-marron.webp" class="hero-hd__logo" alt="Toaka Gasy" />
-      </RouterLink>
+      </RouterLink> 
       <ul class="hero-hd__nav hero-hd__nav--right">
         <li><RouterLink to="/our-rums" class="hero-hd__link" active-class="hero-hd__link--active">OUR RUMS</RouterLink></li>
         <li><RouterLink to="/contact" class="hero-hd__link" active-class="hero-hd__link--active">CONTACT US</RouterLink></li>
@@ -171,9 +196,9 @@ const parallax = computed(() => {
       <button class="hero-mobile-menu__close" @click="menuOpen = false" aria-label="Fermer">
         <span></span><span></span>
       </button>
-      <RouterLink to="/" class="hero-mobile-menu__logo" @click="menuOpen = false">
+      <!-- <RouterLink to="/" class="hero-mobile-menu__logo" @click="menuOpen = false">
         <img src="/logo/logo-marron.webp" alt="Toaka Gasy" />
-      </RouterLink>
+      </RouterLink> -->
       <nav class="hero-mobile-menu__nav">
         <RouterLink to="/" class="hero-mobile-menu__link" @click="menuOpen = false">HOME</RouterLink>
         <RouterLink to="/our-story" class="hero-mobile-menu__link" @click="menuOpen = false">OUR STORY</RouterLink>
@@ -188,7 +213,7 @@ const parallax = computed(() => {
     <h1 class="visually-hidden">Toaka Gasy — Authentic Malagasy Rum Crafted in the Betsileo Tradition</h1>
     <div class="home-sticky">
       <div class="home-sticky__bg-clip">
-        <img src="/img/fond.webp" class="home-bg" alt="" aria-hidden="true" />
+        <img src="/img/fond-mobile.png" class="home-bg" alt="" aria-hidden="true" />
         <div class="scene-pos scene-pos--ravinala" :style="{ transform: parallax.ravinala }">
           <img src="/img/ravinala.webp" alt="" aria-hidden="true" />
         </div>

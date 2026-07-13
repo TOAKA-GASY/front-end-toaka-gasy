@@ -115,6 +115,14 @@
   object-fit: cover; object-position: center;
   z-index: 0;
   filter: sepia(0.3) saturate(1.15) brightness(1.05);
+  opacity: 0;
+  transform: scale(1.1);
+  transition: opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.or-hero__bg--in {
+  opacity: 1;
+  transform: scale(1);
 }
 /* Filtre beige : rectangle plein posé au-dessus de l'image */
 .or-hero__beige {
@@ -283,15 +291,22 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(1.12);
   max-width: 130%;
   max-height: 130%;
   width: auto;
   height: auto;
   object-fit: contain;
-  opacity: 0.16;
+  opacity: 0;
   z-index: 0;
   pointer-events: none;
+  transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.or-col-intro--visible .or-col-intro__bgimg {
+  opacity: 0.16;
+  transform: translate(-50%, -50%) scale(1);
 }
 .or-col-intro__bgimg--bw {
   filter: grayscale(1);

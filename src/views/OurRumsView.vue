@@ -194,7 +194,13 @@ onUnmounted(() => {
        ══════════════════════════════════════ -->
   <section class="or-hero">
     <h1 class="visually-hidden">Our Rums — Toaka Gasy Collection: Nova, Vaza &amp; Sôma</h1>
-    <img src="/img/nosy.webp" class="or-hero__bg" alt="" aria-hidden="true" />
+    <img
+      src="/img/nosy.webp"
+      class="or-hero__bg"
+      :class="{ 'or-hero__bg--in': animated }"
+      alt=""
+      aria-hidden="true"
+    />
     <div class="or-hero__beige" aria-hidden="true"></div>
 
     <div class="or-hero__bottles">

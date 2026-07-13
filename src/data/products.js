@@ -15,7 +15,7 @@ export const products = [
     shortName: 'NOVA',
     spec: 'Amber Rum · 40% · 75cl',
     tags: 'Bright · Bold · Born for the Party',
-    pageDesc: "Nova represents the beginning of our story, the perfect home for our vision where our creativity takes shape. NOVA is the toast, a celebration of new starts, bold dreams, and the people who bring them to life.\n\nAn iconic rum made of Caribbean sugar cane and Canadian maple syrup.",
+    pageDesc: "Nova represents the beginning of our story, the perfect home for our vision, where our creativity takes shape. NOVA is the toast, the celebration of new starts, bold dreams, and the people who bring them to life.\n\nAn iconic rum made of Caribbean sugar cane and Canadian maple syrup.",
     closing: 'Pour it. Share it. Let the night begin.',
     moment: {
       title: 'The Moment',
@@ -73,7 +73,7 @@ export const products = [
       abv: '40%',
       character: 'Powerful · Grassy · Authentic · Alive',
       ingredients: 'Caribbean Sugar Cane · Ripe Banana · Natural Botanical Notes',
-      taste: 'VAZA reveals vibrant herbal notes, ripe banana richness, and a subtle earthy warmth. With a raw edge that breathes authenticity, crafted to celebrate diversity and the stories that connect us.',
+      taste: "VAZA reveals vibrant herbal notes, ripe banana richness, and a subtle earthy warmth.\n\nWith a raw edge that breathes authenticity, it's crafted to celebrate diversity and the stories that connect us.",
     },
   },
   {

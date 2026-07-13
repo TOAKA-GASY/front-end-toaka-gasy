@@ -13,7 +13,7 @@ const router = createRouter({
       name: 'home',
       component: () => import('@/views/HomeView.vue'),
       meta: {
-        title: `${SITE_NAME} | Authentic Malagasy Rum from Madagascar`,
+        title: `${SITE_NAME} | Rum of celebration`,
         description: DEFAULT_DESCRIPTION,
       },
     },

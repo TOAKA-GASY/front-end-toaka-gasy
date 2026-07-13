@@ -201,7 +201,7 @@
   font-family: var(--font-cinzel);
   font-weight: 700;
   font-size: clamp(30px, 4.4vw, 48px);
-  color: #3A1D08;
+  color: var(--color-brown-light);
   letter-spacing: 0.06em;
   line-height: 1.1;
   margin: 0 0 0.35rem;
@@ -273,6 +273,7 @@
   color: #5b3507;
   line-height: 1.7;
   margin: 0;
+  white-space: pre-line;
 }
 
 @media (max-width: 575.98px) {

@@ -52,6 +52,24 @@
   filter: none;
 }
 
+/* Desktop uniquement : le logo n'apparaît que sur le header avec fond
+   (sticky, quand la nav apparaît) ; il ne s'affiche pas sur la section 1
+   (header transparent). */
+@media (min-width: 768px) {
+  .hero-hd__logo {
+    opacity: 0;
+    pointer-events: none;
+    transition: height 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                filter 0.45s ease,
+                opacity 0.35s ease;
+  }
+
+  .hero-hd--sticky .hero-hd__logo {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
 /* ─── Nav ─── */
 .hero-hd__nav {
   display: flex;
@@ -440,7 +458,6 @@
 .hn-s2b-content .hn-s2-text {
   max-width: 480px;
   font-family: var(--font-simonetta);
-  font-size: clamp(16px, 1.3vw, 21px);
   color: #F4EADB;
 }
 
@@ -513,7 +530,7 @@
   inset: 0;
   background:
     url('/img/fond-sec2-3.webp') center / cover no-repeat,
-    linear-gradient(to bottom, #6E7E99, #F5EADB);
+    #F5EADB;
   z-index: -2;
 }
 
@@ -1073,13 +1090,26 @@
   .hero-hd__inner   { padding: 1.25rem 1.5rem; grid-template-columns: 1fr; justify-items: center; }
   .hero-hd__nav,
   .hero-hd--sticky .hero-hd__nav { display: none; }
-  .hero-hd__logo  { height: clamp(100px, 24vw, 150px); }
+  /* Mobile : logo caché en section 1, affiché centré sur le fond glass
+     (sticky) — comme le header des autres pages. */
+  .hero-hd__logo {
+    opacity: 0;
+    pointer-events: none;
+    height: 42px;
+    transition: filter 0.45s ease, opacity 0.35s ease;
+  }
+  .hero-hd--sticky .hero-hd__logo {
+    opacity: 1;
+    pointer-events: auto;
+  }
   .hero-hd--sticky .hero-hd__inner { padding: 0.6rem 1.5rem; }
-  .hero-hd--sticky .hero-hd__logo  { height: 42px; }
   .hero-hd--sticky .hero-hd__toggler { top: 50%; }
 
   /* Section 1 : un seul scroll (pas de zone morte après l'animation) */
   .home-page { height: 100vh; }
+
+  /* Fond encore plus remonté pour mieux cadrer la scène */
+  .home-bg { object-position: center 20%; }
 
   /* Scene section 1 */
   .scene-pos--ravinala { left: 8%; bottom: 16vh; }
@@ -1166,7 +1196,6 @@
   .hn-s2-cta     { font-size: clamp(18px, 1.2vw, 22px); }
 
   .hn-s2b-title  { font-size: clamp(100px, 6vw, 140px); }
-  .hn-s2b-content .hn-s2-text { font-size: clamp(21px, 1.3vw, 26px); }
 
   .hn-s4-title { font-size: clamp(60px, 3.6vw, 84px); }
   .hn-s4-text  { font-size: clamp(20px, 1.1vw, 26px); }

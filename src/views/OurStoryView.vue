@@ -7,29 +7,43 @@ const scrollY  = ref(0)
 
 const onScroll = () => { scrollY.value = window.scrollY }
 
+/* Les animations rejouent à chaque passage (pas seulement la première fois) */
 const observer = new IntersectionObserver(
   (entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const delay = entry.target.dataset.delay || 0
-        entry.target.style.transitionDelay = `${delay}ms`
-        entry.target.classList.add('os-animate--in')
-        observer.unobserve(entry.target)
-      }
+      const delay = entry.target.dataset.delay || 0
+      entry.target.style.transitionDelay = `${delay}ms`
+      entry.target.classList.toggle('os-animate--in', entry.isIntersecting)
     })
   },
   { threshold: 0.12 }
 )
 
+/* Proverbe : effet machine à écrire, lettre par lettre, à chaque passage */
+const proverbText = "Ny betsileo tsa mora mamo fa ny toaka ro mahery"
+const proverbLetters = proverbText.split('').map(ch => (ch === ' ' ? ' ' : ch))
+const proverbVisible = ref(false)
+let proverbObserver = null
+
 onMounted(() => {
   window.scrollTo(0, 0)
   window.addEventListener('scroll', onScroll, { passive: true })
   document.querySelectorAll('.os-animate').forEach(el => observer.observe(el))
+
+  const proverbEl = document.querySelector('.os-legend__proverb')
+  if (proverbEl) {
+    proverbObserver = new IntersectionObserver(
+      ([entry]) => { proverbVisible.value = entry.isIntersecting },
+      { threshold: 0.4 }
+    )
+    proverbObserver.observe(proverbEl)
+  }
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', onScroll)
   observer.disconnect()
+  proverbObserver?.disconnect()
 })
 </script>
 
@@ -112,7 +126,15 @@ onUnmounted(() => {
       </div>
     </div>
 
-    <p class="os-legend__proverb os-animate" data-delay="280">Ny betsileo tsa mora mamo fa ny toaka ro mahery</p>
+    <p class="os-legend__proverb">
+      <span
+        v-for="(letter, i) in proverbLetters"
+        :key="i"
+        class="os-letter"
+        :class="{ 'os-letter--in': proverbVisible }"
+        :style="{ transitionDelay: `${i * 28}ms` }"
+      >{{ letter }}</span>
+    </p>
 
   </section>
 

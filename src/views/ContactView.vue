@@ -78,7 +78,7 @@ onUnmounted(() => {
         <h3 class="ct-founders__name">NARINDRA RAJOSVAH</h3>
         <a class="ct-founders__link" href="mailto:narindra@toakagasy.com">narindra@toakagasy.com</a>
         <a class="ct-founders__link" href="tel:+15142429517">+1 514 242 9517</a>
-        <p class="ct-founders__address">2621 Clifton Street, Halifax NS, CA</p>
+        <p class="ct-founders__address">2621 Clifton Street, Halifax Nova Scotia, Canada</p>
       </div>
       <div class="ct-founders__sep" aria-hidden="true"></div>
       <div class="ct-founders__col">

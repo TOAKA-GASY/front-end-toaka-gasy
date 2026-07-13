@@ -111,7 +111,7 @@ const menuOpen = ref(false)
 }
 
 .header__logo {
-  height: clamp(44px, 10vh, 72px);
+  height: clamp(44px, 5vw, 72px);
   width: auto;
   object-fit: contain;
 }
@@ -183,24 +183,9 @@ const menuOpen = ref(false)
 }
 
 .header__logo-mobile {
-  height: clamp(32px, 5vh, 48px);
+  height: clamp(44px, 5vw, 72px);
   width: auto;
   object-fit: contain;
-}
-
-/* ─── Grand écran (Bootstrap xxl) ─── */
-@media (min-width: 1400px) {
-  .header__logo {
-    height: clamp(72px, 7vh, 100px);
-  }
-
-  .header__nav {
-    gap: clamp(4rem, 5vw, 7rem);
-  }
-
-  .header__link {
-    font-size: clamp(1rem, 1.1vw, 1.3rem);
-  }
 }
 
 /* ─── Phone breakpoint ─── */
