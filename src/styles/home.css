@@ -148,6 +148,27 @@
   z-index: 0;
 }
 
+/* ─── Logo section 1 : centré dans la scène, pas fixed (défile avec la section) ─── */
+.home-hero-logo {
+  position: absolute;
+  top: 9%;
+  left: 50%;
+  transform: translateX(-50%);
+  height: clamp(75px, 9vw, 140px);
+  width: auto;
+  object-fit: contain;
+  z-index: 2;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.3));
+}
+
+@media (max-width: 767.98px) {
+  .home-hero-logo {
+    top: 6%;
+    height: clamp(66px, 18vw, 112px);
+  }
+}
+
 /* ─── Mountain layer (above sky, below ravinala/bottle) ─── */
 .home-mountain {
   position: absolute;

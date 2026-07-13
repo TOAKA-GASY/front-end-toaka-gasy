@@ -246,7 +246,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: clamp(360px, 46vw, 560px);
+  min-height: clamp(360px, 60vmin, 700px);
 }
 
 .os-legend__bottle-pos {
@@ -258,7 +258,7 @@
 .os-legend__bottle {
   position: relative;
   z-index: 2;
-  height: clamp(320px, 46vw, 560px);
+  height: clamp(320px, 60vmin, 680px);
   width: auto;
   display: block;
   filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.35));
@@ -586,8 +586,8 @@
 
   .os-legend { padding: 3.5rem 0; }
   .os-legend__inner { grid-template-columns: 1fr; gap: 1.5rem; padding: 0 1.5rem; }
-  .os-legend__visual { order: -1; min-height: clamp(280px, 68vw, 400px); }
-  .os-legend__bottle { height: clamp(240px, 64vw, 380px); }
+  .os-legend__visual { order: -1; min-height: clamp(280px, 68vmin, 400px); }
+  .os-legend__bottle { height: clamp(240px, 64vmin, 380px); }
   .os-legend__content { align-items: center; text-align: center; }
   .os-legend__content .os-s4__title { font-size: clamp(16px, 6vw, 22px); }
   .os-legend__content .os-s4__line { margin: 0 auto 1.5rem; }

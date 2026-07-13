@@ -118,7 +118,8 @@ onUnmounted(() => {
         <h2 class="os-s4__title">BEHIND THE LEGEND</h2>
         <div class="os-s4__line"></div>
         <p class="os-legend__body">
-          Across Madagascar, rum has always been part of every tradition. It's called toaka gasy, often made in far places where wild nature gives it its finest taste. The one that inspired us most comes from the south, in the hidden valleys of Betsileo's ethnie, a special rum that has carried Betsileo celebration for generations. A symbol of unity and hospitality, it's poured to welcome a guest, to bless a marriage, to bring people together at the moments that matter most.
+          Across Madagascar, rum has always been part of every tradition. It's called toaka gasy, often made in far places where wild nature gives it its finest taste.<br>
+          The one that inspired us most comes from the south, in the hidden valleys of Betsileo's ethnie, a special rum that has carried Betsileo celebration for generations. A symbol of unity and hospitality, it's poured to welcome a guest, to bless a marriage, to bring people together at the moments that matter most.
         </p>
         <p class="os-legend__body">
           So we crafted a bottle to honor it, to show the world how rum can be enjoyed: as a spirit of togetherness and a drink of celebration. Because for us, the best moments in life are the ones we celebrate together.
@@ -173,7 +174,7 @@ onUnmounted(() => {
           <p class="os-s6__bio">
             It all started in 1980, when my mother began working at a Sino-Malagasy winery in Ambalavao Tsienimparihy, Madagascar. That's where she discovered the world of wine and spirits and learned the business from the ground up.
             In 1989, she started her own wholesale business, supplying wine to bars across Antananarivo.
-            A few years later, in 1992, she expanded into rum. More than 30 years later, she is still doing what she loves.
+            A few years later, in 1992, she expanded into rum. More than 30 years later, she is still doing what she loves.<br>
             I grew up surrounded by bottles, customers, and stories. Spirits weren't just something we sold, they were part of our family's everyday life. Watching my mother work hard and build her business showed me what dedication and perseverance look like.
             Today, I'm proud to continue what she started.
             With Toaka Gasy, my goal is to bring a piece of Madagascar to North America. Every bottle reflects where I come from, the values I grew up with, and the passion that has been passed down through my family.
@@ -199,9 +200,10 @@ onUnmounted(() => {
         <div class="col-12 col-md-8 order-2 order-md-1 text-md-end os-animate" data-delay="0">
           <p class="os-s6__bio os-s6__bio--gerben ms-md-auto">
             Dutch by birth, I come from Loosdrecht, in the Netherlands, where festivals, music, movement, and people from all over the world shaped my early world. That energy stayed with me. It taught me that the best moments in life aren't planned—they're lived.
-            For over 15 years, I travelled the world working in festivals. Not on stage, but behind the scenes—on the technical side of beverages, setups, and the systems that make large celebrations run smoothly. I learned what people reach for in those moments: what they drink when they're happy, free, and fully present.
+            For over 15 years, I travelled the world working in festivals. Not on stage, but behind the scenes—on the technical side of beverages, setups, and the systems that make large celebrations run smoothly.<br>
+            I learned what people reach for in those moments: what they drink when they're happy, free, and fully present.
             Over time, I realized it was never just about drinks. It was about connection.
-            That's where Toaka Gasy found me.
+            That's where Toaka Gasy found me.<br>
             Not as a project, but as a purpose. A bridge between global festivals and movement, and Malagasy culture, heritage, and identity.
             Toaka Gasy lives in that space between those worlds.
             At its core, it carries one simple truth: the best moments in life are the ones we share.
@@ -223,7 +225,8 @@ onUnmounted(() => {
         <div class="col-12 col-md-7 os-animate" data-delay="200">
           <p class="os-s6__bio">
             Born and raised in Madagascar, I've been surrounded by this world from a very young age. Coming from a family involved in alcohol distribution in Madagascar, that environment naturally became part of my story and my inspiration.
-            In my 20s, I moved to Canada to study. Like many people starting over somewhere new, there was a moment where I felt completely lost and questioned what I truly wanted to build. I remember during a trip to Calgary being on a call with my best friend, who later became my co-founder. That's when I realized I wanted to create something meaningful, something connected to who I am and what I'm passionate about.
+            In my 20s, I moved to Canada to study. Like many people starting over somewhere new, there was a moment where I felt completely lost and questioned what I truly wanted to build.<br>
+            I remember during a trip to Calgary being on a call with my best friend, who later became my co-founder. That's when I realized I wanted to create something meaningful, something connected to who I am and what I'm passionate about.<br>
             I wanted to bring a part of my roots to North America and share a piece of Madagascar through something authentic. That idea became Toaka Gasy, inspired by traditional Betsileo rum and my heritage as part of the Betsileo ethnic group.
             For me, this is more than a product idea. It's a way to connect tradition with modernity, celebrate where I come from, and create something that tells a story across cultures.
           </p>

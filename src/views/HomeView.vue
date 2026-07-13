@@ -50,8 +50,21 @@ const onHeroWheel = (e) => {
 
   e.preventDefault()
   heroSnapping = true
+
+  let settled = false
+  const finishSnap = () => {
+    if (settled) return
+    settled = true
+    heroSnapping = false
+    heroSnapDone = true
+    window.removeEventListener('scrollend', finishSnap)
+  }
+  /* scrollend (quand supporté) détecte la vraie fin de l'animation native,
+     au lieu d'un délai fixe qui peut être plus court que le smooth scroll
+     réel sur 200vh et laisser passer un second scroll avant l'arrivée. */
+  window.addEventListener('scrollend', finishSnap, { once: true })
+  window.setTimeout(finishSnap, 1600)
   window.scrollTo({ top: heroHeight, behavior: 'smooth' })
-  window.setTimeout(() => { heroSnapping = false; heroSnapDone = true }, 1000)
 }
 
 /* Le header (avec le menu) ne doit apparaître qu'à l'arrivée de la section 2,
@@ -214,9 +227,9 @@ const parallax = computed(() => {
     <div class="home-sticky">
       <div class="home-sticky__bg-clip">
         <picture>
-          <source media="(max-width: 767.98px)" srcset="/img/fond-mobile.png" />
-          <img src="/img/fond2.png" class="home-bg" alt="" aria-hidden="true" />
+          <img src="/img/fond.webp" class="home-bg" alt="" aria-hidden="true" />
         </picture>
+        <img src="/logo/logo-marron.webp" class="home-hero-logo" alt="Toaka Gasy" aria-hidden="true" />
         <div class="scene-pos scene-pos--ravinala" :style="{ transform: parallax.ravinala }">
           <img src="/img/ravinala.webp" alt="" aria-hidden="true" />
         </div>

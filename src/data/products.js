@@ -16,7 +16,6 @@ export const products = [
     spec: 'Amber Rum · 40% · 75cl',
     tags: 'Bright · Bold · Born for the Party',
     pageDesc: "Nova represents the beginning of our story, the perfect home for our vision, where our creativity takes shape. NOVA is the toast, the celebration of new starts, bold dreams, and the people who bring them to life.\n\nAn iconic rum made of Caribbean sugar cane and Canadian maple syrup.",
-    closing: 'Pour it. Share it. Let the night begin.',
     moment: {
       title: 'The Moment',
       text: 'The spark — the cocktail, the toast, the start of the night.',
@@ -55,8 +54,7 @@ export const products = [
     shortName: 'VAZA',
     spec: 'Aged Rum · Working Name',
     tags: 'Round · Mellow · Made to Savour',
-    pageDesc: 'In Madagascar, "Vaza" means foreigner, often referring to someone from another culture. To honour one of the founders, we created Vaza — a rum that celebrates the beauty of two worlds coming together.\n\nPowerful, grassy, and alive — with a raw edge that breathes authenticity. Crafted from Caribbean sugarcane, it reveals vibrant herbal notes, ripe wet-grade banana richness, and a subtle earthy warmth that creates unforgettable character.',
-    closing: '',
+    pageDesc: 'In Madagascar, "Vaza" means foreigner, often referring to someone from another culture.\nTo honour one of the founders, we created Vaza — a rum that celebrates the beauty of two worlds coming together.\n\nPowerful, grassy, and alive — with a raw edge that breathes authenticity. Crafted from Caribbean sugarcane, it reveals vibrant herbal notes, ripe wet-grade banana richness, and a subtle earthy warmth that creates unforgettable character.',
     moment: null,
     enjoy: {
       title: 'How to Enjoy',
@@ -93,7 +91,6 @@ export const products = [
     spec: 'Long-Aged Rum · Working Name',
     tags: 'Deep · Complex · Unforgettable',
     pageDesc: 'SÔMA represents the joy of gathering, the magic of shared moments, and the warmth of celebrations that bring people together.\n\nA bold and warm rum made from Caribbean sugar cane, the iconic Madagascar vanilla, and rich sweet caramel notes. Carrying the essence of Madagascar, SÔMA is our signature creation.',
-    closing: '',
     moment: null,
     enjoy: {
       title: 'How to Enjoy',
