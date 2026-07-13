@@ -213,7 +213,10 @@ const parallax = computed(() => {
     <h1 class="visually-hidden">Toaka Gasy — Authentic Malagasy Rum Crafted in the Betsileo Tradition</h1>
     <div class="home-sticky">
       <div class="home-sticky__bg-clip">
-        <img src="/img/fond-mobile.png" class="home-bg" alt="" aria-hidden="true" />
+        <picture>
+          <source media="(max-width: 767.98px)" srcset="/img/fond-mobile.png" />
+          <img src="/img/fond2.png" class="home-bg" alt="" aria-hidden="true" />
+        </picture>
         <div class="scene-pos scene-pos--ravinala" :style="{ transform: parallax.ravinala }">
           <img src="/img/ravinala.webp" alt="" aria-hidden="true" />
         </div>
