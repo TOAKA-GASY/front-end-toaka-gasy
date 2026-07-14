@@ -397,6 +397,7 @@
   font-size: clamp(14px, 1.05vw, 18px);
   line-height: 1.7;
   color: #F4EADB;
+  white-space: pre-line;
 }
 
 .hn-s2-cta {
@@ -601,6 +602,10 @@
   letter-spacing: 0.06em;
   line-height: 1.15;
   text-transform: uppercase;
+}
+
+.riz-title__break {
+  display: none;
 }
 
 .riz-heading .hn-s2-eyebrow {
@@ -1196,6 +1201,7 @@
   .riz-heading { padding-top: 1.75rem; gap: 0.25rem; }
   .riz-heading .hn-s2-eyebrow { font-size: 9px; letter-spacing: 0.22em; }
   .riz-title { font-size: clamp(18px, 5.5vw, 26px); }
+  .riz-title__break { display: block; }
   .s7-bottle img { height: 200px; }
   .s7-bottle--center { bottom: 55px; }
   .s7-bottle--left  {

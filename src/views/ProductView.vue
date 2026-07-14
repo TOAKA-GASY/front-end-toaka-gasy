@@ -1,14 +1,17 @@
 <script setup>
 import { computed, watchEffect } from 'vue'
 import { useRoute, useRouter, RouterLink } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import Header from '@/layout/Header.vue'
-import { products } from '@/data/products'
+import { useLocalizedProducts } from '@/composables/useLocalizedData'
 import '@/styles/product.css'
 
 const route = useRoute()
 const router = useRouter()
-const productIndex = computed(() => products.findIndex(p => p.slug === route.params.slug))
-const product = computed(() => products[productIndex.value])
+const { t } = useI18n()
+const products = useLocalizedProducts()
+const productIndex = computed(() => products.value.findIndex(p => p.slug === route.params.slug))
+const product = computed(() => products.value[productIndex.value])
 
 const goBackToRums = () => {
   if (window.history.state?.back) {
@@ -35,7 +38,7 @@ watchEffect(() => {
 
     <!-- ── Hero : fond bleu/beige + image de fond + bouteille + texte ── -->
     <div class="pp-hero">
-      <button type="button" class="pp-hero__back" @click="goBackToRums" aria-label="Back to Our Rums">
+      <button type="button" class="pp-hero__back" @click="goBackToRums" :aria-label="t('product.backAria')">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M19 12H5M12 19l-7-7 7-7" />
@@ -76,29 +79,29 @@ watchEffect(() => {
 
         <dl class="pp-fiche__specs">
           <div class="pp-fiche__spec">
-            <dt>Type</dt>
+            <dt>{{ t('product.specType') }}</dt>
             <dd>{{ product.fiche.type }}</dd>
           </div>
           <div class="pp-fiche__spec">
-            <dt>Volume</dt>
+            <dt>{{ t('product.specVolume') }}</dt>
             <dd>{{ product.fiche.volume }}</dd>
           </div>
           <div class="pp-fiche__spec">
-            <dt>ABV</dt>
+            <dt>{{ t('product.specAbv') }}</dt>
             <dd>{{ product.fiche.abv }}</dd>
           </div>
           <div class="pp-fiche__spec">
-            <dt>Character</dt>
+            <dt>{{ t('product.specCharacter') }}</dt>
             <dd>{{ product.fiche.character }}</dd>
           </div>
           <div class="pp-fiche__spec pp-fiche__spec--full">
-            <dt>Ingredients</dt>
+            <dt>{{ t('product.specIngredients') }}</dt>
             <dd>{{ product.fiche.ingredients }}</dd>
           </div>
         </dl>
 
         <div class="pp-fiche__taste">
-          <span class="pp-fiche__taste-label">Taste Profile</span>
+          <span class="pp-fiche__taste-label">{{ t('product.tasteProfile') }}</span>
           <p class="pp-fiche__taste-text">{{ product.fiche.taste }}</p>
         </div>
 
@@ -121,14 +124,14 @@ watchEffect(() => {
 
     <!-- ── Tagline collection ── -->
     <div class="pp-tagline">
-      <h2 class="pp-tagline__title">Pour out the first shot<br>for what you believe in ! </h2>
+      <h2 class="pp-tagline__title">{{ t('product.tagline') }}</h2>
     </div>
 
   </section>
 
   <section v-else class="pp pp--empty">
-    <p>Product not found.</p>
-    <RouterLink to="/" class="pp-cta__link">back to home</RouterLink>
+    <p>{{ t('product.notFound') }}</p>
+    <RouterLink to="/" class="pp-cta__link">{{ t('product.backHome') }}</RouterLink>
   </section>
 
 </template>

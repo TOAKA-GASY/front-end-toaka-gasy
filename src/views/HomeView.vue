@@ -1,11 +1,14 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { products } from '@/data/products'
+import { useI18n } from 'vue-i18n'
+import { useLocalizedProducts } from '@/composables/useLocalizedData'
 import EventsSection from '@/components/EventsSection.vue'
 import '@/styles/home.css'
 
 const router = useRouter()
+const { t } = useI18n()
+const products = useLocalizedProducts()
 
 const scrollY    = ref(0)
 const menuOpen   = ref(false)
@@ -27,44 +30,8 @@ const onScroll = () => {
   scrollTicking = true
   requestAnimationFrame(() => {
     scrollY.value = window.scrollY
-    if (scrollY.value < 40) heroSnapDone = false
     scrollTicking = false
   })
-}
-
-/* ─── Section 1 : un seul geste de scroll anime directement jusqu'à la
-   section 2 (au lieu d'obliger l'utilisateur à parcourir manuellement les
-   200vh de la scène parallax) ─── */
-let heroSnapDone = false
-let heroSnapping = false
-
-const onHeroWheel = (e) => {
-  if (heroSnapDone) return
-  if (heroSnapping) { e.preventDefault(); return }
-  if (e.deltaY <= 0) return
-
-  const homePageEl = document.querySelector('.home-page')
-  if (!homePageEl) return
-  const heroHeight = homePageEl.offsetHeight
-  if (window.scrollY >= heroHeight - 4) { heroSnapDone = true; return }
-
-  e.preventDefault()
-  heroSnapping = true
-
-  let settled = false
-  const finishSnap = () => {
-    if (settled) return
-    settled = true
-    heroSnapping = false
-    heroSnapDone = true
-    window.removeEventListener('scrollend', finishSnap)
-  }
-  /* scrollend (quand supporté) détecte la vraie fin de l'animation native,
-     au lieu d'un délai fixe qui peut être plus court que le smooth scroll
-     réel sur 200vh et laisser passer un second scroll avant l'arrivée. */
-  window.addEventListener('scrollend', finishSnap, { once: true })
-  window.setTimeout(finishSnap, 1600)
-  window.scrollTo({ top: heroHeight, behavior: 'smooth' })
 }
 
 /* Le header (avec le menu) ne doit apparaître qu'à l'arrivée de la section 2,
@@ -106,7 +73,6 @@ const onS5Prev = () => { s5Index.value = (s5Index.value + 2) % 3 }
 
 onMounted(() => {
   window.addEventListener('scroll', onScroll, { passive: true })
-  window.addEventListener('wheel', onHeroWheel, { passive: false })
 
   const hnS2TopEl = document.querySelector('.hn-s2-top')
   if (hnS2TopEl) {
@@ -156,7 +122,6 @@ onMounted(() => {
 
 onUnmounted(() => {
   window.removeEventListener('scroll', onScroll)
-  window.removeEventListener('wheel', onHeroWheel)
   if (hnS2TopObserver)    hnS2TopObserver.disconnect()
   if (hnS2BottomObserver) hnS2BottomObserver.disconnect()
   if (hnS4Observer)       hnS4Observer.disconnect()
@@ -182,7 +147,7 @@ const parallax = computed(() => {
   <!-- Hero Header : grand logo centré → sticky nav au scroll -->
   <div class="hero-hd" :class="{ 'hero-hd--sticky': isSticky }">
     <!-- Hamburger (mobile only) -->
-    <button class="hero-hd__toggler" @click="menuOpen = true" aria-label="Ouvrir le menu">
+    <button class="hero-hd__toggler" @click="menuOpen = true" :aria-label="t('nav.openMenu')">
       <span class="hero-hd__bar"></span>
       <span class="hero-hd__bar"></span>
       <span class="hero-hd__bar"></span>
@@ -190,15 +155,15 @@ const parallax = computed(() => {
 
     <div class="hero-hd__inner">
       <ul class="hero-hd__nav hero-hd__nav--left">
-        <li><RouterLink to="/" class="hero-hd__link" active-class="hero-hd__link--active">HOME</RouterLink></li>
-        <li><RouterLink to="/our-story" class="hero-hd__link" active-class="hero-hd__link--active">OUR STORY</RouterLink></li>
+        <li><RouterLink to="/" class="hero-hd__link" active-class="hero-hd__link--active">{{ t('nav.home') }}</RouterLink></li>
+        <li><RouterLink to="/our-story" class="hero-hd__link" active-class="hero-hd__link--active">{{ t('nav.ourStory') }}</RouterLink></li>
       </ul>
       <RouterLink to="/" class="hero-hd__logo-wrap">
         <img src="/logo/logo-marron.webp" class="hero-hd__logo" alt="Toaka Gasy" />
-      </RouterLink> 
+      </RouterLink>
       <ul class="hero-hd__nav hero-hd__nav--right">
-        <li><RouterLink to="/our-rums" class="hero-hd__link" active-class="hero-hd__link--active">OUR RUMS</RouterLink></li>
-        <li><RouterLink to="/contact" class="hero-hd__link" active-class="hero-hd__link--active">CONTACT US</RouterLink></li>
+        <li><RouterLink to="/our-rums" class="hero-hd__link" active-class="hero-hd__link--active">{{ t('nav.ourRums') }}</RouterLink></li>
+        <li><RouterLink to="/contact" class="hero-hd__link" active-class="hero-hd__link--active">{{ t('nav.contact') }}</RouterLink></li>
       </ul>
     </div>
   </div>
@@ -206,24 +171,24 @@ const parallax = computed(() => {
   <!-- Mobile menu overlay -->
   <Transition name="hmenu">
     <div v-if="menuOpen" class="hero-mobile-menu">
-      <button class="hero-mobile-menu__close" @click="menuOpen = false" aria-label="Fermer">
+      <button class="hero-mobile-menu__close" @click="menuOpen = false" :aria-label="t('nav.close')">
         <span></span><span></span>
       </button>
       <!-- <RouterLink to="/" class="hero-mobile-menu__logo" @click="menuOpen = false">
         <img src="/logo/logo-marron.webp" alt="Toaka Gasy" />
       </RouterLink> -->
       <nav class="hero-mobile-menu__nav">
-        <RouterLink to="/" class="hero-mobile-menu__link" @click="menuOpen = false">HOME</RouterLink>
-        <RouterLink to="/our-story" class="hero-mobile-menu__link" @click="menuOpen = false">OUR STORY</RouterLink>
-        <RouterLink to="/our-rums" class="hero-mobile-menu__link" @click="menuOpen = false">OUR RUMS</RouterLink>
-        <RouterLink to="/contact" class="hero-mobile-menu__link" @click="menuOpen = false">CONTACT US</RouterLink>
+        <RouterLink to="/" class="hero-mobile-menu__link" @click="menuOpen = false">{{ t('nav.home') }}</RouterLink>
+        <RouterLink to="/our-story" class="hero-mobile-menu__link" @click="menuOpen = false">{{ t('nav.ourStory') }}</RouterLink>
+        <RouterLink to="/our-rums" class="hero-mobile-menu__link" @click="menuOpen = false">{{ t('nav.ourRums') }}</RouterLink>
+        <RouterLink to="/contact" class="hero-mobile-menu__link" @click="menuOpen = false">{{ t('nav.contact') }}</RouterLink>
       </nav>
     </div>
   </Transition>
 
   <!-- Section 1 : parallax sticky -->
   <div class="home-page">
-    <h1 class="visually-hidden">Toaka Gasy — Authentic Malagasy Rum Crafted in the Betsileo Tradition</h1>
+    <h1 class="visually-hidden">{{ t('home.hiddenH1') }}</h1>
     <div class="home-sticky">
       <div class="home-sticky__bg-clip">
         <picture>
@@ -253,15 +218,11 @@ const parallax = computed(() => {
       <!-- 2A : The Rum of Celebration -->
       <div class="hn-s2-top" :class="{ 'hn-s2-top--visible': hnS2TopVisible }">
         <div class="hn-s2-content">
-          <span class="hn-s2-eyebrow">THE INSPIRATION</span>
-          <h2 class="hn-s2-title">The Rum of Celebration</h2>
-          <p class="hn-s2-text">
-            In Betsileo Ethnies, in the South of Madagascar, rum is more than a drink.<br>
-            It's a symbol of togetherness, a pleasure of celebration, a joy of hospitality.<br>
-            Our rum is inspired by this culture and shaped by our journey, made to be shared with the world.
-          </p>
+          <span class="hn-s2-eyebrow">{{ t('home.s2Eyebrow') }}</span>
+          <h2 class="hn-s2-title">{{ t('home.s2Title') }}</h2>
+          <p class="hn-s2-text">{{ t('home.s2Text') }}</p>
           <button class="hn-s2-cta" @click="goToStory">
-            <span>DISCOVER OUR STORY</span>
+            <span>{{ t('home.s2Cta') }}</span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="6 9 12 15 18 9"/>
@@ -277,13 +238,11 @@ const parallax = computed(() => {
           <div class="hn-s2b-bottle__shadow" aria-hidden="true"></div>
         </div>
         <div class="hn-s2b-content">
-          <span class="hn-s2-eyebrow">INTRODUCING</span>
-          <h2 class="hn-s2b-title">NOVA</h2>
-          <p class="hn-s2-text">
-            Born in Nova Scotia, shaped by the spirit of the Maritimes. An amber rum that celebrates all sweet beginning
-          </p>
+          <span class="hn-s2-eyebrow">{{ t('home.s2bEyebrow') }}</span>
+          <h2 class="hn-s2b-title">{{ t('home.s2bTitle') }}</h2>
+          <p class="hn-s2-text">{{ t('home.s2bText') }}</p>
           <button class="hn-s2-cta" @click="goToProduct(products[0].slug)">
-            <span>DISCOVER NOVA</span>
+            <span>{{ t('home.s2bCta') }}</span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="6 9 12 15 18 9"/>
@@ -297,14 +256,14 @@ const parallax = computed(() => {
     <!-- Section 4 : Why We Exist -->
     <section class="home-new-s4" :class="{ 'home-new-s4--visible': hnS4Visible }">
       <div class="hn-s4-content">
-        <span class="hn-s2-eyebrow">WHY WE EXIST</span>
-        <h2 class="hn-s4-title">Rum Crafted With<br />Purpose</h2>
-        <p class="hn-s4-text">From Madagascar to the world, rum has always brought us together!</p>
+        <span class="hn-s2-eyebrow">{{ t('home.s4Eyebrow') }}</span>
+        <h2 class="hn-s4-title">{{ t('home.s4TitleLine1') }}<br />{{ t('home.s4TitleLine2') }}</h2>
+        <p class="hn-s4-text">{{ t('home.s4Text') }}</p>
       </div>
       <div class="hn-s4-images">
-        <img src="/img/cajot1.webp" class="hn-s4-img" alt="Rum aging in oak barrels" loading="lazy" />
-        <img src="/img/cajot2.webp" class="hn-s4-img" alt="Tasting the rum" loading="lazy" />
-        <img src="/img/cajot3.webp" class="hn-s4-img" alt="Rum tasting experience" loading="lazy" />
+        <img src="/img/cajot1.webp" class="hn-s4-img" :alt="t('home.s4Img1Alt')" loading="lazy" />
+        <img src="/img/cajot2.webp" class="hn-s4-img" :alt="t('home.s4Img2Alt')" loading="lazy" />
+        <img src="/img/cajot3.webp" class="hn-s4-img" :alt="t('home.s4Img3Alt')" loading="lazy" />
       </div>
     </section>
 
@@ -315,8 +274,8 @@ const parallax = computed(() => {
     <img src="/img/rizière.webp" class="home-riz__bg" alt="" aria-hidden="true" />
 
     <div class="riz-heading" :class="{ 'riz-heading--visible': rizVisible }">
-      <span class="hn-s2-eyebrow">OUR COLLECTION</span>
-      <h2 class="riz-title">EACH BOTTLE TELLS A STORY</h2>
+      <span class="hn-s2-eyebrow">{{ t('home.rizEyebrow') }}</span>
+      <h2 class="riz-title">{{ t('home.rizTitleLine1') }}<br class="riz-title__break"> {{ t('home.rizTitleLine2') }}</h2>
     </div>
 
     <div class="home-riz__bottles">
@@ -332,13 +291,13 @@ const parallax = computed(() => {
       </div>
     </div>
 
-    <button class="s57-nav s57-nav--left" @click="onS5Prev" aria-label="Bouteille précédente">
+    <button class="s57-nav s57-nav--left" @click="onS5Prev" :aria-label="t('home.prevBottle')">
       <svg width="32" height="32" viewBox="0 0 74 74" fill="none">
         <polyline points="44,22 28,37 44,52" stroke="currentColor" stroke-width="4"
           stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </button>
-    <button class="s57-nav s57-nav--right" @click="onS5Next" aria-label="Bouteille suivante">
+    <button class="s57-nav s57-nav--right" @click="onS5Next" :aria-label="t('home.nextBottle')">
       <svg width="32" height="32" viewBox="0 0 74 74" fill="none">
         <polyline points="30,22 46,37 30,52" stroke="currentColor" stroke-width="4"
           stroke-linecap="round" stroke-linejoin="round"/>
@@ -351,7 +310,7 @@ const parallax = computed(() => {
         class="s7-dot"
         :class="{ 's7-dot--active': s5Index === i - 1 }"
         @click="s5Index = i - 1"
-        :aria-label="`Bouteille ${i}`"
+        :aria-label="t('home.bottleDot', { n: i })"
       />
     </div>
   </section>
@@ -368,7 +327,7 @@ const parallax = computed(() => {
 
   <!-- Section : Follow Us -->
   <section class="home-follow">
-    <p class="home-follow__subtitle">Follow us on social media for upcoming events</p>
+    <p class="home-follow__subtitle">{{ t('home.followSubtitle') }}</p>
     <div class="home-follow__social">
       <a href="https://www.instagram.com/toakagasy.company" class="home-follow__link" target="_blank" rel="noopener" aria-label="Instagram">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -397,7 +356,7 @@ const parallax = computed(() => {
       v-if="showTopBtn"
       class="back-to-top"
       @click="scrollToTop"
-      aria-label="Remonter en haut"
+      :aria-label="t('home.backToTop')"
     >
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

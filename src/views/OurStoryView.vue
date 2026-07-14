@@ -1,7 +1,9 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import '@/styles/our-story.css'
 
+const { t } = useI18n()
 const menuOpen = ref(false)
 const scrollY  = ref(0)
 
@@ -51,39 +53,39 @@ onUnmounted(() => {
 
   <!-- Nav Header -->
   <nav class="os-nav" :class="{ 'os-nav--solid': scrollY > 50 }">
-    <button class="os-nav__toggler" @click="menuOpen = true" aria-label="Ouvrir le menu">
+    <button class="os-nav__toggler" @click="menuOpen = true" :aria-label="t('nav.openMenu')">
       <span class="os-nav__bar"></span>
       <span class="os-nav__bar"></span>
       <span class="os-nav__bar"></span>
     </button>
     <div class="os-nav__inner">
       <ul class="os-nav__links os-nav__links--left">
-        <li><RouterLink to="/" class="os-nav__link" active-class="os-nav__link--active">HOME</RouterLink></li>
-        <li><RouterLink to="/our-story" class="os-nav__link" active-class="os-nav__link--active">OUR STORY</RouterLink></li>
+        <li><RouterLink to="/" class="os-nav__link" active-class="os-nav__link--active">{{ t('nav.home') }}</RouterLink></li>
+        <li><RouterLink to="/our-story" class="os-nav__link" active-class="os-nav__link--active">{{ t('nav.ourStory') }}</RouterLink></li>
       </ul>
       <RouterLink to="/" class="os-nav__logo-wrap">
         <img src="/logo/logo-marron.webp" class="os-nav__logo" alt="Toaka Gasy" />
       </RouterLink>
       <ul class="os-nav__links os-nav__links--right">
-        <li><RouterLink to="/our-rums" class="os-nav__link" active-class="os-nav__link--active">OUR RUMS</RouterLink></li>
-        <li><RouterLink to="/contact" class="os-nav__link" active-class="os-nav__link--active">CONTACT US</RouterLink></li>
+        <li><RouterLink to="/our-rums" class="os-nav__link" active-class="os-nav__link--active">{{ t('nav.ourRums') }}</RouterLink></li>
+        <li><RouterLink to="/contact" class="os-nav__link" active-class="os-nav__link--active">{{ t('nav.contact') }}</RouterLink></li>
       </ul>
     </div>
   </nav>
 
   <Transition name="osmenu">
     <div v-if="menuOpen" class="os-mobile-menu">
-      <button class="os-mobile-menu__close" @click="menuOpen = false" aria-label="Fermer">
+      <button class="os-mobile-menu__close" @click="menuOpen = false" :aria-label="t('nav.close')">
         <span></span><span></span>
       </button>
       <RouterLink to="/" class="os-mobile-menu__logo" @click="menuOpen = false">
         <img src="/logo/logo-marron.webp" alt="Toaka Gasy" />
       </RouterLink>
       <nav class="os-mobile-menu__nav">
-        <RouterLink to="/" class="os-mobile-menu__link" @click="menuOpen = false">HOME</RouterLink>
-        <RouterLink to="/our-story" class="os-mobile-menu__link" @click="menuOpen = false">OUR STORY</RouterLink>
-        <RouterLink to="/our-rums" class="os-mobile-menu__link" @click="menuOpen = false">OUR RUMS</RouterLink>
-        <RouterLink to="/contact" class="os-mobile-menu__link" @click="menuOpen = false">CONTACT US</RouterLink>
+        <RouterLink to="/" class="os-mobile-menu__link" @click="menuOpen = false">{{ t('nav.home') }}</RouterLink>
+        <RouterLink to="/our-story" class="os-mobile-menu__link" @click="menuOpen = false">{{ t('nav.ourStory') }}</RouterLink>
+        <RouterLink to="/our-rums" class="os-mobile-menu__link" @click="menuOpen = false">{{ t('nav.ourRums') }}</RouterLink>
+        <RouterLink to="/contact" class="os-mobile-menu__link" @click="menuOpen = false">{{ t('nav.contact') }}</RouterLink>
       </nav>
     </div>
   </Transition>
@@ -92,7 +94,7 @@ onUnmounted(() => {
        Section 1 – Fond + vidéo masquée (paper-mask.svg)
        ══════════════════════════════════════ -->
   <section class="os-hero">
-    <h1 class="visually-hidden">Our Story — The Heritage Behind Toaka Gasy Rum</h1>
+    <h1 class="visually-hidden">{{ t('ourStory.hiddenH1') }}</h1>
 
     <div class="os-hero__mask-wrap os-animate" data-delay="0">
       <video class="os-hero__video" autoplay muted loop playsinline preload="none">
@@ -109,21 +111,16 @@ onUnmounted(() => {
     <div class="os-legend__inner">
       <div class="os-legend__visual">
         <div class="os-legend__bottle-pos os-animate" data-delay="0">
-          <img src="/img/toaka-gasy-red.webp" class="os-legend__bottle" alt="Toaka Gasy Mena" />
+          <img src="/img/toaka-gasy-red.webp" class="os-legend__bottle" :alt="t('ourStory.bottleAlt')" />
           <div class="os-legend__bottle-shadow" aria-hidden="true"></div>
         </div>
       </div>
 
       <div class="os-legend__content os-animate" data-delay="150">
-        <h2 class="os-s4__title">BEHIND THE LEGEND</h2>
+        <h2 class="os-s4__title">{{ t('ourStory.legendTitle') }}</h2>
         <div class="os-s4__line"></div>
-        <p class="os-legend__body">
-          Across Madagascar, rum has always been part of every tradition. It's called toaka gasy, often made in far places where wild nature gives it its finest taste.<br>
-          The one that inspired us most comes from the south, in the hidden valleys of Betsileo's ethnie, a special rum that has carried Betsileo celebration for generations. A symbol of unity and hospitality, it's poured to welcome a guest, to bless a marriage, to bring people together at the moments that matter most.
-        </p>
-        <p class="os-legend__body">
-          So we crafted a bottle to honor it, to show the world how rum can be enjoyed: as a spirit of togetherness and a drink of celebration. Because for us, the best moments in life are the ones we celebrate together.
-        </p>
+        <p class="os-legend__body">{{ t('ourStory.legendBody1') }}</p>
+        <p class="os-legend__body">{{ t('ourStory.legendBody2') }}</p>
       </div>
     </div>
 
@@ -145,15 +142,13 @@ onUnmounted(() => {
   <section class="os-s4">
 
     <div class="os-s4__content os-animate" data-delay="0">
-      <h2 class="os-s4__title">ABOUT US</h2>
+      <h2 class="os-s4__title">{{ t('ourStory.aboutTitle') }}</h2>
       <div class="os-s4__line"></div>
-      <p class="os-s4__body os-s4__body--compact">
-        We are Toaka Gasy Company, a rum house founded by Malagasy and Dutch associates. Our vision is to redefine the alcohol lifestyle by creating products that evoke emotion and bring people together. Inspired by the energy of rhythm, culture, and festivity, we see every bottle as a symbol of celebration.
-      </p>
+      <p class="os-s4__body os-s4__body--compact">{{ t('ourStory.aboutBody') }}</p>
     </div>
 
     <div class="os-s4__img-wrap os-animate" data-delay="180">
-      <img src="/img/cajot2-story.webp" class="os-s4__img" alt="Cajot" />
+      <img src="/img/cajot2-story.webp" class="os-s4__img" :alt="t('ourStory.aboutImgAlt')" />
     </div>
 
   </section>
@@ -168,18 +163,10 @@ onUnmounted(() => {
     <div class="os-s6__person">
       <div class="row align-items-start gx-3 gy-3 gy-md-0">
         <div class="col-12 col-md-4 offset-md-1 os-animate" data-delay="0">
-          <img src="/img/narindra.webp" class="os-s6__photo" alt="Narindra Rajosvah" />
+          <img src="/img/narindra.webp" class="os-s6__photo" :alt="t('ourStory.narindraPhotoAlt')" />
         </div>
         <div class="col-12 col-md-7 os-animate" data-delay="200">
-          <p class="os-s6__bio">
-            It all started in 1980, when my mother began working at a Sino-Malagasy winery in Ambalavao Tsienimparihy, Madagascar. That's where she discovered the world of wine and spirits and learned the business from the ground up.
-            In 1989, she started her own wholesale business, supplying wine to bars across Antananarivo.
-            A few years later, in 1992, she expanded into rum. More than 30 years later, she is still doing what she loves.<br>
-            Spirits were never just products on a shelf—they were part of our family's everyday life. Watching my mother work hard and build her business showed me what dedication and perseverance look like.
-            Today, I'm proud to continue what she started.<br>
-            With Toaka Gasy, my goal is to bring a piece of Madagascar to North America. Every bottle reflects where I come from, the values I grew up with, and the passion that has been passed down through my family.
-            This isn't just about making rum. It's about sharing our story, our culture, and the spirit of Madagascar with the world.
-          </p>
+          <p class="os-s6__bio">{{ t('ourStory.narindraBio') }}</p>
           <p class="os-s6__signature os-animate" data-delay="120">Narindra Rajosvah</p>
         </div>
       </div>
@@ -198,20 +185,11 @@ onUnmounted(() => {
     <div class="os-s6__person os-s6__person--gerben">
       <div class="row align-items-start justify-content-end gx-3 gx-md-5 gy-3 gy-md-0">
         <div class="col-12 col-md-8 order-2 order-md-1 text-md-end os-animate" data-delay="0">
-          <p class="os-s6__bio os-s6__bio--gerben ms-md-auto">
-            Dutch by birth, I come from Loosdrecht, in the Netherlands, where festivals, music, movement, and people from all over the world shaped my early world. That energy stayed with me. It taught me that the best moments in life aren't planned—they're lived.
-            For over 15 years, I travelled the world working in festivals. Not on stage, but behind the scenes—on the technical side of beverages, setups, and the systems that make large celebrations run smoothly.<br>
-            I learned what people reach for in those moments: what they drink when they're happy, free, and fully present.
-            Over time, I realized it was never just about drinks. It was about connection.
-            That's where Toaka Gasy found me.<br>
-            Not as a project, but as a purpose. A bridge between global festivals and movement, and Malagasy culture, heritage, and identity.
-            Toaka Gasy lives in that space between those worlds.
-            At its core, it carries one simple truth: the best moments in life are the ones we share.
-          </p>
+          <p class="os-s6__bio os-s6__bio--gerben ms-md-auto">{{ t('ourStory.gerbenBio') }}</p>
           <p class="os-s6__signature os-animate" data-delay="120">Gerben Krijnen</p>
         </div>
         <div class="col-12 col-md-4 order-1 order-md-2 os-animate" data-delay="200">
-          <img src="/img/gerben.webp" class="os-s6__photo os-s6__photo--gerben" alt="Gerben Krijnen" />
+          <img src="/img/gerben.webp" class="os-s6__photo os-s6__photo--gerben" :alt="t('ourStory.gerbenPhotoAlt')" />
         </div>
       </div>
     </div>
@@ -220,16 +198,10 @@ onUnmounted(() => {
     <div class="os-s6__person">
       <div class="row align-items-start gx-3 gy-3 gy-md-0">
         <div class="col-12 col-md-4 offset-md-1 os-animate" data-delay="0">
-          <img src="/img/nathalie.webp" class="os-s6__photo" alt="Nathalie Manantsara" />
+          <img src="/img/nathalie.webp" class="os-s6__photo" :alt="t('ourStory.nathaliePhotoAlt')" />
         </div>
         <div class="col-12 col-md-7 os-animate" data-delay="200">
-          <p class="os-s6__bio">
-            I still remember the first time Toaka Gasy Company was introduced to me.<br>
-            From that moment, everything just clicked. We instantly connected through a shared excitement for what Toaka Gasy could become, and everything started to take shape almost instinctively.<br>
-            Finding the right expression for the brand, giving its identity a voice people could genuinely connect with, and watching it grow while staying true to the intention behind it.<br>
-            To me, its story reflects exactly what it was created to inspire: bringing people together, creating genuine moments.<br>
-            I have always believed in building with intention and staying true to what matters. That's the kind of journey I will always choose to be part of.
-          </p>
+          <p class="os-s6__bio">{{ t('ourStory.nathalieBio') }}</p>
           <p class="os-s6__signature os-animate" data-delay="120">Nathalie Manantsara</p>
         </div>
       </div>

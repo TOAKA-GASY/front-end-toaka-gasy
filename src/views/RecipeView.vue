@@ -1,13 +1,16 @@
 <script setup>
 import { computed, watchEffect } from 'vue'
 import { useRoute, RouterLink } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import Header from '@/layout/Header.vue'
-import { cocktails } from '@/data/cocktails'
+import { useLocalizedCocktails } from '@/composables/useLocalizedData'
 import '@/styles/recipe.css'
 
 const route = useRoute()
-const cocktailIndex = computed(() => cocktails.findIndex(c => c.slug === route.params.slug))
-const cocktail = computed(() => cocktails[cocktailIndex.value])
+const { t } = useI18n()
+const cocktails = useLocalizedCocktails()
+const cocktailIndex = computed(() => cocktails.value.findIndex(c => c.slug === route.params.slug))
+const cocktail = computed(() => cocktails.value[cocktailIndex.value])
 
 watchEffect(() => {
   if (cocktail.value) {
@@ -28,7 +31,7 @@ watchEffect(() => {
       <img :src="cocktail.src" class="recipe-hero__bg" :alt="cocktail.title" />
       <div class="recipe-hero__overlay" aria-hidden="true"></div>
 
-      <RouterLink to="/our-rums" class="recipe-back" aria-label="Back to Perfect Serves">
+      <RouterLink to="/our-rums" class="recipe-back" :aria-label="t('recipe.backAria')">
         <i class="fa-solid fa-arrow-left"></i>
       </RouterLink>
 
@@ -41,7 +44,7 @@ watchEffect(() => {
     <div class="recipe-lower">
       <div class="recipe-lower__inner">
         <div class="recipe-block">
-          <h2 class="recipe-block__heading">Ingredients</h2>
+          <h2 class="recipe-block__heading">{{ t('recipe.ingredients') }}</h2>
           <ul class="recipe-list">
             <li v-for="(item, i) in cocktail.ingredients" :key="i">
               <i class="fa-solid fa-martini-glass-citrus recipe-list__icon"></i>
@@ -50,20 +53,20 @@ watchEffect(() => {
           </ul>
         </div>
         <div class="recipe-block">
-          <h2 class="recipe-block__heading">Method</h2>
+          <h2 class="recipe-block__heading">{{ t('recipe.method') }}</h2>
           <ol class="recipe-steps">
             <li v-for="(step, i) in cocktail.steps" :key="i">{{ step }}</li>
           </ol>
         </div>
       </div>
 
-      <p class="recipe-enjoy">Enjoy Responsibly</p>
+      <p class="recipe-enjoy">{{ t('recipe.enjoyResponsibly') }}</p>
     </div>
   </section>
 
   <section v-else class="recipe-page recipe-page--empty">
-    <p>Recipe not found.</p>
-    <RouterLink to="/our-rums" class="recipe-back-link">back to perfect serves</RouterLink>
+    <p>{{ t('recipe.notFound') }}</p>
+    <RouterLink to="/our-rums" class="recipe-back-link">{{ t('recipe.backLink') }}</RouterLink>
   </section>
 
 </template>

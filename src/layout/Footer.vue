@@ -12,18 +12,18 @@
 
       <!-- Newsletter -->
       <div class="footer-newsletter">
-        <p class="footer-newsletter__heading">join our community</p>
+        <p class="footer-newsletter__heading">{{ t('footer.newsletterHeading') }}</p>
         <form class="footer-newsletter__form" @submit.prevent="sendWelcome">
           <input
             v-model="newsletterEmail"
             class="footer-newsletter__input"
             type="email"
-            placeholder="enter your email"
-            aria-label="Votre adresse email"
+            :placeholder="t('footer.newsletterPlaceholder')"
+            :aria-label="t('footer.newsletterAria')"
             :disabled="newsletterSending || newsletterDone"
           />
           <button class="footer-newsletter__btn" type="submit" :disabled="newsletterSending || newsletterDone">
-            {{ newsletterSending ? '...' : newsletterDone ? '✓' : 'continue' }}
+            {{ newsletterSending ? '...' : newsletterDone ? '✓' : t('footer.newsletterBtnIdle') }}
           </button>
         </form>
         <p v-if="newsletterError" class="footer-newsletter__msg footer-newsletter__msg--error">{{ newsletterError }}</p>
@@ -36,13 +36,13 @@
             <div class="fn-popup-card">
               <img src="/logo/logo-icon.webp" class="fn-popup__logo" alt="Toaka Gasy" />
               <span class="fn-popup__ornament"></span>
-              <p class="fn-popup__title">Welcome to the Community</p>
+              <p class="fn-popup__title">{{ t('footer.popupTitle') }}</p>
               <p class="fn-popup__message">
-                You're in.<br />
-                We have sent you a welcome email.<br />
-                <em>Born in the Hidden Valleys of Madagascar.</em>
+                {{ t('footer.popupLine1') }}<br />
+                {{ t('footer.popupLine2') }}<br />
+                <em>{{ t('footer.popupLine3') }}</em>
               </p>
-              <button class="fn-popup__close" @click="newsletterDone = false">CLOSE</button>
+              <button class="fn-popup__close" @click="newsletterDone = false">{{ t('footer.close') }}</button>
             </div>
           </div>
         </Transition>
@@ -77,26 +77,26 @@
       <div class="footer-divider" aria-hidden="true"></div>
 
       <!-- Link columns -->
-      <nav class="footer-links" aria-label="Liens footer">
+      <nav class="footer-links" :aria-label="t('footer.linksAria')">
         <div class="footer-col">
-          <p class="footer-col__heading">Privacy &amp; Terms</p>
+          <p class="footer-col__heading">{{ t('footer.colPrivacy') }}</p>
           <ul>
-            <li><a href="#" class="footer-col__link">Returns &amp; Exchanges</a></li>
-            <li><a href="#" class="footer-col__link">Customer Support</a></li>
+            <li><a href="#" class="footer-col__link">{{ t('footer.linkReturns') }}</a></li>
+            <li><a href="#" class="footer-col__link">{{ t('footer.linkSupport') }}</a></li>
           </ul>
         </div>
         <div class="footer-col">
-          <p class="footer-col__heading">Read</p>
+          <p class="footer-col__heading">{{ t('footer.colRead') }}</p>
           <ul>
-            <li><RouterLink to="/contact" class="footer-col__link">Contact Us</RouterLink></li>
-            <li><a href="#" class="footer-col__link">Blog</a></li>
+            <li><RouterLink to="/contact" class="footer-col__link">{{ t('footer.linkContact') }}</RouterLink></li>
+            <li><a href="#" class="footer-col__link">{{ t('footer.linkBlog') }}</a></li>
           </ul>
         </div>
         <div class="footer-col">
-          <p class="footer-col__heading">Collaborate</p>
+          <p class="footer-col__heading">{{ t('footer.colCollaborate') }}</p>
           <ul>
-            <li><a href="#" class="footer-col__link">Become a Partner</a></li>
-            <li><a href="#" class="footer-col__link">Influence With Us</a></li>
+            <li><a href="#" class="footer-col__link">{{ t('footer.linkPartner') }}</a></li>
+            <li><a href="#" class="footer-col__link">{{ t('footer.linkInfluence') }}</a></li>
           </ul>
         </div>
       </nav>
@@ -107,8 +107,10 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import emailjs from '@emailjs/browser'
 
+const { t } = useI18n()
 const newsletterEmail = ref('')
 const newsletterSending = ref(false)
 const newsletterDone = ref(false)
@@ -128,7 +130,7 @@ async function sendWelcome() {
   newsletterError.value = ''
   const email = newsletterEmail.value.trim()
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    newsletterError.value = 'Please enter a valid email address.'
+    newsletterError.value = t('footer.newsletterErrorInvalid')
     return
   }
 
@@ -146,7 +148,7 @@ async function sendWelcome() {
     newsletterDone.value = true
     newsletterEmail.value = ''
   } catch {
-    newsletterError.value = 'Something went wrong. Please try again.'
+    newsletterError.value = t('footer.newsletterErrorGeneric')
   } finally {
     newsletterSending.value = false
   }

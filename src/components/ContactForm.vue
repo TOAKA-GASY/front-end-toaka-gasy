@@ -1,7 +1,9 @@
 <script setup>
 import { reactive, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import emailjs from '@emailjs/browser'
 
+const { t } = useI18n()
 const form = reactive({ name: '', firstName: '', email: '', message: '' })
 const errors = reactive({ name: '', firstName: '', email: '', message: '' })
 const isSending = ref(false)
@@ -11,14 +13,14 @@ const sendError = ref('')
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 function validate() {
-  errors.name = form.name.trim() ? '' : 'Please enter your name.'
-  errors.firstName = form.firstName.trim() ? '' : 'Please enter your first name.'
-  errors.message = form.message.trim() ? '' : 'Please write a message.'
+  errors.name = form.name.trim() ? '' : t('contactForm.errorName')
+  errors.firstName = form.firstName.trim() ? '' : t('contactForm.errorFirstName')
+  errors.message = form.message.trim() ? '' : t('contactForm.errorMessage')
 
   if (!form.email.trim()) {
-    errors.email = 'Please enter your email address.'
+    errors.email = t('contactForm.errorEmailRequired')
   } else if (!emailRegex.test(form.email.trim())) {
-    errors.email = 'Please enter a valid email address.'
+    errors.email = t('contactForm.errorEmailInvalid')
   } else {
     errors.email = ''
   }
@@ -64,7 +66,7 @@ async function sendEmail() {
     showSuccess.value = true
     Object.assign(form, { name: '', firstName: '', email: '', message: '' })
   } catch {
-    sendError.value = 'Failed to send message. Please try again later.'
+    sendError.value = t('contactForm.errorGeneric')
   } finally {
     isSending.value = false
   }
@@ -80,7 +82,7 @@ async function sendEmail() {
           v-model="form.name"
           type="text"
           :class="['contact-form__input', { 'contact-form__input--error': errors.name }]"
-          placeholder="Your name"
+          :placeholder="t('contactForm.namePlaceholder')"
           @input="clearError('name')"
         />
         <span v-if="errors.name" class="contact-form__field-error">{{ errors.name }}</span>
@@ -90,7 +92,7 @@ async function sendEmail() {
           v-model="form.firstName"
           type="text"
           :class="['contact-form__input', { 'contact-form__input--error': errors.firstName }]"
-          placeholder="Your first name"
+          :placeholder="t('contactForm.firstNamePlaceholder')"
           @input="clearError('firstName')"
         />
         <span v-if="errors.firstName" class="contact-form__field-error">{{ errors.firstName }}</span>
@@ -103,7 +105,7 @@ async function sendEmail() {
         v-model="form.email"
         type="email"
         :class="['contact-form__input', { 'contact-form__input--error': errors.email }]"
-        placeholder="Your email address"
+        :placeholder="t('contactForm.emailPlaceholder')"
         @input="clearError('email')"
       />
       <span v-if="errors.email" class="contact-form__field-error">{{ errors.email }}</span>
@@ -114,7 +116,7 @@ async function sendEmail() {
       <textarea
         v-model="form.message"
         :class="['contact-form__textarea', { 'contact-form__input--error': errors.message }]"
-        placeholder="Your message"
+        :placeholder="t('contactForm.messagePlaceholder')"
         rows="3"
         @input="clearError('message')"
       ></textarea>
@@ -124,7 +126,7 @@ async function sendEmail() {
     <!-- Submit -->
     <div class="text-center mt-2">
       <button type="submit" class="contact-form__submit" :disabled="isSending">
-        {{ isSending ? 'SENDING...' : 'SUBMIT' }}
+        {{ isSending ? t('contactForm.sending') : t('contactForm.submit') }}
       </button>
     </div>
 
@@ -140,11 +142,11 @@ async function sendEmail() {
       <div class="popup-card">
         <img src="/logo/logo-beige.webp" class="popup-card__logo" alt="Toaka Gasy" />
         <span class="popup-card__ornament"></span>
-        <p class="popup-card__title">Message Received</p>
+        <p class="popup-card__title">{{ t('contactForm.popupTitle') }}</p>
         <p class="popup-card__message">
-          Thank you for reaching out.<br />We will be in touch soon.
+          {{ t('contactForm.popupLine1') }}<br />{{ t('contactForm.popupLine2') }}
         </p>
-        <button class="popup-card__close" @click="showSuccess = false">CLOSE</button>
+        <button class="popup-card__close" @click="showSuccess = false">{{ t('contactForm.close') }}</button>
       </div>
     </div>
   </Teleport>

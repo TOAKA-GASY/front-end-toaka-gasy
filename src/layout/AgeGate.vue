@@ -6,17 +6,13 @@
 
         <img src="/logo/logo-marron.webp" class="age-gate__logo" alt="Toaka Gasy" />
 
-        <h2 id="age-gate-title" class="age-gate__title">ARE YOU OF LEGAL DRINKING AGE&nbsp;?</h2>
-        <p class="age-gate__text">
-          You must be of legal drinking age in your respective country to enter. By entering, you
-          accept our terms of use in addition to our privacy and cookie policies. We're committed
-          to stop underage drinking and encourage responsible enjoyment of our products.
-        </p>
+        <h2 id="age-gate-title" class="age-gate__title">{{ t('ageGate.title') }}</h2>
+        <p class="age-gate__text">{{ t('ageGate.text') }}</p>
 
-        <p class="age-gate__dob-label">ENTER YOUR DATE OF BIRTH</p>
+        <p class="age-gate__dob-label">{{ t('ageGate.dobLabel') }}</p>
         <div class="age-gate__dob">
           <div class="age-gate__field">
-            <label class="age-gate__label" for="ag-year">Year</label>
+            <label class="age-gate__label" for="ag-year">{{ t('ageGate.yearLabel') }}</label>
             <input
               id="ag-year" v-model="year" type="number" inputmode="numeric"
               class="age-gate__input" placeholder="YYYY" min="1900" :max="currentYear"
@@ -24,7 +20,7 @@
             />
           </div>
           <div class="age-gate__field">
-            <label class="age-gate__label" for="ag-month">Month</label>
+            <label class="age-gate__label" for="ag-month">{{ t('ageGate.monthLabel') }}</label>
             <input
               id="ag-month" ref="monthInput" v-model="month" type="number" inputmode="numeric"
               class="age-gate__input" placeholder="MM" min="1" max="12"
@@ -36,11 +32,11 @@
 
         <label class="age-gate__remember">
           <input type="checkbox" v-model="rememberMe" />
-          Remember me
+          {{ t('ageGate.rememberMe') }}
         </label>
 
         <div class="age-gate__actions">
-          <button class="age-gate__btn age-gate__btn--yes" @click="onSubmit">ENTER</button>
+          <button class="age-gate__btn age-gate__btn--yes" @click="onSubmit">{{ t('ageGate.enter') }}</button>
         </div>
 
         <img src="/img/line-mdg2.webp" class="age-gate__line" alt="" aria-hidden="true" />
@@ -51,7 +47,9 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const visible = ref(false)
 let timer = null
 
@@ -75,7 +73,7 @@ onMounted(() => {
 
 const onSubmit = () => {
   if (!month.value || !year.value) {
-    error.value = 'Please enter your full date of birth.'
+    error.value = t('ageGate.errorIncomplete')
     return
   }
 
@@ -83,14 +81,14 @@ const onSubmit = () => {
   const y = Number(year.value)
 
   if (m < 1 || m > 12) {
-    error.value = 'Please enter a valid date.'
+    error.value = t('ageGate.errorInvalid')
     return
   }
 
   const dob = new Date(y, m - 1, 1)
 
   if (dob.getFullYear() !== y || dob.getMonth() !== m - 1) {
-    error.value = 'Please enter a valid date.'
+    error.value = t('ageGate.errorInvalid')
     return
   }
 

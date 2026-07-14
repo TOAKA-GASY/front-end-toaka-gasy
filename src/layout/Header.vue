@@ -3,7 +3,7 @@
     <div class="header__container">
 
       <!-- Phone only: hamburger + logo centered -->
-      <button class="header__toggler" @click="menuOpen = true" aria-label="Ouvrir le menu">
+      <button class="header__toggler" @click="menuOpen = true" :aria-label="t('nav.openMenu')">
         <span class="header__bar"></span>
         <span class="header__bar"></span>
         <span class="header__bar"></span>
@@ -17,10 +17,10 @@
       <div class="header__grid">
         <ul class="header__nav header__nav--left">
           <li>
-            <RouterLink to="/" class="header__link" active-class="header__link--active">HOME</RouterLink>
+            <RouterLink to="/" class="header__link" active-class="header__link--active">{{ t('nav.home') }}</RouterLink>
           </li>
           <li>
-            <RouterLink to="/our-story" class="header__link" active-class="header__link--active">OUR STORY</RouterLink>
+            <RouterLink to="/our-story" class="header__link" active-class="header__link--active">{{ t('nav.ourStory') }}</RouterLink>
           </li>
         </ul>
 
@@ -30,10 +30,10 @@
 
         <ul class="header__nav header__nav--right">
           <li>
-            <RouterLink to="/our-rums" class="header__link" active-class="header__link--active">OUR RUMS</RouterLink>
+            <RouterLink to="/our-rums" class="header__link" active-class="header__link--active">{{ t('nav.ourRums') }}</RouterLink>
           </li>
           <li>
-            <RouterLink to="/contact" class="header__link" active-class="header__link--active">CONTACT US</RouterLink>
+            <RouterLink to="/contact" class="header__link" active-class="header__link--active">{{ t('nav.contact') }}</RouterLink>
           </li>
         </ul>
       </div>
@@ -44,7 +44,7 @@
   <!-- Full-page mobile menu overlay -->
   <Transition name="menu-slide">
     <div v-if="menuOpen" class="mobile-menu">
-      <button class="mobile-menu__close" @click="menuOpen = false" aria-label="Fermer le menu">
+      <button class="mobile-menu__close" @click="menuOpen = false" :aria-label="t('nav.close')">
         <span></span>
         <span></span>
       </button>
@@ -54,10 +54,10 @@
       </RouterLink>
 
       <nav class="mobile-menu__nav">
-        <RouterLink to="/" class="mobile-menu__link" @click="menuOpen = false">HOME</RouterLink>
-        <RouterLink to="/our-story" class="mobile-menu__link" @click="menuOpen = false">OUR STORY</RouterLink>
-        <RouterLink to="/our-rums" class="mobile-menu__link" @click="menuOpen = false">OUR RUMS</RouterLink>
-        <RouterLink to="/contact" class="mobile-menu__link" @click="menuOpen = false">CONTACT US</RouterLink>
+        <RouterLink to="/" class="mobile-menu__link" @click="menuOpen = false">{{ t('nav.home') }}</RouterLink>
+        <RouterLink to="/our-story" class="mobile-menu__link" @click="menuOpen = false">{{ t('nav.ourStory') }}</RouterLink>
+        <RouterLink to="/our-rums" class="mobile-menu__link" @click="menuOpen = false">{{ t('nav.ourRums') }}</RouterLink>
+        <RouterLink to="/contact" class="mobile-menu__link" @click="menuOpen = false">{{ t('nav.contact') }}</RouterLink>
       </nav>
     </div>
   </Transition>
@@ -65,11 +65,13 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 defineProps({
   bgColor: { type: String, default: '' },
 })
 
+const { t } = useI18n()
 const menuOpen = ref(false)
 </script>
 
@@ -200,8 +202,16 @@ const menuOpen = ref(false)
     background: rgba(245, 233, 219, 0.92);
   }
 
+  .header__container {
+    padding: 0 1.5rem;
+  }
+
   .header__toggler {
     display: flex;
+  }
+
+  .header__bar {
+    width: 26px;
   }
 
   .header__brand-mobile {

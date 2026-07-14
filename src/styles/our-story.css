@@ -343,6 +343,7 @@
   line-height: 1.75;
   margin: 0 0 1.25rem;
   max-width: 620px;
+  white-space: pre-line;
 }
 
 .os-legend__body:last-of-type {
@@ -458,6 +459,7 @@
   line-height: 1.75;
   margin: 0;
   max-width: clamp(1000px, 95vw, 2000px);
+  white-space: pre-line;
 }
 
 .os-s6__bio--gerben {

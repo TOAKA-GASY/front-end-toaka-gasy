@@ -1,34 +1,10 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useLocalizedEvents } from '@/composables/useLocalizedData'
 
-const events = [
-  {
-    title: 'SAIL GP',
-    location: 'Halifax — Nova Scotia',
-    desc: "First stop, first connections. In Halifax, Nova Scotia, Toaka Gasy Company team made meaningful connections and join the active community during SailGP, one of the city's most iconic and anticipated sailing events.\n\nA first step in the city where it all began!",
-    date: '20 June 2026',
-    images: [
-      '/img/gp1.webp',
-      '/img/gp2.webp',
-      '/img/gp3.webp',
-      '/img/gp4.webp',
-      '/img/gp5.webp',
-    ],
-  },
-  {
-    title: 'SOOKANY TROPHY',
-    location: 'Diego Suarez — Madagascar',
-    desc: "Very honored to be part of the Sookany Trophy!\n\nWe're excited to support an event that celebrates sailing, the spirit of Diego Suarez, and Madagascar's rich maritime heritage.\nThe culture of sailing has also been one of the inspirations behind our rum. This time, we'll meet on the water for the race... and hopefully next time, we'll meet again to share a glass of our Toaka Gasy Rum \nSee you on the water!",
-    date: '17 July 2026',
-    images: [
-      '/img/s1.webp',
-      '/img/s2.webp',
-      '/img/s3.webp',
-      '/img/s4.webp',
-      '/img/s5.webp',
-    ],
-  },
-]
+const { t } = useI18n()
+const events = useLocalizedEvents()
 
 const eventIndex = ref(0)
 let eventAutoplay = null
@@ -37,12 +13,12 @@ const AUTOPLAY_DELAY = 6000
 const restartAutoplay = () => {
   if (eventAutoplay) clearInterval(eventAutoplay)
   eventAutoplay = setInterval(() => {
-    eventIndex.value = (eventIndex.value + 1) % events.length
+    eventIndex.value = (eventIndex.value + 1) % events.value.length
   }, AUTOPLAY_DELAY)
 }
 
-const nextEvent = () => { eventIndex.value = (eventIndex.value + 1) % events.length; restartAutoplay() }
-const prevEvent = () => { eventIndex.value = (eventIndex.value - 1 + events.length) % events.length; restartAutoplay() }
+const nextEvent = () => { eventIndex.value = (eventIndex.value + 1) % events.value.length; restartAutoplay() }
+const prevEvent = () => { eventIndex.value = (eventIndex.value - 1 + events.value.length) % events.value.length; restartAutoplay() }
 const goToEvent = (i) => { eventIndex.value = i; restartAutoplay() }
 
 let observer = null
@@ -75,20 +51,20 @@ onUnmounted(() => {
   <section class="os-events">
 
     <div class="os-events__header ev-animate" data-delay="0">
-      <h2 class="os-events__title">EVENTS</h2>
+      <h2 class="os-events__title">{{ t('eventsSection.title') }}</h2>
     </div>
 
     <div class="os-events__slider ev-animate" data-delay="120">
       <div class="os-events__slide">
         <span class="os-events__index">0{{ eventIndex + 1 }} / 0{{ events.length }}</span>
         <div class="os-events__title-row">
-          <button class="os-events__nav os-events__nav--prev" @click="prevEvent" aria-label="Previous event">
+          <button class="os-events__nav os-events__nav--prev" @click="prevEvent" :aria-label="t('eventsSection.prevAria')">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="15 18 9 12 15 6"/>
             </svg>
           </button>
           <h3 class="os-events__name">{{ events[eventIndex].title }}</h3>
-          <button class="os-events__nav os-events__nav--next" @click="nextEvent" aria-label="Next event">
+          <button class="os-events__nav os-events__nav--next" @click="nextEvent" :aria-label="t('eventsSection.nextAria')">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="9 18 15 12 9 6"/>
             </svg>
@@ -106,7 +82,7 @@ onUnmounted(() => {
         class="os-events__dot"
         :class="{ 'os-events__dot--active': eventIndex === i }"
         @click="goToEvent(i)"
-        :aria-label="`Go to ${e.title}`"
+        :aria-label="t('eventsSection.goToEvent', { title: e.title })"
       />
     </div>
 
@@ -158,6 +134,7 @@ onUnmounted(() => {
   font-weight: 700;
   font-size: clamp(36px, 4.6vw, 60px);
   letter-spacing: 0.08em;
+  text-indent: 0.08em;
   color: #3a2e22;
   margin: 0;
 }

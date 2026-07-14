@@ -310,10 +310,17 @@
 }
 .or-col-intro__bgimg--bw {
   filter: grayscale(1);
-  width: 100vw;
-  height: auto;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   max-width: none;
   max-height: none;
+  object-fit: cover;
+  transform: scale(1.12);
+}
+.or-col-intro--visible .or-col-intro__bgimg--bw {
+  transform: scale(1);
 }
 
 .or-col-intro__content {
@@ -726,11 +733,6 @@
 
   .or-col-intro { height: auto; min-height: 42vh; padding: 1.5rem clamp(1.5rem, 6vw, 4rem); }
 
-  /* La section rum est maintenant plus courte (min-height: 42vh au lieu de
-     100vh) : l'image de fond N&B (Vaza/Soma), dimensionnée en 100vw de large,
-     ne couvrait plus toute la hauteur réduite et laissait un blanc. */
-  .or-col-intro__bgimg--bw { width: 145vw; }
-
   .or-side-nav { right: 1rem; top: 110px; }
 
   .or-cocktails { padding: 0.5rem clamp(1.5rem,5vw,3rem) 4rem; gap: 3rem; }
@@ -772,7 +774,7 @@
 
   .or-intro { padding: 4rem 1.5rem 3.5rem; }
 
-  .or-side-nav { right: 0.6rem; top: 88px; gap: 0.85rem; }
+  .or-side-nav { right: 0.6rem; top: 50%; transform: translateY(-50%); gap: 0.85rem; }
   .or-side-nav__bottle { height: clamp(38px,4.5vh,55px); }
   .or-side-nav__label  { display: none; }
   .or-side-nav__sep    { height: 12px; }

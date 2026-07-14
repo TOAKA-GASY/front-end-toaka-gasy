@@ -202,4 +202,5 @@
   .recipe-hero  { flex-basis: 100vh; }
   .recipe-lower { flex-basis: auto; min-height: auto; padding-top: 3rem; padding-bottom: 3rem; }
   .recipe-lower__inner { grid-template-columns: 1fr; gap: 2rem; }
+  .recipe-enjoy { font-size: clamp(26px, 7vw, 34px); }
 }

@@ -63,10 +63,13 @@
   pointer-events: none;
 }
 
-/* Vaza & Soma : image de fond pleine largeur (contrairement à Nova, contenue) */
+/* Vaza & Soma : image de fond qui remplit toute la section (contrairement à Nova, contenue) */
 .pp-hero__bgimg--full {
-  width: 100vw;
-  height: auto;
+  top: 0;
+  left: 0;
+  transform: none;
+  width: 100%;
+  height: 100%;
   max-width: none;
   max-height: none;
   object-fit: cover;
@@ -294,6 +297,7 @@
   color: #3A1D08;
   line-height: 1.2;
   margin: 0 0 1.25rem;
+  white-space: pre-line;
 }
 
 /* ── Détails : the moment / how to enjoy / notes ── */

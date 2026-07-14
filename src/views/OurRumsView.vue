@@ -1,10 +1,13 @@
 <script setup>
 import { ref, reactive, computed, onMounted, onUnmounted } from 'vue'
 import { RouterLink } from 'vue-router'
-import { products } from '@/data/products'
-import { cocktails } from '@/data/cocktails'
+import { useI18n } from 'vue-i18n'
+import { useLocalizedProducts, useLocalizedCocktails } from '@/composables/useLocalizedData'
 import '@/styles/our-rums.css'
 
+const { t } = useI18n()
+const products = useLocalizedProducts()
+const cocktails = useLocalizedCocktails()
 const menuOpen  = ref(false)
 const scrollY   = ref(0)
 const animated  = ref(false)
@@ -151,22 +154,22 @@ onUnmounted(() => {
        Nav – visible dès le chargement
        ══════════════════════════════════════ -->
   <nav class="or-nav or-nav--solid" aria-hidden="true">
-    <button class="or-nav__toggler" @click="menuOpen = true" aria-label="Ouvrir le menu">
+    <button class="or-nav__toggler" @click="menuOpen = true" :aria-label="t('nav.openMenu')">
       <span class="or-nav__bar"></span>
       <span class="or-nav__bar"></span>
       <span class="or-nav__bar"></span>
     </button>
     <div class="or-nav__inner">
       <ul class="or-nav__links or-nav__links--left">
-        <li><RouterLink to="/"          class="or-nav__link" active-class="or-nav__link--active">HOME</RouterLink></li>
-        <li><RouterLink to="/our-story" class="or-nav__link" active-class="or-nav__link--active">OUR STORY</RouterLink></li>
+        <li><RouterLink to="/"          class="or-nav__link" active-class="or-nav__link--active">{{ t('nav.home') }}</RouterLink></li>
+        <li><RouterLink to="/our-story" class="or-nav__link" active-class="or-nav__link--active">{{ t('nav.ourStory') }}</RouterLink></li>
       </ul>
       <RouterLink to="/" class="or-nav__logo-wrap">
         <img src="/logo/logo-marron.webp" class="or-nav__logo" alt="Toaka Gasy" />
       </RouterLink>
       <ul class="or-nav__links or-nav__links--right">
-        <li><RouterLink to="/our-rums" class="or-nav__link" active-class="or-nav__link--active">OUR RUMS</RouterLink></li>
-        <li><RouterLink to="/contact"  class="or-nav__link" active-class="or-nav__link--active">CONTACT US</RouterLink></li>
+        <li><RouterLink to="/our-rums" class="or-nav__link" active-class="or-nav__link--active">{{ t('nav.ourRums') }}</RouterLink></li>
+        <li><RouterLink to="/contact"  class="or-nav__link" active-class="or-nav__link--active">{{ t('nav.contact') }}</RouterLink></li>
       </ul>
     </div>
   </nav>
@@ -174,17 +177,17 @@ onUnmounted(() => {
   <!-- Mobile menu -->
   <Transition name="ormenu">
     <div v-if="menuOpen" class="or-mobile-menu">
-      <button class="or-mobile-menu__close" @click="menuOpen = false" aria-label="Fermer">
+      <button class="or-mobile-menu__close" @click="menuOpen = false" :aria-label="t('nav.close')">
         <span></span><span></span>
       </button>
       <RouterLink to="/" class="or-mobile-menu__logo" @click="menuOpen = false">
         <img src="/logo/logo-marron.webp" alt="Toaka Gasy" />
       </RouterLink>
       <nav class="or-mobile-menu__nav">
-        <RouterLink to="/"          class="or-mobile-menu__link" @click="menuOpen = false">HOME</RouterLink>
-        <RouterLink to="/our-story" class="or-mobile-menu__link" @click="menuOpen = false">OUR STORY</RouterLink>
-        <RouterLink to="/our-rums"  class="or-mobile-menu__link" @click="menuOpen = false">OUR RUMS</RouterLink>
-        <RouterLink to="/contact"   class="or-mobile-menu__link" @click="menuOpen = false">CONTACT US</RouterLink>
+        <RouterLink to="/"          class="or-mobile-menu__link" @click="menuOpen = false">{{ t('nav.home') }}</RouterLink>
+        <RouterLink to="/our-story" class="or-mobile-menu__link" @click="menuOpen = false">{{ t('nav.ourStory') }}</RouterLink>
+        <RouterLink to="/our-rums"  class="or-mobile-menu__link" @click="menuOpen = false">{{ t('nav.ourRums') }}</RouterLink>
+        <RouterLink to="/contact"   class="or-mobile-menu__link" @click="menuOpen = false">{{ t('nav.contact') }}</RouterLink>
       </nav>
     </div>
   </Transition>
@@ -193,7 +196,7 @@ onUnmounted(() => {
        Section 1 – Hero : nosy.webp (filtre beige) + 3 bouteilles flottantes
        ══════════════════════════════════════ -->
   <section class="or-hero">
-    <h1 class="visually-hidden">Our Rums — Toaka Gasy Collection: Nova, Vaza &amp; Sôma</h1>
+    <h1 class="visually-hidden">{{ t('ourRums.hiddenH1') }}</h1>
     <img
       src="/img/nosy.webp"
       class="or-hero__bg"
@@ -253,8 +256,8 @@ onUnmounted(() => {
     <!-- 2A : Many ways to celebrate + bateau -->
     <div class="or-col-top" :class="{ 'or-col-top--visible': orColTopVisible }">
       <div class="or-col-top__content">
-        <span class="or-col-eyebrow">OUR COLLECTION</span>
-        <h2 class="or-col-top__title">MANY WAYS<br>TO CELEBRATE</h2>
+        <span class="or-col-eyebrow">{{ t('ourRums.collectionEyebrow') }}</span>
+        <h2 class="or-col-top__title">{{ t('ourRums.collectionTitleLine1') }}<br>{{ t('ourRums.collectionTitleLine2') }}</h2>
       </div>
     </div>
 
@@ -284,7 +287,7 @@ onUnmounted(() => {
         <p class="or-col-intro__desc">{{ p.desc }}</p>
         <span class="or-col-intro__badge">{{ p.badge }}</span>
         <RouterLink :to="`/product/${p.slug}`" class="or-col-intro__cta">
-          DISCOVER MORE
+          {{ t('ourRums.discoverMore') }}
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="5" y1="12" x2="19" y2="12"/>
@@ -304,13 +307,13 @@ onUnmounted(() => {
        Side nav – fixe droite, visible dans la zone rums
        ══════════════════════════════════════ -->
   <Transition name="or-sidenav">
-    <div v-if="showSideNav" class="or-side-nav" role="navigation" aria-label="Naviguer entre les rums">
+    <div v-if="showSideNav" class="or-side-nav" role="navigation" :aria-label="t('nav.ourRums')">
       <template v-for="(b, i) in sideBottles" :key="i">
         <button
           class="or-side-nav__item"
           :class="{ 'or-side-nav__item--active': activeRum === i }"
           @click="scrollToRum(i)"
-          :aria-label="`Aller à ${b.label}`"
+          :aria-label="t('ourRums.goToRum', { label: b.label })"
         >
           <img :src="b.src" class="or-side-nav__bottle" :alt="b.alt" />
           <span class="or-side-nav__label">{{ b.label }}</span>
@@ -325,9 +328,9 @@ onUnmounted(() => {
        ══════════════════════════════════════ -->
   <section class="or-cocktails">
     <div class="or-cocktails__header">
-      <h2 class="or-cocktails__title">PERFECT SERVES</h2>
+      <h2 class="or-cocktails__title">{{ t('ourRums.perfectServesTitle') }}</h2>
       <div class="or-cocktails__line"></div>
-      <p class="or-cocktails__desc">Three signature ways to enjoy Toaka Gasy, crafted for every mood and occasion.</p>
+      <p class="or-cocktails__desc">{{ t('ourRums.perfectServesDesc') }}</p>
     </div>
     <div class="or-cocktails__grid">
       <RouterLink
@@ -344,7 +347,7 @@ onUnmounted(() => {
           <p class="or-cocktail-card__sub">{{ c.subtitle }}</p>
         </div>
         <div class="or-cocktail-card__hover" aria-hidden="true">
-          <span>VIEW RECIPE</span>
+          <span>{{ t('ourRums.viewRecipe') }}</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="5" y1="12" x2="19" y2="12"/>
@@ -361,7 +364,7 @@ onUnmounted(() => {
       v-if="showTopBtn"
       class="or-back-to-top"
       @click="scrollToTop"
-      aria-label="Remonter en haut"
+      :aria-label="t('ourRums.backToTop')"
     >
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
