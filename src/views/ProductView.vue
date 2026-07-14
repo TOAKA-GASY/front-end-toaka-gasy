@@ -121,7 +121,7 @@ watchEffect(() => {
 
     <!-- ── Tagline collection ── -->
     <div class="pp-tagline">
-      <h2 class="pp-tagline__title">Pour out the first shot<br>for what you believe in</h2>
+      <h2 class="pp-tagline__title">Pour out the first shot<br>for what you believe in ! </h2>
     </div>
 
   </section>

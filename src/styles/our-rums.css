@@ -142,19 +142,19 @@
 /* ─── Wrappers de positionnement ─── */
 .or-hero__pos {
   position: absolute;
-  top: 170px;
+  top: 50%;
   left: 50%;
 }
 .or-hero__pos--center {
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   z-index: 3;
 }
 .or-hero__pos--left {
-  transform: translateX(calc(-50% - clamp(110px, 15vw, 280px)));
+  transform: translate(calc(-50% - clamp(110px, 15vw, 280px)), -50%);
   z-index: 2;
 }
 .or-hero__pos--right {
-  transform: translateX(calc(-50% + clamp(110px, 15vw, 280px)));
+  transform: translate(calc(-50% + clamp(110px, 15vw, 280px)), -50%);
   z-index: 2;
 }
 
@@ -712,15 +712,28 @@
   .or-nav__links--left  { padding-right: 1.25rem; }
   .or-nav__links--right { padding-left:  1.25rem; }
 
-  .or-hero__pos        { top: 130px; }
   .or-hero__bottle--white { height: clamp(240px,50vh,460px); }
   .or-hero__bottle--black { height: clamp(185px,38vh,355px); }
   .or-hero__bottle--red   { height: clamp(168px,34vh,325px); }
 
   .or-col-top__boat { width: clamp(700px, 100vw, 1200px); }
 
+  /* .or-collection a une hauteur fixe (335vh = 35vh + 3×100vh desktop) ;
+     comme .or-col-intro passe en hauteur auto/réduite ci-dessous, garder ce
+     335vh fixe laissait tout l'espace non consommé vide avant "Perfect
+     Serves". Hauteur auto : la section épouse exactement son contenu. */
+  .or-collection { height: auto; }
+
+  .or-col-intro { height: auto; min-height: 42vh; padding: 1.5rem clamp(1.5rem, 6vw, 4rem); }
+
+  /* La section rum est maintenant plus courte (min-height: 42vh au lieu de
+     100vh) : l'image de fond N&B (Vaza/Soma), dimensionnée en 100vw de large,
+     ne couvrait plus toute la hauteur réduite et laissait un blanc. */
+  .or-col-intro__bgimg--bw { width: 145vw; }
+
   .or-side-nav { right: 1rem; top: 110px; }
 
+  .or-cocktails { padding: 0.5rem clamp(1.5rem,5vw,3rem) 4rem; gap: 3rem; }
   .or-cocktails__grid { grid-template-columns: 1fr; max-width: 460px; }
   .or-cocktail-card   { aspect-ratio: 4/3; }
 }
@@ -729,7 +742,6 @@
   .or-nav__inner  { grid-template-columns: 1fr; justify-items: center; padding: 0.75rem 1.5rem; }
   .or-nav__links, .or-nav__links--left, .or-nav__links--right { display: none; }
   .or-nav__toggler { display: flex; }
-  .or-nav__bar { background: #F4EADB; }
 
   .or-hero__pos           { top: 50%; }
   .or-hero__pos--center   { transform: translate(-50%, -50%); }
@@ -739,12 +751,16 @@
   .or-hero__bottle--black { height: clamp(184px, 43vh, 305px); }
   .or-hero__bottle--red   { height: clamp(168px, 39vh, 278px); }
 
+  .or-collection { height: auto; }
+
   .or-col-top__boat { width: clamp(560px, 130vw, 900px); opacity: 0.12; }
   .or-col-intro {
+    height: auto;
+    min-height: 60vh;
     flex-direction: column-reverse;
     justify-content: center;
     gap: 1.5rem;
-    padding: 2rem 1.5rem;
+    padding: 3rem 1.5rem;
     text-align: center;
   }
   .or-col-intro__content,
@@ -761,7 +777,8 @@
   .or-side-nav__label  { display: none; }
   .or-side-nav__sep    { height: 12px; }
 
-  .or-cocktails { padding: 4rem 1rem 3rem; gap: 2.5rem; }
+  .or-cocktails { padding: 3rem 1rem 3rem; gap: 2rem; }
+  .or-cocktails__header { gap: 0.85rem; }
   .or-cocktails__grid { grid-template-columns: 1fr; max-width: 420px; }
   .or-cocktail-card   { aspect-ratio: 4/3; }
   .or-cocktail-card__content { bottom: 1.25rem; left: 1.25rem; right: 1.25rem; }

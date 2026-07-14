@@ -1,19 +1,22 @@
-Dans our story section 2 descendre un peu l'image story.png stp 
-Rajouter animation sur l'arrivée de la section 2 texte et une animation stp comme une ecriture lettre par lettre sur le ny bestileo qui arrivent par lettre lorsque que le curseur descends sur la section 2 
-Augmente la taille de la bouteille stp 
-Les animations doivent toujours etre presentes lorsqu'on passe le curseur stp 
+Maintenant j'attaque au responsive portrait et paysage pour chaque screen 
+Dans page home en portrait : 
+-augmenter le logo 
+-Augmenter la montagne 
+-Augmenter la bouteille 
+-Diminuer le shaddow 
+-images 3 cajot 
+Section our collection trop long  la section bouteille non centrée
+-Section lifestyle trop long 
+-Foloww us trop haut 
+gere les espaces stp version protrait pas obligé 100vh 
+Home version paysage remontge les bouteille au milieu des chevrons next
 
+Dans Our story finalement remplir les 100vh avec le masq sans laisser de top 
+Mets le respect de tout les textes qui doivent etre a la ligne stp 
+dans section 2 our story le texte Ny Bestileo est hors de la section 2 en version Ipad portait , reduis les espaces et fais entrer le texte dans l'image 
 
-Dans la page Home , premiere section je veux faire un scroll et elle descends direct sur la deuxieme section en animation scroll down 
-le logo marron doré ne doit pas descendre en meme temps que le scroll elle reste la ou elle est
-Pour la description Born in Nova Scotia, shaped by the spirit of the Maritimes. An amber rum that celebrates all sweet beginning
-mettre la taille pareil que pour In Bestileo Ethnies
+Dans our rums sur certains ecrans il y'a un grand espace entre les 3 rums 
+il y'a espace entre perfect serves 
+et section 1 our rulms assure toi que ca garde meme taille bouteille et disposition au centre de la section et non en haut 
 
-Sur la page product view , la fiche produit mettre le titre en marron clair 
-La barre de header devient trop grand dans la page product view 
-Dans product view VAZA With a (mettre  la ligne) , ajouter “It’s “ crafted to celebrate….
-Et pour chaque product view Pour out the first shot for what you believe in au lieu de One spirit 
-
-Dans contact us NS,CA changer par Nova Scotia , Canada
-
-Dans la page our rums rajoute plus d'animation sur l'arrivée des elements stp comme les images animé dans home 
+Verifie les espaces et le responsive pour tous les ecrans stp pour toutes les pages , assure toi que tout est bien placé avec bootsrap , pas de blanc pas de disposition moche et surtout garder la même taille pour tout les elements meme pour les grands ecran sur emac 

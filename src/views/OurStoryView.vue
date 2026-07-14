@@ -20,7 +20,7 @@ const observer = new IntersectionObserver(
 )
 
 /* Proverbe : effet machine à écrire, lettre par lettre, à chaque passage */
-const proverbText = "Ny betsileo tsa mora mamo fa ny toaka ro mahery"
+const proverbText = "Ny betsileo tsa mora mamo fa ny toaka ro mahery!"
 const proverbLetters = proverbText.split('').map(ch => (ch === ' ' ? ' ' : ch))
 const proverbVisible = ref(false)
 let proverbObserver = null
@@ -132,7 +132,7 @@ onUnmounted(() => {
         v-for="(letter, i) in proverbLetters"
         :key="i"
         class="os-letter"
-        :class="{ 'os-letter--in': proverbVisible }"
+        :class="{ 'os-letter--in': proverbVisible, 'os-letter--space': letter === ' ' }"
         :style="{ transitionDelay: `${i * 28}ms` }"
       >{{ letter }}</span>
     </p>
@@ -175,8 +175,8 @@ onUnmounted(() => {
             It all started in 1980, when my mother began working at a Sino-Malagasy winery in Ambalavao Tsienimparihy, Madagascar. That's where she discovered the world of wine and spirits and learned the business from the ground up.
             In 1989, she started her own wholesale business, supplying wine to bars across Antananarivo.
             A few years later, in 1992, she expanded into rum. More than 30 years later, she is still doing what she loves.<br>
-            I grew up surrounded by bottles, customers, and stories. Spirits weren't just something we sold, they were part of our family's everyday life. Watching my mother work hard and build her business showed me what dedication and perseverance look like.
-            Today, I'm proud to continue what she started.
+            Spirits were never just products on a shelf—they were part of our family's everyday life. Watching my mother work hard and build her business showed me what dedication and perseverance look like.
+            Today, I'm proud to continue what she started.<br>
             With Toaka Gasy, my goal is to bring a piece of Madagascar to North America. Every bottle reflects where I come from, the values I grew up with, and the passion that has been passed down through my family.
             This isn't just about making rum. It's about sharing our story, our culture, and the spirit of Madagascar with the world.
           </p>
@@ -224,11 +224,11 @@ onUnmounted(() => {
         </div>
         <div class="col-12 col-md-7 os-animate" data-delay="200">
           <p class="os-s6__bio">
-            Born and raised in Madagascar, I've been surrounded by this world from a very young age. Coming from a family involved in alcohol distribution in Madagascar, that environment naturally became part of my story and my inspiration.
-            In my 20s, I moved to Canada to study. Like many people starting over somewhere new, there was a moment where I felt completely lost and questioned what I truly wanted to build.<br>
-            I remember during a trip to Calgary being on a call with my best friend, who later became my co-founder. That's when I realized I wanted to create something meaningful, something connected to who I am and what I'm passionate about.<br>
-            I wanted to bring a part of my roots to North America and share a piece of Madagascar through something authentic. That idea became Toaka Gasy, inspired by traditional Betsileo rum and my heritage as part of the Betsileo ethnic group.
-            For me, this is more than a product idea. It's a way to connect tradition with modernity, celebrate where I come from, and create something that tells a story across cultures.
+            I still remember the first time Toaka Gasy Company was introduced to me.<br>
+            From that moment, everything just clicked. We instantly connected through a shared excitement for what Toaka Gasy could become, and everything started to take shape almost instinctively.<br>
+            Finding the right expression for the brand, giving its identity a voice people could genuinely connect with, and watching it grow while staying true to the intention behind it.<br>
+            To me, its story reflects exactly what it was created to inspire: bringing people together, creating genuine moments.<br>
+            I have always believed in building with intention and staying true to what matters. That's the kind of journey I will always choose to be part of.
           </p>
           <p class="os-s6__signature os-animate" data-delay="120">Nathalie Manantsara</p>
         </div>
