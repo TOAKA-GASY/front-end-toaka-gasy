@@ -30,8 +30,44 @@ const onScroll = () => {
   scrollTicking = true
   requestAnimationFrame(() => {
     scrollY.value = window.scrollY
+    if (scrollY.value < 40) heroSnapDone = false
     scrollTicking = false
   })
+}
+
+/* ─── Section 1 : un seul geste de scroll anime directement jusqu'à la
+   section 2 (au lieu d'obliger l'utilisateur à parcourir manuellement les
+   200vh de la scène parallax) ─── */
+let heroSnapDone = false
+let heroSnapping = false
+
+const onHeroWheel = (e) => {
+  if (heroSnapDone) return
+  if (heroSnapping) { e.preventDefault(); return }
+  if (e.deltaY <= 0) return
+
+  const homePageEl = document.querySelector('.home-page')
+  if (!homePageEl) return
+  const heroHeight = homePageEl.offsetHeight
+  if (window.scrollY >= heroHeight - 4) { heroSnapDone = true; return }
+
+  e.preventDefault()
+  heroSnapping = true
+
+  let settled = false
+  const finishSnap = () => {
+    if (settled) return
+    settled = true
+    heroSnapping = false
+    heroSnapDone = true
+    window.removeEventListener('scrollend', finishSnap)
+  }
+  /* scrollend (quand supporté) détecte la vraie fin de l'animation native,
+     au lieu d'un délai fixe qui peut être plus court que le smooth scroll
+     réel sur 200vh et laisser passer un second scroll avant l'arrivée. */
+  window.addEventListener('scrollend', finishSnap, { once: true })
+  window.setTimeout(finishSnap, 1600)
+  window.scrollTo({ top: heroHeight, behavior: 'smooth' })
 }
 
 /* Le header (avec le menu) ne doit apparaître qu'à l'arrivée de la section 2,
@@ -73,6 +109,7 @@ const onS5Prev = () => { s5Index.value = (s5Index.value + 2) % 3 }
 
 onMounted(() => {
   window.addEventListener('scroll', onScroll, { passive: true })
+  window.addEventListener('wheel', onHeroWheel, { passive: false })
 
   const hnS2TopEl = document.querySelector('.hn-s2-top')
   if (hnS2TopEl) {
@@ -122,6 +159,7 @@ onMounted(() => {
 
 onUnmounted(() => {
   window.removeEventListener('scroll', onScroll)
+  window.removeEventListener('wheel', onHeroWheel)
   if (hnS2TopObserver)    hnS2TopObserver.disconnect()
   if (hnS2BottomObserver) hnS2BottomObserver.disconnect()
   if (hnS4Observer)       hnS4Observer.disconnect()

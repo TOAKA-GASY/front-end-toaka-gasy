@@ -1113,46 +1113,17 @@
   .hero-hd__nav   { gap: 2rem; }
   .hero-hd__nav--left  { padding-right: 1.25rem; }
   .hero-hd__nav--right { padding-left:  1.25rem; }
-  .hero-hd__logo  { height: clamp(80px, 10vw, 120px); }
-  .hero-hd--sticky .hero-hd__logo { height: clamp(44px, 5vw, 60px); }
-
-  /* Logo de la scène (section 1, avant que le header ne devienne sticky) : trop petit en portrait */
-  .home-hero-logo { height: clamp(95px, 13vw, 160px); }
 
   /* Scene */
   .scene-pos--ravinala { left: -5%; bottom: 12vh; }
   .scene-pos--ravinala img { height: clamp(460px, 90vh, 720px); }
-  .home-mountain { height: 68%; object-fit: cover; }
-  .scene-pos--bottle img   { height: clamp(320px, 86vh, 560px); }
-  .bottle-shadow { width: 320px; height: 68px; background: rgba(4, 1, 0, 0.35); }
+  .scene-pos--bottle img   { height: clamp(250px, 74vh, 470px); }
+  .bottle-shadow { width: 460px; height: 95px; }
 
-  /* Section 5 – Rizière : hauteur maîtrisée (pas 115vh), bouteilles centrées */
-  .home-riz { height: 62vh; }
-  .riz-heading { padding-top: 3rem; }
-  .s7-bottle img { height: clamp(280px, 40vh, 480px); }
-  .s7-bottle--center { bottom: 7vh; }
-  .s7-bottle--left  { transform: translateX(calc(-50% - 30vw)) scale(0.62); bottom: 7vh; }
-  .s7-bottle--right { transform: translateX(calc(-50% + 30vw)) scale(0.62); bottom: 7vh; }
-
-  /* Section 2 – Inspiration : hauteur fixe 100vh trop haute en portrait, le
-     texte ne remplit pas la section et laisse un grand vide avant la suite.
-     Le wrap passe en hauteur auto pour épouser exactement ses enfants (plus
-     de vide résiduel calculé sur une estimation desktop). */
-  .home-new-wrap { height: auto; }
-  .home-new-s2   { height: auto; }
-  .hn-s2-top     { height: auto; padding: 3rem 1.5rem; margin-top: 6rem; }
-  .hn-s2-content { padding: 8rem 1.5rem 0; }
-  .hn-s2-bottom  { height: auto; min-height: 55vh; padding: 2.5rem clamp(1.5rem, 6vw, 4rem); }
-
-  /* Section 4 – Why We Exist (images "cajot") : trop longue en portrait */
-  .home-new-s4   { height: auto; min-height: 60vh; padding: 3rem 0; }
-  .hn-s4-images  { flex: 0 0 42vh; height: 42vh; }
-
-  /* Section 3 – Lifestyle : réduite (100vh par défaut est trop long en portrait) */
-  .home-new-s3 { height: 40vh; }
-
-  /* Follow us : padding-top équilibré (trop proche du haut de sa section) */
-  .home-follow { padding-top: clamp(2rem, 4vw, 3rem); }
+  /* Section 5 – Rizière */
+  .s7-bottle img { height: clamp(280px, 48vh, 480px); }
+  .s7-bottle--left  { transform: translateX(calc(-50% - 30vw)) scale(0.62); }
+  .s7-bottle--right { transform: translateX(calc(-50% + 30vw)) scale(0.62); }
 }
 
 /* ════════════════════════════════════════
