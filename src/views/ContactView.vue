@@ -65,7 +65,6 @@ onUnmounted(() => {
   <section class="ct-form-section">
     <div class="ct-form-section__grid">
       <div class="ct-form-section__inner">
-        <img src="/logo/logo-marron.webp" class="ct-form-section__logo" alt="Toaka Gasy" />
         <h1 class="ct-form-section__title">{{ t('contact.title') }}</h1>
         <p class="ct-form-section__subtitle">{{ t('contact.subtitleLine1') }}<br>{{ t('contact.subtitleLine2') }}</p>
         <ContactForm />
