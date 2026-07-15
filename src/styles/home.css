@@ -1161,8 +1161,8 @@
   .home-mountain { height: 74%; }
 
   /* Scene section 1 */
-  .scene-pos--ravinala { left: 8%; bottom: 16vh; }
-  .scene-pos--ravinala img { height: clamp(300px, 66vh, 520px); }
+  .scene-pos--ravinala { left: 8%; bottom: 15vh; }
+  .scene-pos--ravinala img { height: clamp(360px, 78vh, 640px); }
   .scene-pos--bottle { bottom: -40px; }
   .scene-pos--bottle img   { height: clamp(340px, 86vh, 580px); }
   .bottle-shadow { width: 260px; height: 60px; }
@@ -1199,8 +1199,8 @@
 @media (max-width: 575.98px) {
 
   /* Scene */
-  .scene-pos--ravinala { left: -50%; bottom: 18vh; }
-  .scene-pos--ravinala img { height: clamp(320px, 76vh, 560px); }
+  .scene-pos--ravinala { left: -50%; bottom: 15vh; }
+  .scene-pos--ravinala img { height: clamp(340px, 72vh, 560px); }
   .scene-pos--bottle img   { height: clamp(260px, 70vh, 440px); }
   .bottle-shadow { width: 180px; height: 58px; }
 

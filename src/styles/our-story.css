@@ -100,7 +100,7 @@
      boîtes à la jonction hero/section 2. */
   bottom: -2px;
   z-index: 1;
-  background: url('/img/story.png') center top / cover no-repeat;
+  background: url('/img/story2.png') center top / cover no-repeat;
   transform: scaleY(-1);
   opacity: 0.16;
 }
