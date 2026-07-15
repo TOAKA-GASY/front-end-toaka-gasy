@@ -42,11 +42,19 @@
 
 html {
   height: 100%;
+  /* overflow-x: hidden sur <html> casse position:sticky sur Chrome (l'axe X
+     et Y de overflow sont liés en interne) ; overflow-x: clip empêche le
+     débordement horizontal (pan/zoom-out) sans créer de scroll-container et
+     donc sans casser le sticky de la section 1 du Home. Fallback hidden pour
+     les navigateurs qui ne supportent pas clip. */
+  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
   min-height: 100%;
   overflow-x: hidden;
+  overflow-x: clip;
 }
 
 a {

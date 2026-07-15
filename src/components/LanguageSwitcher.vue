@@ -81,7 +81,7 @@ onUnmounted(() => {
   position: fixed;
   z-index: 500;
   top: 2.2rem;
-  right: 1.25rem;
+  left: 1.25rem;
   transform: translateY(-50%);
 }
 
@@ -115,7 +115,7 @@ onUnmounted(() => {
 .lang-switcher__menu {
   position: absolute;
   top: calc(100% + 0.6rem);
-  right: 0;
+  left: 0;
   list-style: none;
   margin: 0;
   padding: 0.4rem 0;
@@ -153,7 +153,13 @@ onUnmounted(() => {
 @media (min-width: 768px) {
   .lang-switcher {
     top: 3.2rem;
+    left: auto;
     right: 4rem;
+  }
+
+  .lang-switcher__menu {
+    left: auto;
+    right: 0;
   }
 }
 </style>

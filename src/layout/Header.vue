@@ -208,6 +208,7 @@ const menuOpen = ref(false)
 
   .header__toggler {
     display: flex;
+    margin-left: auto;
   }
 
   .header__bar {

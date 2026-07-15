@@ -53,7 +53,7 @@
 .or-nav__toggler {
   display: none;
   position: absolute;
-  left: 1.25rem; top: 50%;
+  right: 1.25rem; top: 50%;
   transform: translateY(-50%);
   border: none; background: transparent;
   flex-direction: column;
