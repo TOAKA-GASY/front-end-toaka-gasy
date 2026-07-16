@@ -20,7 +20,9 @@ export default defineConfig({
     Sitemap({
       hostname: 'https://toakagasy.com',
       dynamicRoutes,
-      i18n: { defaultLanguage: 'en', languages: ['en', 'fr', 'nl'], strategy: 'prefix' },
+      // FR temporarily deactivated (see src/i18n.js) — kept out so the sitemap
+      // doesn't list /fr/* URLs the router no longer serves.
+      i18n: { defaultLanguage: 'en', languages: ['en', 'nl'], strategy: 'prefix' },
     })
   ],
   resolve: {

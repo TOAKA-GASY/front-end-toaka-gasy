@@ -3,9 +3,13 @@ import en from '@/locales/en'
 import fr from '@/locales/fr'
 import nl from '@/locales/nl'
 
-export const SUPPORTED_LOCALES = ['en', 'fr', 'nl']
+// FR temporarily deactivated: kept out of SUPPORTED_LOCALES so routes, the
+// language switcher, and locale detection all skip it, without deleting the
+// fr.js translations. Re-add 'fr' here to switch it back on.
+export const SUPPORTED_LOCALES = ['en', 'nl']
 export const DEFAULT_LOCALE = 'en'
 const STORAGE_KEY = 'tg-locale'
+const NON_DEFAULT_LOCALES = SUPPORTED_LOCALES.filter((locale) => locale !== DEFAULT_LOCALE)
 
 function readStoredLocale() {
   try {
@@ -32,17 +36,20 @@ function writeStoredLocale(locale) {
 function resolveInitialLocale() {
   if (typeof window === 'undefined') return DEFAULT_LOCALE
 
-  const pathLocale = window.location.pathname.match(/^\/(fr|nl)(\/|$)/)?.[1]
-  if (pathLocale) {
-    writeStoredLocale(pathLocale)
-    return pathLocale
+  if (NON_DEFAULT_LOCALES.length) {
+    const pathLocale = window.location.pathname
+      .match(new RegExp(`^/(${NON_DEFAULT_LOCALES.join('|')})(/|$)`))?.[1]
+    if (pathLocale) {
+      writeStoredLocale(pathLocale)
+      return pathLocale
+    }
   }
 
   const stored = readStoredLocale()
   if (stored) return stored
 
   const browserLang = (navigator.language || '').slice(0, 2).toLowerCase()
-  if (browserLang === 'fr' || browserLang === 'nl') {
+  if (NON_DEFAULT_LOCALES.includes(browserLang)) {
     writeStoredLocale(browserLang)
     return browserLang
   }
