@@ -30,4 +30,13 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  server: {
+    // Local admin API testing: run `vercel dev --listen 3001` in a separate
+    // terminal (serves only /api/*) and keep using `npm run dev` as usual —
+    // this avoids a known conflict between `vercel dev`'s SPA rewrite
+    // emulation and Vite's own index.html handling.
+    proxy: {
+      '/api': 'http://localhost:3001',
+    },
+  },
 })
