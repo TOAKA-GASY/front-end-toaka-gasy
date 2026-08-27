@@ -76,7 +76,7 @@ export default {
   },
 
   ourStory: {
-    hiddenH1: 'Ons Verhaal — Het erfgoed achter Toaka Gasy rum',
+    hiddenH1: 'Ons Verhaal — Het erfgoed achter Toaka Gasy rum !',
     legendTitle: 'HET VERHAAL ACHTER DE LEGENDE',
     legendBody1:
       'Overal in Madagaskar maakt rum al eeuwenlang deel uit van elke traditie. Het heet toaka gasy en wordt vaak gemaakt op afgelegen plekken waar de wilde natuur het zijn fijnste smaak geeft.\nDegene die ons het meest inspireerde komt uit het zuiden, uit de verborgen valleien van de Betsileo-bevolkingsgroep, een bijzondere rum die al generaties lang de Betsileo-feesten draagt. Als symbool van eenheid en gastvrijheid wordt hij geschonken om een gast te verwelkomen, een huwelijk te zegenen, mensen samen te brengen op de momenten die er het meest toe doen.',

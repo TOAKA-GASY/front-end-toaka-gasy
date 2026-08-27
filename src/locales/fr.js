@@ -76,7 +76,7 @@ export default {
   },
 
   ourStory: {
-    hiddenH1: "Notre Histoire — L'héritage derrière le rhum Toaka Gasy",
+    hiddenH1: "Notre Histoire — L'héritage derrière le rhum Toaka Gasy !",
     legendTitle: 'DERRIÈRE LA LÉGENDE',
     legendBody1:
       "Partout à Madagascar, le rhum a toujours fait partie de chaque tradition. On l'appelle toaka gasy, souvent élaboré dans des lieux reculés où la nature sauvage lui donne sa saveur la plus fine.\nCelui qui nous a le plus inspirés vient du sud, dans les vallées cachées de l'ethnie Betsileo, un rhum particulier qui porte la célébration betsileo depuis des générations. Symbole d'unité et d'hospitalité, il est versé pour accueillir un invité, bénir un mariage, réunir les gens dans les moments qui comptent le plus.",
