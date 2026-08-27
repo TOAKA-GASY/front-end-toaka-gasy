@@ -179,7 +179,7 @@ export default {
     ourRums: {
       title: 'Onze Rums | Toaka Gasy Collectie',
       description:
-        'Ontdek de Toaka Gasy rumcollectie — Nova, Vaza en Sôma — plus perfect serves en cocktailrecepten geïnspireerd door Madagaskar.',
+        'Ontdek de Toaka Gasy rumcollectie Nova, Vaza en Sôma plus perfect serves en cocktailrecepten geïnspireerd door Madagaskar.',
     },
     contact: {
       title: 'Contact | Toaka Gasy',
