@@ -227,7 +227,7 @@ function onConfirmed() {
     }
   }
   confirmSection.value = null
-  pushToast('Modifications publiées sur GitHub ✅')
+  pushToast('Modifications publiées ✅')
 }
 
 function handleKeydown(event) {
