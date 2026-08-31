@@ -52,7 +52,7 @@ export default {
     s2Eyebrow: 'GEÏNSPIREERD DOOR ',
     s2Title: 'DE TRADITIONELE RUM VAN MADAGASCAR',
     s2Text:
-      'Bij de Betsileo-volkeren, in het zuiden van Madagaskar, is rum meer dan alleen een drankje.\nHet is een symbool van saamhorigheid, een feestelijk genot, een uiting van gastvrijheid.\nOnze rum is geïnspireerd door deze cultuur en gevormd door onze reis, gemaakt om met de wereld te delen.',
+      'In het Madagaskar van de 19e eeuw, onder koningin Ranavalona I, kreeg de kunst van het distilleren een uitgesproken Malagassisch karakter. Diep in het hart van dit woeste en ongerepte eiland, te midden van uitgestrekte bossen, verborgen valleien en natuurlijke oases, begonnen families suikerriet te verwerken tot hun eigen sterke drank. Deze traditie werd van generatie op generatie doorgegeven en stond bekend als Toaka Gasy — „de sterke drank van Madagaskar“.',
     s2Cta: 'ONTDEK ONS VERHAAL',
     s2bEyebrow: 'MAAK KENNIS MET',
     s2bTitle: 'NOVA',
@@ -61,7 +61,7 @@ export default {
     s4Eyebrow: 'WAAROM WE BESTAAN',
     s4TitleLine1: 'Rum, vervaardigd met',
     s4TitleLine2: 'Doel',
-    s4Text: 'Van Madagaskar tot de rest van de wereld: rum heeft ons altijd bij elkaar gebracht!',
+    s4Text: 'Van Madagaskar tot de rest van de wereld: rum heeft ons altijd al bij elkaar gebracht!',
     s4Img1Alt: 'Rijping van rum in eikenhouten vaten',
     s4Img2Alt: 'De rum proeven',
     s4Img3Alt: 'Rumproeverij',
