@@ -49,8 +49,8 @@ export default {
 
   home: {
     hiddenH1: 'Toaka Gasy — Authentic Malagasy Rum Crafted in the Betsileo Tradition',
-    s2Eyebrow: 'INSPIRED BY ',
-    s2Title: 'THE TRADITIONAL RUM OF MADAGASCAR',
+    s2Eyebrow: 'INSPIRED BY THE',
+    s2Title: 'TRADITIONAL RUM OF MADAGASCAR',
     s2Text:
       "In 19th-century Madagascar, under Queen Ranavalona I, the art of distillation took on a distinctly Malagasy character. Deep within this wild and untouched island, through vast forests, hidden valleys and natural oases, families began turning sugarcane into a spirit of their own. Passed down through generations, it became known as Toaka Gasy  “the spirit of Madagascar.”",
     s2Cta: 'DISCOVER OUR STORY',

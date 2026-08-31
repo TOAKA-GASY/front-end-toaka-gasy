@@ -49,16 +49,16 @@ export default {
 
   home: {
     hiddenH1: 'Toaka Gasy — Authentieke Malagassische rum, gebrand volgens de Betsileo-traditie',
-    s2Eyebrow: 'GEÏNSPIREERD DOOR ',
-    s2Title: 'DE TRADITIONELE RUM VAN MADAGASCAR',
+    s2Eyebrow: 'GEÏNSPIREERD DOOR DE',
+    s2Title: 'TRADITIONELE RUM UIT MADAGASCAR',
     s2Text:
-      'In het Madagaskar van de 19e eeuw, onder koningin Ranavalona I, kreeg de kunst van het distilleren een uitgesproken Malagassisch karakter. Diep in het hart van dit woeste en ongerepte eiland, te midden van uitgestrekte bossen, verborgen valleien en natuurlijke oases, begonnen families suikerriet te verwerken tot hun eigen sterke drank. Deze traditie werd van generatie op generatie doorgegeven en stond bekend als Toaka Gasy  „de sterke drank van Madagaskar“.',
+      'In het Madagaskar van de 19e eeuw, onder koningin Ranavalona I, kreeg de kunst van het distilleren een uitgesproken Malagassisch karakter. Diep in het hart van dit woeste en ongerepte eiland, te midden van uitgestrekte bossen, verborgen valleien en natuurlijke oases, begonnen families suikerriet te verwerken tot hun eigen sterke drank. Deze traditie werd van generatie op generatie doorgegeven en stond bekend als Toaka Gasy, ‘de sterke drank van Madagaskar’.',
     s2Cta: 'ONTDEK ONS VERHAAL',
     s2bEyebrow: 'MAAK KENNIS MET',
     s2bTitle: 'NOVA',
     s2bText: 'Geboren in Nova Scotia, gevormd door de geest van de Maritimes. Een amberkleurige rum die alle zoete beginmomenten viert',
     s2bCta: 'ONTDEK NOVA',
-    s4Eyebrow: 'WAAROM WE BESTAAN',
+    s4Eyebrow: 'WAAROM WIJ BESTAAN',
     s4TitleLine1: 'Rum, vervaardigd met',
     s4TitleLine2: 'Doel',
     s4Text: 'Van Madagaskar tot de rest van de wereld: rum heeft ons altijd al bij elkaar gebracht!',
