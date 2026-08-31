@@ -61,8 +61,8 @@ onUnmounted(() => {
     </div>
   </Transition>
 
-  <!-- Section : Fond f3e6d8 + formulaire, centré -->
-  <section class="ct-form-section">
+  <!-- Section : Fond f3e6d8 + formulaire + fondateurs, tenant dans 100vh -->
+  <section class="ct-hero">
     <div class="ct-form-section__grid">
       <div class="ct-form-section__inner">
         <h1 class="ct-form-section__title">{{ t('contact.title') }}</h1>
@@ -70,25 +70,30 @@ onUnmounted(() => {
         <ContactForm />
       </div>
     </div>
-  </section>
 
-  <!-- Section 3 : Fondateurs – rectangle marron -->
-  <section class="ct-founders">
-    <div class="ct-founders__inner">
-      <div class="ct-founders__col">
-        <h3 class="ct-founders__name">NARINDRA RAJOSVAH</h3>
-        <a class="ct-founders__link" href="mailto:narindra@toakagasy.com">narindra@toakagasy.com</a>
-        <a class="ct-founders__link" href="tel:+15142429517">+1 514 242 9517</a>
-        <p class="ct-founders__address">{{ t('contact.founderNarindraAddress') }}</p>
-      </div>
-      <div class="ct-founders__sep" aria-hidden="true"></div>
-      <div class="ct-founders__col">
-        <h3 class="ct-founders__name">GERBEN KRIJNEN</h3>
-        <a class="ct-founders__link" href="mailto:gerben@toakagasy.com">gerben@toakagasy.com</a>
-        <a class="ct-founders__link" href="tel:+310615851268">+31 (0) 6 1585 1268</a>
-        <p class="ct-founders__address">{{ t('contact.founderGerbenAddress') }}</p>
+    <!-- Fondateurs – rectangle marron compact -->
+    <div class="ct-founders">
+      <div class="ct-founders__inner">
+        <div class="ct-founders__col">
+          <h3 class="ct-founders__name">NARINDRA RAJOSVAH</h3>
+          <a class="ct-founders__link" href="mailto:narindra@toakagasy.com">narindra@toakagasy.com</a>
+          <a class="ct-founders__link" href="tel:+15142429517">+1 514 242 9517</a>
+          <p class="ct-founders__address">{{ t('contact.founderNarindraAddress') }}</p>
+        </div>
+        <div class="ct-founders__sep" aria-hidden="true"></div>
+        <div class="ct-founders__col">
+          <h3 class="ct-founders__name">GERBEN KRIJNEN</h3>
+          <a class="ct-founders__link" href="mailto:gerben@toakagasy.com">gerben@toakagasy.com</a>
+          <a class="ct-founders__link" href="tel:+310615851268">+31 (0) 6 1585 1268</a>
+          <p class="ct-founders__address">{{ t('contact.founderGerbenAddress') }}</p>
+        </div>
       </div>
     </div>
+  </section>
+
+  <!-- Section : Photo pleine page -->
+  <section class="ct-photo">
+    <img src="/img/toaka-gasy.png" class="ct-photo__img" alt="Toaka Gasy" />
   </section>
 
 </template>

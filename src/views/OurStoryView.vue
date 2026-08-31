@@ -91,22 +91,42 @@ onUnmounted(() => {
   </Transition>
 
   <!-- ══════════════════════════════════════
-       Section 1 – Fond + vidéo masquée (paper-mask.svg)
+       Section 1 – The Story Of / Madagascar's Wildest Rum
        ══════════════════════════════════════ -->
   <section class="os-hero">
     <h1 class="visually-hidden">{{ t('ourStory.hiddenH1') }}</h1>
 
-    <div class="os-hero__mask-wrap os-animate" data-delay="0">
-      <video class="os-hero__video" autoplay muted loop playsinline preload="none">
-        <source src="/vd/mdg-video.mp4" type="video/mp4" />
-      </video>
+    <div class="os-hero__inner">
+      <div class="os-hero__text os-animate" data-delay="0">
+        <span class="os-hero__kicker">{{ t('ourStory.heroKicker') }}</span>
+        <h2 class="os-hero__title">{{ t('ourStory.heroTitleLine1') }}<br />{{ t('ourStory.heroTitleLine2') }}</h2>
+        <p class="os-hero__body">{{ t('ourStory.heroBody') }}</p>
+      </div>
+
+      <div class="os-hero__visual os-animate" data-delay="150">
+        <img src="/img/bottle-story.png" class="os-hero__img" :alt="t('ourStory.heroImgAlt')" />
+        <div class="os-brush" aria-hidden="true">
+          <span class="os-brush__stroke"></span>
+          <span class="os-brush__stroke"></span>
+          <span class="os-brush__stroke"></span>
+          <span class="os-brush__stroke"></span>
+          <span class="os-brush__stroke"></span>
+          <span class="os-brush__stroke"></span>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- ══════════════════════════════════════
-       Section 2 – Behind the Legend
+       Section 2 – The Rum of Celebration (vidéo masquée + Behind the Legend)
        ══════════════════════════════════════ -->
   <section class="os-legend">
+
+    <div class="os-legend__video-wrap os-animate" data-delay="0">
+      <video class="os-legend__video" autoplay muted loop playsinline preload="none">
+        <source src="/vd/mdg-video2.mp4" type="video/mp4" />
+      </video>
+    </div>
 
     <div class="os-legend__inner">
       <div class="os-legend__visual">
@@ -117,8 +137,8 @@ onUnmounted(() => {
       </div>
 
       <div class="os-legend__content os-animate" data-delay="150">
-        <h2 class="os-s4__title">{{ t('ourStory.legendTitle') }}</h2>
-        <div class="os-s4__line"></div>
+        <img src="/img/lemurien.png" class="os-legend__lemur os-animate" data-delay="0" alt="" aria-hidden="true" />
+        <h2 class="os-s4__title os-legend__title">{{ t('ourStory.legendTitleLine1') }}<br />{{ t('ourStory.legendTitleLine2') }}</h2>
         <p class="os-legend__body">{{ t('ourStory.legendBody1') }}</p>
         <p class="os-legend__body">{{ t('ourStory.legendBody2') }}</p>
       </div>

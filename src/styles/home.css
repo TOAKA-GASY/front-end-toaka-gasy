@@ -421,6 +421,14 @@
 .hn-s2-cta svg { animation: chevronBounce 1.8s ease-in-out infinite; }
 .hn-s2-cta:hover { opacity: 0.7; }
 
+.hn-s2-icon-man {
+  width: clamp(14px, 1.3vw, 22px);
+  height: auto;
+  display: block;
+  margin: 0.9rem auto 0;
+  opacity: 0.85;
+}
+
 /* ─── 2B : Introducing Nova ─── */
 .hn-s2-bottom {
   display: flex;
@@ -487,17 +495,19 @@
 .hn-s2-top .hn-s2-eyebrow,
 .hn-s2-top .hn-s2-title,
 .hn-s2-top .hn-s2-text,
-.hn-s2-top .hn-s2-cta {
+.hn-s2-top .hn-s2-cta,
+.hn-s2-top .hn-s2-icon-man {
   opacity: 0;
   transform: translateY(28px);
   transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
               transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.hn-s2-top--visible .hn-s2-eyebrow { opacity: 1; transform: none; transition-delay: 0.05s; }
-.hn-s2-top--visible .hn-s2-title   { opacity: 1; transform: none; transition-delay: 0.18s; }
-.hn-s2-top--visible .hn-s2-text    { opacity: 1; transform: none; transition-delay: 0.32s; }
-.hn-s2-top--visible .hn-s2-cta     { opacity: 1; transform: none; transition-delay: 0.46s; }
+.hn-s2-top--visible .hn-s2-eyebrow  { opacity: 1; transform: none; transition-delay: 0.05s; }
+.hn-s2-top--visible .hn-s2-title    { opacity: 1; transform: none; transition-delay: 0.18s; }
+.hn-s2-top--visible .hn-s2-text     { opacity: 1; transform: none; transition-delay: 0.32s; }
+.hn-s2-top--visible .hn-s2-cta      { opacity: 1; transform: none; transition-delay: 0.46s; }
+.hn-s2-top--visible .hn-s2-icon-man { opacity: 0.85; transform: none; transition-delay: 0.58s; }
 
 /* ─── Introducing Nova : animation plus ample et plus longue, bien visible ─── */
 .hn-s2-bottom .hn-s2-eyebrow,

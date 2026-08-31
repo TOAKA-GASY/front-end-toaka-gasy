@@ -75,78 +75,104 @@
 }
 
 /* ════════════════════════════════════════
-   Section 1 – Hero : fond + vidéo masquée + bouteille Mena
+   Section 1 – The Story Of / Madagascar's Wildest Rum
    ════════════════════════════════════════ */
 .os-hero {
   position: relative;
-  height: 100vh;
-  height: 100dvh;
-  overflow: visible;
   background: #F5E9DB;
+  padding: clamp(7.5rem, 15vh, 10.5rem) 0 4.5rem;
+  overflow: hidden;
 }
 
-/* Même photo story.png que .os-legend::before, très estompée, mais
-   retournée à l'envers (scaleY(-1)) — visible derrière la vidéo masquée
-   dans le hero. z-index 1 : au-dessus du fond uni du hero, en-dessous du
-   masque vidéo (z-index 5). */
-.os-hero::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  /* bottom: -2px (au lieu de 0) : léger chevauchement avec .os-legend::before
-     pour éviter une ligne blanche due à l'arrondi sub-pixel entre les deux
-     boîtes à la jonction hero/section 2. */
-  bottom: -2px;
-  z-index: 1;
-  background: url('/img/story2.png') center top / cover no-repeat;
-  transform: scaleY(-1);
-  opacity: 0.16;
+.os-hero__inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  align-items: center;
+  gap: clamp(2rem, 5vw, 5rem);
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 5rem);
 }
 
-/* left:0 / right:0 calent la boîte exactement sur .os-hero, qui est déjà
-   une section pleine largeur (pas de marge/padding latéral) : la boîte
-   couvre donc toute la largeur de l'écran, bien centrée.
-   Le SVG (paper-mask.svg, 1728×904) réserve en interne ses ~13.5% du haut
-   (y < 122 sur 904) comme zone toujours vide (clip interne du fichier) :
-   même avec `cover`, sur un écran portrait cette zone tombe pile dans les
-   tout premiers pixels visibles de la boîte, ce qui donnait l'impression
-   d'une marge/d'un espace vide entre le header et la vidéo.
-   Fix : la boîte est ancrée par le BAS (bottom: 0, pas top: 0) et surdimensionnée
-   à 120dvh au lieu de 100dvh — les 20% de hauteur en trop débordent au-dessus
-   du haut réel de la page (.os-hero est en overflow:visible), donc hors
-   écran. `cover` calcule alors son échelle sur cette boîte plus grande, ce
-   qui pousse mécaniquement la zone vide interne du SVG dans la partie qui
-   déborde hors-champ : la vidéo remplit tout l'écran dès le tout premier
-   pixel sous le header, sur tous les ratios (portrait, paysage, carré). */
-.os-hero__mask-wrap {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 5;
-  width: auto;
-  height: 120vh;
-  height: 120dvh;
-  -webkit-mask-image: url('/img/paper-mask.svg');
-          mask-image: url('/img/paper-mask.svg');
-  -webkit-mask-size: cover;
-          mask-size: cover;
-  -webkit-mask-position: center bottom;
-          mask-position: center bottom;
-  -webkit-mask-repeat: no-repeat;
-          mask-repeat: no-repeat;
+.os-hero__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
-.os-hero__video {
+.os-hero__kicker {
+  font-family: var(--font-cinzel);
+  font-weight: 700;
+  font-size: clamp(10px, 0.95vw, 13px);
+  color: #b48d46;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.os-hero__title {
+  font-family: var(--font-cinzel);
+  font-weight: 700;
+  font-size: clamp(24px, 3vw, 42px);
+  color: #8a96ab;
+  line-height: 1.1;
+  margin: 0 0 1.4rem;
+  text-transform: uppercase;
+}
+
+.os-hero__body {
+  font-family: var(--font-simonetta);
+  font-size: clamp(12px, 0.95vw, 15px);
+  color: #69431D;
+  line-height: 1.75;
+  margin: 0 auto;
+  max-width: 460px;
+  white-space: pre-line;
+}
+
+.os-hero__visual {
+  position: relative;
+  overflow: hidden;
+}
+
+.os-hero__img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ─── Reveal Animation : Brush Reveal Effect ───
+   6 bandes opaques (couleur du fond) empilées sur toute la hauteur de
+   l'image, chacune avec un bord en biseau (clip-path) pour simuler une
+   touche de pinceau irrégulière. Au scroll (.os-animate--in), chaque
+   bande glisse hors-champ à gauche avec un délai croissant du haut vers
+   le bas, ce qui "dévoile" l'image comme un coup de pinceau. */
+.os-brush {
   position: absolute;
   inset: 0;
-  z-index: 6;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.os-brush__stroke {
+  position: absolute;
+  inset: 0;
+  background: #F5E9DB;
+  transform: translateX(0);
+  transition: transform 1s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.os-brush__stroke:nth-child(1) { clip-path: polygon(0 0%,   100% 0%,   100% 18%, 0 15%);  transition-delay: 0s;    }
+.os-brush__stroke:nth-child(2) { clip-path: polygon(0 14%,  100% 17%,  100% 34%, 0 32%);  transition-delay: .06s;  }
+.os-brush__stroke:nth-child(3) { clip-path: polygon(0 31%,  100% 33%,  100% 51%, 0 49%);  transition-delay: .12s;  }
+.os-brush__stroke:nth-child(4) { clip-path: polygon(0 48%,  100% 50%,  100% 68%, 0 66%);  transition-delay: .18s;  }
+.os-brush__stroke:nth-child(5) { clip-path: polygon(0 65%,  100% 67%,  100% 85%, 0 83%);  transition-delay: .24s;  }
+.os-brush__stroke:nth-child(6) { clip-path: polygon(0 82%,  100% 84%,  100% 100%, 0 100%); transition-delay: .3s;  }
+
+.os-hero__visual.os-animate--in .os-brush__stroke {
+  transform: translateX(-115%);
 }
 
 /* ─── Float animation subtile (réutilisée par la bouteille de la section 2) ─── */
@@ -221,34 +247,55 @@
 }
 
 /* ════════════════════════════════════════
-   Section 2 – Behind the Legend
+   Section 2 – The Rum of Celebration (vidéo + Behind the Legend)
    ════════════════════════════════════════ */
 .os-legend {
   position: relative;
   overflow: hidden;
   background: #F5E9DB;
-  padding: 6rem 0;
+  padding: 4.5rem 0 6rem;
 }
 
-/* Fond de section : une seule photo story.png, très estompée, qui remonte
-   derrière le hero jusqu'à sa moitié (top: -50dvh, le hero fait 100dvh) et
-   descend jusqu'à la toute fin de .os-legend (bottom: 0).
-   z-index 3 < .os-hero__mask-wrap (z-index 5), mais le masque du hero est
-   transparent en dehors de la forme "papier déchiré" : dans ces zones-là,
-   rien n'est dessiné par le hero et cette image apparaît naturellement en
-   dessous, donnant l'impression d'une seule et même texture continue entre
-   le hero et la section 2 — pas besoin d'une deuxième copie de l'image. */
+/* Fond de section : photo story.png très estompée derrière tout le contenu. */
 .os-legend::before {
   content: '';
   position: absolute;
-  top: -70vh;
-  top: -70dvh;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background: url('/img/story.png') center bottom / 100% 100% no-repeat;
   opacity: 0.16;
   z-index: 3;
+}
+
+/* ─── Bandeau vidéo masqué (paper-mask.svg), pleine largeur, bord à bord.
+   aspect-ratio reprend le ratio natif du SVG (1728×904) pour garder ses
+   proportions — pas de hauteur imposée sur mobile/tablette/desktop
+   standard. max-height plafonne uniquement les très grands écrans (sinon
+   la hauteur dérivée de la largeur pleine page approcherait 100vh) ; le
+   width reste toujours à 100% pour toucher les deux bords. mask-size:
+   cover garde le masque non déformé même quand max-height entre en jeu
+   (il recadre légèrement au lieu d'étirer). ─── */
+.os-legend__video-wrap {
+  position: relative;
+  z-index: 4;
+  width: 100%;
+  aspect-ratio: 1728 / 904;
+  max-height: 785px;
+  margin: 0 auto clamp(3rem, 6vw, 5rem);
+  -webkit-mask-image: url('/img/paper-mask.svg');
+          mask-image: url('/img/paper-mask.svg');
+  -webkit-mask-size: cover;
+          mask-size: cover;
+  -webkit-mask-position: center;
+          mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+}
+
+.os-legend__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .os-legend__inner {
@@ -323,8 +370,8 @@
   z-index: 1;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
+  align-items: center;
+  text-align: center;
 }
 
 .os-legend__content .os-s4__title {
@@ -332,8 +379,42 @@
   white-space: nowrap;
 }
 
-.os-legend__content .os-s4__line {
-  margin: 0 0 2rem;
+.os-legend__title {
+  color: #8a96ab;
+  margin-bottom: 1.75rem;
+}
+
+/* ─── Petit lémurien qui saute depuis le bas de la section et vole vers
+   le haut jusqu'à sa position de repos près du titre, avec un léger
+   rebond à l'atterrissage (rejoué à chaque passage, via le même observer
+   générique que .os-animate). --lemur-rise = distance de départ,
+   raccourcie en mobile. ─── */
+.os-legend__lemur {
+  position: absolute;
+  top: -2.5rem;
+  right: 8%;
+  width: clamp(44px, 5.2vw, 74px);
+  height: auto;
+  z-index: 5;
+  pointer-events: none;
+  --lemur-rise: 340px;
+}
+
+.os-legend__lemur.os-animate {
+  opacity: 0;
+  transform: translateY(var(--lemur-rise)) scale(0.55);
+  transition: none;
+}
+
+.os-legend__lemur.os-animate--in {
+  animation: os-lemur-fly 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes os-lemur-fly {
+  0%   { opacity: 0; transform: translateY(var(--lemur-rise)) rotate(10deg) scale(0.55); }
+  55%  { opacity: 1; transform: translateY(-22px) rotate(-8deg) scale(1.08); }
+  78%  { opacity: 1; transform: translateY(8px) rotate(4deg) scale(0.96); }
+  100% { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
 }
 
 .os-legend__body {
@@ -341,7 +422,7 @@
   font-size: clamp(14px, 1.15vw, 19px);
   color: #69431D;
   line-height: 1.75;
-  margin: 0 0 1.25rem;
+  margin: 0 auto 1.25rem;
   max-width: 620px;
   white-space: pre-line;
 }
@@ -623,12 +704,15 @@
   .os-nav__links--left  { padding-right: 1.25rem; }
   .os-nav__links--right { padding-left:  1.25rem; }
 
+  .os-hero { padding: 6.5rem 0 3.5rem; }
+  .os-hero__inner { gap: 2.5rem; }
+
+  .os-legend__video-wrap { margin-bottom: 2.5rem; }
+
   .os-legend { padding: 0 0 2.5rem; }
   .os-legend__inner { grid-template-columns: 1fr; gap: 0.5rem; }
   .os-legend__visual { order: -1; min-height: clamp(320px, 56vmin, 500px); }
   .os-legend__bottle { height: clamp(320px, 56vmin, 500px); }
-  .os-legend__content { align-items: center; text-align: center; }
-  .os-legend__content .os-s4__line { margin: 0 auto 1.25rem; }
   .os-legend__body { max-width: 620px; margin-left: auto; margin-right: auto; margin-bottom: 1rem; }
   .os-legend__proverb { margin-top: clamp(1rem, 3vw, 1.75rem); }
 
@@ -645,14 +729,23 @@
   .os-nav__links, .os-nav__links--left, .os-nav__links--right { display: none; }
   .os-nav__toggler { display: flex; }
 
+  .os-hero { padding: 6rem 0 3rem; }
+  .os-hero__inner { grid-template-columns: 1fr; gap: 1.75rem; padding: 0 1.5rem; }
+  .os-hero__visual { order: -1; }
+  .os-hero__text { align-items: center; text-align: center; }
+  .os-hero__kicker { font-size: clamp(11px, 3.4vw, 13px); }
+  .os-hero__title { font-size: clamp(24px, 7.5vw, 34px); }
+  .os-hero__body { font-size: clamp(13px, 3.6vw, 16px); max-width: 100%; }
+
+  .os-legend__video-wrap { margin-bottom: 2rem; }
+
   .os-legend { padding: 2.5rem 0 2.75rem; }
   .os-legend__inner { grid-template-columns: 1fr; gap: 1rem; padding: 0 1.5rem; }
   .os-legend__visual { order: -1; min-height: clamp(320px, 80vmin, 460px); }
   .os-legend__bottle { height: clamp(280px, 76vmin, 440px); }
   .os-legend__bottle-shadow { width: clamp(140px, 20vmin, 280px); height: clamp(44px, 6vmin, 90px); background: rgba(4, 1, 0, 0.3); filter: blur(14px); }
-  .os-legend__content { align-items: center; text-align: center; }
   .os-legend__content .os-s4__title { font-size: clamp(14px, 5vw, 18px); white-space: normal; }
-  .os-legend__content .os-s4__line { margin: 0 auto 1rem; }
+  .os-legend__lemur { top: -2rem; right: 4%; width: clamp(38px, 11vw, 54px); --lemur-rise: 190px; }
   .os-legend__body { max-width: 100%; }
   .os-legend__proverb { font-size: clamp(16px, 5.2vw, 22px); margin-top: clamp(1rem, 4vw, 1.5rem); }
 

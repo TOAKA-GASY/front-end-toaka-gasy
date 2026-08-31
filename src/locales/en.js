@@ -4,7 +4,7 @@ const DEFAULT_DESCRIPTION =
 export default {
   nav: {
     home: 'HOME',
-    ourStory: 'OUR STORY',
+    ourStory: 'THE STORY',
     ourRums: 'OUR RUMS',
     contact: 'CONTACT US',
     openMenu: 'Open menu',
@@ -50,10 +50,11 @@ export default {
   home: {
     hiddenH1: 'Toaka Gasy — Authentic Malagasy Rum Crafted in the Betsileo Tradition',
     s2Eyebrow: 'INSPIRED BY THE',
-    s2Title: 'TRADITIONAL RUM OF MADAGASCAR',
+    s2TitleLine1: 'TRADITIONAL RUM',
+    s2TitleLine2: 'OF MADAGASCAR',
     s2Text:
       "In 19th-century Madagascar, under Queen Ranavalona I, the art of distillation took on a distinctly Malagasy character. Deep within this wild and untouched island, through vast forests, hidden valleys and natural oases, families began turning sugarcane into a spirit of their own. Passed down through generations, it became known as Toaka Gasy  “the spirit of Madagascar.”",
-    s2Cta: 'DISCOVER OUR STORY',
+    s2Cta: 'DISCOVER THE STORY',
     s2bEyebrow: 'INTRODUCING',
     s2bTitle: 'NOVA',
     s2bText: 'Born in Nova Scotia, shaped by the spirit of the Maritimes. An amber rum that celebrates all sweet beginning',
@@ -77,11 +78,18 @@ export default {
 
   ourStory: {
     hiddenH1: 'Our Story — The Heritage Behind Toaka Gasy Rum !',
-    legendTitle: 'BEHIND THE LEGEND !',
+    heroKicker: 'THE STORY OF',
+    heroTitleLine1: "MADAGASCAR'S",
+    heroTitleLine2: 'WILDEST RUM',
+    heroBody:
+      'Across Madagascar, Toaka Gasy takes on many names, flavours and expressions. In the Highlands, it is known as Galeoka or Ambodivoara; in the North, as Gantriaka or Lemadio. Each name carries a different expression of the same Malagasy spirit.\nSome of its most fascinating expressions are found deeper within the island, beyond the Madagascar most people ever see. Hidden among valleys, forests and untouched landscapes, families craft Toaka Gasy close to the nature that surrounds them. Sugarcane is fermented, distilled over fire and combined with native botanicals known as laro, bringing distinctive aromas, flavours and character to the spirit.\nFrom one place to another, ingredients change, methods differ and every creation carries something of the land it comes from. This is where the wild character of Toaka Gasy lives. A spirit born from the island, shaped by its nature and crafted in many different ways.',
+    heroImgAlt: 'Toaka Gasy bottle surrounded by the wildlife of Madagascar',
+    legendTitleLine1: 'THE RUM OF',
+    legendTitleLine2: 'CELEBRATION',
     legendBody1:
-      "Across Madagascar, rum has always been part of every tradition. It's called toaka gasy, often made in far places where wild nature gives it its finest taste.\nThe one that inspired us most comes from the south, in the hidden valleys of Betsileo's ethnie, a special rum that has carried Betsileo celebration for generations. A symbol of unity and hospitality, it's poured to welcome a guest, to bless a marriage, to bring people together at the moments that matter most.",
+      'But what makes Toaka Gasy remarkable is not only what goes into it, but what it means when it is poured. Toaka Gasy literally means "Malagasy rum," and for generations, it has accompanied celebrations, weddings, rites of passage and moments of remembrance.\nA shared glass can welcome a guest, celebrate a union or bring people together.\nA few drops offered to the earth can honour those who came before.\nToaka Gasy became part of Madagascar\'s living heritage, carrying stories of culture, celebration and connection through generations.',
     legendBody2:
-      'So we crafted a bottle to honor it, to show the world how rum can be enjoyed: as a spirit of togetherness and a drink of celebration. Because for us, the best moments in life are the ones we celebrate together.',
+      'Nearly two centuries later, the spirit lives on.\nThat heritage inspired our bottle today. A rum created to honour where Toaka Gasy comes from and carry its spirit of celebration beyond the island.\nBecause for us, rum is more than what fills the glass. It is what happens around it.',
     bottleAlt: 'Toaka Gasy Mena',
     aboutTitle: 'ABOUT US',
     aboutBody:

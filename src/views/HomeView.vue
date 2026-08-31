@@ -257,7 +257,7 @@ const parallax = computed(() => {
       <div class="hn-s2-top" :class="{ 'hn-s2-top--visible': hnS2TopVisible }">
         <div class="hn-s2-content">
           <span class="hn-s2-eyebrow">{{ t('home.s2Eyebrow') }}</span>
-          <h2 class="hn-s2-title">{{ t('home.s2Title') }}</h2>
+          <h2 class="hn-s2-title">{{ t('home.s2TitleLine1') }}<br />{{ t('home.s2TitleLine2') }}</h2>
           <p class="hn-s2-text">{{ t('home.s2Text') }}</p>
           <button class="hn-s2-cta" @click="goToStory">
             <span>{{ t('home.s2Cta') }}</span>
@@ -266,6 +266,7 @@ const parallax = computed(() => {
               <polyline points="6 9 12 15 18 9"/>
             </svg>
           </button>
+          <img src="/img/icon-man.png" class="hn-s2-icon-man" alt="" aria-hidden="true" />
         </div>
       </div>
 
