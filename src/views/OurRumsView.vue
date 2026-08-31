@@ -258,6 +258,7 @@ onUnmounted(() => {
       <div class="or-col-top__content">
         <span class="or-col-eyebrow">{{ t('ourRums.collectionEyebrow') }}</span>
         <h2 class="or-col-top__title">{{ t('ourRums.collectionTitleLine1') }}<br>{{ t('ourRums.collectionTitleLine2') }}</h2>
+        <img src="/img/icon-man.png" class="or-col-top__icon-man" alt="" aria-hidden="true" />
       </div>
     </div>
 

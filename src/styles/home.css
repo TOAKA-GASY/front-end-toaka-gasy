@@ -393,6 +393,7 @@
   letter-spacing: 0.05em;
   line-height: 1.1;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .hn-s2-text {
@@ -673,6 +674,7 @@
   color: #F4EADB;
   letter-spacing: 0.04em;
   line-height: 1.15;
+  white-space: nowrap;
 }
 
 .hn-s4-text {
@@ -728,7 +730,12 @@
 
 /* ─── Responsive : 2B en colonne sur mobile ─── */
 @media (max-width: 767.98px) {
-  .home-new-wrap { height: calc(200vh + 500px); }
+  .home-new-wrap { height: calc(200vh + 464px); }
+
+  /* white-space: nowrap + taille liée au vw : "TRADITIONAL RUM" / "OF
+     MADAGASCAR" restent chacune sur une seule ligne sur tous les mobiles,
+     le <br> gardant toujours exactement 2 lignes au total. */
+  .hn-s2-title { font-size: clamp(20px, 6.5vw, 38px); white-space: nowrap; }
 
   .hn-s2-bottom {
     flex-direction: column;
@@ -743,10 +750,28 @@
   .hn-s2b-content .hn-s2-text { max-width: 90%; }
   .hn-s2b-title   { font-size: clamp(32px, 10vw, 56px); }
 
-  /* Section 4 : hauteur fixe pour bien voir les images (pas 100vh) */
-  .home-new-s4   { height: 540px; }
-  .hn-s4-content { padding: 1rem 1.25rem; }
-  .hn-s4-images  { flex: 0 0 340px; height: 340px; gap: 0.4rem; }
+  /* Section 4 : hauteur fixe pour bien voir les images (pas 100vh).
+     Les images sont sorties du flux (position: absolute, ancrées bottom: 0)
+     pour être garanties tout en bas, quel que soit le contenu au-dessus —
+     plus fiable qu'un margin-top: auto en flex. Le contenu texte est
+     cantonné à la zone du haut (height fixe) pour ne jamais chevaucher.
+     margin-top fixe (pas un clamp) : .home-new-wrap est calée dessus au
+     pixel près, pour que les images touchent exactement le bas de la
+     section (pas de vide avant la section 5 qui suit). */
+  .home-new-s4   { height: 540px; margin-top: 24px; }
+  .hn-s4-content { height: 200px; flex: none; padding: 1rem 1.25rem; }
+  .hn-s4-images  {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    flex: none;
+    height: 340px;
+    gap: 0.4rem;
+  }
+  /* nowrap + taille liée au vw : chaque ligne du titre reste sur une
+     seule ligne sur tous les mobiles (2 lignes au total, via le <br>). */
+  .hn-s4-title   { font-size: clamp(22px, 6vw, 32px); white-space: nowrap; }
 }
 
 /* ════════════════════════════════════════

@@ -79,26 +79,35 @@
    ════════════════════════════════════════ */
 .os-hero {
   position: relative;
-  background: #F5E9DB;
-  padding: clamp(7.5rem, 15vh, 10.5rem) 0 4.5rem;
+  height: 100vh;
+  height: 100dvh;
+  background: #F0E5DC;
   overflow: hidden;
 }
 
 .os-hero__inner {
   position: relative;
+  z-index: 1;
+  height: 100%;
+  box-sizing: border-box;
   display: grid;
-  grid-template-columns: 0.8fr 1.2fr;
-  align-items: center;
-  gap: clamp(2rem, 5vw, 5rem);
+  /* L'image (portrait) est étroite une fois contenue en hauteur : lui
+     donner moins de colonne qu'au texte évite le grand vide au milieu,
+     sans avoir besoin de désaligner le texte ou l'image dans leur
+     colonne (chacun reste centré chez soi). */
+  grid-template-columns: 1.2fr 1fr;
+  align-items: stretch;
+  gap: clamp(1.5rem, 3.5vw, 3.5rem);
   max-width: 1500px;
   margin: 0 auto;
-  padding: 0 clamp(1.5rem, 5vw, 5rem);
+  padding: clamp(6.5rem, 14vh, 9rem) clamp(1.5rem, 5vw, 5rem) 2.5rem;
 }
 
 .os-hero__text {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-align: center;
 }
 
@@ -115,11 +124,12 @@
 .os-hero__title {
   font-family: var(--font-cinzel);
   font-weight: 700;
-  font-size: clamp(24px, 3vw, 42px);
+  font-size: clamp(30px, 3.8vw, 54px);
   color: #8a96ab;
   line-height: 1.1;
   margin: 0 0 1.4rem;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .os-hero__body {
@@ -128,51 +138,25 @@
   color: #69431D;
   line-height: 1.75;
   margin: 0 auto;
-  max-width: 460px;
+  max-width: 580px;
   white-space: pre-line;
 }
 
 .os-hero__visual {
   position: relative;
+  height: 100%;
   overflow: hidden;
 }
 
+/* object-fit: contain — quelle que soit l'orientation de l'image (portrait
+   ou paysage), elle reste toujours entièrement visible dans la hauteur de
+   la section, sans jamais la faire dépasser 100vh. */
 .os-hero__img {
   display: block;
   width: 100%;
-  height: auto;
-}
-
-/* ─── Reveal Animation : Brush Reveal Effect ───
-   6 bandes opaques (couleur du fond) empilées sur toute la hauteur de
-   l'image, chacune avec un bord en biseau (clip-path) pour simuler une
-   touche de pinceau irrégulière. Au scroll (.os-animate--in), chaque
-   bande glisse hors-champ à gauche avec un délai croissant du haut vers
-   le bas, ce qui "dévoile" l'image comme un coup de pinceau. */
-.os-brush {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.os-brush__stroke {
-  position: absolute;
-  inset: 0;
-  background: #F5E9DB;
-  transform: translateX(0);
-  transition: transform 1s cubic-bezier(0.65, 0, 0.35, 1);
-}
-
-.os-brush__stroke:nth-child(1) { clip-path: polygon(0 0%,   100% 0%,   100% 18%, 0 15%);  transition-delay: 0s;    }
-.os-brush__stroke:nth-child(2) { clip-path: polygon(0 14%,  100% 17%,  100% 34%, 0 32%);  transition-delay: .06s;  }
-.os-brush__stroke:nth-child(3) { clip-path: polygon(0 31%,  100% 33%,  100% 51%, 0 49%);  transition-delay: .12s;  }
-.os-brush__stroke:nth-child(4) { clip-path: polygon(0 48%,  100% 50%,  100% 68%, 0 66%);  transition-delay: .18s;  }
-.os-brush__stroke:nth-child(5) { clip-path: polygon(0 65%,  100% 67%,  100% 85%, 0 83%);  transition-delay: .24s;  }
-.os-brush__stroke:nth-child(6) { clip-path: polygon(0 82%,  100% 84%,  100% 100%, 0 100%); transition-delay: .3s;  }
-
-.os-hero__visual.os-animate--in .os-brush__stroke {
-  transform: translateX(-115%);
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
 }
 
 /* ─── Float animation subtile (réutilisée par la bouteille de la section 2) ─── */
@@ -315,7 +299,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: clamp(360px, 60vmin, 700px);
+  min-height: clamp(400px, 68vmin, 780px);
 }
 
 .os-legend__bottle-pos {
@@ -327,7 +311,7 @@
 .os-legend__bottle {
   position: relative;
   z-index: 2;
-  height: clamp(320px, 60vmin, 680px);
+  height: clamp(380px, 68vmin, 760px);
   width: auto;
   display: block;
   filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.35));
@@ -375,7 +359,7 @@
 }
 
 .os-legend__content .os-s4__title {
-  font-size: clamp(20px, 2.8vw, 40px);
+  font-size: clamp(30px, 3.8vw, 54px);
   white-space: nowrap;
 }
 
@@ -384,37 +368,39 @@
   margin-bottom: 1.75rem;
 }
 
-/* ─── Petit lémurien qui saute depuis le bas de la section et vole vers
-   le haut jusqu'à sa position de repos près du titre, avec un léger
-   rebond à l'atterrissage (rejoué à chaque passage, via le même observer
-   générique que .os-animate). --lemur-rise = distance de départ,
-   raccourcie en mobile. ─── */
+/* ─── Petit caméléon qui vole depuis la bouteille (à gauche) et atterrit
+   à droite, après "CELEBRATION" (rejoué à chaque passage, via le même
+   observer générique que .os-animate). Un seul mouvement doux, en ligne
+   continue, sans rebond ni changement de phase — pour éviter tout effet
+   de saccade/bug. --lemur-x/--lemur-y = décalage de départ (grand sur
+   desktop pour traverser depuis la colonne de la bouteille, réduit en
+   tablette/mobile où les colonnes sont empilées). ─── */
 .os-legend__lemur {
   position: absolute;
-  top: -2.5rem;
-  right: 8%;
+  top: 0.5rem;
+  right: 4%;
   width: clamp(44px, 5.2vw, 74px);
   height: auto;
   z-index: 5;
   pointer-events: none;
-  --lemur-rise: 340px;
+  --lemur-x: 48vw;
+  --lemur-y: 220px;
 }
 
 .os-legend__lemur.os-animate {
   opacity: 0;
-  transform: translateY(var(--lemur-rise)) scale(0.55);
+  transform: translate(calc(-1 * var(--lemur-x)), var(--lemur-y)) rotate(-6deg) scale(0.65);
   transition: none;
 }
 
 .os-legend__lemur.os-animate--in {
-  animation: os-lemur-fly 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: os-lemur-fly 1.4s ease-out forwards;
 }
 
 @keyframes os-lemur-fly {
-  0%   { opacity: 0; transform: translateY(var(--lemur-rise)) rotate(10deg) scale(0.55); }
-  55%  { opacity: 1; transform: translateY(-22px) rotate(-8deg) scale(1.08); }
-  78%  { opacity: 1; transform: translateY(8px) rotate(4deg) scale(0.96); }
-  100% { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
+  0%   { opacity: 0; transform: translate(calc(-1 * var(--lemur-x)), var(--lemur-y)) rotate(-6deg) scale(0.65); }
+  60%  { opacity: 1; transform: translate(calc(-0.1 * var(--lemur-x)), calc(0.1 * var(--lemur-y))) rotate(3deg) scale(1.03); }
+  100% { opacity: 1; transform: translate(0, 0) rotate(0deg) scale(1); }
 }
 
 .os-legend__body {
@@ -687,9 +673,10 @@
   .os-s4__body--compact { font-size: clamp(20px, 1vw, 24px); }
   .os-s4__img   { width: clamp(540px, 30vw, 640px); }
 
-  .os-legend__content .os-s4__title { font-size: clamp(40px, 2vw, 48px); }
+  .os-hero__title { font-size: clamp(50px, 2.2vw, 60px); }
+  .os-legend__content .os-s4__title { font-size: clamp(50px, 2.2vw, 60px); }
   .os-legend__body { font-size: clamp(19px, 0.9vw, 23px); }
-  .os-legend__bottle { height: clamp(680px, 46vmin, 780px); }
+  .os-legend__bottle { height: clamp(760px, 50vmin, 860px); }
   .os-legend__proverb { font-size: clamp(46px, 2.4vw, 54px); padding: 0 clamp(2rem, 5vw, 4rem); }
 
   .os-s6__bio { font-size: clamp(20px, 1vw, 24px); }
@@ -704,15 +691,15 @@
   .os-nav__links--left  { padding-right: 1.25rem; }
   .os-nav__links--right { padding-left:  1.25rem; }
 
-  .os-hero { padding: 6.5rem 0 3.5rem; }
   .os-hero__inner { gap: 2.5rem; }
 
   .os-legend__video-wrap { margin-bottom: 2.5rem; }
 
   .os-legend { padding: 0 0 2.5rem; }
   .os-legend__inner { grid-template-columns: 1fr; gap: 0.5rem; }
-  .os-legend__visual { order: -1; min-height: clamp(320px, 56vmin, 500px); }
-  .os-legend__bottle { height: clamp(320px, 56vmin, 500px); }
+  .os-legend__visual { order: -1; min-height: clamp(360px, 62vmin, 560px); }
+  .os-legend__bottle { height: clamp(360px, 62vmin, 560px); }
+  .os-legend__lemur { --lemur-x: 8vw; --lemur-y: 160px; }
   .os-legend__body { max-width: 620px; margin-left: auto; margin-right: auto; margin-bottom: 1rem; }
   .os-legend__proverb { margin-top: clamp(1rem, 3vw, 1.75rem); }
 
@@ -729,23 +716,29 @@
   .os-nav__links, .os-nav__links--left, .os-nav__links--right { display: none; }
   .os-nav__toggler { display: flex; }
 
-  .os-hero { padding: 6rem 0 3rem; }
-  .os-hero__inner { grid-template-columns: 1fr; gap: 1.75rem; padding: 0 1.5rem; }
-  .os-hero__visual { order: -1; }
+  /* Sur mobile, le texte (titre + long paragraphe) ne peut pas tenir dans
+     100vh à côté de l'image : la section reprend une hauteur automatique,
+     l'image étant plafonnée en hauteur (object-fit: contain) plutôt que
+     de dicter la hauteur de toute la section. */
+  .os-hero { height: auto; }
+  .os-hero__inner { height: auto; grid-template-columns: 1fr; gap: 1.75rem; padding: 6rem 1.5rem 3rem; }
+  .os-hero__visual { order: -1; max-height: 48vh; }
+  .os-hero__img { height: auto; max-height: 48vh; }
   .os-hero__text { align-items: center; text-align: center; }
   .os-hero__kicker { font-size: clamp(11px, 3.4vw, 13px); }
-  .os-hero__title { font-size: clamp(24px, 7.5vw, 34px); }
+  .os-hero__title { font-size: clamp(26px, 7.5vw, 38px); white-space: nowrap; }
   .os-hero__body { font-size: clamp(13px, 3.6vw, 16px); max-width: 100%; }
 
   .os-legend__video-wrap { margin-bottom: 2rem; }
 
   .os-legend { padding: 2.5rem 0 2.75rem; }
   .os-legend__inner { grid-template-columns: 1fr; gap: 1rem; padding: 0 1.5rem; }
-  .os-legend__visual { order: -1; min-height: clamp(320px, 80vmin, 460px); }
-  .os-legend__bottle { height: clamp(280px, 76vmin, 440px); }
+  .os-legend__visual { order: -1; min-height: clamp(360px, 88vmin, 540px); }
+  .os-legend__bottle { height: clamp(340px, 84vmin, 520px); }
   .os-legend__bottle-shadow { width: clamp(140px, 20vmin, 280px); height: clamp(44px, 6vmin, 90px); background: rgba(4, 1, 0, 0.3); filter: blur(14px); }
-  .os-legend__content .os-s4__title { font-size: clamp(14px, 5vw, 18px); white-space: normal; }
-  .os-legend__lemur { top: -2rem; right: 4%; width: clamp(38px, 11vw, 54px); --lemur-rise: 190px; }
+  .os-legend__content .os-s4__title { font-size: clamp(20px, 7vw, 28px); white-space: nowrap; }
+  /* Mobile : même vol fluide, départ gauche plus marqué */
+  .os-legend__lemur { top: -1rem; right: 4%; width: clamp(38px, 11vw, 54px); --lemur-x: 60vw; --lemur-y: 20px; }
   .os-legend__body { max-width: 100%; }
   .os-legend__proverb { font-size: clamp(16px, 5.2vw, 22px); margin-top: clamp(1rem, 4vw, 1.5rem); }
 

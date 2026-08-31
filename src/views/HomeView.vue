@@ -270,17 +270,17 @@ const parallax = computed(() => {
         </div>
       </div>
 
-      <!-- 2B : Introducing Nova -->
+      <!-- 2B : Introducing Sôma -->
       <div class="hn-s2-bottom" :class="{ 'hn-s2-bottom--visible': hnS2BottomVisible }">
         <div class="hn-s2b-bottle">
-          <img src="/img/toaka-gasy-black.webp" alt="Toaka Gasy" />
+          <img src="/img/toaka-gasy-red.webp" alt="Toaka Gasy" />
           <div class="hn-s2b-bottle__shadow" aria-hidden="true"></div>
         </div>
         <div class="hn-s2b-content">
           <span class="hn-s2-eyebrow">{{ t('home.s2bEyebrow') }}</span>
           <h2 class="hn-s2b-title">{{ t('home.s2bTitle') }}</h2>
           <p class="hn-s2-text">{{ t('home.s2bText') }}</p>
-          <button class="hn-s2-cta" @click="goToProduct(products[0].slug)">
+          <button class="hn-s2-cta" @click="goToProduct(products[2].slug)">
             <span>{{ t('home.s2bCta') }}</span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

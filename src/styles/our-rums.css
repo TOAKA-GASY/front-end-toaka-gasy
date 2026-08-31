@@ -210,7 +210,7 @@
 .or-collection {
   position: relative;
   width: 100%;
-  height: 335vh;
+  height: 346vh;
 }
 .or-collection::before {
   content: '';
@@ -229,9 +229,12 @@
   z-index: 2;
 }
 
-/* ─── 2A : Many ways to celebrate + bateau ─── */
+/* ─── 2A : Many ways to celebrate + bateau ───
+   46vh (au lieu de 35vh) : le titre 2 lignes + le bonhomme en dessous ont
+   besoin de plus de place pour ne pas être rognés par l'overflow:hidden.
+   .or-collection est augmentée d'autant (346vh) pour matcher exactement. */
 .or-col-top {
-  height: 35vh;
+  height: 46vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -255,7 +258,7 @@
   align-items: center;
   gap: 1rem;
   text-align: center;
-  padding: 0 1.5rem;
+  padding: clamp(2rem, 5vw, 3.5rem) 1.5rem 0;
 }
 .or-col-eyebrow {
   font-family: var(--font-cinzel);
@@ -273,7 +276,16 @@
   letter-spacing: 0.04em;
   text-transform: uppercase;
   line-height: 1.1;
+  white-space: nowrap;
   margin: 0;
+}
+
+.or-col-top__icon-man {
+  width: clamp(16px, 1.6vw, 26px);
+  height: auto;
+  display: block;
+  margin-top: 0.25rem;
+  opacity: 0.85;
 }
 
 /* ─── 2B-D : chaque rum – description / bouteille, côtés alternés ─── */
@@ -285,6 +297,16 @@
   padding: 0 clamp(1.5rem, 6vw, 6rem);
 }
 .or-col-intro--reverse { flex-direction: row-reverse; }
+
+/* Nova (première section) : léger décalage vers le bas pour bien
+   l'espacer du bloc "Many ways to celebrate" au-dessus. Décalage en
+   position relative (pas de padding/hauteur) pour ne pas déborder du
+   100vh de la section (overflow: hidden). */
+.or-col-intro--0 .or-col-intro__content,
+.or-col-intro--0 .or-col-intro__bottle {
+  position: relative;
+  top: clamp(1.5rem, 4vw, 3rem);
+}
 
 /* ─── Image de fond centrée par rum (Nova en couleur, Vaza/Soma en N&B) ─── */
 .or-col-intro__bgimg {
@@ -440,6 +462,7 @@
 /* ─── Reveal au scroll (IntersectionObserver) ─── */
 .or-col-top .or-col-eyebrow,
 .or-col-top .or-col-top__title,
+.or-col-top .or-col-top__icon-man,
 .or-col-intro .or-col-intro__title,
 .or-col-intro .or-col-intro__tagline,
 .or-col-intro .or-col-intro__desc,
@@ -451,8 +474,9 @@
   transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
               transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.or-col-top--visible .or-col-eyebrow   { opacity: 1; transform: none; transition-delay: 0.05s; }
+.or-col-top--visible .or-col-eyebrow    { opacity: 1; transform: none; transition-delay: 0.05s; }
 .or-col-top--visible .or-col-top__title { opacity: 1; transform: none; transition-delay: 0.18s; }
+.or-col-top--visible .or-col-top__icon-man { opacity: 0.85; transform: none; transition-delay: 0.3s; }
 
 .or-col-intro--visible .or-col-intro__bottle  { opacity: 1; transform: none; transition-delay: 0.05s; }
 .or-col-intro--visible .or-col-intro__title   { opacity: 1; transform: none; transition-delay: 0.2s;  }

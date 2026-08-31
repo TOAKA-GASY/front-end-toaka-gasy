@@ -103,16 +103,8 @@ onUnmounted(() => {
         <p class="os-hero__body">{{ t('ourStory.heroBody') }}</p>
       </div>
 
-      <div class="os-hero__visual os-animate" data-delay="150">
+      <div class="os-hero__visual">
         <img src="/img/bottle-story.png" class="os-hero__img" :alt="t('ourStory.heroImgAlt')" />
-        <div class="os-brush" aria-hidden="true">
-          <span class="os-brush__stroke"></span>
-          <span class="os-brush__stroke"></span>
-          <span class="os-brush__stroke"></span>
-          <span class="os-brush__stroke"></span>
-          <span class="os-brush__stroke"></span>
-          <span class="os-brush__stroke"></span>
-        </div>
       </div>
     </div>
   </section>
@@ -137,7 +129,7 @@ onUnmounted(() => {
       </div>
 
       <div class="os-legend__content os-animate" data-delay="150">
-        <img src="/img/lemurien.png" class="os-legend__lemur os-animate" data-delay="0" alt="" aria-hidden="true" />
+        <img src="/img/cameleon.png" class="os-legend__lemur os-animate" data-delay="0" alt="" aria-hidden="true" />
         <h2 class="os-s4__title os-legend__title">{{ t('ourStory.legendTitleLine1') }}<br />{{ t('ourStory.legendTitleLine2') }}</h2>
         <p class="os-legend__body">{{ t('ourStory.legendBody1') }}</p>
         <p class="os-legend__body">{{ t('ourStory.legendBody2') }}</p>
