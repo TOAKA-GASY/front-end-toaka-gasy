@@ -52,7 +52,7 @@ export default {
     s2Eyebrow: 'GEÏNSPIREERD DOOR ',
     s2Title: 'DE TRADITIONELE RUM VAN MADAGASCAR',
     s2Text:
-      'In het Madagaskar van de 19e eeuw, onder koningin Ranavalona I, kreeg de kunst van het distilleren een uitgesproken Malagassisch karakter. Diep in het hart van dit woeste en ongerepte eiland, te midden van uitgestrekte bossen, verborgen valleien en natuurlijke oases, begonnen families suikerriet te verwerken tot hun eigen sterke drank. Deze traditie werd van generatie op generatie doorgegeven en stond bekend als Toaka Gasy — „de sterke drank van Madagaskar“.',
+      'In het Madagaskar van de 19e eeuw, onder koningin Ranavalona I, kreeg de kunst van het distilleren een uitgesproken Malagassisch karakter. Diep in het hart van dit woeste en ongerepte eiland, te midden van uitgestrekte bossen, verborgen valleien en natuurlijke oases, begonnen families suikerriet te verwerken tot hun eigen sterke drank. Deze traditie werd van generatie op generatie doorgegeven en stond bekend als Toaka Gasy  „de sterke drank van Madagaskar“.',
     s2Cta: 'ONTDEK ONS VERHAAL',
     s2bEyebrow: 'MAAK KENNIS MET',
     s2bTitle: 'NOVA',

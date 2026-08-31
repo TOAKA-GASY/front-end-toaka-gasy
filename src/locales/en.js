@@ -52,7 +52,7 @@ export default {
     s2Eyebrow: 'INSPIRED BY ',
     s2Title: 'THE TRADITIONAL RUM OF MADAGASCAR',
     s2Text:
-      "In 19th-century Madagascar, under Queen Ranavalona I, the art of distillation took on a distinctly Malagasy character. Deep within this wild and untouched island, through vast forests, hidden valleys and natural oases, families began turning sugarcane into a spirit of their own. Passed down through generations, it became known as Toaka Gasy — “the spirit of Madagascar.”",
+      "In 19th-century Madagascar, under Queen Ranavalona I, the art of distillation took on a distinctly Malagasy character. Deep within this wild and untouched island, through vast forests, hidden valleys and natural oases, families began turning sugarcane into a spirit of their own. Passed down through generations, it became known as Toaka Gasy  “the spirit of Madagascar.”",
     s2Cta: 'DISCOVER OUR STORY',
     s2bEyebrow: 'INTRODUCING',
     s2bTitle: 'NOVA',
