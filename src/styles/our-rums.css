@@ -210,7 +210,11 @@
 .or-collection {
   position: relative;
   width: 100%;
-  height: 346vh;
+  /* Hauteur automatique = somme réelle des sections enfants (elles sont en
+     flux normal, position:relative). Le fond ::before (inset:0) épouse
+     cette hauteur automatiquement : plus besoin de recalculer un total en
+     vh à chaque ajustement de .or-col-top, quel que soit l'appareil. */
+  height: auto;
 }
 .or-collection::before {
   content: '';
@@ -230,11 +234,15 @@
 }
 
 /* ─── 2A : Many ways to celebrate + bateau ───
-   46vh (au lieu de 35vh) : le titre 2 lignes + le bonhomme en dessous ont
-   besoin de plus de place pour ne pas être rognés par l'overflow:hidden.
-   .or-collection est augmentée d'autant (346vh) pour matcher exactement. */
+   height: auto (et pas min-height) : .or-col-top,.or-col-intro plus haut
+   impose height:100vh à TOUTES les bandes — un min-height ne peut jamais
+   réduire ça, seul un height explicite le peut. auto laisse la bande
+   suivre exactement son contenu (texte + bonhomme + padding), sans jamais
+   risquer de rognage par overflow:hidden puisqu'elle ne peut plus être
+   plus petite que son contenu. .or-collection étant en hauteur
+   automatique, tout s'ajuste sans calcul manuel. */
 .or-col-top {
-  height: 46vh;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -258,7 +266,7 @@
   align-items: center;
   gap: 1rem;
   text-align: center;
-  padding: clamp(2rem, 5vw, 3.5rem) 1.5rem 0;
+  padding: clamp(1.5rem, 3.5vw, 2.5rem) 1.5rem clamp(1rem, 2.5vw, 1.75rem);
 }
 .or-col-eyebrow {
   font-family: var(--font-cinzel);
@@ -297,16 +305,6 @@
   padding: 0 clamp(1.5rem, 6vw, 6rem);
 }
 .or-col-intro--reverse { flex-direction: row-reverse; }
-
-/* Nova (première section) : léger décalage vers le bas pour bien
-   l'espacer du bloc "Many ways to celebrate" au-dessus. Décalage en
-   position relative (pas de padding/hauteur) pour ne pas déborder du
-   100vh de la section (overflow: hidden). */
-.or-col-intro--0 .or-col-intro__content,
-.or-col-intro--0 .or-col-intro__bottle {
-  position: relative;
-  top: clamp(1.5rem, 4vw, 3rem);
-}
 
 /* ─── Image de fond centrée par rum (Nova en couleur, Vaza/Soma en N&B) ─── */
 .or-col-intro__bgimg {
