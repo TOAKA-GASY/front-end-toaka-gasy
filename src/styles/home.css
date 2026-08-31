@@ -369,7 +369,10 @@
   align-items: center;
   gap: 1.5rem;
   max-width: 960px;
-  padding: clamp(80px, 14vmin, 180px) 1.5rem 0;
+  /* padding-top plus généreux : la section démarre juste après le hero à
+     bouteille sticky (.home-page), qui peut encore légèrement déborder
+     pendant la transition — ça évite que le titre soit caché derrière. */
+  padding: clamp(160px, 22vmin, 280px) 1.5rem 0;
   text-align: center;
 }
 
