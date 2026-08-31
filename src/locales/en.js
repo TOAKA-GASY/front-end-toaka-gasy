@@ -49,8 +49,8 @@ export default {
 
   home: {
     hiddenH1: 'Toaka Gasy — Authentic Malagasy Rum Crafted in the Betsileo Tradition',
-    s2Eyebrow: 'THE INSPIRATION',
-    s2Title: 'The Rum of Celebration',
+    s2Eyebrow: 'INSPIRED BY ',
+    s2Title: 'THE TRADITIONAL RUM OF MADAGASCAR',
     s2Text:
       "In Betsileo Ethnies, in the South of Madagascar, rum is more than a drink.\nIt's a symbol of togetherness, a pleasure of celebration, a joy of hospitality.\nOur rum is inspired by this culture and shaped by our journey, made to be shared with the world.",
     s2Cta: 'DISCOVER OUR STORY',
