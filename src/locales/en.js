@@ -130,10 +130,10 @@ export default {
   },
 
   contactForm: {
-    namePlaceholder: 'Your name',
-    firstNamePlaceholder: 'Your first name',
-    emailPlaceholder: 'Your email address',
-    messagePlaceholder: 'Your message',
+    namePlaceholder: 'Name',
+    firstNamePlaceholder: 'First name',
+    emailPlaceholder: 'Email address',
+    messagePlaceholder: 'Message',
     submit: 'SUBMIT',
     sending: 'SENDING...',
     errorName: 'Please enter your name.',
