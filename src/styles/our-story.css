@@ -92,15 +92,16 @@
   box-sizing: border-box;
   display: grid;
   /* L'image (portrait) est étroite une fois contenue en hauteur : lui
-     donner moins de colonne qu'au texte évite le grand vide au milieu,
-     sans avoir besoin de désaligner le texte ou l'image dans leur
-     colonne (chacun reste centré chez soi). */
-  grid-template-columns: 1.2fr 1fr;
+     donner moins de colonne qu'au texte évite le grand vide au milieu.
+     1.6fr (pas 1.2fr) : le titre est maintenant à la même échelle que
+     les gros titres de la home (jusqu'à 108px) et a besoin de plus de
+     largeur pour ne pas déborder en nowrap. */
+  grid-template-columns: 1.8fr 1fr;
   align-items: stretch;
   gap: clamp(1.5rem, 3.5vw, 3.5rem);
   max-width: 1500px;
   margin: 0 auto;
-  padding: clamp(6.5rem, 14vh, 9rem) clamp(1.5rem, 5vw, 5rem) 2.5rem;
+  padding: clamp(8rem, 17vh, 11rem) clamp(1.5rem, 5vw, 5rem) 2.5rem;
 }
 
 .os-hero__text {
@@ -124,7 +125,7 @@
 .os-hero__title {
   font-family: var(--font-cinzel);
   font-weight: 700;
-  font-size: clamp(30px, 3.8vw, 54px);
+  font-size: clamp(32px, 5.2vw, 72px);
   color: #8a96ab;
   line-height: 1.1;
   margin: 0 0 1.4rem;
@@ -171,13 +172,17 @@
 .os-s4 {
   display: grid;
   grid-template-columns: 1.3fr 0.7fr;
+  /* gap explicite : sans ça, sur grand écran le texte (qui grandit avec
+     la police) finit par toucher la photo — les paddings directionnels
+     de .os-s4__content/.os-s4__img-wrap ne suffisent pas seuls. */
+  gap: clamp(2rem, 4vw, 5rem);
   background: #F5E9DB;
   padding: 6rem 0;
   align-items: center;
 }
 
 .os-s4__content {
-  padding: 0 2rem 0 4rem;
+  padding: 0 0 0 4rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -286,7 +291,10 @@
   position: relative;
   z-index: 4;
   display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
+  /* 0.8fr/1.2fr (au lieu de 0.9/1.1) : colonne de texte plus large pour
+     accueillir le titre à la même échelle que les gros titres de la
+     home (jusqu'à 108px), sans déborder en nowrap. */
+  grid-template-columns: 0.8fr 1.2fr;
   align-items: center;
   gap: clamp(2rem, 5vw, 5rem);
   max-width: 1500px;
@@ -359,48 +367,13 @@
 }
 
 .os-legend__content .os-s4__title {
-  font-size: clamp(30px, 3.8vw, 54px);
+  font-size: clamp(32px, 5.2vw, 72px);
   white-space: nowrap;
 }
 
 .os-legend__title {
   color: #8a96ab;
   margin-bottom: 1.75rem;
-}
-
-/* ─── Petit caméléon qui vole depuis la bouteille (à gauche) et atterrit
-   à droite, après "CELEBRATION" (rejoué à chaque passage, via le même
-   observer générique que .os-animate). Un seul mouvement doux, en ligne
-   continue, sans rebond ni changement de phase — pour éviter tout effet
-   de saccade/bug. --lemur-x/--lemur-y = décalage de départ (grand sur
-   desktop pour traverser depuis la colonne de la bouteille, réduit en
-   tablette/mobile où les colonnes sont empilées). ─── */
-.os-legend__lemur {
-  position: absolute;
-  top: 0.5rem;
-  right: 4%;
-  width: clamp(44px, 5.2vw, 74px);
-  height: auto;
-  z-index: 5;
-  pointer-events: none;
-  --lemur-x: 48vw;
-  --lemur-y: 220px;
-}
-
-.os-legend__lemur.os-animate {
-  opacity: 0;
-  transform: translate(calc(-1 * var(--lemur-x)), var(--lemur-y)) rotate(-6deg) scale(0.65);
-  transition: none;
-}
-
-.os-legend__lemur.os-animate--in {
-  animation: os-lemur-fly 1.4s ease-out forwards;
-}
-
-@keyframes os-lemur-fly {
-  0%   { opacity: 0; transform: translate(calc(-1 * var(--lemur-x)), var(--lemur-y)) rotate(-6deg) scale(0.65); }
-  60%  { opacity: 1; transform: translate(calc(-0.1 * var(--lemur-x)), calc(0.1 * var(--lemur-y))) rotate(3deg) scale(1.03); }
-  100% { opacity: 1; transform: translate(0, 0) rotate(0deg) scale(1); }
 }
 
 .os-legend__body {
@@ -653,6 +626,18 @@
    Responsive
    ════════════════════════════════════════ */
 
+/* ─── iPad (768–1299px) : garde l'ancien padding-top du hero ───
+   Le padding-top de base a été augmenté pour le desktop. Un seuil trop
+   haut ici (1599px) capturait aussi les laptops 15.6" à 100%+ de zoom
+   (largeur CSS effective ~1300-1536px selon l'échelle OS) : le bug ne se
+   voyait alors qu'à 100%+ de zoom et disparaissait à 90% (largeur
+   effective repassant ≥1300px). Plage resserrée pour ne plus capter les
+   résolutions desktop courantes — seule la vraie tablette (portrait ou
+   paysage 11") reste sur l'ancienne valeur. ─── */
+@media (min-width: 768px) and (max-width: 1299.98px) {
+  .os-hero__inner { padding-top: clamp(6.5rem, 14vh, 9rem); }
+}
+
 /* ─── Grand écran (≥ 1440px) : contrainte max-width ─── */
 @media (min-width: 1440px) {
   .os-s4 {
@@ -663,18 +648,37 @@
   .os-s6__person { max-width: 1400px; margin-left: auto; margin-right: auto; }
 }
 
-/* ─── Très grands écrans / zoom arrière (≥ 1600px) ───
+/* ─── Tablette en paysage "grand format" (1200px – 1299px) ───
+   Uniquement la vraie tablette (11" paysage). Au-delà de 1299px, on
+   considère que c'est un laptop/desktop, jamais une tablette. ─── */
+@media (min-width: 1200px) and (max-width: 1299.98px) {
+  .os-hero__kicker { font-size: clamp(12px, 1vw, 14px); }
+  .os-hero__body   { font-size: clamp(16px, 1.1vw, 18px); }
+  .os-legend__body { font-size: clamp(17px, 1.3vw, 19px); }
+  .os-s4__body      { font-size: clamp(19px, 1.6vw, 23px); }
+  .os-s4__body--compact { font-size: clamp(17px, 1.3vw, 19px); }
+  .os-s6__bio       { font-size: clamp(17px, 1.3vw, 19px); }
+  .os-s6__bio--gerben { font-size: clamp(17px, 1.3vw, 19px); }
+}
+
+/* ─── Grands écrans / zoom arrière (≥ 1300px, pas 1600px) ───
    Les tailles en clamp() plafonnent vers 1350-1650px : au-delà (grand moniteur
-   type iMac 27"), le texte et les bouteilles paraissent minuscules. On relance
-   la progression pour garder la même taille perçue que sur les écrans standards. */
-@media (min-width: 1600px) {
+   type iMac 27", ou simplement un laptop 15.6" à 100%+ de zoom), le texte et
+   les bouteilles paraissent minuscules. Seuil abaissé à 1300px (au lieu de
+   1600px) : un laptop 15.6" à 100% de zoom rapporte souvent une largeur CSS
+   entre 1300 et 1536px selon l'échelle OS — avec un seuil à 1600px, ce cas
+   retombait dans le correctif tablette au lieu de celui-ci, d'où un rendu qui
+   changeait selon le niveau de zoom. */
+@media (min-width: 1300px) {
   .os-s4__title { font-size: clamp(48px, 2.8vw, 60px); }
   .os-s4__body  { font-size: clamp(28px, 1.5vw, 34px); }
   .os-s4__body--compact { font-size: clamp(20px, 1vw, 24px); }
   .os-s4__img   { width: clamp(540px, 30vw, 640px); }
 
-  .os-hero__title { font-size: clamp(50px, 2.2vw, 60px); }
-  .os-legend__content .os-s4__title { font-size: clamp(50px, 2.2vw, 60px); }
+  .os-hero__kicker { font-size: clamp(13px, 0.7vw, 16px); }
+  .os-hero__title { font-size: clamp(72px, 4.6vw, 108px); }
+  .os-hero__body  { font-size: clamp(16px, 0.9vw, 19px); max-width: 620px; }
+  .os-legend__content .os-s4__title { font-size: clamp(72px, 4.6vw, 108px); }
   .os-legend__body { font-size: clamp(19px, 0.9vw, 23px); }
   .os-legend__bottle { height: clamp(760px, 50vmin, 860px); }
   .os-legend__proverb { font-size: clamp(46px, 2.4vw, 54px); padding: 0 clamp(2rem, 5vw, 4rem); }
@@ -699,13 +703,17 @@
   .os-legend__inner { grid-template-columns: 1fr; gap: 0.5rem; }
   .os-legend__visual { order: -1; min-height: clamp(360px, 62vmin, 560px); }
   .os-legend__bottle { height: clamp(360px, 62vmin, 560px); }
-  .os-legend__lemur { --lemur-x: 8vw; --lemur-y: 160px; }
   .os-legend__body { max-width: 620px; margin-left: auto; margin-right: auto; margin-bottom: 1rem; }
   .os-legend__proverb { margin-top: clamp(1rem, 3vw, 1.75rem); }
 
   .os-s4 { grid-template-columns: 1fr; padding: 4rem 0; }
   .os-s4__img-wrap { padding: 0 3rem; order: -1; }
   .os-s4__content  { padding: 3rem 3rem; }
+  /* Tablette : le clamp() de base retombe vers son plancher à cette
+     largeur, trop petit sur un écran de cette taille physique. */
+  .os-s4__title { font-size: clamp(32px, 4.5vw, 42px); }
+  .os-s4__body  { font-size: clamp(18px, 2.6vw, 23px); }
+  .os-s4__body--compact { font-size: clamp(16px, 1.8vw, 19px); }
 
   .os-s5__video { height: clamp(260px, 32vh, 400px); }
 }
@@ -737,8 +745,6 @@
   .os-legend__bottle { height: clamp(340px, 84vmin, 520px); }
   .os-legend__bottle-shadow { width: clamp(140px, 20vmin, 280px); height: clamp(44px, 6vmin, 90px); background: rgba(4, 1, 0, 0.3); filter: blur(14px); }
   .os-legend__content .os-s4__title { font-size: clamp(20px, 7vw, 28px); white-space: nowrap; }
-  /* Mobile : même vol fluide, départ gauche plus marqué */
-  .os-legend__lemur { top: -1rem; right: 4%; width: clamp(38px, 11vw, 54px); --lemur-x: 60vw; --lemur-y: 20px; }
   .os-legend__body { max-width: 100%; }
   .os-legend__proverb { font-size: clamp(16px, 5.2vw, 22px); margin-top: clamp(1rem, 4vw, 1.5rem); }
 

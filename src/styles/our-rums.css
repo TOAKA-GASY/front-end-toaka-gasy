@@ -266,7 +266,7 @@
   align-items: center;
   gap: 1rem;
   text-align: center;
-  padding: clamp(1.5rem, 3.5vw, 2.5rem) 1.5rem clamp(1rem, 2.5vw, 1.75rem);
+  padding: clamp(4rem, 10vw, 8rem) 1.5rem clamp(2.5rem, 6vw, 4.5rem);
 }
 .or-col-eyebrow {
   font-family: var(--font-cinzel);
@@ -735,6 +735,26 @@
   .or-cocktail-card__hover { font-size: clamp(15px, 0.9vw, 18px); }
 }
 
+/* ─── iPad en paysage (992px – 1299px) ───
+   Plage resserrée à 1299px (pas 1599px) pour ce réglage précis : au-delà,
+   on considère que c'est un laptop/desktop (voir le correctif zoom sur
+   home.css/our-story.css), pas une tablette. ─── */
+@media (min-width: 992px) and (max-width: 1299.98px) {
+  .or-col-top__content { padding-top: clamp(5.5rem, 12vw, 8rem); }
+}
+
+/* ─── Tablettes en paysage "grand format" (1200px – 1599px) ───
+   iPad Pro 12.9" en paysage (1366px) et similaires : ni la tranche
+   768–991px, ni celle 992–1199px, ni le palier ≥1600px ne couvrent cette
+   largeur — les descriptions y retombaient au plancher du clamp() de
+   base. ─── */
+@media (min-width: 1200px) and (max-width: 1599.98px) {
+  .or-col-intro__title   { font-size: clamp(44px, 4.2vw, 58px); }
+  .or-col-intro__tagline { font-size: clamp(19px, 1.6vw, 23px); }
+  .or-col-intro__desc    { font-size: clamp(17px, 1.4vw, 20px); }
+  .or-cocktails__desc    { font-size: clamp(17px, 1.3vw, 20px); }
+}
+
 @media (min-width: 768px) and (max-width: 991.98px) {
   .or-nav__inner { padding: 0.9rem 2rem; }
   .or-nav__links { gap: 2rem; }
@@ -747,6 +767,8 @@
 
   .or-col-top__boat { width: clamp(700px, 100vw, 1200px); }
 
+  .or-col-top__content { padding-top: clamp(5rem, 14vw, 8rem); }
+
   /* .or-collection a une hauteur fixe (335vh = 35vh + 3×100vh desktop) ;
      comme .or-col-intro passe en hauteur auto/réduite ci-dessous, garder ce
      335vh fixe laissait tout l'espace non consommé vide avant "Perfect
@@ -755,11 +777,18 @@
 
   .or-col-intro { height: auto; min-height: 42vh; padding: 1.5rem clamp(1.5rem, 6vw, 4rem); }
 
+  /* Descriptions produits : le clamp() de base retombe à son plancher à
+     cette largeur, trop petit pour un écran de cette taille. */
+  .or-col-intro__title   { font-size: clamp(38px, 5vw, 48px); }
+  .or-col-intro__tagline { font-size: clamp(18px, 2.2vw, 21px); }
+  .or-col-intro__desc    { font-size: clamp(17px, 2vw, 20px); }
+
   .or-side-nav { right: 1rem; top: 110px; }
 
   .or-cocktails { padding: 0.5rem clamp(1.5rem,5vw,3rem) 4rem; gap: 3rem; }
   .or-cocktails__grid { grid-template-columns: 1fr; max-width: 460px; }
   .or-cocktail-card   { aspect-ratio: 4/3; }
+  .or-cocktails__desc { font-size: clamp(17px, 2vw, 20px); }
 }
 
 @media (max-width: 767.98px) {

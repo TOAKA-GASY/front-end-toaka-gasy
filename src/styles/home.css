@@ -372,7 +372,7 @@
   /* padding-top plus généreux : la section démarre juste après le hero à
      bouteille sticky (.home-page), qui peut encore légèrement déborder
      pendant la transition — ça évite que le titre soit caché derrière. */
-  padding: clamp(160px, 22vmin, 280px) 1.5rem 0;
+  padding: clamp(140px, 20vmin, 260px) 1.5rem 0;
   text-align: center;
 }
 
@@ -492,7 +492,11 @@
 .hn-s2b-content .hn-s2-text {
   max-width: 480px;
   font-family: var(--font-simonetta);
-  color: #F4EADB;
+  /* Le fond dégradé est déjà passé au beige clair à cette profondeur de
+     scroll : #F4EADB (crème claire, hérité de .hn-s2-text) s'y fondait
+     presque entièrement. Marron foncé, comme le titre, pour rester
+     lisible. */
+  color: #3A1D08;
 }
 
 /* ─── Reveal au scroll (IntersectionObserver) ─── */
@@ -557,7 +561,7 @@
   z-index: 2;
   display: flex;
   overflow: hidden;
-  margin-top: -3vh;
+  margin-top: -8vh;
 }
 
 .home-new-s3::before {
@@ -595,7 +599,7 @@
   flex-direction: column;
   align-items: center;
   gap: 0.6rem;
-  padding-top: clamp(110px, 18vh, 200px);
+  padding-top: clamp(120px, 18vh, 220px);
   text-align: center;
   opacity: 0;
   transform: translateY(-24px);
@@ -671,7 +675,7 @@
   font-family: var(--font-cinzel);
   font-weight: 600;
   font-size: clamp(28px, 4.4vw, 60px);
-  color: #F4EADB;
+  color: #ffffff;
   letter-spacing: 0.04em;
   line-height: 1.15;
   white-space: nowrap;
@@ -680,8 +684,12 @@
 .hn-s4-text {
   font-family: var(--font-simonetta);
   font-size: clamp(15px, 1.2vw, 20px);
-  color: #F4EADB;
+  color: #ffffff;
   line-height: 1.6;
+}
+
+.home-new-s4 .hn-s2-eyebrow {
+  color: #ffffff;
 }
 
 .hn-s4-images {
@@ -1145,6 +1153,26 @@
    ════════════════════════════════════════ */
 @media (min-width: 768px) and (max-width: 991.98px) {
 
+  /* "Inspired by the..." : plus de hauteur en vh devinée à la main — un
+     height:100vh ou une valeur fixe en vh laisse toujours un vide résiduel
+     (en haut via le centrage, en bas via l'espace non consommé) puisque le
+     contenu ne fait jamais exactement cette hauteur. height:auto fait que
+     la section épouse exactement son contenu (padding compris), sans
+     aucun vide ni en haut ni en bas. .home-new-s2 et .home-new-wrap
+     passent aussi en auto pour que leur somme suive automatiquement,
+     au lieu d'un calc(vh) figé qui décalerait tout le reste. */
+  .home-new-s2 { height: auto; }
+  .hn-s2-top { height: auto; padding: clamp(30px, 4vh, 55px) 0; }
+  .home-new-wrap { height: auto; }
+  .hn-s2-text { font-size: clamp(16px, 2.2vw, 20px); }
+  .hn-s2-content { padding-top: 0; }
+  /* .home-riz garde sa hauteur desktop (115vh) par défaut ; les bouteilles
+     sont ancrées à bottom:8vh (indépendamment du titre) — réduire la
+     hauteur de la section les rapproche directement du titre. */
+  .home-riz { height: 90vh; }
+  .riz-heading { padding-top: clamp(20px, 3vh, 40px); }
+  .riz-title { font-size: clamp(30px, 4.6vw, 48px); }
+
   /* Hero header */
   .hero-hd__inner { padding: 2.5rem 2rem 1rem; }
   .hero-hd--sticky .hero-hd__inner { padding: 0.75rem 2rem; }
@@ -1253,6 +1281,17 @@
    ════════════════════════════════════════ */
 @media (min-width: 992px) and (max-width: 1199.98px) {
 
+  /* iPad en paysage tombe dans cette tranche : même correctif que la
+     tranche 768–991px pour "Inspired by the..." (align-items: flex-start
+     au lieu de center, sinon réduire le padding ne fait qu'agrandir
+     l'espace de centrage au-dessus). */
+  .hn-s2-top { height: 60vh; align-items: flex-start; }
+  .home-new-wrap { height: calc(260vh - 100px); }
+  .hn-s2-content { padding-top: clamp(35px, 4.5vh, 60px); }
+  .hn-s2-text { font-size: clamp(17px, 1.8vw, 20px); }
+  .home-riz { height: 88vh; }
+  .riz-heading { padding-top: clamp(35px, 5.5vh, 65px); }
+
   .hero-hd__inner  { padding: 3rem 3rem 1.25rem; }
   .hero-hd--sticky .hero-hd__inner { padding: 0.8rem 3rem; }
   .hero-hd__nav    { gap: 3rem; }
@@ -1263,6 +1302,24 @@
   .scene-pos--bottle img   { height: clamp(240px, 68vh, 460px); }
 
   .s7-bottle img { height: clamp(340px, 54vh, 560px); }
+}
+
+/* ════════════════════════════════════════
+   Tablettes en paysage "grand format" (1200px – 1299px)
+   iPad Pro 12.9" en paysage (1366px) rapporte une largeur CSS proche de
+   celle d'un laptop 15.6" à 100% de zoom (~1300-1536px selon l'échelle
+   OS) : un seuil trop haut (1599px) faisait retomber CET écran laptop
+   dans le correctif "tablette" au lieu du correctif "grand écran", d'où
+   le bug qui n'apparaissait qu'à 100%+ de zoom et disparaissait à 90%
+   (effective width alors ≥1300px). Plage resserrée pour ne plus capter
+   les résolutions desktop courantes. ════════════════════════════════════════ */
+@media (min-width: 1200px) and (max-width: 1299.98px) {
+  .hn-s2-top { height: 64vh; align-items: flex-start; }
+  .home-new-wrap { height: calc(264vh - 100px); }
+  .hn-s2-content { padding-top: clamp(40px, 5vh, 65px); }
+  .hn-s2-text { font-size: clamp(17px, 1.3vw, 20px); }
+  .home-riz { height: 85vh; }
+  .riz-heading { padding-top: clamp(40px, 6vh, 70px); }
 }
 
 /* ════════════════════════════════════════

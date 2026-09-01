@@ -147,16 +147,19 @@
   padding-top: clamp(6.5rem, 13vh, 9rem);
   display: flex;
   flex-direction: column;
+  /* Centre le bloc formulaire+fondateurs comme un seul groupe (au lieu de
+     ne centrer que le formulaire dans un flex:1) : les fondateurs suivent
+     alors juste sous le bouton submit, avec un espace haut/bas équilibré
+     autour du groupe entier plutôt qu'un grand vide avant les fondateurs. */
+  justify-content: center;
 }
 
 .ct-form-section__grid {
-  flex: 1;
   width: 100%;
   max-width: 640px;
   margin: 0 auto;
   padding: 1rem 1.5rem;
   display: flex;
-  align-items: center;
   justify-content: center;
 }
 

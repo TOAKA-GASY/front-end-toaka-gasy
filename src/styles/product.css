@@ -147,14 +147,14 @@
   font-family: var(--font-simonetta);
   font-style: italic;
   font-size: clamp(14px, 1.2vw, 18px);
-  color: #5b3507;
+  color: #3A1D08;
   margin: 0 0 0.5rem;
 }
 
 .pp-hero__desc {
   font-family: var(--font-simonetta);
   font-size: clamp(15px, 1.15vw, 19px);
-  color: #F4EADB;
+  color: #3A1D08;
   line-height: 1.75;
   max-width: 480px;
   margin: 0;
@@ -371,6 +371,33 @@
 }
 
 /* ── Responsive ── */
+
+/* ─── Tablette et "grand format" paysage (768–1599px) : le clamp() basé
+   sur vw ne suffit pas seul — sur toute cette plage (y compris iPad Pro
+   12.9" en paysage, 1366px) son terme vw reste sous le plancher, donc le
+   texte retombe systématiquement au minimum, trop petit pour un écran de
+   cette taille. On relève les tailles explicitement jusqu'au palier
+   ≥1600px qui prend le relais. ─── */
+@media (min-width: 768px) and (max-width: 1599.98px) {
+  .pp-hero__name   { font-size: clamp(52px, 8vw, 68px); }
+  .pp-hero__tags   { font-size: clamp(16px, 1.8vw, 19px); }
+  .pp-hero__desc   { font-size: clamp(16px, 1.8vw, 19px); max-width: 520px; }
+  .pp-fiche__name  { font-size: clamp(34px, 5vw, 42px); }
+  .pp-fiche__subtitle, .pp-fiche__spec dd, .pp-fiche__taste-text { font-size: clamp(15px, 1.8vw, 18px); }
+  .pp-detail__text { font-size: clamp(15px, 1.8vw, 18px); }
+}
+
+/* ─── Très grands écrans (≥ 1600px) : le clamp() plafonne vers 1350-1650px,
+   au-delà le texte parait minuscule sur un grand moniteur. ─── */
+@media (min-width: 1600px) {
+  .pp-hero__name   { font-size: clamp(100px, 6vw, 120px); }
+  .pp-hero__tags   { font-size: clamp(19px, 1vw, 22px); }
+  .pp-hero__desc   { font-size: clamp(20px, 1vw, 23px); max-width: 560px; }
+  .pp-fiche__name  { font-size: clamp(50px, 3vw, 58px); }
+  .pp-fiche__subtitle, .pp-fiche__spec dd, .pp-fiche__taste-text { font-size: clamp(18px, 1vw, 21px); }
+  .pp-detail__text { font-size: clamp(18px, 1vw, 21px); }
+}
+
 @media (max-width: 767.98px) {
   .pp-hero {
     padding: 6rem 1.5rem 3rem;

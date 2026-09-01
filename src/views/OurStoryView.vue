@@ -129,7 +129,6 @@ onUnmounted(() => {
       </div>
 
       <div class="os-legend__content os-animate" data-delay="150">
-        <img src="/img/cameleon.png" class="os-legend__lemur os-animate" data-delay="0" alt="" aria-hidden="true" />
         <h2 class="os-s4__title os-legend__title">{{ t('ourStory.legendTitleLine1') }}<br />{{ t('ourStory.legendTitleLine2') }}</h2>
         <p class="os-legend__body">{{ t('ourStory.legendBody1') }}</p>
         <p class="os-legend__body">{{ t('ourStory.legendBody2') }}</p>
