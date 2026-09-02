@@ -2,11 +2,12 @@ import { createI18n } from 'vue-i18n'
 import en from '@/locales/en'
 import fr from '@/locales/fr'
 import nl from '@/locales/nl'
+import it from '@/locales/it'
 
 // FR temporarily deactivated: kept out of SUPPORTED_LOCALES so routes, the
 // language switcher, and locale detection all skip it, without deleting the
 // fr.js translations. Re-add 'fr' here to switch it back on.
-export const SUPPORTED_LOCALES = ['en', 'nl']
+export const SUPPORTED_LOCALES = ['en', 'nl', 'it']
 export const DEFAULT_LOCALE = 'en'
 const STORAGE_KEY = 'tg-locale'
 const NON_DEFAULT_LOCALES = SUPPORTED_LOCALES.filter((locale) => locale !== DEFAULT_LOCALE)
@@ -63,7 +64,7 @@ export const i18n = createI18n({
   legacy: false,
   locale: initialLocale,
   fallbackLocale: DEFAULT_LOCALE,
-  messages: { en, fr, nl },
+  messages: { en, fr, nl, it },
 })
 
 export function getActiveLocale() {

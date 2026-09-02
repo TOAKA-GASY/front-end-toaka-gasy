@@ -60,7 +60,7 @@ const sectionLabel = computed(() => (props.section.id === '__consts__' ? 'Valeur
 
 const diffRows = computed(() => {
   const rows = []
-  for (const locale of ['en', 'fr', 'nl']) {
+  for (const locale of ['en', 'fr', 'nl', 'it']) {
     for (const [path, newValue] of Object.entries(props.changes[locale] || {})) {
       const field = props.section.fields.find((f) => f.path === path)
       const originalKey = `original${locale[0].toUpperCase()}${locale.slice(1)}`

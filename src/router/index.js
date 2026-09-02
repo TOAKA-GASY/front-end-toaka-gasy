@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { i18n, SUPPORTED_LOCALES, DEFAULT_LOCALE } from '@/i18n'
 
 const SITE_ORIGIN = 'https://toakagasy.com'
-const OG_LOCALE = { en: 'en_US', fr: 'fr_FR', nl: 'nl_NL' }
+const OG_LOCALE = { en: 'en_US', fr: 'fr_FR', nl: 'nl_NL', it: 'it_IT' }
 
 const baseRoutes = [
   {
@@ -44,7 +44,7 @@ const baseRoutes = [
 ]
 
 /* English stays unprefixed at root (preserves currently-indexed URLs).
-   French/Dutch reuse the same components under a /fr, /nl path prefix. */
+   French/Dutch/Italian reuse the same components under a /fr, /nl, /it path prefix. */
 const localizedRoutes = SUPPORTED_LOCALES.filter((locale) => locale !== DEFAULT_LOCALE).flatMap((locale) =>
   baseRoutes.map((route) => ({
     ...route,
@@ -63,7 +63,7 @@ const router = createRouter({
 })
 
 function baseRouteName(name) {
-  return String(name).replace(/-(fr|nl)$/, '')
+  return String(name).replace(/-(fr|nl|it)$/, '')
 }
 
 function localizedHref(name, locale, params) {

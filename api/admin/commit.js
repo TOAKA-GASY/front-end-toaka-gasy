@@ -3,7 +3,7 @@ import { getFileText, commitFiles } from '../_lib/github.js'
 import { applyLocaleEdits } from '../_lib/localeAst.js'
 
 // FR temporarily left out of the editor (site's language switcher has it disabled too).
-const LOCALES = ['en', 'nl']
+const LOCALES = ['en', 'nl', 'it']
 
 function localePath(locale) {
   return `src/locales/${locale}.js`

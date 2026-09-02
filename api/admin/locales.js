@@ -4,7 +4,7 @@ import { parseLocaleSource, flattenLeaves } from '../_lib/localeAst.js'
 import { collectSections } from '../_lib/sectionize.js'
 
 // FR temporarily left out of the editor (site's language switcher has it disabled too).
-const LOCALES = ['en', 'nl']
+const LOCALES = ['en', 'nl', 'it']
 
 function localePath(locale) {
   return `src/locales/${locale}.js`
@@ -26,7 +26,7 @@ export default async function handler(req, res) {
     }
 
     // The English file is the source of truth for which sections/fields exist;
-    // fr/nl are expected to mirror its structure and are merged in by path.
+    // fr/nl/it are expected to mirror its structure and are merged in by path.
     const en = parsedByLocale.en
     const constsNode = { type: 'object', path: '__consts__', children: en.consts }
     const sectionNodes = [...collectSections(en.tree), ...collectSections(constsNode)]

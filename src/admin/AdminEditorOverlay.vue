@@ -66,7 +66,7 @@
                     :disabled="translating === section.id"
                     @click="translateSection(section)"
                   >
-                    {{ translating === section.id ? 'Traduction…' : '🌐 Traduire EN → FR/NL' }}
+                    {{ translating === section.id ? 'Traduction…' : '🌐 Traduire EN → NL/IT' }}
                   </button>
                   <button
                     type="button"
@@ -103,7 +103,7 @@ import { pushToast } from './useToast'
 const emit = defineEmits(['close'])
 
 // FR temporarily left out of the editor (site's language switcher has it disabled too — see src/i18n.js).
-const LOCALES = ['en', 'nl']
+const LOCALES = ['en', 'nl', 'it']
 const TARGET_LOCALES = LOCALES.filter((locale) => locale !== 'en')
 
 const loading = ref(true)
@@ -150,9 +150,11 @@ async function load() {
         en: field.values.en,
         fr: field.values.fr,
         nl: field.values.nl,
+        it: field.values.it,
         originalEn: field.values.en,
         originalFr: field.values.fr,
         originalNl: field.values.nl,
+        originalIt: field.values.it,
       })),
     }))
   } catch (err) {
@@ -204,7 +206,7 @@ function cleanValue(field, locale) {
 }
 
 function openConfirm(section) {
-  const changes = { en: {}, fr: {}, nl: {} }
+  const changes = { en: {}, fr: {}, nl: {}, it: {} }
   for (const field of section.fields) {
     for (const locale of LOCALES) {
       const cleaned = cleanValue(field, locale)

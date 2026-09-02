@@ -50,7 +50,8 @@ export default {
   home: {
     hiddenH1: 'Toaka Gasy — Authentieke Malagassische rum, gebrand volgens de Betsileo-traditie',
     s2Eyebrow: 'GEÏNSPIREERD DOOR DE',
-    s2Title: 'TRADITIONELE RUM UIT MADAGASCAR',
+    s2TitleLine1: 'TRADITIONELE RUM',
+    s2TitleLine2: 'UIT MADAGASCAR',
     s2Text:
       'In het Madagaskar van de 19e eeuw, onder koningin Ranavalona I, kreeg de kunst van het distilleren een uitgesproken Malagassisch karakter. Diep in het hart van dit woeste en ongerepte eiland, te midden van uitgestrekte bossen, verborgen valleien en natuurlijke oases, begonnen families suikerriet te verwerken tot hun eigen sterke drank. Deze traditie werd van generatie op generatie doorgegeven en stond bekend als Toaka Gasy, ‘de sterke drank van Madagaskar’.',
     s2Cta: 'ONTDEK ONS VERHAAL',
@@ -77,11 +78,18 @@ export default {
 
   ourStory: {
     hiddenH1: 'Ons Verhaal — Het erfgoed achter Toaka Gasy rum !',
-    legendTitle: 'HET VERHAAL ACHTER DE LEGENDE',
+    heroKicker: 'HET VERHAAL VAN',
+    heroTitleLine1: 'MADAGASKARS',
+    heroTitleLine2: 'WILDSTE RUM',
+    heroBody:
+      "Overal in Madagaskar krijgt Toaka Gasy andere namen, smaken en vormen. In de Hooglanden heet het Galeoka of Ambodivoara; in het Noorden Gantriaka of Lemadio. Elke naam draagt een andere uitdrukking van dezelfde Malagassische geest.\nEnkele van de meest fascinerende varianten vind je dieper op het eiland, voorbij het Madagaskar dat de meeste mensen ooit te zien krijgen. Verscholen tussen valleien, bossen en ongerepte landschappen maken families Toaka Gasy dicht bij de natuur die hen omringt. Suikerriet wordt gefermenteerd, op open vuur gedistilleerd en gecombineerd met inheemse kruiden die bekendstaan als laro, wat de drank zijn kenmerkende aroma's, smaken en karakter geeft.\nVan plek tot plek veranderen de ingrediënten, verschillen de methodes en draagt elke creatie iets van het land waar ze vandaan komt. Hier leeft het wilde karakter van Toaka Gasy. Een geest geboren uit het eiland, gevormd door zijn natuur en op talloze manieren gemaakt.",
+    heroImgAlt: 'Fles Toaka Gasy omringd door de wilde natuur van Madagaskar',
+    legendTitleLine1: 'DE RUM VAN',
+    legendTitleLine2: 'VIERING',
     legendBody1:
-      'Overal in Madagaskar maakt rum al eeuwenlang deel uit van elke traditie. Het heet toaka gasy en wordt vaak gemaakt op afgelegen plekken waar de wilde natuur het zijn fijnste smaak geeft.\nDegene die ons het meest inspireerde komt uit het zuiden, uit de verborgen valleien van de Betsileo-bevolkingsgroep, een bijzondere rum die al generaties lang de Betsileo-feesten draagt. Als symbool van eenheid en gastvrijheid wordt hij geschonken om een gast te verwelkomen, een huwelijk te zegenen, mensen samen te brengen op de momenten die er het meest toe doen.',
+      "Maar wat Toaka Gasy bijzonder maakt, is niet alleen wat erin zit, maar wat het betekent wanneer het wordt geschonken. Toaka Gasy betekent letterlijk 'Malagassische rum' en begeleidt al generaties lang feesten, huwelijken, overgangsrituelen en momenten van herdenking.\nEen gedeeld glas kan een gast verwelkomen, een verbintenis vieren of mensen samenbrengen.\nEnkele druppels geofferd aan de aarde eren wie ons zijn voorgegaan.\nToaka Gasy werd deel van Madagaskars levende erfgoed en draagt al generaties lang verhalen van cultuur, viering en verbondenheid met zich mee.",
     legendBody2:
-      'Daarom creëerden we een fles om dit te eren, om de wereld te laten zien hoe rum genoten kan worden: als een geest van saamhorigheid en een drank van viering. Want voor ons zijn de beste momenten in het leven de momenten die we samen vieren.',
+      'Bijna twee eeuwen later leeft die geest nog altijd voort.\nDat erfgoed inspireerde onze fles van vandaag. Een rum gemaakt om te eren waar Toaka Gasy vandaan komt en om zijn feestelijke geest voorbij het eiland te dragen.\nWant voor ons is rum meer dan wat het glas vult. Het gaat om wat eromheen gebeurt.',
     bottleAlt: 'Toaka Gasy Mena',
     aboutTitle: 'OVER ONS',
     aboutBody:

@@ -1,6 +1,6 @@
 import { requireSession } from '../_lib/auth.js'
 
-const DEEPL_TARGET_LANG = { fr: 'FR', nl: 'NL' }
+const DEEPL_TARGET_LANG = { fr: 'FR', nl: 'NL', it: 'IT' }
 
 async function deeplTranslate(texts, targetLang) {
   const apiKey = process.env.DEEPL_API_KEY
@@ -41,7 +41,7 @@ export default async function handler(req, res) {
     return
   }
 
-  const targets = (Array.isArray(targetLocales) && targetLocales.length ? targetLocales : ['fr', 'nl']).filter(
+  const targets = (Array.isArray(targetLocales) && targetLocales.length ? targetLocales : ['fr', 'nl', 'it']).filter(
     (locale) => DEEPL_TARGET_LANG[locale],
   )
   const paths = Object.keys(fields)

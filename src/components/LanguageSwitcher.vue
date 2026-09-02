@@ -4,7 +4,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { setActiveLocale, SUPPORTED_LOCALES } from '@/i18n'
 
-const LABELS = { en: 'ENG', fr: 'FR', nl: 'NL' }
+const LABELS = { en: 'ENG', fr: 'FR', nl: 'NL', it: 'ITA' }
 
 const route = useRoute()
 const router = useRouter()
@@ -14,7 +14,7 @@ const open = ref(false)
 const rootEl = ref(null)
 
 function baseRouteName(name) {
-  return String(name).replace(/-(fr|nl)$/, '')
+  return String(name).replace(/-(fr|nl|it)$/, '')
 }
 
 function selectLocale(targetLocale) {
