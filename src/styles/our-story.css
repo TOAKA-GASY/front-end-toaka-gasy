@@ -250,7 +250,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: url('/img/story.png') center bottom / 100% 100% no-repeat;
+  background: url('/img/story.png') center bottom / cover no-repeat;
   opacity: 0.16;
   z-index: 3;
 }
@@ -322,7 +322,6 @@
   height: clamp(380px, 68vmin, 760px);
   width: auto;
   display: block;
-  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.35));
 }
 
 /* ─── Entrée animée de la bouteille (plus marquée que le fondu générique
@@ -344,18 +343,6 @@
   animation: os-float 4.2s ease-in-out 1.4s infinite;
 }
 
-.os-legend__bottle-shadow {
-  position: absolute;
-  bottom: 2%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: clamp(200px, 27vmin, 400px);
-  height: clamp(64px, 8.6vmin, 128px);
-  border-radius: 50%;
-  background: rgba(4, 1, 0, 0.5);
-  filter: blur(18px);
-  z-index: 1;
-}
 
 .os-legend__content {
   position: relative;
@@ -743,7 +730,6 @@
   .os-legend__inner { grid-template-columns: 1fr; gap: 1rem; padding: 0 1.5rem; }
   .os-legend__visual { order: -1; min-height: clamp(360px, 88vmin, 540px); }
   .os-legend__bottle { height: clamp(340px, 84vmin, 520px); }
-  .os-legend__bottle-shadow { width: clamp(140px, 20vmin, 280px); height: clamp(44px, 6vmin, 90px); background: rgba(4, 1, 0, 0.3); filter: blur(14px); }
   .os-legend__content .os-s4__title { font-size: clamp(20px, 7vw, 28px); white-space: nowrap; }
   .os-legend__body { max-width: 100%; }
   .os-legend__proverb { font-size: clamp(16px, 5.2vw, 22px); margin-top: clamp(1rem, 4vw, 1.5rem); }

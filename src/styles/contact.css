@@ -276,6 +276,17 @@
   display: block;
 }
 
+@media (max-width: 767.98px) {
+  .ct-photo {
+    height: auto;
+  }
+
+  .ct-photo__img {
+    height: auto;
+    object-fit: initial;
+  }
+}
+
 /* ════════════════════════════════════════
    Contact Form – sur fond clair f3e6d8
    ════════════════════════════════════════ */

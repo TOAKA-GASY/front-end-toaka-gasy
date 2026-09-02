@@ -241,7 +241,6 @@ const parallax = computed(() => {
       <section class="home-scene" aria-label="Scène Toaka Gasy">
         <div class="scene-pos scene-pos--bottle" :style="{ transform: parallax.bottle }">
           <img src="/img/toaka-gasy-black.webp" alt="Toaka Gasy" />
-          <div class="bottle-shadow" aria-hidden="true"></div>
         </div>
       </section>
     </div>
@@ -274,7 +273,6 @@ const parallax = computed(() => {
       <div class="hn-s2-bottom" :class="{ 'hn-s2-bottom--visible': hnS2BottomVisible }">
         <div class="hn-s2b-bottle">
           <img src="/img/toaka-gasy-red.webp" alt="Toaka Gasy" />
-          <div class="hn-s2b-bottle__shadow" aria-hidden="true"></div>
         </div>
         <div class="hn-s2b-content">
           <span class="hn-s2-eyebrow">{{ t('home.s2bEyebrow') }}</span>
@@ -326,7 +324,6 @@ const parallax = computed(() => {
         @click="goToProduct(products[i].slug)"
       >
         <img :src="bottle.src" :alt="bottle.alt" />
-        <div class="s7-bottle__shadow" aria-hidden="true"></div>
       </div>
     </div>
 

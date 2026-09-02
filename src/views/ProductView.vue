@@ -56,7 +56,6 @@ watchEffect(() => {
       <div class="pp-hero__inner">
         <div class="pp-hero__bottle">
           <img :src="product.bottle" :alt="product.shortName" />
-          <div class="pp-hero__shadow" aria-hidden="true"></div>
         </div>
 
         <div class="pp-hero__content">

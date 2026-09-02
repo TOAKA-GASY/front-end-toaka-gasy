@@ -124,7 +124,6 @@ onUnmounted(() => {
       <div class="os-legend__visual">
         <div class="os-legend__bottle-pos os-animate" data-delay="0">
           <img src="/img/toaka-gasy-red.webp" class="os-legend__bottle" :alt="t('ourStory.bottleAlt')" />
-          <div class="os-legend__bottle-shadow" aria-hidden="true"></div>
         </div>
       </div>
 

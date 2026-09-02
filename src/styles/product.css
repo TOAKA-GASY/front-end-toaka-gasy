@@ -102,19 +102,6 @@
   display: block;
 }
 
-.pp-hero__shadow {
-  position: absolute;
-  bottom: 4%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: clamp(180px, 26vmin, 380px);
-  height: clamp(36px, 5vmin, 76px);
-  border-radius: 50%;
-  background: rgba(4, 1, 0, 0.5);
-  filter: blur(18px);
-  z-index: 1;
-}
-
 .pp-hero__content {
   flex: 0 1 45%;
   display: flex;

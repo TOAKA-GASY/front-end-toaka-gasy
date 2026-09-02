@@ -168,7 +168,6 @@
 .or-hero__bottle {
   display: block;
   width: auto;
-  filter: drop-shadow(0 20px 42px rgba(0, 0, 0, 0.55));
   opacity: 0;
   transform: translateY(60px) scale(0.9);
   transition:
@@ -442,19 +441,6 @@
   height: clamp(380px, 70vmin, 720px);
   width: auto;
   display: block;
-  filter: drop-shadow(0 28px 24px rgba(0, 0, 0, 0.5));
-}
-.or-col-intro__shadow {
-  position: absolute;
-  bottom: 6%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: clamp(120px, 18vmin, 260px);
-  height: clamp(18px, 2.6vmin, 36px);
-  border-radius: 50%;
-  background: rgba(4, 1, 0, 0.85);
-  filter: blur(24px);
-  z-index: 1;
 }
 
 /* ─── Reveal au scroll (IntersectionObserver) ─── */
@@ -549,7 +535,6 @@
 .or-side-nav__bottle {
   height: clamp(52px,5.5vh,78px);
   width: auto;
-  filter: drop-shadow(0 6px 14px rgba(0,0,0,0.55));
   transition: filter 0.45s ease;
 }
 .or-side-nav__item--active .or-side-nav__bottle {

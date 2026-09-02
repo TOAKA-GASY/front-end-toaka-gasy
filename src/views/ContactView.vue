@@ -93,7 +93,10 @@ onUnmounted(() => {
 
   <!-- Section : Photo pleine page -->
   <section class="ct-photo">
-    <img src="/img/toaka-gasy.png" class="ct-photo__img" alt="Toaka Gasy" />
+    <picture>
+      <source media="(max-width: 767.98px)" srcset="/img/toaka-gasy-mobile.webp" />
+      <img src="/img/toaka-gasy.png" class="ct-photo__img" alt="Toaka Gasy" />
+    </picture>
   </section>
 
 </template>

@@ -298,7 +298,6 @@ onUnmounted(() => {
       </div>
       <div class="or-col-intro__bottle">
         <img :src="introBottles[i]" :alt="p.name" />
-        <div class="or-col-intro__shadow" aria-hidden="true"></div>
       </div>
     </div>
 

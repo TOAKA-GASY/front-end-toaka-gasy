@@ -210,20 +210,6 @@
 .scene-pos--bottle  { left: 50%;  z-index: 10; bottom: -100px; }
 .scene-pos--ravinala { left: -3%; z-index: 1; }
 
-.bottle-shadow {
-  position: absolute;
-  bottom: 2%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: clamp(240px, 30vmin, 520px);
-  height: clamp(72px, 10vmin, 160px);
-  border-radius: 50%;
-  background: rgba(4, 1, 0, 0.5);
-  filter: blur(18px);
-  pointer-events: none;
-  z-index: 1;
-}
-
 /* ─── Tailles & animations des images ─── */
 .scene-pos--bottle img {
   position: relative;
@@ -455,19 +441,6 @@
   height: clamp(420px, 78vmin, 820px);
   width: auto;
   display: block;
-}
-
-.hn-s2b-bottle__shadow {
-  position: absolute;
-  bottom: 2%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: clamp(200px, 27vmin, 400px);
-  height: clamp(64px, 8.6vmin, 128px);
-  border-radius: 50%;
-  background: rgba(4, 1, 0, 0.5);
-  filter: blur(18px);
-  z-index: 1;
 }
 
 .hn-s2b-content {
@@ -818,21 +791,6 @@
 
 .s7-bottle:hover img {
   transform: scale(1.05) translateY(-8px);
-  filter: drop-shadow(0 22px 34px rgba(0, 0, 0, 0.4));
-}
-
-.s7-bottle__shadow {
-  position: absolute;
-  bottom: 2%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: clamp(140px, 20vmin, 290px);
-  height: clamp(44px, 6.2vmin, 92px);
-  border-radius: 50%;
-  background: rgba(4, 1, 0, 0.5);
-  filter: blur(18px);
-  pointer-events: none;
-  z-index: 1;
 }
 
 /* ─── Positions des 3 états ─── */
@@ -1229,7 +1187,6 @@
   .scene-pos--ravinala { left: -5%; bottom: 12vh; }
   .scene-pos--ravinala img { height: clamp(460px, 90vh, 720px); }
   .scene-pos--bottle img   { height: clamp(250px, 74vh, 470px); }
-  .bottle-shadow { width: 460px; height: 95px; }
 
   /* Section 5 – Rizière */
   .s7-bottle img { height: clamp(280px, 48vh, 480px); }
@@ -1276,7 +1233,6 @@
   .scene-pos--ravinala img { height: clamp(360px, 78vh, 640px); }
   .scene-pos--bottle { bottom: -40px; }
   .scene-pos--bottle img   { height: clamp(340px, 86vh, 580px); }
-  .bottle-shadow { width: 260px; height: 60px; }
 
   /* Section 5 – Rizière : hauteur encore augmentée (460→620px) et
      padding-top/gap du titre agrandis, plus de marge sous les bouteilles
@@ -1324,7 +1280,6 @@
   .scene-pos--ravinala { left: -50%; bottom: 15vh; }
   .scene-pos--ravinala img { height: clamp(340px, 72vh, 560px); }
   .scene-pos--bottle img   { height: clamp(260px, 70vh, 440px); }
-  .bottle-shadow { width: 180px; height: 58px; }
 
   /* Section 5 – Rizière */
   .s7-bottle img { height: clamp(140px, 34vh, 230px); }
