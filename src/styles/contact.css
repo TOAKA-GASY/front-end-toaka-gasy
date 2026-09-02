@@ -505,3 +505,14 @@
   .ct-hero { padding-top: 5rem; }
   .ct-form-section__grid { padding: 1.5rem 1rem; }
 }
+
+/* ═══ iPad : titres de section uniformes + descriptions agrandies ═══ */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .ct-form-section__title { font-size: 42px; }
+}
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .ct-form-section__title { font-size: 46px; }
+}
+@media (min-width: 1200px) and (max-width: 1299.98px) {
+  .ct-form-section__title { font-size: 50px; }
+}

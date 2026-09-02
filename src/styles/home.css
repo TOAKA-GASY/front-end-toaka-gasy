@@ -372,7 +372,7 @@
   /* padding-top plus généreux : la section démarre juste après le hero à
      bouteille sticky (.home-page), qui peut encore légèrement déborder
      pendant la transition — ça évite que le titre soit caché derrière. */
-  padding: clamp(140px, 20vmin, 260px) 1.5rem 0;
+  padding: clamp(170px, 28vmin, 300px) 1.5rem 0;
   text-align: center;
 }
 
@@ -398,7 +398,7 @@
 
 .hn-s2-text {
   font-family: var(--font-simonetta);
-  font-size: clamp(14px, 1.05vw, 18px);
+  font-size: clamp(16px, 1.3vw, 20px);
   line-height: 1.7;
   color: #F4EADB;
   white-space: pre-line;
@@ -683,7 +683,7 @@
 
 .hn-s4-text {
   font-family: var(--font-simonetta);
-  font-size: clamp(15px, 1.2vw, 20px);
+  font-size: clamp(17px, 1.4vw, 22px);
   color: #ffffff;
   line-height: 1.6;
 }
@@ -738,7 +738,15 @@
 
 /* ─── Responsive : 2B en colonne sur mobile ─── */
 @media (max-width: 767.98px) {
-  .home-new-wrap { height: calc(200vh + 464px); }
+  /* Comme sur tablette (768-991px) : height:auto sur toute la chaîne
+     home-new-wrap → home-new-s2 → hn-s2-top pour que le bloc épouse
+     exactement son contenu, sans vide résiduel ni en haut ni en bas
+     (un height:100vh + centrage laissait ~140-260px de padding plus
+     un vide de centrage des deux côtés). */
+  .home-new-wrap { height: auto; }
+  .home-new-s2 { height: auto; }
+  .hn-s2-top { height: auto; padding: clamp(120px, 20vh, 170px) 0 clamp(24px, 4vh, 40px); }
+  .hn-s2-content { padding-top: 0; }
 
   /* white-space: nowrap + taille liée au vw : "TRADITIONAL RUM" / "OF
      MADAGASCAR" restent chacune sur une seule ligne sur tous les mobiles,
@@ -1162,16 +1170,53 @@
      passent aussi en auto pour que leur somme suive automatiquement,
      au lieu d'un calc(vh) figé qui décalerait tout le reste. */
   .home-new-s2 { height: auto; }
-  .hn-s2-top { height: auto; padding: clamp(30px, 4vh, 55px) 0; }
+  .hn-s2-top { height: auto; padding: clamp(170px, 21vh, 235px) 0; }
   .home-new-wrap { height: auto; }
-  .hn-s2-text { font-size: clamp(16px, 2.2vw, 20px); }
+  .hn-s2-text { font-size: clamp(19px, 2.6vw, 24px); }
+  .hn-s4-text { font-size: clamp(18px, 2.4vw, 23px); }
   .hn-s2-content { padding-top: 0; }
   /* .home-riz garde sa hauteur desktop (115vh) par défaut ; les bouteilles
      sont ancrées à bottom:8vh (indépendamment du titre) — réduire la
      hauteur de la section les rapproche directement du titre. */
-  .home-riz { height: 90vh; }
-  .riz-heading { padding-top: clamp(20px, 3vh, 40px); }
-  .riz-title { font-size: clamp(30px, 4.6vw, 48px); }
+  .home-riz {
+    height: 110vh;
+    /* Le titre (hauteur variable) et les bouteilles sont deux enfants flex :
+       le titre garde sa taille naturelle en haut, les bouteilles récupèrent
+       tout l'espace restant (flex: 1) et s'y centrent verticalement (via
+       .s7-bottle top:50%). Ainsi les bouteilles sont toujours centrées dans
+       l'espace disponible sous le titre, quelle que soit la hauteur de ce
+       dernier — fini le vide résiduel en bas (bottom:Xvh fixe, indépendant
+       du titre, laissait un vide énorme en portrait) et le chevauchement
+       titre/bouteilles (en paysage, où la section est plus basse). */
+    display: flex;
+    flex-direction: column;
+  }
+  .riz-heading { padding-top: clamp(50px, 7vh, 85px); }
+  .riz-heading .hn-s2-eyebrow { font-size: 18px; }
+
+  .home-riz__bottles {
+    position: relative;
+    inset: auto;
+    flex: 1 1 auto;
+  }
+  .s7-bottle--center,
+  .s7-bottle--left,
+  .s7-bottle--right { bottom: auto; top: 50%; }
+  .s7-bottle--center { transform: translate(-50%, -50%); }
+
+  /* Chevrons repositionnés sur le centre réel des bouteilles (milieu de
+     l'espace restant sous le titre), et non plus sur le centre géométrique
+     de toute la section (qui inclut le titre, plus haut). */
+  .home-riz .s57-nav { top: calc(50% + 120px); }
+
+  /* Titres de section : même taille sur tout iPad (768-1299px), quelle
+     que soit la page — cohérence visuelle demandée. */
+  .hn-s2-title,
+  .riz-title,
+  .hn-s4-title { font-size: 50px; }
+  /* Titre de la collection un peu plus grand, pour mieux remplir la largeur
+     tablette (indépendant de hn-s2-title/hn-s4-title, non concernés). */
+  .riz-title { font-size: 58px; }
 
   /* Hero header */
   .hero-hd__inner { padding: 2.5rem 2rem 1rem; }
@@ -1188,8 +1233,8 @@
 
   /* Section 5 – Rizière */
   .s7-bottle img { height: clamp(280px, 48vh, 480px); }
-  .s7-bottle--left  { transform: translateX(calc(-50% - 30vw)) scale(0.62); }
-  .s7-bottle--right { transform: translateX(calc(-50% + 30vw)) scale(0.62); }
+  .s7-bottle--left  { transform: translate(calc(-50% - 30vw), -50%) scale(0.62); }
+  .s7-bottle--right { transform: translate(calc(-50% + 30vw), -50%) scale(0.62); }
 }
 
 /* ════════════════════════════════════════
@@ -1233,27 +1278,38 @@
   .scene-pos--bottle img   { height: clamp(340px, 86vh, 580px); }
   .bottle-shadow { width: 260px; height: 60px; }
 
-  /* Section 5 – Rizière : hauteur réduite, bouteilles centrées sous le titre */
-  .home-riz { height: 400px; }
-  .riz-heading { padding-top: 1.75rem; gap: 0.25rem; }
+  /* Section 5 – Rizière : hauteur encore augmentée (460→620px) et
+     padding-top/gap du titre agrandis, plus de marge sous les bouteilles
+     (55→110px) — la version précédente manquait encore d'air en haut et
+     en bas malgré un premier ajustement. */
+  /* Moins de traction vers le haut (le titre se retrouvait trop proche de
+     la section précédente) : padding-top du titre redescendu, et la
+     section garde/gagne de la hauteur en bas (fond qui s'étend vers le
+     bas) plutôt que d'être entièrement tirée vers le haut. */
+  .home-riz { height: 500px; margin-top: -15px; }
+  .riz-heading { padding-top: 3rem; gap: 0.35rem; }
   .riz-heading .hn-s2-eyebrow { font-size: 9px; letter-spacing: 0.22em; }
   .riz-title { font-size: clamp(18px, 5.5vw, 26px); }
   .riz-title__break { display: block; }
   .s7-bottle img { height: 200px; }
-  .s7-bottle--center { bottom: 55px; }
+  .s7-bottle--center { bottom: 70px; }
   .s7-bottle--left  {
     transform: translateX(calc(-50% - 36vw)) scale(0.55);
-    bottom: 55px;
+    bottom: 70px;
     opacity: 1;
   }
   .s7-bottle--right {
     transform: translateX(calc(-50% + 36vw)) scale(0.55);
-    bottom: 55px;
+    bottom: 70px;
     opacity: 1;
   }
 
-  /* Section 3 – Lifestyle : hauteur réduite (section trop longue en portrait) */
-  .home-new-s3 { height: 300px; }
+  /* Section 3 – Lifestyle : hauteur réduite (section trop longue en portrait).
+     margin-top:-8vh (règle de base, pensée pour desktop) remonte cette
+     section de ~65-70px sur mobile — elle chevauchait alors l'ombre des
+     bouteilles de la section 5 juste au-dessus. Annulé ici + léger espace
+     positif pour une vraie respiration entre les deux sections. */
+  .home-new-s3 { height: 300px; margin-top: 0; }
 
   /* Section vidéo/femme : remontée pour ne pas laisser de vide après la lifestyle */
   .home-s57 { margin-top: -8px; }
@@ -1285,12 +1341,39 @@
      tranche 768–991px pour "Inspired by the..." (align-items: flex-start
      au lieu de center, sinon réduire le padding ne fait qu'agrandir
      l'espace de centrage au-dessus). */
-  .hn-s2-top { height: 60vh; align-items: flex-start; }
-  .home-new-wrap { height: calc(260vh - 100px); }
-  .hn-s2-content { padding-top: clamp(35px, 4.5vh, 60px); }
-  .hn-s2-text { font-size: clamp(17px, 1.8vw, 20px); }
-  .home-riz { height: 88vh; }
-  .riz-heading { padding-top: clamp(35px, 5.5vh, 65px); }
+  .home-new-s2 { height: auto; }
+  .hn-s2-top { height: auto; align-items: flex-start; }
+  .home-new-wrap { height: auto; }
+  .hn-s2-content { padding-top: clamp(190px, 23vh, 255px); }
+  .hn-s2-text { font-size: clamp(20px, 2.2vw, 25px); }
+  .hn-s4-text { font-size: clamp(19px, 2vw, 24px); }
+  /* Titre + bouteilles en flex column : le titre garde sa taille naturelle
+     en haut, les bouteilles (flex:1) récupèrent tout l'espace restant et
+     s'y centrent verticalement (.s7-bottle top:50%). Cf. même correctif
+     sur la tranche 768–991px pour le détail — en paysage (cette tranche
+     capte la plupart des iPad en paysage) la section est plus basse et le
+     titre+bouteilles se chevauchaient avec l'ancien bottom:34vh fixe. */
+  .home-riz { height: 107vh; display: flex; flex-direction: column; }
+  .riz-heading { padding-top: clamp(55px, 7.5vh, 90px); }
+  .riz-heading .hn-s2-eyebrow { font-size: 18px; }
+
+  .home-riz__bottles { position: relative; inset: auto; flex: 1 1 auto; }
+  .s7-bottle--center,
+  .s7-bottle--left,
+  .s7-bottle--right { bottom: auto; top: 50%; }
+  .s7-bottle--center { transform: translate(-50%, -50%); }
+  .s7-bottle--left   { transform: translate(calc(-50% - clamp(180px, 26vw, 420px)), -50%) scale(0.6); }
+  .s7-bottle--right  { transform: translate(calc(-50% + clamp(180px, 26vw, 420px)), -50%) scale(0.6); }
+
+  /* Chevrons alignés sur le centre réel des bouteilles, pas sur le centre
+     géométrique de toute la section (qui inclut le titre, plus haut). */
+  .home-riz .s57-nav { top: calc(50% + 110px); }
+
+  /* Titres de section : même taille sur tout iPad (768-1299px). */
+  .hn-s2-title,
+  .riz-title,
+  .hn-s4-title { font-size: 50px; }
+  .riz-title { font-size: 58px; }
 
   .hero-hd__inner  { padding: 3rem 3rem 1.25rem; }
   .hero-hd--sticky .hero-hd__inner { padding: 0.8rem 3rem; }
@@ -1314,12 +1397,76 @@
    (effective width alors ≥1300px). Plage resserrée pour ne plus capter
    les résolutions desktop courantes. ════════════════════════════════════════ */
 @media (min-width: 1200px) and (max-width: 1299.98px) {
-  .hn-s2-top { height: 64vh; align-items: flex-start; }
-  .home-new-wrap { height: calc(264vh - 100px); }
-  .hn-s2-content { padding-top: clamp(40px, 5vh, 65px); }
-  .hn-s2-text { font-size: clamp(17px, 1.3vw, 20px); }
-  .home-riz { height: 85vh; }
-  .riz-heading { padding-top: clamp(40px, 6vh, 70px); }
+  .home-new-s2 { height: auto; }
+  .hn-s2-top { height: auto; align-items: flex-start; }
+  .home-new-wrap { height: auto; }
+  .hn-s2-content { padding-top: clamp(195px, 23.5vh, 260px); }
+  .hn-s2-text { font-size: clamp(20px, 1.7vw, 25px); }
+  .hn-s4-text { font-size: clamp(19px, 1.6vw, 24px); }
+  /* Même correctif flex que les tranches 768-991px et 992-1199px : titre
+     en haut à taille naturelle, bouteilles centrées dans l'espace restant
+     (au lieu d'un bottom:Xvh fixe qui les laissait trop basses). */
+  .home-riz { height: 104vh; display: flex; flex-direction: column; }
+  .riz-heading { padding-top: clamp(60px, 8vh, 100px); }
+  .riz-heading .hn-s2-eyebrow { font-size: 18px; }
+
+  .home-riz__bottles { position: relative; inset: auto; flex: 1 1 auto; }
+  .s7-bottle--center,
+  .s7-bottle--left,
+  .s7-bottle--right { bottom: auto; top: 50%; }
+  .s7-bottle--center { transform: translate(-50%, -50%); }
+  .s7-bottle--left   { transform: translate(calc(-50% - clamp(180px, 26vw, 420px)), -50%) scale(0.6); }
+  .s7-bottle--right  { transform: translate(calc(-50% + clamp(180px, 26vw, 420px)), -50%) scale(0.6); }
+
+  .home-riz .s57-nav { top: calc(50% + 110px); }
+
+  /* Titres de section : même taille sur tout iPad (768-1299px). */
+  .hn-s2-title,
+  .riz-title,
+  .hn-s4-title { font-size: 50px; }
+  .riz-title { font-size: 58px; }
+}
+
+/* ════════════════════════════════════════
+   iPad Pro 12.9" en paysage (1366px) : même largeur CSS qu'un laptop
+   15.6" à 100% de zoom, donc impossible à distinguer par largeur seule
+   (cf. note ci-dessus, qui a délibérément exclu 1366 du correctif
+   tablette pour ne pas abîmer ce laptop). On cible ici uniquement les
+   écrans tactiles sans souris (hover:none + pointer:coarse) pour
+   appliquer le même correctif "pas de vide résiduel haut/bas" SANS
+   jamais toucher un vrai écran desktop/laptop (hover:hover + pointer:fine).
+   ════════════════════════════════════════ */
+@media (min-width: 1300px) and (max-width: 1400px) and (hover: none) and (pointer: coarse) {
+  .home-new-s2 { height: auto; }
+  .hn-s2-top { height: auto; align-items: flex-start; }
+  .home-new-wrap { height: auto; }
+  .hn-s2-content { padding-top: clamp(195px, 23.5vh, 260px); }
+  .hn-s2-text { font-size: clamp(20px, 1.7vw, 25px); }
+  .hn-s4-text { font-size: clamp(19px, 1.6vw, 24px); }
+
+  /* Section 5 (rizière) : cette tranche (iPad Pro 12.9" paysage tactile)
+     n'avait encore aucun correctif — elle héritait de la hauteur desktop
+     (115vh) et d'un bottom:8vh fixe, laissant les bouteilles bien trop
+     basses. Même correctif flex que les autres tranches iPad. */
+  .home-riz { height: 104vh; display: flex; flex-direction: column; }
+  .riz-heading { padding-top: clamp(60px, 8vh, 100px); }
+  .riz-heading .hn-s2-eyebrow { font-size: 18px; }
+
+  .home-riz__bottles { position: relative; inset: auto; flex: 1 1 auto; }
+  .s7-bottle--center,
+  .s7-bottle--left,
+  .s7-bottle--right { bottom: auto; top: 50%; }
+  .s7-bottle--center { transform: translate(-50%, -50%); }
+  .s7-bottle--left   { transform: translate(calc(-50% - clamp(180px, 26vw, 420px)), -50%) scale(0.6); }
+  .s7-bottle--right  { transform: translate(calc(-50% + clamp(180px, 26vw, 420px)), -50%) scale(0.6); }
+
+  .home-riz .s57-nav { top: calc(50% + 110px); }
+
+  /* Titres de section : même taille sur tout iPad (768-1299px). */
+  .hn-s2-title,
+  .riz-title,
+  .hn-s4-title { font-size: 50px; }
+  .riz-title { font-size: 58px; }
 }
 
 /* ════════════════════════════════════════

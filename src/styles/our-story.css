@@ -767,3 +767,38 @@
   .os-s6__photo--gerben { max-width: 68vw; margin: 0 auto 0; }
   .os-s6__quote-line { font-size: clamp(14px, 4vw, 24px); }
 }
+
+/* ═══ iPad : titres de section uniformes + descriptions agrandies ═══ */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .os-hero__title, .os-s4__title, .os-legend__content .os-s4__title { font-size: 42px; }
+  .os-hero__body, .os-s4__body, .os-s4__body--compact, .os-legend__body, .os-s6__bio { font-size: clamp(19px, 2.4vw, 23px); }
+  /* Texte de gauche (colonne .os-hero__text) encore agrandi. */
+  .os-hero__kicker { font-size: 13px; }
+  .os-hero__title  { font-size: 39px; }
+  .os-hero__body   { font-size: clamp(18px, 2.2vw, 21px); }
+}
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .os-hero__title, .os-s4__title, .os-legend__content .os-s4__title { font-size: 46px; }
+  .os-hero__body, .os-s4__body, .os-s4__body--compact, .os-legend__body, .os-s6__bio { font-size: clamp(20px, 2vw, 24px); }
+  .os-hero__kicker { font-size: 14px; }
+  .os-hero__title  { font-size: 43px; }
+  .os-hero__body   { font-size: clamp(19px, 1.9vw, 22px); }
+}
+@media (min-width: 1200px) and (max-width: 1299.98px) {
+  .os-hero__title, .os-s4__title, .os-legend__content .os-s4__title { font-size: 50px; }
+  .os-hero__body, .os-s4__body, .os-s4__body--compact, .os-legend__body, .os-s6__bio { font-size: clamp(20px, 1.6vw, 24px); }
+  .os-hero__kicker { font-size: 14px; }
+  .os-hero__title  { font-size: 46px; }
+  .os-hero__body   { font-size: clamp(19px, 1.6vw, 22px); }
+}
+
+/* Cette page traite tout ce qui est ≥1300px comme "desktop" par design
+   (cf. commentaire plus haut) — un iPad Pro 12.9" en paysage (1366px) y
+   tombe donc, avec un kicker/corps plus petits que sur les autres paliers
+   iPad. On cible ici uniquement les écrans tactiles sans souris pour
+   appliquer le même agrandissement, sans jamais toucher un vrai laptop/
+   desktop (hover:hover + pointer:fine) à cette même largeur. */
+@media (min-width: 1300px) and (max-width: 1600px) and (hover: none) and (pointer: coarse) {
+  .os-hero__kicker { font-size: 14px; }
+  .os-hero__body   { font-size: clamp(19px, 1.6vw, 22px); }
+}

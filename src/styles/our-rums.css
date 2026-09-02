@@ -749,10 +749,13 @@
    largeur — les descriptions y retombaient au plancher du clamp() de
    base. ─── */
 @media (min-width: 1200px) and (max-width: 1599.98px) {
-  .or-col-intro__title   { font-size: clamp(44px, 4.2vw, 58px); }
-  .or-col-intro__tagline { font-size: clamp(19px, 1.6vw, 23px); }
-  .or-col-intro__desc    { font-size: clamp(17px, 1.4vw, 20px); }
-  .or-cocktails__desc    { font-size: clamp(17px, 1.3vw, 20px); }
+  .or-col-top__title, .or-intro__title, .or-cocktails__title { font-size: 66px; }
+  .or-col-intro__title   { font-size: 66px; }
+  .or-col-eyebrow        { font-size: 22px; }
+  .or-col-intro__tagline { font-size: clamp(26px, 2vw, 30px); }
+  .or-col-intro__desc    { font-size: clamp(18px, 2.6vw, 25px); }
+  .or-intro__text        { font-size: clamp(29px, 2.6vw, 34px); }
+  .or-cocktails__desc    { font-size: clamp(29px, 2.6vw, 34px); }
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
@@ -779,16 +782,18 @@
 
   /* Descriptions produits : le clamp() de base retombe à son plancher à
      cette largeur, trop petit pour un écran de cette taille. */
-  .or-col-intro__title   { font-size: clamp(38px, 5vw, 48px); }
-  .or-col-intro__tagline { font-size: clamp(18px, 2.2vw, 21px); }
-  .or-col-intro__desc    { font-size: clamp(17px, 2vw, 20px); }
+  .or-col-intro__title   { font-size: 54px; }
+  .or-col-eyebrow        { font-size: 18px; }
+  .or-col-intro__tagline { font-size: clamp(24px, 2.8vw, 28px); }
+  .or-col-intro__desc    { font-size: clamp(18px, 3.4vw, 20px); }
 
   .or-side-nav { right: 1rem; top: 110px; }
 
   .or-cocktails { padding: 0.5rem clamp(1.5rem,5vw,3rem) 4rem; gap: 3rem; }
   .or-cocktails__grid { grid-template-columns: 1fr; max-width: 460px; }
   .or-cocktail-card   { aspect-ratio: 4/3; }
-  .or-cocktails__desc { font-size: clamp(17px, 2vw, 20px); }
+  .or-cocktails__desc { font-size: clamp(28px, 3.4vw, 33px); }
+  .or-intro__text     { font-size: clamp(28px, 3.4vw, 33px); }
 }
 
 @media (max-width: 767.98px) {
@@ -842,4 +847,20 @@
   .or-hero__pos--right { transform: translate(calc(-50% + clamp(60px, 15vw, 130px)), -50%); }
   .or-col-top__title { font-size: clamp(28px, 8vw, 40px); }
   .or-cocktail-card { aspect-ratio: 3/2; }
+}
+
+/* ═══ iPad : titres de section uniformes + descriptions agrandies ═══ */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .or-col-top__title, .or-col-intro__title, .or-intro__title, .or-cocktails__title { font-size: 54px; }
+  .or-col-intro__desc, .or-intro__text, .or-cocktails__desc { font-size: clamp(28px, 3.4vw, 20px); }
+}
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .or-col-top__title, .or-col-intro__title, .or-intro__title, .or-cocktails__title { font-size: 60px; }
+  .or-col-eyebrow        { font-size: 20px; }
+  .or-col-intro__tagline { font-size: clamp(25px, 2.4vw, 29px); }
+  .or-col-intro__desc, .or-intro__text, .or-cocktails__desc { font-size: clamp(20px, 3vw, 20px); }
+}
+@media (min-width: 1200px) and (max-width: 1299.98px) {
+  .or-col-top__title, .or-col-intro__title, .or-intro__title, .or-cocktails__title { font-size: 66px; }
+  .or-col-intro__desc, .or-intro__text, .or-cocktails__desc { font-size: clamp(32px, 2.6vw, 20px); }
 }
