@@ -667,7 +667,7 @@
   .os-hero__body  { font-size: clamp(16px, 0.9vw, 19px); max-width: 620px; }
   .os-legend__content .os-s4__title { font-size: clamp(72px, 4.6vw, 108px); }
   .os-legend__body { font-size: clamp(19px, 0.9vw, 23px); }
-  .os-legend__bottle { height: clamp(760px, 50vmin, 860px); }
+  .os-legend__bottle { height: clamp(560px, 42vmin, 680px); }
   .os-legend__proverb { font-size: clamp(46px, 2.4vw, 54px); padding: 0 clamp(2rem, 5vw, 4rem); }
 
   .os-s6__bio { font-size: clamp(20px, 1vw, 24px); }
@@ -688,8 +688,8 @@
 
   .os-legend { padding: 0 0 2.5rem; }
   .os-legend__inner { grid-template-columns: 1fr; gap: 0.5rem; }
-  .os-legend__visual { order: -1; min-height: clamp(360px, 62vmin, 560px); }
-  .os-legend__bottle { height: clamp(360px, 62vmin, 560px); }
+  .os-legend__visual { order: -1; min-height: clamp(300px, 52vmin, 460px); }
+  .os-legend__bottle { height: clamp(300px, 52vmin, 460px); }
   .os-legend__body { max-width: 620px; margin-left: auto; margin-right: auto; margin-bottom: 1rem; }
   .os-legend__proverb { margin-top: clamp(1rem, 3vw, 1.75rem); }
 
