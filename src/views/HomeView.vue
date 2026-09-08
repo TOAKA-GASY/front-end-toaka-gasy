@@ -193,15 +193,15 @@ const parallax = computed(() => {
 
     <div class="hero-hd__inner">
       <ul class="hero-hd__nav hero-hd__nav--left">
-        <li><RouterLink to="/" class="hero-hd__link" active-class="hero-hd__link--active">{{ t('nav.home') }}</RouterLink></li>
-        <li><RouterLink to="/our-story" class="hero-hd__link" active-class="hero-hd__link--active">{{ t('nav.ourStory') }}</RouterLink></li>
+        <li><RouterLink to="/" class="hero-hd__link" active-class="hero-hd__link--active" v-field-style="'nav.home'">{{ t('nav.home') }}</RouterLink></li>
+        <li><RouterLink to="/our-story" class="hero-hd__link" active-class="hero-hd__link--active" v-field-style="'nav.ourStory'">{{ t('nav.ourStory') }}</RouterLink></li>
       </ul>
       <RouterLink to="/" class="hero-hd__logo-wrap">
         <img src="/logo/logo-marron.webp" class="hero-hd__logo" alt="Toaka Gasy" />
       </RouterLink>
       <ul class="hero-hd__nav hero-hd__nav--right">
-        <li><RouterLink to="/our-rums" class="hero-hd__link" active-class="hero-hd__link--active">{{ t('nav.ourRums') }}</RouterLink></li>
-        <li><RouterLink to="/contact" class="hero-hd__link" active-class="hero-hd__link--active">{{ t('nav.contact') }}</RouterLink></li>
+        <li><RouterLink to="/our-rums" class="hero-hd__link" active-class="hero-hd__link--active" v-field-style="'nav.ourRums'">{{ t('nav.ourRums') }}</RouterLink></li>
+        <li><RouterLink to="/contact" class="hero-hd__link" active-class="hero-hd__link--active" v-field-style="'nav.contact'">{{ t('nav.contact') }}</RouterLink></li>
       </ul>
     </div>
   </div>
@@ -216,10 +216,10 @@ const parallax = computed(() => {
         <img src="/logo/logo-marron.webp" alt="Toaka Gasy" />
       </RouterLink> -->
       <nav class="hero-mobile-menu__nav">
-        <RouterLink to="/" class="hero-mobile-menu__link" @click="menuOpen = false">{{ t('nav.home') }}</RouterLink>
-        <RouterLink to="/our-story" class="hero-mobile-menu__link" @click="menuOpen = false">{{ t('nav.ourStory') }}</RouterLink>
-        <RouterLink to="/our-rums" class="hero-mobile-menu__link" @click="menuOpen = false">{{ t('nav.ourRums') }}</RouterLink>
-        <RouterLink to="/contact" class="hero-mobile-menu__link" @click="menuOpen = false">{{ t('nav.contact') }}</RouterLink>
+        <RouterLink to="/" class="hero-mobile-menu__link" @click="menuOpen = false" v-field-style="'nav.home'">{{ t('nav.home') }}</RouterLink>
+        <RouterLink to="/our-story" class="hero-mobile-menu__link" @click="menuOpen = false" v-field-style="'nav.ourStory'">{{ t('nav.ourStory') }}</RouterLink>
+        <RouterLink to="/our-rums" class="hero-mobile-menu__link" @click="menuOpen = false" v-field-style="'nav.ourRums'">{{ t('nav.ourRums') }}</RouterLink>
+        <RouterLink to="/contact" class="hero-mobile-menu__link" @click="menuOpen = false" v-field-style="'nav.contact'">{{ t('nav.contact') }}</RouterLink>
       </nav>
     </div>
   </Transition>
@@ -255,11 +255,11 @@ const parallax = computed(() => {
       <!-- 2A : The Rum of Celebration -->
       <div class="hn-s2-top" :class="{ 'hn-s2-top--visible': hnS2TopVisible }">
         <div class="hn-s2-content">
-          <span class="hn-s2-eyebrow">{{ t('home.s2Eyebrow') }}</span>
-          <h2 class="hn-s2-title">{{ t('home.s2TitleLine1') }}<br />{{ t('home.s2TitleLine2') }}</h2>
-          <p class="hn-s2-text">{{ t('home.s2Text') }}</p>
+          <span class="hn-s2-eyebrow" v-field-style="'home.s2Eyebrow'">{{ t('home.s2Eyebrow') }}</span>
+          <h2 class="hn-s2-title"><span v-field-style="'home.s2TitleLine1'">{{ t('home.s2TitleLine1') }}</span><br /><span v-field-style="'home.s2TitleLine2'">{{ t('home.s2TitleLine2') }}</span></h2>
+          <p class="hn-s2-text" v-field-style="'home.s2Text'">{{ t('home.s2Text') }}</p>
           <button class="hn-s2-cta" @click="goToStory">
-            <span>{{ t('home.s2Cta') }}</span>
+            <span v-field-style="'home.s2Cta'">{{ t('home.s2Cta') }}</span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="6 9 12 15 18 9"/>
@@ -275,11 +275,11 @@ const parallax = computed(() => {
           <img src="/img/toaka-gasy-red.webp" alt="Toaka Gasy" />
         </div>
         <div class="hn-s2b-content">
-          <span class="hn-s2-eyebrow">{{ t('home.s2bEyebrow') }}</span>
-          <h2 class="hn-s2b-title">{{ t('home.s2bTitle') }}</h2>
-          <p class="hn-s2-text">{{ t('home.s2bText') }}</p>
+          <span class="hn-s2-eyebrow" v-field-style="'home.s2bEyebrow'">{{ t('home.s2bEyebrow') }}</span>
+          <h2 class="hn-s2b-title" v-field-style="'home.s2bTitle'">{{ t('home.s2bTitle') }}</h2>
+          <p class="hn-s2-text" v-field-style="'home.s2bText'">{{ t('home.s2bText') }}</p>
           <button class="hn-s2-cta" @click="goToProduct(products[2].slug)">
-            <span>{{ t('home.s2bCta') }}</span>
+            <span v-field-style="'home.s2bCta'">{{ t('home.s2bCta') }}</span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="6 9 12 15 18 9"/>
@@ -293,9 +293,9 @@ const parallax = computed(() => {
     <!-- Section 4 : Why We Exist -->
     <section class="home-new-s4" :class="{ 'home-new-s4--visible': hnS4Visible }">
       <div class="hn-s4-content">
-        <span class="hn-s2-eyebrow">{{ t('home.s4Eyebrow') }}</span>
-        <h2 class="hn-s4-title">{{ t('home.s4TitleLine1') }}<br />{{ t('home.s4TitleLine2') }}</h2>
-        <p class="hn-s4-text">{{ t('home.s4Text') }}</p>
+        <span class="hn-s2-eyebrow" v-field-style="'home.s4Eyebrow'">{{ t('home.s4Eyebrow') }}</span>
+        <h2 class="hn-s4-title"><span v-field-style="'home.s4TitleLine1'">{{ t('home.s4TitleLine1') }}</span><br /><span v-field-style="'home.s4TitleLine2'">{{ t('home.s4TitleLine2') }}</span></h2>
+        <p class="hn-s4-text" v-field-style="'home.s4Text'">{{ t('home.s4Text') }}</p>
       </div>
       <div class="hn-s4-images">
         <img src="/img/cajot1.webp" class="hn-s4-img" :alt="t('home.s4Img1Alt')" loading="lazy" />
@@ -311,8 +311,8 @@ const parallax = computed(() => {
     <img src="/img/rizière.webp" class="home-riz__bg" alt="" aria-hidden="true" />
 
     <div class="riz-heading" :class="{ 'riz-heading--visible': rizVisible }">
-      <span class="hn-s2-eyebrow">{{ t('home.rizEyebrow') }}</span>
-      <h2 class="riz-title">{{ t('home.rizTitleLine1') }}<br class="riz-title__break"> {{ t('home.rizTitleLine2') }}</h2>
+      <span class="hn-s2-eyebrow" v-field-style="'home.rizEyebrow'">{{ t('home.rizEyebrow') }}</span>
+      <h2 class="riz-title"><span v-field-style="'home.rizTitleLine1'">{{ t('home.rizTitleLine1') }}</span><br class="riz-title__break"> <span v-field-style="'home.rizTitleLine2'">{{ t('home.rizTitleLine2') }}</span></h2>
     </div>
 
     <div class="home-riz__bottles">
@@ -363,7 +363,7 @@ const parallax = computed(() => {
 
   <!-- Section : Follow Us -->
   <section class="home-follow">
-    <p class="home-follow__subtitle">{{ t('home.followSubtitle') }}</p>
+    <p class="home-follow__subtitle" v-field-style="'home.followSubtitle'">{{ t('home.followSubtitle') }}</p>
     <div class="home-follow__social">
       <a href="https://www.instagram.com/toakagasy.company" class="home-follow__link" target="_blank" rel="noopener" aria-label="Instagram">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">

@@ -36,37 +36,37 @@ watchEffect(() => {
       </RouterLink>
 
       <div class="recipe-hero__title">
-        <h1 class="recipe-title">{{ cocktail.title }}</h1>
-        <p class="recipe-subtitle">{{ cocktail.subtitle }}</p>
+        <h1 class="recipe-title" v-field-style="`data.cocktails.${cocktail.slug}.title`">{{ cocktail.title }}</h1>
+        <p class="recipe-subtitle" v-field-style="`data.cocktails.${cocktail.slug}.subtitle`">{{ cocktail.subtitle }}</p>
       </div>
     </div>
 
     <div class="recipe-lower">
       <div class="recipe-lower__inner">
         <div class="recipe-block">
-          <h2 class="recipe-block__heading">{{ t('recipe.ingredients') }}</h2>
+          <h2 class="recipe-block__heading" v-field-style="'recipe.ingredients'">{{ t('recipe.ingredients') }}</h2>
           <ul class="recipe-list">
             <li v-for="(item, i) in cocktail.ingredients" :key="i">
               <i class="fa-solid fa-martini-glass-citrus recipe-list__icon"></i>
-              <span>{{ item }}</span>
+              <span v-field-style="`data.cocktails.${cocktail.slug}.ingredients`">{{ item }}</span>
             </li>
           </ul>
         </div>
         <div class="recipe-block">
-          <h2 class="recipe-block__heading">{{ t('recipe.method') }}</h2>
+          <h2 class="recipe-block__heading" v-field-style="'recipe.method'">{{ t('recipe.method') }}</h2>
           <ol class="recipe-steps">
-            <li v-for="(step, i) in cocktail.steps" :key="i">{{ step }}</li>
+            <li v-for="(step, i) in cocktail.steps" :key="i" v-field-style="`data.cocktails.${cocktail.slug}.steps`">{{ step }}</li>
           </ol>
         </div>
       </div>
 
-      <p class="recipe-enjoy">{{ t('recipe.enjoyResponsibly') }}</p>
+      <p class="recipe-enjoy" v-field-style="'recipe.enjoyResponsibly'">{{ t('recipe.enjoyResponsibly') }}</p>
     </div>
   </section>
 
   <section v-else class="recipe-page recipe-page--empty">
-    <p>{{ t('recipe.notFound') }}</p>
-    <RouterLink to="/our-rums" class="recipe-back-link">{{ t('recipe.backLink') }}</RouterLink>
+    <p v-field-style="'recipe.notFound'">{{ t('recipe.notFound') }}</p>
+    <RouterLink to="/our-rums" class="recipe-back-link" v-field-style="'recipe.backLink'">{{ t('recipe.backLink') }}</RouterLink>
   </section>
 
 </template>

@@ -6,13 +6,13 @@
 
         <img src="/logo/logo-marron.webp" class="age-gate__logo" alt="Toaka Gasy" />
 
-        <h2 id="age-gate-title" class="age-gate__title">{{ t('ageGate.title') }}</h2>
-        <p class="age-gate__text">{{ t('ageGate.text') }}</p>
+        <h2 id="age-gate-title" class="age-gate__title" v-field-style="'ageGate.title'">{{ t('ageGate.title') }}</h2>
+        <p class="age-gate__text" v-field-style="'ageGate.text'">{{ t('ageGate.text') }}</p>
 
-        <p class="age-gate__dob-label">{{ t('ageGate.dobLabel') }}</p>
+        <p class="age-gate__dob-label" v-field-style="'ageGate.dobLabel'">{{ t('ageGate.dobLabel') }}</p>
         <div class="age-gate__dob">
           <div class="age-gate__field">
-            <label class="age-gate__label" for="ag-year">{{ t('ageGate.yearLabel') }}</label>
+            <label class="age-gate__label" for="ag-year" v-field-style="'ageGate.yearLabel'">{{ t('ageGate.yearLabel') }}</label>
             <input
               id="ag-year" v-model="year" type="number" inputmode="numeric"
               class="age-gate__input" placeholder="YYYY" min="1900" :max="currentYear"
@@ -20,7 +20,7 @@
             />
           </div>
           <div class="age-gate__field">
-            <label class="age-gate__label" for="ag-month">{{ t('ageGate.monthLabel') }}</label>
+            <label class="age-gate__label" for="ag-month" v-field-style="'ageGate.monthLabel'">{{ t('ageGate.monthLabel') }}</label>
             <input
               id="ag-month" ref="monthInput" v-model="month" type="number" inputmode="numeric"
               class="age-gate__input" placeholder="MM" min="1" max="12"
@@ -32,11 +32,11 @@
 
         <label class="age-gate__remember">
           <input type="checkbox" v-model="rememberMe" />
-          {{ t('ageGate.rememberMe') }}
+          <span v-field-style="'ageGate.rememberMe'">{{ t('ageGate.rememberMe') }}</span>
         </label>
 
         <div class="age-gate__actions">
-          <button class="age-gate__btn age-gate__btn--yes" @click="onSubmit">{{ t('ageGate.enter') }}</button>
+          <button class="age-gate__btn age-gate__btn--yes" @click="onSubmit" v-field-style="'ageGate.enter'">{{ t('ageGate.enter') }}</button>
         </div>
 
         <img src="/img/line-mdg2.webp" class="age-gate__line" alt="" aria-hidden="true" />

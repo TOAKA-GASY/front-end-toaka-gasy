@@ -17,10 +17,10 @@
       <div class="header__grid">
         <ul class="header__nav header__nav--left">
           <li>
-            <RouterLink to="/" class="header__link" active-class="header__link--active">{{ t('nav.home') }}</RouterLink>
+            <RouterLink to="/" class="header__link" active-class="header__link--active" v-field-style="'nav.home'">{{ t('nav.home') }}</RouterLink>
           </li>
           <li>
-            <RouterLink to="/our-story" class="header__link" active-class="header__link--active">{{ t('nav.ourStory') }}</RouterLink>
+            <RouterLink to="/our-story" class="header__link" active-class="header__link--active" v-field-style="'nav.ourStory'">{{ t('nav.ourStory') }}</RouterLink>
           </li>
         </ul>
 
@@ -30,10 +30,10 @@
 
         <ul class="header__nav header__nav--right">
           <li>
-            <RouterLink to="/our-rums" class="header__link" active-class="header__link--active">{{ t('nav.ourRums') }}</RouterLink>
+            <RouterLink to="/our-rums" class="header__link" active-class="header__link--active" v-field-style="'nav.ourRums'">{{ t('nav.ourRums') }}</RouterLink>
           </li>
           <li>
-            <RouterLink to="/contact" class="header__link" active-class="header__link--active">{{ t('nav.contact') }}</RouterLink>
+            <RouterLink to="/contact" class="header__link" active-class="header__link--active" v-field-style="'nav.contact'">{{ t('nav.contact') }}</RouterLink>
           </li>
         </ul>
       </div>
@@ -54,10 +54,10 @@
       </RouterLink>
 
       <nav class="mobile-menu__nav">
-        <RouterLink to="/" class="mobile-menu__link" @click="menuOpen = false">{{ t('nav.home') }}</RouterLink>
-        <RouterLink to="/our-story" class="mobile-menu__link" @click="menuOpen = false">{{ t('nav.ourStory') }}</RouterLink>
-        <RouterLink to="/our-rums" class="mobile-menu__link" @click="menuOpen = false">{{ t('nav.ourRums') }}</RouterLink>
-        <RouterLink to="/contact" class="mobile-menu__link" @click="menuOpen = false">{{ t('nav.contact') }}</RouterLink>
+        <RouterLink to="/" class="mobile-menu__link" @click="menuOpen = false" v-field-style="'nav.home'">{{ t('nav.home') }}</RouterLink>
+        <RouterLink to="/our-story" class="mobile-menu__link" @click="menuOpen = false" v-field-style="'nav.ourStory'">{{ t('nav.ourStory') }}</RouterLink>
+        <RouterLink to="/our-rums" class="mobile-menu__link" @click="menuOpen = false" v-field-style="'nav.ourRums'">{{ t('nav.ourRums') }}</RouterLink>
+        <RouterLink to="/contact" class="mobile-menu__link" @click="menuOpen = false" v-field-style="'nav.contact'">{{ t('nav.contact') }}</RouterLink>
       </nav>
     </div>
   </Transition>

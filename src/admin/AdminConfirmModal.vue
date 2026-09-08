@@ -5,8 +5,11 @@
         <h2 class="h5 mb-1">Confirmer la publication</h2>
         <p class="text-muted small mb-3">Section : {{ sectionLabel }}</p>
 
-        <div v-if="diffRows.length === 0" class="alert alert-secondary small">Aucun changement détecté.</div>
-        <ul v-else class="list-unstyled small mb-3 tg-admin-diff border rounded p-2">
+        <div v-if="diffRows.length === 0 && styleDiffRows.length === 0" class="alert alert-secondary small">
+          Aucun changement détecté.
+        </div>
+
+        <ul v-if="diffRows.length" class="list-unstyled small mb-3 tg-admin-diff border rounded p-2">
           <li v-for="(row, i) in diffRows" :key="i" class="mb-2 pb-2 border-bottom">
             <span class="badge text-bg-light border me-1">{{ row.locale.toUpperCase() }}</span>
             <strong>{{ row.path }}</strong>
@@ -14,6 +17,17 @@
             <div>{{ display(row.newValue) }}</div>
           </li>
         </ul>
+
+        <div v-if="styleDiffRows.length" class="mb-3">
+          <div class="small text-muted mb-1">Style</div>
+          <ul class="list-unstyled small tg-admin-diff border rounded p-2 mb-0">
+            <li v-for="(row, i) in styleDiffRows" :key="i" class="mb-2 pb-2 border-bottom">
+              <strong>{{ row.path }}</strong>
+              <div class="text-muted text-decoration-line-through">{{ displayStyle(row.oldStyle) }}</div>
+              <div>{{ displayStyle(row.newStyle) }}</div>
+            </li>
+          </ul>
+        </div>
 
         <form @submit.prevent="submit">
           <label class="form-label small">Ressaisissez le code d'accès pour publier</label>
@@ -30,7 +44,11 @@
             <button type="button" class="btn btn-outline-secondary" :disabled="loading" @click="emit('close')">
               Annuler
             </button>
-            <button type="submit" class="btn btn-dark" :disabled="loading || !code || diffRows.length === 0">
+            <button
+              type="submit"
+              class="btn btn-dark"
+              :disabled="loading || !code || (diffRows.length === 0 && styleDiffRows.length === 0)"
+            >
               {{ loading ? 'Publication…' : 'Confirmer & publier' }}
             </button>
           </div>
@@ -48,6 +66,7 @@ import { pushToast } from './useToast'
 const props = defineProps({
   section: { type: Object, required: true },
   changes: { type: Object, required: true },
+  styleChanges: { type: Object, default: () => ({}) },
 })
 const emit = defineEmits(['confirmed', 'close'])
 
@@ -70,9 +89,26 @@ const diffRows = computed(() => {
   return rows
 })
 
+const styleDiffRows = computed(() => {
+  const rows = []
+  for (const [path, newStyle] of Object.entries(props.styleChanges || {})) {
+    const field = props.section.fields.find((f) => f.path === path)
+    rows.push({ path, oldStyle: field?.originalStyle, newStyle })
+  }
+  return rows
+})
+
 function display(value) {
   if (Array.isArray(value)) return value.join(' / ')
   return value ?? ''
+}
+
+function displayStyle(style) {
+  if (!style) return 'Par défaut'
+  const parts = []
+  if (style.font) parts.push(`Police : ${style.font === 'cinzel' ? 'Cinzel' : 'Simonetta'}`)
+  if (style.color) parts.push(`Couleur : ${style.color}`)
+  return parts.length ? parts.join(' · ') : 'Par défaut'
 }
 
 async function submit() {
@@ -80,7 +116,7 @@ async function submit() {
   loading.value = true
   error.value = ''
   try {
-    const result = await commitSection(props.section.id, props.changes, code.value)
+    const result = await commitSection(props.section.id, props.changes, props.styleChanges, code.value)
     if (result.skipped) {
       pushToast('Aucun changement à publier.', 'error')
       emit('close')

@@ -12,7 +12,7 @@
 
       <!-- Newsletter -->
       <div class="footer-newsletter">
-        <p class="footer-newsletter__heading">{{ t('footer.newsletterHeading') }}</p>
+        <p class="footer-newsletter__heading" v-field-style="'footer.newsletterHeading'">{{ t('footer.newsletterHeading') }}</p>
         <form class="footer-newsletter__form" @submit.prevent="sendWelcome">
           <input
             v-model="newsletterEmail"
@@ -22,7 +22,12 @@
             :aria-label="t('footer.newsletterAria')"
             :disabled="newsletterSending || newsletterDone"
           />
-          <button class="footer-newsletter__btn" type="submit" :disabled="newsletterSending || newsletterDone">
+          <button
+            class="footer-newsletter__btn"
+            type="submit"
+            :disabled="newsletterSending || newsletterDone"
+            v-field-style="!newsletterSending && !newsletterDone ? 'footer.newsletterBtnIdle' : ''"
+          >
             {{ newsletterSending ? '...' : newsletterDone ? '✓' : t('footer.newsletterBtnIdle') }}
           </button>
         </form>
@@ -36,13 +41,13 @@
             <div class="fn-popup-card">
               <img src="/logo/logo-icon.webp" class="fn-popup__logo" alt="Toaka Gasy" />
               <span class="fn-popup__ornament"></span>
-              <p class="fn-popup__title">{{ t('footer.popupTitle') }}</p>
+              <p class="fn-popup__title" v-field-style="'footer.popupTitle'">{{ t('footer.popupTitle') }}</p>
               <p class="fn-popup__message">
-                {{ t('footer.popupLine1') }}<br />
-                {{ t('footer.popupLine2') }}<br />
-                <em>{{ t('footer.popupLine3') }}</em>
+                <span v-field-style="'footer.popupLine1'">{{ t('footer.popupLine1') }}</span><br />
+                <span v-field-style="'footer.popupLine2'">{{ t('footer.popupLine2') }}</span><br />
+                <em v-field-style="'footer.popupLine3'">{{ t('footer.popupLine3') }}</em>
               </p>
-              <button class="fn-popup__close" @click="newsletterDone = false">{{ t('footer.close') }}</button>
+              <button class="fn-popup__close" @click="newsletterDone = false" v-field-style="'footer.close'">{{ t('footer.close') }}</button>
             </div>
           </div>
         </Transition>
@@ -79,24 +84,24 @@
       <!-- Link columns -->
       <nav class="footer-links" :aria-label="t('footer.linksAria')">
         <div class="footer-col">
-          <p class="footer-col__heading">{{ t('footer.colPrivacy') }}</p>
+          <p class="footer-col__heading" v-field-style="'footer.colPrivacy'">{{ t('footer.colPrivacy') }}</p>
           <ul>
-            <li><a href="#" class="footer-col__link">{{ t('footer.linkReturns') }}</a></li>
-            <li><a href="#" class="footer-col__link">{{ t('footer.linkSupport') }}</a></li>
+            <li><a href="#" class="footer-col__link" v-field-style="'footer.linkReturns'">{{ t('footer.linkReturns') }}</a></li>
+            <li><a href="#" class="footer-col__link" v-field-style="'footer.linkSupport'">{{ t('footer.linkSupport') }}</a></li>
           </ul>
         </div>
         <div class="footer-col">
-          <p class="footer-col__heading">{{ t('footer.colRead') }}</p>
+          <p class="footer-col__heading" v-field-style="'footer.colRead'">{{ t('footer.colRead') }}</p>
           <ul>
-            <li><RouterLink to="/contact" class="footer-col__link">{{ t('footer.linkContact') }}</RouterLink></li>
-            <li><a href="#" class="footer-col__link">{{ t('footer.linkBlog') }}</a></li>
+            <li><RouterLink to="/contact" class="footer-col__link" v-field-style="'footer.linkContact'">{{ t('footer.linkContact') }}</RouterLink></li>
+            <li><a href="#" class="footer-col__link" v-field-style="'footer.linkBlog'">{{ t('footer.linkBlog') }}</a></li>
           </ul>
         </div>
         <div class="footer-col">
-          <p class="footer-col__heading">{{ t('footer.colCollaborate') }}</p>
+          <p class="footer-col__heading" v-field-style="'footer.colCollaborate'">{{ t('footer.colCollaborate') }}</p>
           <ul>
-            <li><a href="#" class="footer-col__link">{{ t('footer.linkPartner') }}</a></li>
-            <li><a href="#" class="footer-col__link">{{ t('footer.linkInfluence') }}</a></li>
+            <li><a href="#" class="footer-col__link" v-field-style="'footer.linkPartner'">{{ t('footer.linkPartner') }}</a></li>
+            <li><a href="#" class="footer-col__link" v-field-style="'footer.linkInfluence'">{{ t('footer.linkInfluence') }}</a></li>
           </ul>
         </div>
       </nav>

@@ -125,7 +125,12 @@ async function sendEmail() {
 
     <!-- Submit -->
     <div class="text-center mt-2">
-      <button type="submit" class="contact-form__submit" :disabled="isSending">
+      <button
+        type="submit"
+        class="contact-form__submit"
+        :disabled="isSending"
+        v-field-style="isSending ? 'contactForm.sending' : 'contactForm.submit'"
+      >
         {{ isSending ? t('contactForm.sending') : t('contactForm.submit') }}
       </button>
     </div>
@@ -142,11 +147,11 @@ async function sendEmail() {
       <div class="popup-card">
         <img src="/logo/logo-beige.webp" class="popup-card__logo" alt="Toaka Gasy" />
         <span class="popup-card__ornament"></span>
-        <p class="popup-card__title">{{ t('contactForm.popupTitle') }}</p>
+        <p class="popup-card__title" v-field-style="'contactForm.popupTitle'">{{ t('contactForm.popupTitle') }}</p>
         <p class="popup-card__message">
-          {{ t('contactForm.popupLine1') }}<br />{{ t('contactForm.popupLine2') }}
+          <span v-field-style="'contactForm.popupLine1'">{{ t('contactForm.popupLine1') }}</span><br /><span v-field-style="'contactForm.popupLine2'">{{ t('contactForm.popupLine2') }}</span>
         </p>
-        <button class="popup-card__close" @click="showSuccess = false">{{ t('contactForm.close') }}</button>
+        <button class="popup-card__close" @click="showSuccess = false" v-field-style="'contactForm.close'">{{ t('contactForm.close') }}</button>
       </div>
     </div>
   </Teleport>

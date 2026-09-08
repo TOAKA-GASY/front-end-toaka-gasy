@@ -51,7 +51,7 @@ onUnmounted(() => {
   <section class="os-events">
 
     <div class="os-events__header ev-animate" data-delay="0">
-      <h2 class="os-events__title">{{ t('eventsSection.title') }}</h2>
+      <h2 class="os-events__title" v-field-style="'eventsSection.title'">{{ t('eventsSection.title') }}</h2>
     </div>
 
     <div class="os-events__slider ev-animate" data-delay="120">
@@ -63,16 +63,16 @@ onUnmounted(() => {
               <polyline points="15 18 9 12 15 6"/>
             </svg>
           </button>
-          <h3 class="os-events__name">{{ events[eventIndex].title }}</h3>
+          <h3 class="os-events__name" v-field-style="`data.events.${events[eventIndex].id}.title`">{{ events[eventIndex].title }}</h3>
           <button class="os-events__nav os-events__nav--next" @click="nextEvent" :aria-label="t('eventsSection.nextAria')">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="9 18 15 12 9 6"/>
             </svg>
           </button>
         </div>
-        <p class="os-events__location">{{ events[eventIndex].location }}</p>
-        <p class="os-events__desc">{{ events[eventIndex].desc }}</p>
-        <p class="os-events__date">{{ events[eventIndex].date }}</p>
+        <p class="os-events__location" v-field-style="`data.events.${events[eventIndex].id}.location`">{{ events[eventIndex].location }}</p>
+        <p class="os-events__desc" v-field-style="`data.events.${events[eventIndex].id}.desc`">{{ events[eventIndex].desc }}</p>
+        <p class="os-events__date" v-field-style="`data.events.${events[eventIndex].id}.date`">{{ events[eventIndex].date }}</p>
       </div>
     </div>
 

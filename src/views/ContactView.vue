@@ -30,15 +30,15 @@ onUnmounted(() => {
     </button>
     <div class="ct-nav__inner">
       <ul class="ct-nav__links ct-nav__links--left">
-        <li><RouterLink to="/" class="ct-nav__link" active-class="ct-nav__link--active">{{ t('nav.home') }}</RouterLink></li>
-        <li><RouterLink to="/our-story" class="ct-nav__link" active-class="ct-nav__link--active">{{ t('nav.ourStory') }}</RouterLink></li>
+        <li><RouterLink to="/" class="ct-nav__link" active-class="ct-nav__link--active" v-field-style="'nav.home'">{{ t('nav.home') }}</RouterLink></li>
+        <li><RouterLink to="/our-story" class="ct-nav__link" active-class="ct-nav__link--active" v-field-style="'nav.ourStory'">{{ t('nav.ourStory') }}</RouterLink></li>
       </ul>
       <RouterLink to="/" class="ct-nav__logo-wrap">
         <img src="/logo/logo-marron.webp" class="ct-nav__logo" alt="Toaka Gasy" />
       </RouterLink>
       <ul class="ct-nav__links ct-nav__links--right">
-        <li><RouterLink to="/our-rums" class="ct-nav__link" active-class="ct-nav__link--active">{{ t('nav.ourRums') }}</RouterLink></li>
-        <li><RouterLink to="/contact" class="ct-nav__link" active-class="ct-nav__link--active">{{ t('nav.contact') }}</RouterLink></li>
+        <li><RouterLink to="/our-rums" class="ct-nav__link" active-class="ct-nav__link--active" v-field-style="'nav.ourRums'">{{ t('nav.ourRums') }}</RouterLink></li>
+        <li><RouterLink to="/contact" class="ct-nav__link" active-class="ct-nav__link--active" v-field-style="'nav.contact'">{{ t('nav.contact') }}</RouterLink></li>
       </ul>
     </div>
   </nav>
@@ -53,10 +53,10 @@ onUnmounted(() => {
         <img src="/logo/logo-marron.webp" alt="Toaka Gasy" />
       </RouterLink>
       <nav class="ct-mobile-menu__nav">
-        <RouterLink to="/" class="ct-mobile-menu__link" @click="menuOpen = false">{{ t('nav.home') }}</RouterLink>
-        <RouterLink to="/our-story" class="ct-mobile-menu__link" @click="menuOpen = false">{{ t('nav.ourStory') }}</RouterLink>
-        <RouterLink to="/our-rums" class="ct-mobile-menu__link" @click="menuOpen = false">{{ t('nav.ourRums') }}</RouterLink>
-        <RouterLink to="/contact" class="ct-mobile-menu__link" @click="menuOpen = false">{{ t('nav.contact') }}</RouterLink>
+        <RouterLink to="/" class="ct-mobile-menu__link" @click="menuOpen = false" v-field-style="'nav.home'">{{ t('nav.home') }}</RouterLink>
+        <RouterLink to="/our-story" class="ct-mobile-menu__link" @click="menuOpen = false" v-field-style="'nav.ourStory'">{{ t('nav.ourStory') }}</RouterLink>
+        <RouterLink to="/our-rums" class="ct-mobile-menu__link" @click="menuOpen = false" v-field-style="'nav.ourRums'">{{ t('nav.ourRums') }}</RouterLink>
+        <RouterLink to="/contact" class="ct-mobile-menu__link" @click="menuOpen = false" v-field-style="'nav.contact'">{{ t('nav.contact') }}</RouterLink>
       </nav>
     </div>
   </Transition>
@@ -65,8 +65,8 @@ onUnmounted(() => {
   <section class="ct-hero">
     <div class="ct-form-section__grid">
       <div class="ct-form-section__inner">
-        <h1 class="ct-form-section__title">{{ t('contact.title') }}</h1>
-        <p class="ct-form-section__subtitle">{{ t('contact.subtitleLine1') }}<br>{{ t('contact.subtitleLine2') }}</p>
+        <h1 class="ct-form-section__title" v-field-style="'contact.title'">{{ t('contact.title') }}</h1>
+        <p class="ct-form-section__subtitle"><span v-field-style="'contact.subtitleLine1'">{{ t('contact.subtitleLine1') }}</span><br><span v-field-style="'contact.subtitleLine2'">{{ t('contact.subtitleLine2') }}</span></p>
         <ContactForm />
       </div>
     </div>
@@ -78,14 +78,14 @@ onUnmounted(() => {
           <h3 class="ct-founders__name">NARINDRA RAJOSVAH</h3>
           <a class="ct-founders__link" href="mailto:narindra@toakagasy.com">narindra@toakagasy.com</a>
           <a class="ct-founders__link" href="tel:+15142429517">+1 514 242 9517</a>
-          <p class="ct-founders__address">{{ t('contact.founderNarindraAddress') }}</p>
+          <p class="ct-founders__address" v-field-style="'contact.founderNarindraAddress'">{{ t('contact.founderNarindraAddress') }}</p>
         </div>
         <div class="ct-founders__sep" aria-hidden="true"></div>
         <div class="ct-founders__col">
           <h3 class="ct-founders__name">GERBEN KRIJNEN</h3>
           <a class="ct-founders__link" href="mailto:gerben@toakagasy.com">gerben@toakagasy.com</a>
           <a class="ct-founders__link" href="tel:+310615851268">+31 (0) 6 1585 1268</a>
-          <p class="ct-founders__address">{{ t('contact.founderGerbenAddress') }}</p>
+          <p class="ct-founders__address" v-field-style="'contact.founderGerbenAddress'">{{ t('contact.founderGerbenAddress') }}</p>
         </div>
       </div>
     </div>

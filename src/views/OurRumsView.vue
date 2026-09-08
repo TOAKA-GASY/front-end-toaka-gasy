@@ -161,15 +161,15 @@ onUnmounted(() => {
     </button>
     <div class="or-nav__inner">
       <ul class="or-nav__links or-nav__links--left">
-        <li><RouterLink to="/"          class="or-nav__link" active-class="or-nav__link--active">{{ t('nav.home') }}</RouterLink></li>
-        <li><RouterLink to="/our-story" class="or-nav__link" active-class="or-nav__link--active">{{ t('nav.ourStory') }}</RouterLink></li>
+        <li><RouterLink to="/"          class="or-nav__link" active-class="or-nav__link--active" v-field-style="'nav.home'">{{ t('nav.home') }}</RouterLink></li>
+        <li><RouterLink to="/our-story" class="or-nav__link" active-class="or-nav__link--active" v-field-style="'nav.ourStory'">{{ t('nav.ourStory') }}</RouterLink></li>
       </ul>
       <RouterLink to="/" class="or-nav__logo-wrap">
         <img src="/logo/logo-marron.webp" class="or-nav__logo" alt="Toaka Gasy" />
       </RouterLink>
       <ul class="or-nav__links or-nav__links--right">
-        <li><RouterLink to="/our-rums" class="or-nav__link" active-class="or-nav__link--active">{{ t('nav.ourRums') }}</RouterLink></li>
-        <li><RouterLink to="/contact"  class="or-nav__link" active-class="or-nav__link--active">{{ t('nav.contact') }}</RouterLink></li>
+        <li><RouterLink to="/our-rums" class="or-nav__link" active-class="or-nav__link--active" v-field-style="'nav.ourRums'">{{ t('nav.ourRums') }}</RouterLink></li>
+        <li><RouterLink to="/contact"  class="or-nav__link" active-class="or-nav__link--active" v-field-style="'nav.contact'">{{ t('nav.contact') }}</RouterLink></li>
       </ul>
     </div>
   </nav>
@@ -184,10 +184,10 @@ onUnmounted(() => {
         <img src="/logo/logo-marron.webp" alt="Toaka Gasy" />
       </RouterLink>
       <nav class="or-mobile-menu__nav">
-        <RouterLink to="/"          class="or-mobile-menu__link" @click="menuOpen = false">{{ t('nav.home') }}</RouterLink>
-        <RouterLink to="/our-story" class="or-mobile-menu__link" @click="menuOpen = false">{{ t('nav.ourStory') }}</RouterLink>
-        <RouterLink to="/our-rums"  class="or-mobile-menu__link" @click="menuOpen = false">{{ t('nav.ourRums') }}</RouterLink>
-        <RouterLink to="/contact"   class="or-mobile-menu__link" @click="menuOpen = false">{{ t('nav.contact') }}</RouterLink>
+        <RouterLink to="/"          class="or-mobile-menu__link" @click="menuOpen = false" v-field-style="'nav.home'">{{ t('nav.home') }}</RouterLink>
+        <RouterLink to="/our-story" class="or-mobile-menu__link" @click="menuOpen = false" v-field-style="'nav.ourStory'">{{ t('nav.ourStory') }}</RouterLink>
+        <RouterLink to="/our-rums"  class="or-mobile-menu__link" @click="menuOpen = false" v-field-style="'nav.ourRums'">{{ t('nav.ourRums') }}</RouterLink>
+        <RouterLink to="/contact"   class="or-mobile-menu__link" @click="menuOpen = false" v-field-style="'nav.contact'">{{ t('nav.contact') }}</RouterLink>
       </nav>
     </div>
   </Transition>
@@ -256,8 +256,8 @@ onUnmounted(() => {
     <!-- 2A : Many ways to celebrate + bateau -->
     <div class="or-col-top" :class="{ 'or-col-top--visible': orColTopVisible }">
       <div class="or-col-top__content">
-        <span class="or-col-eyebrow">{{ t('ourRums.collectionEyebrow') }}</span>
-        <h2 class="or-col-top__title">{{ t('ourRums.collectionTitleLine1') }}<br>{{ t('ourRums.collectionTitleLine2') }}</h2>
+        <span class="or-col-eyebrow" v-field-style="'ourRums.collectionEyebrow'">{{ t('ourRums.collectionEyebrow') }}</span>
+        <h2 class="or-col-top__title"><span v-field-style="'ourRums.collectionTitleLine1'">{{ t('ourRums.collectionTitleLine1') }}</span><br><span v-field-style="'ourRums.collectionTitleLine2'">{{ t('ourRums.collectionTitleLine2') }}</span></h2>
         <img src="/img/icon-man.png" class="or-col-top__icon-man" alt="" aria-hidden="true" />
       </div>
     </div>
@@ -283,11 +283,11 @@ onUnmounted(() => {
         aria-hidden="true"
       />
       <div class="or-col-intro__content">
-        <h2 class="or-col-intro__title">{{ p.name }}</h2>
-        <p class="or-col-intro__tagline">{{ p.tagline }}</p>
-        <p class="or-col-intro__desc">{{ p.desc }}</p>
-        <span class="or-col-intro__badge">{{ p.badge }}</span>
-        <RouterLink :to="`/product/${p.slug}`" class="or-col-intro__cta">
+        <h2 class="or-col-intro__title" v-field-style="`data.products.${p.slug}.name`">{{ p.name }}</h2>
+        <p class="or-col-intro__tagline" v-field-style="`data.products.${p.slug}.tagline`">{{ p.tagline }}</p>
+        <p class="or-col-intro__desc" v-field-style="`data.products.${p.slug}.desc`">{{ p.desc }}</p>
+        <span class="or-col-intro__badge" v-field-style="`data.products.${p.slug}.badge`">{{ p.badge }}</span>
+        <RouterLink :to="`/product/${p.slug}`" class="or-col-intro__cta" v-field-style="'ourRums.discoverMore'">
           {{ t('ourRums.discoverMore') }}
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -328,9 +328,9 @@ onUnmounted(() => {
        ══════════════════════════════════════ -->
   <section class="or-cocktails">
     <div class="or-cocktails__header">
-      <h2 class="or-cocktails__title">{{ t('ourRums.perfectServesTitle') }}</h2>
+      <h2 class="or-cocktails__title" v-field-style="'ourRums.perfectServesTitle'">{{ t('ourRums.perfectServesTitle') }}</h2>
       <div class="or-cocktails__line"></div>
-      <p class="or-cocktails__desc">{{ t('ourRums.perfectServesDesc') }}</p>
+      <p class="or-cocktails__desc" v-field-style="'ourRums.perfectServesDesc'">{{ t('ourRums.perfectServesDesc') }}</p>
     </div>
     <div class="or-cocktails__grid">
       <RouterLink
@@ -343,11 +343,11 @@ onUnmounted(() => {
         <img :src="c.src" class="or-cocktail-card__img" :alt="c.title" />
         <div class="or-cocktail-card__overlay" aria-hidden="true"></div>
         <div class="or-cocktail-card__content">
-          <h3 class="or-cocktail-card__title">{{ c.title }}</h3>
-          <p class="or-cocktail-card__sub">{{ c.subtitle }}</p>
+          <h3 class="or-cocktail-card__title" v-field-style="`data.cocktails.${c.slug}.title`">{{ c.title }}</h3>
+          <p class="or-cocktail-card__sub" v-field-style="`data.cocktails.${c.slug}.subtitle`">{{ c.subtitle }}</p>
         </div>
         <div class="or-cocktail-card__hover" aria-hidden="true">
-          <span>{{ t('ourRums.viewRecipe') }}</span>
+          <span v-field-style="'ourRums.viewRecipe'">{{ t('ourRums.viewRecipe') }}</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="5" y1="12" x2="19" y2="12"/>

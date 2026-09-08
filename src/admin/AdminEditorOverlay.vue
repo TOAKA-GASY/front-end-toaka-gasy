@@ -37,6 +37,51 @@
                     {{ fieldLabel(field.path, section.id) }}
                   </label>
 
+                  <div class="tg-field-style d-flex flex-wrap align-items-end gap-3 mb-2 p-2 border rounded bg-light">
+                    <div>
+                      <label class="form-label small text-muted mb-1">Police</label>
+                      <select class="form-select form-select-sm" v-model="field.style.font">
+                        <option value="">Par défaut</option>
+                        <option value="cinzel">Cinzel</option>
+                        <option value="simonetta">Simonetta</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label class="form-label small text-muted mb-1">Couleur</label>
+                      <div class="d-flex align-items-center gap-2">
+                        <input
+                          type="color"
+                          class="form-control form-control-color"
+                          title="Choisir une couleur"
+                          :value="isValidHex(field.style.color) ? field.style.color : '#000000'"
+                          @input="field.style.color = $event.target.value"
+                        />
+                        <input
+                          type="text"
+                          class="form-control form-control-sm"
+                          style="width: 8rem"
+                          placeholder="#f28888"
+                          v-model="field.style.color"
+                          @blur="normalizeHex(field)"
+                          :class="{ 'is-invalid': field.style.color && !isValidHex(field.style.color) }"
+                        />
+                        <button
+                          v-if="field.style.color"
+                          type="button"
+                          class="btn btn-sm btn-outline-secondary"
+                          @click="field.style.color = ''"
+                        >
+                          Réinitialiser
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="tg-field-style__preview ms-auto px-3 py-1 rounded" :style="previewStyle(field)">
+                      Aperçu
+                    </div>
+                  </div>
+
                   <div class="row g-2">
                     <div v-for="locale in LOCALES" :key="locale" class="col-12 col-lg-4">
                       <div class="small text-muted mb-1">{{ locale.toUpperCase() }}</div>
@@ -89,6 +134,7 @@
     v-if="confirmSection"
     :section="confirmSection"
     :changes="pendingChanges"
+    :style-changes="pendingStyleChanges"
     @confirmed="onConfirmed"
     @close="confirmSection = null"
   />
@@ -97,8 +143,10 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import AdminConfirmModal from './AdminConfirmModal.vue'
-import { fetchLocales, translateFields } from './adminApi'
+import { fetchLocales, fetchTextStyles, translateFields } from './adminApi'
 import { pushToast } from './useToast'
+
+const HEX_COLOR_RE = /^#[0-9a-fA-F]{6}$/
 
 const emit = defineEmits(['close'])
 
@@ -112,6 +160,7 @@ const sections = ref([])
 const translating = ref(null)
 const confirmSection = ref(null)
 const pendingChanges = ref(null)
+const pendingStyleChanges = ref(null)
 
 function originalKey(locale) {
   return `original${locale[0].toUpperCase()}${locale.slice(1)}`
@@ -133,29 +182,62 @@ function valuesEqual(a, b) {
   return JSON.stringify(a) === JSON.stringify(b)
 }
 
+function isValidHex(value) {
+  return HEX_COLOR_RE.test(value || '')
+}
+
+function normalizeHex(field) {
+  const value = (field.style.color || '').trim()
+  field.style.color = value && !value.startsWith('#') ? `#${value}` : value
+}
+
+function previewStyle(field) {
+  const style = {}
+  if (field.style.font) style.fontFamily = `var(--font-${field.style.font})`
+  if (isValidHex(field.style.color)) style.color = field.style.color
+  return style
+}
+
+function styleEqual(a, b) {
+  return (a?.font || '') === (b?.font || '') && (a?.color || '') === (b?.color || '')
+}
+
+function fieldStyleDirty(field) {
+  return !styleEqual(field.style, field.originalStyle)
+}
+
 function sectionDirty(section) {
-  return section.fields.some((f) => LOCALES.some((locale) => !valuesEqual(f[locale], f[originalKey(locale)])))
+  return section.fields.some(
+    (f) => LOCALES.some((locale) => !valuesEqual(f[locale], f[originalKey(locale)])) || fieldStyleDirty(f),
+  )
 }
 
 async function load() {
   loading.value = true
   loadError.value = ''
   try {
-    const data = await fetchLocales()
+    const [data, styleData] = await Promise.all([fetchLocales(), fetchTextStyles()])
+    const styles = styleData.styles || {}
     sections.value = data.sections.map((section) => ({
       id: section.id,
-      fields: section.fields.map((field) => ({
-        path: field.path,
-        type: field.type,
-        en: field.values.en,
-        fr: field.values.fr,
-        nl: field.values.nl,
-        it: field.values.it,
-        originalEn: field.values.en,
-        originalFr: field.values.fr,
-        originalNl: field.values.nl,
-        originalIt: field.values.it,
-      })),
+      fields: section.fields.map((field) => {
+        const savedStyle = styles[field.path] || {}
+        const style = { font: savedStyle.font || '', color: savedStyle.color || '' }
+        return {
+          path: field.path,
+          type: field.type,
+          en: field.values.en,
+          fr: field.values.fr,
+          nl: field.values.nl,
+          it: field.values.it,
+          originalEn: field.values.en,
+          originalFr: field.values.fr,
+          originalNl: field.values.nl,
+          originalIt: field.values.it,
+          style,
+          originalStyle: { ...style },
+        }
+      }),
     }))
   } catch (err) {
     loadError.value = err.message || 'Impossible de charger le contenu.'
@@ -207,6 +289,7 @@ function cleanValue(field, locale) {
 
 function openConfirm(section) {
   const changes = { en: {}, fr: {}, nl: {}, it: {} }
+  const styleChanges = {}
   for (const field of section.fields) {
     for (const locale of LOCALES) {
       const cleaned = cleanValue(field, locale)
@@ -214,8 +297,14 @@ function openConfirm(section) {
         changes[locale][field.path] = cleaned
       }
     }
+    if (fieldStyleDirty(field)) {
+      const font = field.style.font || null
+      const color = isValidHex(field.style.color) ? field.style.color : null
+      styleChanges[field.path] = font || color ? { font, color } : null
+    }
   }
   pendingChanges.value = changes
+  pendingStyleChanges.value = styleChanges
   confirmSection.value = section
 }
 
@@ -227,6 +316,7 @@ function onConfirmed() {
       field[locale] = cleaned
       field[originalKey(locale)] = cleaned
     }
+    field.originalStyle = { ...field.style }
   }
   confirmSection.value = null
   pushToast('Modifications publiées ✅')
@@ -266,5 +356,11 @@ onUnmounted(() => window.removeEventListener('keydown', handleKeydown))
 }
 .tg-admin-body {
   overflow-y: auto;
+}
+.tg-field-style__preview {
+  background: #2a2118;
+  color: #f5e6c8;
+  font-size: 0.9rem;
+  white-space: nowrap;
 }
 </style>

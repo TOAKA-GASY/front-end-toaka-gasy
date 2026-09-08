@@ -60,15 +60,15 @@ onUnmounted(() => {
     </button>
     <div class="os-nav__inner">
       <ul class="os-nav__links os-nav__links--left">
-        <li><RouterLink to="/" class="os-nav__link" active-class="os-nav__link--active">{{ t('nav.home') }}</RouterLink></li>
-        <li><RouterLink to="/our-story" class="os-nav__link" active-class="os-nav__link--active">{{ t('nav.ourStory') }}</RouterLink></li>
+        <li><RouterLink to="/" class="os-nav__link" active-class="os-nav__link--active" v-field-style="'nav.home'">{{ t('nav.home') }}</RouterLink></li>
+        <li><RouterLink to="/our-story" class="os-nav__link" active-class="os-nav__link--active" v-field-style="'nav.ourStory'">{{ t('nav.ourStory') }}</RouterLink></li>
       </ul>
       <RouterLink to="/" class="os-nav__logo-wrap">
         <img src="/logo/logo-marron.webp" class="os-nav__logo" alt="Toaka Gasy" />
       </RouterLink>
       <ul class="os-nav__links os-nav__links--right">
-        <li><RouterLink to="/our-rums" class="os-nav__link" active-class="os-nav__link--active">{{ t('nav.ourRums') }}</RouterLink></li>
-        <li><RouterLink to="/contact" class="os-nav__link" active-class="os-nav__link--active">{{ t('nav.contact') }}</RouterLink></li>
+        <li><RouterLink to="/our-rums" class="os-nav__link" active-class="os-nav__link--active" v-field-style="'nav.ourRums'">{{ t('nav.ourRums') }}</RouterLink></li>
+        <li><RouterLink to="/contact" class="os-nav__link" active-class="os-nav__link--active" v-field-style="'nav.contact'">{{ t('nav.contact') }}</RouterLink></li>
       </ul>
     </div>
   </nav>
@@ -82,10 +82,10 @@ onUnmounted(() => {
         <img src="/logo/logo-marron.webp" alt="Toaka Gasy" />
       </RouterLink>
       <nav class="os-mobile-menu__nav">
-        <RouterLink to="/" class="os-mobile-menu__link" @click="menuOpen = false">{{ t('nav.home') }}</RouterLink>
-        <RouterLink to="/our-story" class="os-mobile-menu__link" @click="menuOpen = false">{{ t('nav.ourStory') }}</RouterLink>
-        <RouterLink to="/our-rums" class="os-mobile-menu__link" @click="menuOpen = false">{{ t('nav.ourRums') }}</RouterLink>
-        <RouterLink to="/contact" class="os-mobile-menu__link" @click="menuOpen = false">{{ t('nav.contact') }}</RouterLink>
+        <RouterLink to="/" class="os-mobile-menu__link" @click="menuOpen = false" v-field-style="'nav.home'">{{ t('nav.home') }}</RouterLink>
+        <RouterLink to="/our-story" class="os-mobile-menu__link" @click="menuOpen = false" v-field-style="'nav.ourStory'">{{ t('nav.ourStory') }}</RouterLink>
+        <RouterLink to="/our-rums" class="os-mobile-menu__link" @click="menuOpen = false" v-field-style="'nav.ourRums'">{{ t('nav.ourRums') }}</RouterLink>
+        <RouterLink to="/contact" class="os-mobile-menu__link" @click="menuOpen = false" v-field-style="'nav.contact'">{{ t('nav.contact') }}</RouterLink>
       </nav>
     </div>
   </Transition>
@@ -98,9 +98,9 @@ onUnmounted(() => {
 
     <div class="os-hero__inner">
       <div class="os-hero__text os-animate" data-delay="0">
-        <span class="os-hero__kicker">{{ t('ourStory.heroKicker') }}</span>
-        <h2 class="os-hero__title">{{ t('ourStory.heroTitleLine1') }}<br />{{ t('ourStory.heroTitleLine2') }}</h2>
-        <p class="os-hero__body">{{ t('ourStory.heroBody') }}</p>
+        <span class="os-hero__kicker" v-field-style="'ourStory.heroKicker'">{{ t('ourStory.heroKicker') }}</span>
+        <h2 class="os-hero__title"><span v-field-style="'ourStory.heroTitleLine1'">{{ t('ourStory.heroTitleLine1') }}</span><br /><span v-field-style="'ourStory.heroTitleLine2'">{{ t('ourStory.heroTitleLine2') }}</span></h2>
+        <p class="os-hero__body" v-field-style="'ourStory.heroBody'">{{ t('ourStory.heroBody') }}</p>
       </div>
 
       <div class="os-hero__visual">
@@ -128,9 +128,9 @@ onUnmounted(() => {
       </div>
 
       <div class="os-legend__content os-animate" data-delay="150">
-        <h2 class="os-s4__title os-legend__title">{{ t('ourStory.legendTitleLine1') }}<br />{{ t('ourStory.legendTitleLine2') }}</h2>
-        <p class="os-legend__body">{{ t('ourStory.legendBody1') }}</p>
-        <p class="os-legend__body">{{ t('ourStory.legendBody2') }}</p>
+        <h2 class="os-s4__title os-legend__title"><span v-field-style="'ourStory.legendTitleLine1'">{{ t('ourStory.legendTitleLine1') }}</span><br /><span v-field-style="'ourStory.legendTitleLine2'">{{ t('ourStory.legendTitleLine2') }}</span></h2>
+        <p class="os-legend__body" v-field-style="'ourStory.legendBody1'">{{ t('ourStory.legendBody1') }}</p>
+        <p class="os-legend__body" v-field-style="'ourStory.legendBody2'">{{ t('ourStory.legendBody2') }}</p>
       </div>
     </div>
 
@@ -152,9 +152,9 @@ onUnmounted(() => {
   <section class="os-s4">
 
     <div class="os-s4__content os-animate" data-delay="0">
-      <h2 class="os-s4__title">{{ t('ourStory.aboutTitle') }}</h2>
+      <h2 class="os-s4__title" v-field-style="'ourStory.aboutTitle'">{{ t('ourStory.aboutTitle') }}</h2>
       <div class="os-s4__line"></div>
-      <p class="os-s4__body os-s4__body--compact">{{ t('ourStory.aboutBody') }}</p>
+      <p class="os-s4__body os-s4__body--compact" v-field-style="'ourStory.aboutBody'">{{ t('ourStory.aboutBody') }}</p>
     </div>
 
     <div class="os-s4__img-wrap os-animate" data-delay="180">
@@ -176,7 +176,7 @@ onUnmounted(() => {
           <img src="/img/narindra.webp" class="os-s6__photo" :alt="t('ourStory.narindraPhotoAlt')" />
         </div>
         <div class="col-12 col-md-7 os-animate" data-delay="200">
-          <p class="os-s6__bio">{{ t('ourStory.narindraBio') }}</p>
+          <p class="os-s6__bio" v-field-style="'ourStory.narindraBio'">{{ t('ourStory.narindraBio') }}</p>
           <p class="os-s6__signature os-animate" data-delay="120">Narindra Rajosvah</p>
         </div>
       </div>
@@ -195,7 +195,7 @@ onUnmounted(() => {
     <div class="os-s6__person os-s6__person--gerben">
       <div class="row align-items-start justify-content-end gx-3 gx-md-5 gy-3 gy-md-0">
         <div class="col-12 col-md-8 order-2 order-md-1 text-md-end os-animate" data-delay="0">
-          <p class="os-s6__bio os-s6__bio--gerben ms-md-auto">{{ t('ourStory.gerbenBio') }}</p>
+          <p class="os-s6__bio os-s6__bio--gerben ms-md-auto" v-field-style="'ourStory.gerbenBio'">{{ t('ourStory.gerbenBio') }}</p>
           <p class="os-s6__signature os-animate" data-delay="120">Gerben Krijnen</p>
         </div>
         <div class="col-12 col-md-4 order-1 order-md-2 os-animate" data-delay="200">
@@ -211,7 +211,7 @@ onUnmounted(() => {
           <img src="/img/nathalie.webp" class="os-s6__photo" :alt="t('ourStory.nathaliePhotoAlt')" />
         </div>
         <div class="col-12 col-md-7 os-animate" data-delay="200">
-          <p class="os-s6__bio">{{ t('ourStory.nathalieBio') }}</p>
+          <p class="os-s6__bio" v-field-style="'ourStory.nathalieBio'">{{ t('ourStory.nathalieBio') }}</p>
           <p class="os-s6__signature os-animate" data-delay="120">Nathalie Manantsara</p>
         </div>
       </div>

@@ -34,10 +34,14 @@ export function fetchLocales() {
   return request('/api/admin/locales', { method: 'GET' })
 }
 
+export function fetchTextStyles() {
+  return request('/api/admin/text-styles', { method: 'GET' })
+}
+
 export function translateFields(fields, targetLocales) {
   return request('/api/admin/translate', { method: 'POST', body: JSON.stringify({ fields, targetLocales }) })
 }
 
-export function commitSection(section, changes, code) {
-  return request('/api/admin/commit', { method: 'POST', body: JSON.stringify({ section, changes, code }) })
+export function commitSection(section, changes, styleChanges, code) {
+  return request('/api/admin/commit', { method: 'POST', body: JSON.stringify({ section, changes, styleChanges, code }) })
 }
