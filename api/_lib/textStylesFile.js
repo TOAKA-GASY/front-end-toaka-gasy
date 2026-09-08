@@ -1,6 +1,8 @@
 const STYLE_FILE_PATH = 'src/data/textStyles.json'
 const FONT_VALUES = new Set(['cinzel', 'simonetta'])
 const HEX_COLOR_RE = /^#[0-9a-fA-F]{6}$/
+const MIN_SIZE = 0.5
+const MAX_SIZE = 2.5
 
 export function styleFilePath() {
   return STYLE_FILE_PATH
@@ -17,6 +19,9 @@ function sanitizeStyle(style) {
   const out = {}
   if (FONT_VALUES.has(style.font)) out.font = style.font
   if (typeof style.color === 'string' && HEX_COLOR_RE.test(style.color)) out.color = style.color
+  if (typeof style.size === 'number' && Number.isFinite(style.size) && style.size >= MIN_SIZE && style.size <= MAX_SIZE) {
+    out.size = Math.round(style.size * 100) / 100
+  }
   return Object.keys(out).length > 0 ? out : null
 }
 

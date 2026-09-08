@@ -108,6 +108,7 @@ function displayStyle(style) {
   const parts = []
   if (style.font) parts.push(`Police : ${style.font === 'cinzel' ? 'Cinzel' : 'Simonetta'}`)
   if (style.color) parts.push(`Couleur : ${style.color}`)
+  if (style.size) parts.push(`Taille : ${Math.round(style.size * 100)}%`)
   return parts.length ? parts.join(' · ') : 'Par défaut'
 }
 
