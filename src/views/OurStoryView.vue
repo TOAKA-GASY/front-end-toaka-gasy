@@ -7,6 +7,52 @@ const { t } = useI18n()
 const menuOpen = ref(false)
 const scrollY  = ref(0)
 
+/* Section "Many regions, One spirit" : carte animée des 5 régions.
+   x/y : position du point en % de l'image desktop (ourstory-desk.png).
+   mx/my : sa position en % de l'image mobile (ourstory-mobile.png), qui a
+   un tout autre cadrage (portrait, bouteille centrée) — d'où des coordonnées
+   distinctes plutôt qu'un simple recalcul des mêmes x/y. Le texte de chaque
+   région est ancré par le bas, juste au-dessus de son point (cf. template),
+   et grandit vers le haut. */
+const regions = [
+  { key: 'west',      x: 8,  y: 58, mx: 12, my: 40, delay: 0,   labelKey: 'ourStory.regionWestLabel',      bodyKey: 'ourStory.regionWestBody' },
+  { key: 'north',     x: 22, y: 36, mx: 32, my: 32, delay: 120, labelKey: 'ourStory.regionNorthLabel',     bodyKey: 'ourStory.regionNorthBody' },
+  { key: 'highlands', x: 34, y: 54, mx: 50, my: 24, delay: 240, labelKey: 'ourStory.regionHighlandsLabel', bodyKey: 'ourStory.regionHighlandsBody' },
+  { key: 'east',      x: 66, y: 36, mx: 70, my: 30, delay: 360, labelKey: 'ourStory.regionEastLabel',      bodyKey: 'ourStory.regionEastBody' },
+  { key: 'south',     x: 92, y: 52, mx: 88, my: 38, delay: 480, labelKey: 'ourStory.regionSouthLabel',     bodyKey: 'ourStory.regionSouthBody' },
+]
+
+/* Dimensions natives des deux photos : chaque carte SVG utilise ce même
+   repère en pixels (viewBox) pour un tracé et des points sans aucune
+   distorsion une fois le SVG étiré à la taille réelle affichée. */
+const IMG_W = 2962
+const IMG_H = 1361
+const MOBILE_IMG_W = 1125
+const MOBILE_IMG_H = 2436
+
+/* Courbe continue en vague passant par les 5 points (Catmull-Rom convertie
+   en segments de Bézier cubique) : une seule ligne fluide, au lieu de 5
+   segments droits indépendants. */
+function buildWavePath(points) {
+  const at = (i) => points[Math.max(0, Math.min(points.length - 1, i))]
+  let d = `M ${at(0).px.toFixed(1)},${at(0).py.toFixed(1)}`
+  for (let i = 0; i < points.length - 1; i++) {
+    const p0 = at(i - 1), p1 = at(i), p2 = at(i + 1), p3 = at(i + 2)
+    const c1x = p1.px + (p2.px - p0.px) / 6
+    const c1y = p1.py + (p2.py - p0.py) / 6
+    const c2x = p2.px - (p3.px - p1.px) / 6
+    const c2y = p2.py - (p3.py - p1.py) / 6
+    d += ` C ${c1x.toFixed(1)},${c1y.toFixed(1)} ${c2x.toFixed(1)},${c2y.toFixed(1)} ${p2.px.toFixed(1)},${p2.py.toFixed(1)}`
+  }
+  return d
+}
+
+const wavePoints = regions.map(r => ({ key: r.key, px: (r.x / 100) * IMG_W, py: (r.y / 100) * IMG_H }))
+const wavePath = buildWavePath(wavePoints)
+
+const mobileWavePoints = regions.map(r => ({ key: r.key, px: (r.mx / 100) * MOBILE_IMG_W, py: (r.my / 100) * MOBILE_IMG_H }))
+const mobileWavePath = buildWavePath(mobileWavePoints)
+
 const onScroll = () => { scrollY.value = window.scrollY }
 
 /* Les animations rejouent à chaque passage (pas seulement la première fois) */
@@ -91,22 +137,86 @@ onUnmounted(() => {
   </Transition>
 
   <!-- ══════════════════════════════════════
-       Section 1 – The Story Of / Madagascar's Wildest Rum
+       Section – Many Regions, One Spirit (carte animée des régions)
        ══════════════════════════════════════ -->
-  <section class="os-hero">
+  <section class="os-regions">
     <h1 class="visually-hidden">{{ t('ourStory.hiddenH1') }}</h1>
 
-    <div class="os-hero__inner">
-      <div class="os-hero__text os-animate" data-delay="0">
-        <span class="os-hero__kicker" v-field-style="'ourStory.heroKicker'">{{ t('ourStory.heroKicker') }}</span>
-        <h2 class="os-hero__title"><span v-field-style="'ourStory.heroTitleLine1'">{{ t('ourStory.heroTitleLine1') }}</span><br /><span v-field-style="'ourStory.heroTitleLine2'">{{ t('ourStory.heroTitleLine2') }}</span></h2>
-        <p class="os-hero__body" v-field-style="'ourStory.heroBody'">{{ t('ourStory.heroBody') }}</p>
-      </div>
+    <picture class="os-regions__bg-wrap">
+      <source media="(max-width: 767.98px)" srcset="/img/ourstory-mobile.png" />
+      <img src="/img/ourstory-desk.png" class="os-regions__bg" alt="" aria-hidden="true" />
+    </picture>
 
-      <div class="os-hero__visual">
-        <img src="/img/bottle-story.png" class="os-hero__img" :alt="t('ourStory.heroImgAlt')" />
+    <!-- Ligne continue en vague reliant les 5 régions, + un point par région
+         (deux tracés : cadrage desktop paysage / cadrage mobile portrait,
+         basculés en CSS selon la largeur d'écran) -->
+    <svg
+      class="os-regions__wave os-regions__wave--desktop os-animate"
+      data-delay="150"
+      viewBox="0 0 2962 1361"
+      preserveAspectRatio="xMidYMid meet"
+      aria-hidden="true"
+    >
+      <path :d="wavePath" class="os-regions__wave-path" />
+      <circle
+        v-for="pt in wavePoints" :key="`halo-${pt.key}`"
+        class="os-regions__wave-dot-halo" :cx="pt.px" :cy="pt.py" r="28"
+      />
+      <circle
+        v-for="pt in wavePoints" :key="`dot-${pt.key}`"
+        class="os-regions__wave-dot" :cx="pt.px" :cy="pt.py" r="12"
+      />
+    </svg>
+
+    <svg
+      class="os-regions__wave os-regions__wave--mobile os-animate"
+      data-delay="150"
+      viewBox="0 0 1125 2436"
+      preserveAspectRatio="xMidYMid meet"
+      aria-hidden="true"
+    >
+      <path :d="mobileWavePath" class="os-regions__wave-path" />
+      <circle
+        v-for="pt in mobileWavePoints" :key="`mhalo-${pt.key}`"
+        class="os-regions__wave-dot-halo" :cx="pt.px" :cy="pt.py" r="14"
+      />
+      <circle
+        v-for="pt in mobileWavePoints" :key="`mdot-${pt.key}`"
+        class="os-regions__wave-dot" :cx="pt.px" :cy="pt.py" r="6"
+      />
+    </svg>
+
+    <div class="os-regions__points">
+      <div
+        v-for="region in regions"
+        :key="region.key"
+        class="os-regions__point os-animate"
+        :style="{
+          '--pt-left': region.x + '%',
+          '--pt-bottom': `calc(${100 - region.y}% + 20px)`,
+          '--pt-left-m': region.mx + '%',
+          '--pt-bottom-m': `calc(${100 - region.my}% + 20px)`,
+        }"
+        :data-delay="region.delay"
+      >
+        <div class="os-regions__point-text">
+          <span class="os-regions__point-label" v-field-style="region.labelKey">{{ t(region.labelKey) }}</span>
+          <p class="os-regions__point-body" v-field-style="region.bodyKey">{{ t(region.bodyKey) }}</p>
+        </div>
       </div>
     </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       Section – MADAGASCAR / Many regions. One spirit.
+       ══════════════════════════════════════ -->
+  <section class="os-regions-intro os-animate" data-delay="0">
+    <span class="os-regions-intro__eyebrow" v-field-style="'ourStory.regionsEyebrow'">{{ t('ourStory.regionsEyebrow') }}</span>
+    <h2 class="os-regions-intro__title">
+      <span v-field-style="'ourStory.regionsTitleLine1'">{{ t('ourStory.regionsTitleLine1') }}</span><br />
+      <span v-field-style="'ourStory.regionsTitleLine2'">{{ t('ourStory.regionsTitleLine2') }}</span>
+    </h2>
+    <p class="os-regions-intro__body" v-field-style="'ourStory.regionsBody'">{{ t('ourStory.regionsBody') }}</p>
   </section>
 
   <!-- ══════════════════════════════════════

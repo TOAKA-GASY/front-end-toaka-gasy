@@ -176,8 +176,6 @@ const parallax = computed(() => {
     ravinala: `translateX(${-progress * 110}px)`,
   }
 })
-
-
 </script>
 
 <template>

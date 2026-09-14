@@ -96,6 +96,22 @@ export default {
     nathaliePhotoAlt: 'Nathalie Manantsara',
     nathalieBio:
       "Je me souviens encore de la première fois où Toaka Gasy Company m'a été présentée.\nDès cet instant, tout s'est mis en place naturellement. Nous nous sommes immédiatement connectés autour d'un enthousiasme partagé pour ce que Toaka Gasy pouvait devenir, et tout a commencé à prendre forme presque instinctivement.\nTrouver la juste expression de la marque, donner à son identité une voix à laquelle les gens pouvaient vraiment s'identifier, et la voir grandir tout en restant fidèle à l'intention de départ.\nPour moi, son histoire reflète exactement ce qu'elle a été créée pour inspirer : rassembler les gens, créer des moments authentiques.\nJ'ai toujours cru qu'il fallait construire avec intention et rester fidèle à ce qui compte vraiment. C'est le genre de parcours dont je choisirai toujours de faire partie.",
+    regionsEyebrow: 'MADAGASCAR',
+    regionsTitleLine1: 'Mille régions.',
+    regionsTitleLine2: 'Un seul esprit.',
+    regionsBody:
+      "Des Hautes Terres aux côtes, des vallées du nord aux terres du sud, le Toaka Gasy prend mille noms, saveurs et expressions, un esprit né de l'île, façonné par sa nature.",
+    regionWestLabel: 'OUEST',
+    regionWestBody: 'Des vallées luxuriantes et des terres fertiles, porteuses de richesse et de profondeur.',
+    regionNorthLabel: 'NORD',
+    regionNorthBody: 'Gantiriaka ou Lemadio. Des saveurs audacieuses, façonnées par la chaleur tropicale et les plantes locales.',
+    regionHighlandsLabel: 'HAUTES TERRES',
+    regionHighlandsBody: "Galeoka ou Ambodivoara. Une élégance unique, née en altitude, où la tradition rencontre la nature pure.",
+    regionEastLabel: 'EST',
+    regionEastBody: 'Des expressions plus légères et plus fraîches, aux notes marines et tropicales.',
+    regionSouthLabel: 'SUD',
+    regionSouthBody:
+      "Des recettes rares et envoûtantes, nées dans des vallées arides et des paysages préservés, là où vit le caractère sauvage du Toaka Gasy.",
   },
 
   ourRums: {

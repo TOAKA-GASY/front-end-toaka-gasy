@@ -78,12 +78,6 @@ export default {
 
   ourStory: {
     hiddenH1: 'Our Story — The Heritage Behind Toaka Gasy Rum !',
-    heroKicker: 'THE STORY OF',
-    heroTitleLine1: "MADAGASCAR'S",
-    heroTitleLine2: 'WILDEST RUM',
-    heroBody:
-      'Across Madagascar, Toaka Gasy takes on many names, flavours and expressions. In the Highlands, it is known as Galeoka or Ambodivoara; in the North, as Gantriaka or Lemadio. Each name carries a different expression of the same Malagasy spirit.\nSome of its most fascinating expressions are found deeper within the island, beyond the Madagascar most people ever see. Hidden among valleys, forests and untouched landscapes, families craft Toaka Gasy close to the nature that surrounds them. Sugarcane is fermented, distilled over fire and combined with native botanicals known as laro, bringing distinctive aromas, flavours and character to the spirit.\nFrom one place to another, ingredients change, methods differ and every creation carries something of the land it comes from. This is where the wild character of Toaka Gasy lives. A spirit born from the island, shaped by its nature and crafted in many different ways.',
-    heroImgAlt: 'Toaka Gasy bottle surrounded by the wildlife of Madagascar',
     legendTitleLine1: 'THE RUM OF',
     legendTitleLine2: 'CELEBRATION',
     legendBody1:
@@ -104,6 +98,22 @@ export default {
     nathaliePhotoAlt: 'Nathalie Manantsara',
     nathalieBio:
       "I still remember the first time Toaka Gasy Company was introduced to me. From that moment, everything just clicked.\nFrom shaping the brand's identity to crafting its voice and building creative experiences that people could genuinely connect with, every step was guided by intention. Watching the brand grow while staying true to its purpose has been one of the most rewarding parts of the journey.\nTo me, its story reflects exactly what it was created to inspire: bringing people together and creating genuine moments. I have always believed in building with intention and staying true to what matters. That's the kind of journey I will always choose to be part of.",
+    regionsEyebrow: 'MADAGASCAR',
+    regionsTitleLine1: 'Many regions,',
+    regionsTitleLine2: 'One spirit',
+    regionsBody:
+      'From the Highlands to the coasts, from the northern valleys to the southern lands, Toaka Gasy takes on many names, flavours and expressions, a spirit born from the island, shaped by its nature.',
+    regionWestLabel: 'WEST',
+    regionWestBody: 'Lush valleys and fertile lands, bringing richness and depth.',
+    regionNorthLabel: 'NORTH',
+    regionNorthBody: 'Gantiriaka or Lemadio. Bold flavours, shaped by tropical heat and local botanicals.',
+    regionHighlandsLabel: 'HIGHLANDS',
+    regionHighlandsBody: 'Galeoka or Ambodivoara. A unique elegance, born at altitude, where tradition meets pure nature.',
+    regionEastLabel: 'EAST',
+    regionEastBody: 'Lighter and fresher expressions, with marine and tropical notes.',
+    regionSouthLabel: 'SOUTH',
+    regionSouthBody:
+      'Rare and captivating recipes, born in arid valleys and untouched landscapes, where the wild character of Toaka Gasy lives.',
   },
 
   ourRums: {
