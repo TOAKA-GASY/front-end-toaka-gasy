@@ -15,9 +15,9 @@ const scrollY  = ref(0)
    région est ancré par le bas, juste au-dessus de son point (cf. template),
    et grandit vers le haut. */
 const regions = [
-  { key: 'west',      x: 8,  y: 58, mx: 12, my: 40, delay: 0,   labelKey: 'ourStory.regionWestLabel',      bodyKey: 'ourStory.regionWestBody' },
+  { key: 'west',      x: 8,  y: 38, mx: 12, my: 40, delay: 0,   labelKey: 'ourStory.regionWestLabel',      bodyKey: 'ourStory.regionWestBody' },
   { key: 'north',     x: 22, y: 36, mx: 32, my: 32, delay: 120, labelKey: 'ourStory.regionNorthLabel',     bodyKey: 'ourStory.regionNorthBody' },
-  { key: 'highlands', x: 34, y: 54, mx: 50, my: 24, delay: 240, labelKey: 'ourStory.regionHighlandsLabel', bodyKey: 'ourStory.regionHighlandsBody' },
+  { key: 'highlands', x: 34, y: 40, mx: 50, my: 24, delay: 240, labelKey: 'ourStory.regionHighlandsLabel', bodyKey: 'ourStory.regionHighlandsBody' },
   { key: 'east',      x: 66, y: 36, mx: 70, my: 30, delay: 360, labelKey: 'ourStory.regionEastLabel',      bodyKey: 'ourStory.regionEastBody' },
   { key: 'south',     x: 92, y: 52, mx: 88, my: 38, delay: 480, labelKey: 'ourStory.regionSouthLabel',     bodyKey: 'ourStory.regionSouthBody' },
 ]
@@ -205,18 +205,21 @@ onUnmounted(() => {
         </div>
       </div>
     </div>
+
+    <!-- Bouteille Sôma en grand plan, superposée au premier plan -->
+    <img src="/img/toaka-gasy-red.webp" class="os-regions__bottle" alt="" aria-hidden="true" />
   </section>
 
   <!-- ══════════════════════════════════════
-       Section – MADAGASCAR / Many regions. One spirit.
+       Section – The Story Of / Madagascar's Wildest Rum
        ══════════════════════════════════════ -->
   <section class="os-regions-intro os-animate" data-delay="0">
-    <span class="os-regions-intro__eyebrow" v-field-style="'ourStory.regionsEyebrow'">{{ t('ourStory.regionsEyebrow') }}</span>
-    <h2 class="os-regions-intro__title">
-      <span v-field-style="'ourStory.regionsTitleLine1'">{{ t('ourStory.regionsTitleLine1') }}</span><br />
-      <span v-field-style="'ourStory.regionsTitleLine2'">{{ t('ourStory.regionsTitleLine2') }}</span>
-    </h2>
-    <p class="os-regions-intro__body" v-field-style="'ourStory.regionsBody'">{{ t('ourStory.regionsBody') }}</p>
+    <span class="os-regions-intro__hero-kicker" v-field-style="'ourStory.heroKicker'">{{ t('ourStory.heroKicker') }}</span>
+    <h3 class="os-regions-intro__hero-title">
+      <span v-field-style="'ourStory.heroTitleLine1'">{{ t('ourStory.heroTitleLine1') }}</span><br />
+      <span v-field-style="'ourStory.heroTitleLine2'">{{ t('ourStory.heroTitleLine2') }}</span>
+    </h3>
+    <p class="os-regions-intro__hero-body" v-field-style="'ourStory.heroBody'">{{ t('ourStory.heroBody') }}</p>
   </section>
 
   <!-- ══════════════════════════════════════

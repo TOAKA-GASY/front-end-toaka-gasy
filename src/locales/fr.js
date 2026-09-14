@@ -77,6 +77,11 @@ export default {
 
   ourStory: {
     hiddenH1: "Notre Histoire — L'héritage derrière le rhum Toaka Gasy !",
+    heroKicker: "L'HISTOIRE DU",
+    heroTitleLine1: 'RHUM LE PLUS SAUVAGE',
+    heroTitleLine2: 'DE MADAGASCAR',
+    heroBody:
+      "Partout à Madagascar, le Toaka Gasy prend de nombreux noms, saveurs et expressions. Dans les Hautes Terres, on l'appelle Galeoka ou Ambodivoara ; dans le Nord, Gantriaka ou Lemadio. Chaque nom porte une expression différente du même esprit malgache.\nCertaines de ses expressions les plus fascinantes se trouvent au plus profond de l'île, au-delà du Madagascar que la plupart des gens voient. Cachées parmi les vallées, les forêts et les paysages préservés, des familles élaborent le Toaka Gasy tout près de la nature qui les entoure. La canne à sucre est fermentée, distillée au feu et associée à des plantes locales appelées laro, qui donnent à l'esprit ses arômes, ses saveurs et son caractère distinctifs.\nD'un lieu à l'autre, les ingrédients changent, les méthodes diffèrent et chaque création porte quelque chose de la terre dont elle est issue. C'est là que vit le caractère sauvage du Toaka Gasy. Un esprit né de l'île, façonné par sa nature et élaboré de bien des façons.",
     legendTitle: 'DERRIÈRE LA LÉGENDE',
     legendBody1:
       "Partout à Madagascar, le rhum a toujours fait partie de chaque tradition. On l'appelle toaka gasy, souvent élaboré dans des lieux reculés où la nature sauvage lui donne sa saveur la plus fine.\nCelui qui nous a le plus inspirés vient du sud, dans les vallées cachées de l'ethnie Betsileo, un rhum particulier qui porte la célébration betsileo depuis des générations. Symbole d'unité et d'hospitalité, il est versé pour accueillir un invité, bénir un mariage, réunir les gens dans les moments qui comptent le plus.",
@@ -96,11 +101,6 @@ export default {
     nathaliePhotoAlt: 'Nathalie Manantsara',
     nathalieBio:
       "Je me souviens encore de la première fois où Toaka Gasy Company m'a été présentée.\nDès cet instant, tout s'est mis en place naturellement. Nous nous sommes immédiatement connectés autour d'un enthousiasme partagé pour ce que Toaka Gasy pouvait devenir, et tout a commencé à prendre forme presque instinctivement.\nTrouver la juste expression de la marque, donner à son identité une voix à laquelle les gens pouvaient vraiment s'identifier, et la voir grandir tout en restant fidèle à l'intention de départ.\nPour moi, son histoire reflète exactement ce qu'elle a été créée pour inspirer : rassembler les gens, créer des moments authentiques.\nJ'ai toujours cru qu'il fallait construire avec intention et rester fidèle à ce qui compte vraiment. C'est le genre de parcours dont je choisirai toujours de faire partie.",
-    regionsEyebrow: 'MADAGASCAR',
-    regionsTitleLine1: 'Mille régions.',
-    regionsTitleLine2: 'Un seul esprit.',
-    regionsBody:
-      "Des Hautes Terres aux côtes, des vallées du nord aux terres du sud, le Toaka Gasy prend mille noms, saveurs et expressions, un esprit né de l'île, façonné par sa nature.",
     regionWestLabel: 'OUEST',
     regionWestBody: 'Des vallées luxuriantes et des terres fertiles, porteuses de richesse et de profondeur.',
     regionNorthLabel: 'NORD',
