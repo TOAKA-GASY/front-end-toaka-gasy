@@ -83,6 +83,7 @@ export default {
     heroTitleLine2: 'WILDSTE RUM',
     heroBody:
       "Overal in Madagaskar krijgt Toaka Gasy andere namen, smaken en vormen. In de Hooglanden heet het Galeoka of Ambodivoara; in het Noorden Gantriaka of Lemadio. Elke naam draagt een andere uitdrukking van dezelfde Malagassische geest.\nEnkele van de meest fascinerende varianten vind je dieper op het eiland, voorbij het Madagaskar dat de meeste mensen ooit te zien krijgen. Verscholen tussen valleien, bossen en ongerepte landschappen maken families Toaka Gasy dicht bij de natuur die hen omringt. Suikerriet wordt gefermenteerd, op open vuur gedistilleerd en gecombineerd met inheemse kruiden die bekendstaan als laro, wat de drank zijn kenmerkende aroma's, smaken en karakter geeft.\nVan plek tot plek veranderen de ingrediënten, verschillen de methodes en draagt elke creatie iets van het land waar ze vandaan komt. Hier leeft het wilde karakter van Toaka Gasy. Een geest geboren uit het eiland, gevormd door zijn natuur en op talloze manieren gemaakt.",
+    heroImgAlt: 'Fles Toaka Gasy omringd door de wilde natuur van Madagaskar',
     legendTitleLine1: 'DE RUM VAN',
     legendTitleLine2: 'VIERING',
     legendBody1:
@@ -103,17 +104,6 @@ export default {
     nathaliePhotoAlt: 'Nathalie Manantsara',
     nathalieBio:
       'Ik herinner me nog de eerste keer dat Toaka Gasy Company aan mij werd voorgesteld.\nVanaf dat moment klikte alles gewoon. We voelden meteen een gedeelde opwinding voor wat Toaka Gasy kon worden, en alles begon bijna instinctief vorm te krijgen.\nDe juiste uitdrukking voor het merk vinden, zijn identiteit een stem geven waarmee mensen zich echt konden verbinden, en het zien groeien terwijl het trouw bleef aan de oorspronkelijke intentie.\nVoor mij weerspiegelt het verhaal precies waarvoor het is bedacht: mensen samenbrengen, oprechte momenten creëren.\nIk heb altijd geloofd in bouwen met intentie en trouw blijven aan wat ertoe doet. Dat is het soort reis waar ik altijd deel van wil blijven uitmaken.',
-    regionWestLabel: 'WEST',
-    regionWestBody: 'Weelderige valleien en vruchtbare grond, die rijkdom en diepgang brengen.',
-    regionNorthLabel: 'NOORD',
-    regionNorthBody: 'Gantiriaka of Lemadio. Gedurfde smaken, gevormd door tropische hitte en lokale kruiden.',
-    regionHighlandsLabel: 'HOOGLANDEN',
-    regionHighlandsBody: 'Galeoka of Ambodivoara. Een unieke elegantie, geboren op hoogte, waar traditie de zuivere natuur ontmoet.',
-    regionEastLabel: 'OOST',
-    regionEastBody: 'Lichtere en frissere vormen, met maritieme en tropische tonen.',
-    regionSouthLabel: 'ZUID',
-    regionSouthBody:
-      'Zeldzame en boeiende recepten, geboren in droge valleien en ongerepte landschappen, waar het wilde karakter van Toaka Gasy leeft.',
   },
 
   ourRums: {
