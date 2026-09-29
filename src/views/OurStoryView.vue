@@ -104,7 +104,7 @@ onUnmounted(() => {
       </div>
 
       <div class="os-hero__visual">
-        <img src="/img/bottle-story.png" class="os-hero__img" :alt="t('ourStory.heroImgAlt')" />
+        <img src="/img/bottle-story.png" class="os-hero__img" :alt="t('ourStory.heroImgAlt')" v-reveal-img="'our-story-hero'" />
       </div>
     </div>
   </section>

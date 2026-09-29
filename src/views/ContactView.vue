@@ -95,7 +95,7 @@ onUnmounted(() => {
   <section class="ct-photo">
     <picture>
       <source media="(max-width: 767.98px)" srcset="/img/toaka-gasy-mobile.webp" />
-      <img src="/img/toaka-gasy.png" class="ct-photo__img" alt="Toaka Gasy" />
+      <img src="/img/toaka-gasy.png" class="ct-photo__img" alt="Toaka Gasy" v-reveal-img="'contact-hero'" />
     </picture>
   </section>
 

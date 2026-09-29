@@ -228,13 +228,13 @@ const parallax = computed(() => {
     <div class="home-sticky">
       <div class="home-sticky__bg-clip">
         <picture>
-          <img src="/img/fond.webp" class="home-bg" alt="" aria-hidden="true" />
+          <img src="/img/fond.webp" class="home-bg" alt="" aria-hidden="true" v-reveal-img="'home-hero'" />
         </picture>
-        <img src="/logo/logo-marron.webp" class="home-hero-logo" alt="Toaka Gasy" aria-hidden="true" />
+        <img src="/logo/logo-marron.webp" class="home-hero-logo" alt="Toaka Gasy" aria-hidden="true" v-reveal-img="'home-hero'" />
         <div class="scene-pos scene-pos--ravinala" :style="{ transform: parallax.ravinala }">
           <img src="/img/ravinala.webp" alt="" aria-hidden="true" />
         </div>
-        <img src="/img/montagne.webp" class="home-mountain" alt="" aria-hidden="true" />
+        <img src="/img/montagne.webp" class="home-mountain" alt="" aria-hidden="true" v-reveal-img="'home-hero'" />
       </div>
       <section class="home-scene" aria-label="Scène Toaka Gasy">
         <div class="scene-pos scene-pos--bottle" :style="{ transform: parallax.bottle }">

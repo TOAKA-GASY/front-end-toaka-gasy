@@ -28,7 +28,7 @@ watchEffect(() => {
   <section v-if="cocktail" class="recipe-page" :class="`recipe-page--${cocktailIndex}`">
 
     <div class="recipe-hero">
-      <img :src="cocktail.src" class="recipe-hero__bg" :alt="cocktail.title" />
+      <img :src="cocktail.src" class="recipe-hero__bg" :alt="cocktail.title" v-reveal-img="'recipe-hero'" />
       <div class="recipe-hero__overlay" aria-hidden="true"></div>
 
       <RouterLink to="/our-rums" class="recipe-back" :aria-label="t('recipe.backAria')">

@@ -24,6 +24,18 @@
   font-display: swap;
 }
 
+/* ─── v-reveal-img : voir src/directives/revealImg.js ───
+   L'image reste invisible (mais garde sa place, pas de saut de mise en
+   page) jusqu'à ce que tout son groupe soit chargé, puis apparaît avec
+   les autres images du même groupe en un seul fondu synchronisé. */
+.reveal-img {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.reveal-img--ready {
+  opacity: 1;
+}
+
 :root {
   --font-cinzel: 'Cinzel', 'Times New Roman', serif;
   --font-cinzel2: 'Cinzel', 'regular', 'Times New Roman', serif;

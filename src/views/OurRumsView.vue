@@ -30,6 +30,24 @@ const sideBottles = [
 
 const onScroll = () => { scrollY.value = window.scrollY }
 
+/* Hero (section 1) : les 4 images entrent ensemble une fois toutes chargées
+   (plus de délai fixe qui déclenchait l'entrée avant que le réseau ait fini
+   de les livrer, faisant "popper" chacune séparément à son arrivée). */
+const heroImageSrcs = [
+  '/img/nosy.webp',
+  '/img/toaka-gasy-black.webp',
+  '/img/toaka-gasy-white.webp',
+  '/img/toaka-gasy-red.webp',
+]
+function preloadImages(srcs) {
+  return Promise.all(srcs.map((src) => new Promise((resolve) => {
+    const img = new Image()
+    img.onload = resolve
+    img.onerror = resolve
+    img.src = src
+  })))
+}
+
 /* Parallax léger des 3 bouteilles du hero (section 1) */
 const heroP = computed(() => Math.min(1, scrollY.value / (window.innerHeight || 1)))
 const parallaxWhite = computed(() => ({ transform: `translateY(${-heroP.value * 55}px)` }))
@@ -70,7 +88,14 @@ let cocktailObs = null
 onMounted(() => {
   window.scrollTo(0, 0)
   window.addEventListener('scroll', onScroll, { passive: true })
-  requestAnimationFrame(() => setTimeout(() => { animated.value = true }, 80))
+
+  /* Filet de sécurité : ne jamais laisser le hero invisible indéfiniment
+     si une image traîne sur un réseau lent. */
+  const animateFallback = setTimeout(() => { animated.value = true }, 2500)
+  preloadImages(heroImageSrcs).then(() => {
+    clearTimeout(animateFallback)
+    requestAnimationFrame(() => { animated.value = true })
+  })
 
   /* Rums (Our Collection) – visibilité pour side nav actif */
   rumObs = new IntersectionObserver(

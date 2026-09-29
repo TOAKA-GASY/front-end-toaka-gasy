@@ -55,7 +55,7 @@ watchEffect(() => {
 
       <div class="pp-hero__inner">
         <div class="pp-hero__bottle">
-          <img :src="product.bottle" :alt="product.shortName" />
+          <img :src="product.bottle" :alt="product.shortName" v-reveal-img="'product-hero'" />
         </div>
 
         <div class="pp-hero__content">
